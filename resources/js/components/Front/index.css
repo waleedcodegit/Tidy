@@ -16,7 +16,7 @@ code {
 }
 @font-face {
   font-family: popinsbold;
-  src: url('/fonts/Poppins/Poppins-Bold.ttf');
+  src: url('/fonts/Poppins/Poppins-Bold.ttf'); 
 }
 @font-face {
   font-family: Poppins-Regular;
