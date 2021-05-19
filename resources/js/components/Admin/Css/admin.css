@@ -1,0 +1,45 @@
+@font-face {
+    font-family: popinsbold;
+    src: url('/fonts/Poppins/Poppins-Bold.ttf');
+  }
+  @font-face {
+    font-family: poppinslight;
+    src: url('/fonts/Poppins/Poppins-Light.ttf');
+  }
+  @font-face {
+    font-family: poopinmedium;
+    src: url('/fonts/Poppins/Poppins-Medium.ttf');
+}
+@media screen and (max-width:480px){
+  .nav_mobile{
+    left: 0px !important;
+    top:60px !important;
+  }
+}
+@media screen and (min-width:480px){
+  .tgl-menu-btn{
+    display: none !important;
+  }
+  .custom-search-form{
+    display: none !important;
+  }
+}
+body{
+    font-family: poopinmedium;
+}
+.sidebar_icon{
+    width: 25px;
+    height: 25px;
+}
+td, th {
+  text-align: center;
+}
+.active_item{
+  color: #fff;
+  font-weight: 600;
+  background-color: #25476a;
+  margin: 0 5px;
+  padding-left: 13px;
+  padding-right: 13px;
+  border-radius: 3px;
+}

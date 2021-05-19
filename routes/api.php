@@ -17,4 +17,46 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/api_caller','ApiCaller@Call_Api');
+Route::middleware(['admin-login'])->group(function () {
+    // Customer Route
+    Route::get('/customer-list','Customer\AuthController@index');
+    Route::post('/create-customer','Customer\AuthController@create_customer');
+    Route::post('/edit-customer/{id}','Customer\AuthController@edit_customer');
+    Route::post('/update-customer','Customer\AuthController@update_customer');
+    // Vendor Route
+    Route::get('/vendor-list','Vendor\VendorController@list');
+    Route::post('/vendor-info/{id}','Vendor\VendorController@show');
+    Route::post('/approved-vendor','Vendor\VendorController@approved_vendor');
+    // Service Price Route
+    Route::resource('service-price', 'Admin\ServicePricingController');
+    // Category Route
+    Route::resource('category', 'Admin\CategoryController');
+    // SubCategory Route
+    Route::resource('subcategory', 'Admin\SubCategoryController');
+    // Setting Route
+    Route::resource('setting', 'Admin\SettingController');
+
+    Route::resource('holiday', 'Admin\PublicHolidaysController');
+    Route::resource('question', 'Admin\QuestionController');
+
+
+    
+    
+});
+
+
+Route::post('update-setting', 'Admin\SettingController@update_setting');
+Route::post('/customer-login','Customer\AuthController@customer_login');
+Route::post('/customer_forget_password','Customer\AuthController@customer_forget_password');
+Route::post('/user-password','Customer\AuthController@user_password');
+Route::get('/test','Admin\AdminController@test');
+Route::post('/create-admin','Admin\AdminController@create_admin');
+Route::post('/login-admin','Admin\AdminController@login_admin');
+Route::post('/check-auth-admin','Admin\AdminController@admin_check_auth');
+Route::post('/create-vendor','Vendor\VendorController@create_vendor');
+Route::post('/vendor-login','Vendor\VendorController@vendor_login');
+Route::post('/getcategory','Frontend\CategoryController@getcategory');
+Route::post('/get-services','Vendor\VendorController@get_services');
+Route::post('/save_vendor_services','Vendor\VendorController@save_vendor_services');
+Route::post('/vendor_insurance_certificate','Vendor\VendorController@vendor_insurance_certificate');
+

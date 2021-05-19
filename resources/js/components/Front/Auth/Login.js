@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { img_base ,base_url, vendor_base } from '../../Configs/baseurls';
+import { img_baseurl } from '../../Configs/Api';
 import Axios from 'axios';
 class Login extends Component {
     constructor(props) {
@@ -14,7 +14,7 @@ class Login extends Component {
     }
     set_auth_type(val){
         if(val == 2){
-            window.open(vendor_base+"login" , "_blank")
+            window.open("/vendor-login" , "_blank")
         }
         this.setState({
             auth_type:val
@@ -33,7 +33,7 @@ class Login extends Component {
     }
     login(e){
         e.preventDefault();
-        Axios.post(base_url+'customer-login',this.state).then(res=>{
+        Axios.post('/api/customer-login',this.state).then(res=>{
             if(res.data.status){
                 this.props.history.push('/');
             }else{
@@ -46,17 +46,21 @@ class Login extends Component {
     }
     render() { 
         return (
+            <React.Fragment>
+            {/* <div className="back_image"></div> */}
+           
             <div className="row">
-                <div className="col-md-9">
-                    <div className="login_img_div">
-                        <img src={img_base+"login-img.png"}></img>
-                    </div>
+               
+                {/* <div className="login_img_div">
+                        <img src={img_baseurl+"login-img.png"}></img>
+                    </div> */}
+                <div className="col-md-4">
                 </div>
-                <div className="col-md-3 auth_div">
+                <div className="col-md-4 auth_div">
                     <div className="login_div">
-                        <div className="auth-site-logo">
-                            <img className="logo" src="/img/site-logo.png" alt="Indico"/>
-                        </div>
+                        {/* <div className="auth-site-logo">
+                            <img className="logo" src={img_baseurl+"site-logo.png"} alt="Indico"/>
+                        </div> */}
                         <h1 className="login_page_heading">Login</h1>
                         <div className="form_div">
                             <form>
@@ -109,11 +113,11 @@ class Login extends Component {
                                 {
                                     this.state.auth_type == 1 ?
                                     <>
-                                    <p className="auth_divider_text">Are You New to TidyHome ? <span> <a href="/customer-signup">Sig Up</a></span></p>
+                                    <p className="auth_divider_text">Are You New to TidyHome ? <span> <a href="/signup">Sign Up</a></span></p>
                                     </>
                                     :
                                     <>
-                                    <p className="auth_divider_text">Are You New to TidyHome ? <span> <a href={vendor_base+"signup"}>Sig Up as a Vendor</a></span></p>
+                                    <p className="auth_divider_text">Are You New to TidyHome ? <span> <a href={"vendor-signup"}>Sign Up as a Vendor</a></span></p>
                                     </>
                                 }
                               
@@ -121,7 +125,9 @@ class Login extends Component {
                         </div>
                     </div>
                 </div>
+                <div className="col-md-4"></div>
             </div>
+            </React.Fragment>
         );
     }
 }

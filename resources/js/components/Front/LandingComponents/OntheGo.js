@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {img_baseurl} from '../../Configs/Api';
 
 class OntheGo extends Component {
     render() {
@@ -8,7 +9,7 @@ class OntheGo extends Component {
                 <div className="row">
                     <div className="col-lg-6 col-sm-12">
                 <div className="work-pro-item">
-                <img src="/img/getleads.png" alt=""/>
+                <img src={img_baseurl+"getleads.png"} alt=""/>
                 </div>
                 </div>
                 <div className="col-lg-6 col-sm-12 sm-padding">

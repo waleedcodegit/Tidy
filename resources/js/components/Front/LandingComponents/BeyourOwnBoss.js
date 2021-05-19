@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import {img_baseurl} from '../../Configs/Api';
 class BeYourOwnBoss extends Component {
     render() {
         return (
@@ -10,7 +10,7 @@ class BeYourOwnBoss extends Component {
                 <div className="section-heading dark-background text-center wow fadeInUp tab-des" data-wow-delay="100ms">
 
                 <h2>How can you provide your <span>services</span></h2>
-                    <div className="heading-img"><img src="/img/heading-bg.png" alt=""/></div>
+                    <div className="heading-img"><img src={img_baseurl+"heading-bg.png"} alt=""/></div>
                     <p>Be Your Own Boss.</p>
                 </div>
                     
@@ -24,7 +24,7 @@ class BeYourOwnBoss extends Component {
                                 <div className="sec-bg">
                             
                             <div className="cln-sec testi-content2">
-                                <img src="/img/team.png" alt=""/>
+                                <img src={img_baseurl+"team.png"} alt=""/>
                                             <h3>Sign up as a business</h3>
                                         
                                             <p>Lorem ipsum, or lipsum as it is
@@ -39,7 +39,7 @@ class BeYourOwnBoss extends Component {
                                 <div className="sec-bg">
                             
                             <div className="cln-sec testi-content2">
-                                <img src="/img/shedule.png" alt=""/>
+                                <img src={img_baseurl+"shedule.png"} alt=""/>
                                             <h3>You choose your schedule and area   </h3>
                                         
                                             <p>Lorem ipsum, or lipsum as it is
@@ -54,7 +54,7 @@ class BeYourOwnBoss extends Component {
                                 
                             <div className="sec-bg">
                             <div className="cln-sec testi-content2">
-                                <img src="/img/location.png" alt=""/>
+                                <img src={img_baseurl+"location.png"} alt=""/>
                                             <h3>You get jobs based on your area and schedule</h3>
                                         
                                             <p>Lorem ipsum, or lipsum as it is
@@ -69,7 +69,7 @@ class BeYourOwnBoss extends Component {
                                 
                                 <div className="sec-bg">
                                 <div className="cln-sec testi-content2">
-                                    <img src="/img/paids.png" alt=""/>
+                                    <img src={img_baseurl+"paids.png"} alt=""/>
                                                 <h3>Get paid weekly</h3>
                                             
                                                 <p>Lorem ipsum, or lipsum as it is

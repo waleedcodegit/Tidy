@@ -1,6 +1,6 @@
 import Axios from 'axios';
 import React, { Component } from 'react';
-import { base_url, img_base } from '../../Configs/baseurls';
+import {img_baseurl } from '../../Configs/Api';
  
 class CustomerSignUp extends Component {
     constructor(props) {
@@ -54,7 +54,7 @@ class CustomerSignUp extends Component {
     }
     signup(e){
         e.preventDefault();
-        Axios.post(base_url+'create-customer',this.state).then(res=>{
+        Axios.post('/api/create-customer',this.state).then(res=>{
             if(res.data.status == 200){
                 this.props.history.push('/');
             }else{
@@ -67,17 +67,19 @@ class CustomerSignUp extends Component {
     }
     render() { 
         return (
+        <React.Fragment>
+            {/* <div className="back_image"></div> */}
             <div className="row">
-                <div className="col-md-9">
-                    <div className="login_img_div">
-                        <img src={img_base+"login-img.png"}></img>
-                    </div>
+                <div className="col-md-4">
+                    {/* <div className="login_img_div">
+                        <img src={img_baseurl+"login-img.png"}></img>
+                    </div> */}
                 </div>
-                <div className="col-md-3 auth_div">
+                <div className="col-md-4 auth_div">
                     <div className="login_div">
-                        <div className="auth-site-logo">
-                            <img className="logo" src="/img/site-logo.png" alt="Indico"/>
-                        </div>
+                        {/* <div className="auth-site-logo">
+                            <img className="logo" src={img_baseurl+"site-logo.png"} alt="Indico"/>
+                        </div> */}
                         <h1 className="login_page_heading">Customer SignUp</h1>
                         <div className="form_div">
                             <form>
@@ -124,7 +126,9 @@ class CustomerSignUp extends Component {
                         </div>
                     </div>
                 </div>
+                <div className="col-md-4"></div>
             </div>
+        </React.Fragment>
         );
     }
 }

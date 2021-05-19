@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import {img_baseurl} from '../../Configs/Api';
+
 const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -34,7 +36,7 @@ class Reviews extends Component {
                 <div className="container">
                 <div className="section-heading-rev text-center mb-40 wow fadeInUp" data-wow-delay="100ms">
                 <h2>Live reviews <span>NEAR YOU</span></h2>
-                    <div className="heading-img"><img src="/img/heading-bg.png" alt=""/></div>
+                    <div className="heading-img"><img src={img_baseurl+"heading-bg.png"} alt=""/></div>
                 </div>
                 <Carousel
                 swipeable={true}
@@ -56,7 +58,7 @@ class Reviews extends Component {
                 >
                     <div className="testi-item align-items-center testi-content">
 
-                    <img src="/img/testi-1.jpg" alt="img"/>
+                    <img src={img_baseurl+"testi-1.jpg"} alt="img"/>
                     <ul className="rattings">
                     <li><i className="fa fa-star"></i></li>
                     <li><i className="fa fa-star"></i></li>
@@ -74,7 +76,7 @@ class Reviews extends Component {
                     </div>
                     <div className="testi-item align-items-center testi-content">
 
-                    <img src="/img/testi-1.jpg" alt="img"/>
+                    <img src={img_baseurl+"testi-1.jpg"} alt="img"/>
                     <ul className="rattings">
                     <li><i className="fa fa-star"></i></li>
                     <li><i className="fa fa-star"></i></li>
@@ -91,7 +93,7 @@ class Reviews extends Component {
                     <i className="fa fa-quote-right"></i>
                     </div>
                     <div className="testi-item align-items-center testi-content">
-                        <img src="/img/testi-2.jpg" alt="img"/>
+                        <img src={img_baseurl+"testi-2.jpg"} alt="img"/>
                             <ul className="rattings">
                         <li><i className="fa fa-star"></i></li>
                         <li><i className="fa fa-star"></i></li>
@@ -108,7 +110,7 @@ class Reviews extends Component {
                         <i className="fa fa-quote-right"></i>
                         </div>
                         <div className="testi-item align-items-center testi-content">
-                        <img src="/img/testi-3.jpg" alt="img"/>
+                        <img src={img_baseurl+"testi-3.jpg"} alt="img"/>
                             <ul className="rattings">
                         <li><i className="fa fa-star"></i></li>
                         <li><i className="fa fa-star"></i></li>

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { base_url, img_base, img_url } from '../../Configs/baseurls';
+import { img_baseurl } from '../../Configs/Api';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Axios from 'axios';
-
+import { connect } from 'react-redux';
 class Slider extends Component {
     constructor(props) {
         super(props);
@@ -12,15 +12,7 @@ class Slider extends Component {
             delay_items:false,
             cat_img:1,
             cat_images:[
-                {
-                    name:'cleaning-service.png'
-                },
-                {
-                    name:'professional.png'
-                },
-                {
-                    name:'getleads.png'
-                }
+               
             ],
             categories:[],
             showmodal:false,
@@ -30,12 +22,17 @@ class Slider extends Component {
             current_cat:'',
             services:[],
             sub_services:[],
-            services_track:[]
+            services_track:0,
+            service_type:'',
+            service_name:'',
+            sub_service:'',
+            step:1
+            
         };
         console.log(this.props);
     }
     componentDidMount(){
-        Axios.post('https://cors-anywhere.herokuapp.com/'+base_url+'getcategory').then(res=>{
+        Axios.post('/api/getcategory').then(res=>{
             console.log(res);    
             this.setState({
                     categories:res.data.categories,
@@ -70,20 +67,16 @@ class Slider extends Component {
             })
         },700);
 
-        const headers = {
-            
-            'Access-Control-Allow-Origin': "*",
-            'accept': '*/*',
-            'Access-Control-Allow-Methods': 'POST, GET, OPTIONS'
-           }
-        const data = [] ;
+       
        
     }
     show_modal(){
-        this.seletct_type(this.state.services_track[0].name);
-        this.setState({
-            showmodal: true,
-        })
+         this.seletct_type(this.state.service_type);
+         this.seletct_service(this.state.service_name);
+         this.setState({
+             step:2
+         })
+        this.props.changeModal(true);
     }
     back_btn(){
         this.setState({
@@ -93,15 +86,35 @@ class Slider extends Component {
     }
     hide_modal(){
         this.setState((state)=>({
-            showmodal:false,
-            services_track:[],
-            categories:state.all_categories
+            services_track:0,
+            categories:state.all_categories,
+            current_cat: ''
         }))
+        this.props.changeModal(false);
     }
     manage_categories(data){
-        this.setState((prevState)=>({
-            services_track: [...prevState.services_track,data]
-        }))
+        console.log(data);
+        this.setState({
+            services_track: this.state.services_track + 1
+        },function(){
+            console.log(this.state.services_track);
+            if(this.state.services_track == 1){
+                this.setState({
+                    service_type:data.name
+                })
+            }else if(this.state.services_track == 2){
+                this.setState({
+                    service_name:data.id
+                })
+            }else{
+                this.setState({
+                    sub_service:data.id
+                })
+            }
+        },function(){
+            console.log(this.state)
+        })
+        
         if(data.subcategory){
             if(data.subcategory.length > 0){
                 this.setState({
@@ -116,13 +129,9 @@ class Slider extends Component {
         }
     }
     seletct_type(val){
-        let subcat = [];
-        let temp = this.state.services_track;
-       
+        let subcat = [];       
         this.state.all_categories.map((data,index)=>{
             if(data.name == val){
-                temp[0] = data;
-                
                 subcat = data.subcategory
             }
         })
@@ -130,38 +139,43 @@ class Slider extends Component {
         this.setState({
             // services_track:temp,
             services:[],
-            sub_services:[]
+            sub_services:[],
+            service_type:val
         },function(){
             this.setState({
                 services:subcat
             },function(){
-                if(this.state.services_track.length > 2){
-                    console.log(this.state.services_track);
-                    this.seletct_service(this.state.services_track[1].id)
-                }
-                
+                this.seletct_service(this.state.service_name);
             })
         })
     }
     seletct_service(val){
+        console.log(val);
         this.state.services.map((data,index)=>{
             if(data.id == val){
-                // let temp = this.state.services_track;
-                // temp[1] = data;
-                // console.log(temp)
-                // this.setState({
-                //     services_track:temp,
-                // },function(){
-                   
-                // })
                 if(data.subcategory.length > 0){
                     this.setState({
-                        
                         sub_services:data.subcategory,
-                       
+                        service_name:data.id
+                    })
+                }else{
+                    this.setState({
+                        service_name:data.id,
+                        sub_services:[]
                     })
                 }
             }
+        })
+    }
+
+    Select_subService(val){
+        this.setState({
+            sub_service:val
+        })
+    }
+    ProceedTOStep2(){
+        this.setState({
+            step:2
         })
     }
     render() {
@@ -200,6 +214,14 @@ class Slider extends Component {
                                        
                                     </div>
                                 </div>
+                                {
+                                this.state.current_cat != '' ?
+                                <div className="text-center mt-2">
+                                    <button onClick={this.back_btn.bind(this)} className="btn btn-light mr-1">Home Services</button>
+                                    <button onClick={this.back_btn.bind(this)} className="btn btn-light">Business Services</button>
+                                </div>
+                                :null
+                                }
                                 <div className="container fade-in-bottom">
                                     <div className="">
                                     <Carousel 
@@ -212,8 +234,8 @@ class Slider extends Component {
                                                             <div onClick={this.manage_categories.bind(this,data)} className="item-pading ">
                                                             <div  className="  card p-2 item-servies">
                                                                 <div className="fade-in-bottom py-2" >
-                                                                <img alt="ïmg" src={img_url+data.image}/>
-                                                                    {/* <img src={img_base+'personal-information.png'}></img> */}
+                                                                <img alt="ïmg" src={img_baseurl+data.image}/>
+                                                                    {/* <img src={img_baseurl+'personal-information.png'}></img> */}
                                                                 </div>
                                                                 <div>
                                                                     <p className="item_name py-2" >{data.name}</p>
@@ -242,11 +264,11 @@ class Slider extends Component {
                                                 </div>:null
                                             }
                                             <br></br>
-                                               {
+                                               {/* {
                                                    this.state.current_cat != '' ?
                                                    <img onClick={this.back_btn.bind(this)} style={{float:'right',marginTop:'5px',cursor:'pointer'}} title='Back to Categories'  src="https://img.icons8.com/flat-round/40/000000/arrow-left.png"/>
                                                     :null
-                                               }
+                                               } */}
                                         
                                     </div>
                                     </div>
@@ -257,23 +279,25 @@ class Slider extends Component {
 
                 </div>
                 {
-                    this.state.showmodal ? 
+                    this.props.modal ? 
                     <div className="homemodal">
                         <div className="homemodal_card">
                             <div className="cross_div">
                                 <img onClick={this.hide_modal.bind(this)} src="https://img.icons8.com/ios/30/000000/multiply.png"/>
                             </div>
                             <div className="track container">
-                                <div className="step active"> <span className="icon"> <img src={img_base+'cleaning-service.png'}></img> </span> <span className="text">Choose Category</span> </div>
-                                <div className="step "> <span className="icon"> <img src={img_base+'personal-information.png'}></img> </span> <span className="text"> Enter your information</span> </div>
-                                <div className="step "> <span className="icon"> <img src={img_base+'price.png'}></img> </span> <span className="text"> Get Price or Qoute </span> </div>
+                                <div className={this.state.step >= 1 ? "step active" : "step"}> <span className="icon"> <img src={img_baseurl+'cleaning-service.png'}></img> </span> <span className="text">Choose Category</span> </div>
+                                <div className={this.state.step >= 2 ? "step active" : "step"}> <span className="icon"> <img src={img_baseurl+'personal-information.png'}></img> </span> <span className="text"> Enter your information</span> </div>
+                                <div className={this.state.step == 3 ? "step active" : "step"}> <span className="icon"> <img src={img_baseurl+'price.png'}></img> </span> <span className="text"> Get Price or Qoute </span> </div>
                             </div>
                             <div className="container">
                                 <div style={{marginTop:'90px'}}>
+                                {
+                                    this.state.step == 1 ?
                                     <div className="col-md-6 ml-auto mr-auto">
                                         <div class="form-group ">
                                             <label className="form_label" for="comment">Select Service Type</label>
-                                            <select value={this.state.services_track[0].name || ""} onChange={(e)=>{this.seletct_type(e.target.value)}}  class="form-control form_select" rows="5" id="comment">
+                                            <select value={this.state.service_type || ""} onChange={(e)=>{this.seletct_type(e.target.value)}}  class="form-control form_select" rows="5" id="comment">
                                                 <option value="">Choose..</option>
                                                 {
                                                     this.state.all_categories.map((data,index)=>{
@@ -289,7 +313,7 @@ class Slider extends Component {
                                             this.state.services.length > 0 ?
                                             <div class="form-group ">
                                             <label className="form_label" for="comment">Select Service</label>
-                                            <select value={this.state.services_track[1] ? this.state.services_track[1].id : ""} onChange={(e)=>{this.seletct_service(e.target.value)}}  class="form-control form_select" rows="5" id="comment">
+                                            <select value={this.state.service_name || ""} onChange={(e)=>{this.seletct_service(e.target.value)}}  class="form-control form_select" rows="5" id="comment">
                                                 <option value="">Choose..</option>
                                                 {
                                                     this.state.services.map((data,index)=>{
@@ -307,7 +331,7 @@ class Slider extends Component {
                                             this.state.sub_services.length > 0 ?
                                             <div class="form-group ">
                                             <label className="form_label" for="comment">Select Sub Service</label>
-                                            <select value={this.state.services_track[2] ? this.state.services_track[2].id : ""}  class="form-control form_select" rows="5" id="comment">
+                                            <select onChange={(e)=>{this.Select_subService(e.target.value)}} value={this.state.sub_service || ""}  class="form-control form_select" rows="5" id="comment">
                                                 <option value="">Choose..</option>
                                                 {
                                                     this.state.sub_services.map((data,index)=>{
@@ -321,7 +345,41 @@ class Slider extends Component {
                                         </div>
                                         :null
                                         }
+                                        <div class="form-group ">
+                                            <button onClick={this.ProceedTOStep2.bind(this)} className="btn btn-outline-success btn_continue">Continue</button>
+                                        </div>
                                     </div>
+                                    :null
+                                }
+                                {
+                                    this.state.step == 2 ?
+                                     <div className="col-md-6 ml-auto mr-auto">
+                                        <div class="form-group ">
+                                            <label className="form_label" for="comment">Resident Type</label>
+                                            <select  className="form-control form_select" type="text">
+                                                <option>--Select Resident type--</option>
+                                                <option>House</option>
+                                                <option>Apartment</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label className="form_label" for="comment">Enter No. Levels</label>
+                                            <input  className="form-control form_select" type="text"></input>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label className="form_label" for="comment">Enter No. of Bedrooms</label>
+                                            <input  className="form-control form_select" type="text"></input>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label className="form_label" for="comment">Enter No. Bathrooms</label>
+                                            <input  className="form-control form_select" type="text"></input>
+                                        </div>
+                                        <div class="form-group ">
+                                            <button className="btn btn-outline-success btn_continue">Continue</button>
+                                        </div>
+                                    </div>
+                                    :null
+                                }  
                                     
                                 </div>
                             </div>
@@ -333,5 +391,14 @@ class Slider extends Component {
         );
     }
 }
-
-export default Slider;
+const mapDistpatchToProps = (dispatch) =>{
+    return{
+        changeModal:(modal)=>{dispatch({type:'CHANGE_SERVICES_MODAL',payload:modal})}
+    }
+}
+const mapStateToProps = (state) => {
+    return{
+        modal:state.services_modal
+    }
+}
+export default connect(mapStateToProps,mapDistpatchToProps)(Slider);

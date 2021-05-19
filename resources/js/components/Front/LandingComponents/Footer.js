@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {img_baseurl} from '../../Configs/Api';
 
 class Footer extends Component {
     render() {

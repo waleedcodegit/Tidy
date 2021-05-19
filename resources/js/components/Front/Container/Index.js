@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import Navbar from '../Navigation/Navbar2';
 import Footer from '../LandingComponents/Footer';
 import Landing from '../LandingComponents/Index';
+import Login from '../Auth/Login';
+import Signup from '../Auth/CustomerSignUp'
 import { Switch,BrowserRouter,Route} from 'react-router-dom';
 import TopHeader from '../LandingComponents/TopHeader';
+import '../index.css'
 class Index extends Component {
     constructor(props) {
         super(props);
@@ -16,9 +19,11 @@ class Index extends Component {
             <div>
                 
                 {/* <Route path="/" component={TopHeader}></Route> */}
-                <Navbar></Navbar>
+                <Navbar  {...this.props}></Navbar>
                 <Route exact path="/" component={Landing}></Route>
-                <Route  path="/services/:name?" component={Landing}></Route>
+                <Route exact path="/login" component={Login}></Route>
+                <Route exact path="/signup" component={Signup}></Route>
+                <Route path="/services/:name?" component={Landing}></Route>
                 <Footer></Footer>
 
             </div>

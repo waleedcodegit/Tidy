@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
 import {Navbar , Nav , NavDropdown}  from 'react-bootstrap';
-import { vendor_base } from '../../Configs/baseurls';
+import {img_baseurl} from '../../Configs/Api';
+import {connect} from 'react-redux';
+
 class Navbar2 extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
+     
     open_link(link){
-        window.open(link,'_self');
+        console.log(123);
+        this.props.changeModal(true);
     }
     render() {
         return (
@@ -11,7 +19,7 @@ class Navbar2 extends Component {
                 <Navbar  bg="light" expand="lg" >
                     <div className="container-fluid">
                     <div class="header-logo">
-                    <a href="#"><img className="logo" src="/img/site-logo.png" alt="Indico"/></a>
+                    <a href="#"><img className="logo" src={img_baseurl+"site-logo.png"} alt="Indico"/></a>
                 </div>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav ">
@@ -28,8 +36,8 @@ class Navbar2 extends Component {
                         <span><img src="https://img.icons8.com/ios/24/000000/dot-logo.png"/></span>
                         <br></br>
                         <NavDropdown title="Services" id="basic-nav-dropdown">
-                        <NavDropdown.Item onClick={this.open_link.bind(this,'/services/home')} ><a href="/services/home" target="blank">Home Services</a></NavDropdown.Item>
-                        <NavDropdown.Item onClick={this.open_link.bind(this,'/services/business')}><a href="/services/business" target="blank">Business Services</a></NavDropdown.Item>
+                        <NavDropdown.Item onClick={()=>{this.props.changeModal(true)}} ><a  target="blank">Home Services</a></NavDropdown.Item>
+                        <NavDropdown.Item onClick={()=>{this.props.changeModal(true)}}><a target="blank">Business Services</a></NavDropdown.Item>
                       
                     </NavDropdown>
                     </Nav.Link>
@@ -38,11 +46,11 @@ class Navbar2 extends Component {
                         <br></br>
                         <p className="nav_link"> About Us</p>
                     </Nav.Link>
-                    <Nav.Link href="/customer-signup">
-                        <span><img src="https://img.icons8.com/ios/24/000000/add-user-male.png"/></span>
+                    <Nav.Link href="/signup">
+                        <span><img src="https://img.icons8.com/windows/24/000000/add-ticket.png"/></span>
                         <br></br>
-                        <p className="nav_link"> Customer SignUp </p></Nav.Link>
-                    <Nav.Link target="blank" href={vendor_base+"signup"}><button className="btn  vendor_btn">Became a Vendor</button></Nav.Link>
+                        <p className="nav_link"> Book Now </p></Nav.Link>
+                    <Nav.Link target="blank" href={"/vendor-signup"}><button className="btn  vendor_btn">Became a Vendor</button></Nav.Link>
                     <Nav.Link href="/login">
                     <button className="btn btn-info login_btn">Login</button>
                         </Nav.Link>
@@ -52,11 +60,19 @@ class Navbar2 extends Component {
                     
                 </Navbar.Collapse>
                     </div>
-                
                 </Navbar>
             </div>
         );
     }
 }
-
-export default Navbar2;
+const mapStateToProps = (state) =>{
+    return{
+        modal:state.services_modal
+    }
+}
+const mapDistpatchToProps = (dispatch) =>{
+    return{
+        changeModal:(modal)=>{dispatch({type:'CHANGE_SERVICES_MODAL',payload:modal})}
+    }
+}
+export default connect(mapStateToProps,mapDistpatchToProps)(Navbar2);

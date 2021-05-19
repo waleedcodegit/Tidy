@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {img_baseurl} from '../../Configs/Api';
 
 class ModernCleaning extends Component {
     render() {
@@ -10,7 +11,7 @@ class ModernCleaning extends Component {
                 <div className="section-heading dark-background text-center wow fadeInUp tab-des" data-wow-delay="100ms">
 
                 <h2>Modern Cleaning for <span>MODERN LIVES</span></h2>
-                    <div className="heading-img"><img src="/img/heading-bg.png" alt=""/></div>
+                    <div className="heading-img"><img src={img_baseurl+"heading-bg.png"} alt=""/></div>
                     <p>We have the technology to keep things efficient and the people to<br/>
                 keep things personalized.</p>
                 </div>
@@ -25,7 +26,7 @@ class ModernCleaning extends Component {
                                 <div className="sec-bg">
                             
                             <div className="cln-sec testi-content2">
-                                <img src="/img/booking.png" alt=""/>
+                                <img src={img_baseurl+"booking.png"} alt=""/>
                                             <h3>Instant online<br/>booking</h3>
                                         
                                             <p>Lorem ipsum, or lipsum as it is
@@ -40,7 +41,7 @@ class ModernCleaning extends Component {
                                 <div className="sec-bg">
                             
                             <div className="cln-sec testi-content2">
-                                <img src="/img/adjustable.png" alt=""/>
+                                <img src={img_baseurl+"adjustable.png"} alt=""/>
                                             <h3>Adjustable<br/>scheduling</h3>
                                         
                                             <p>Lorem ipsum, or lipsum as it is
@@ -55,7 +56,7 @@ class ModernCleaning extends Component {
                                 
                             <div className="sec-bg">
                             <div className="cln-sec testi-content2">
-                                <img src="/img/professional.png" alt=""/>
+                                <img src={img_baseurl+"professional.png"} alt=""/>
                                             <h3>Trusted<br/>professionals</h3>
                                         
                                             <p>Lorem ipsum, or lipsum as it is
