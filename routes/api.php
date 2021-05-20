@@ -29,6 +29,14 @@ Route::middleware(['admin-login'])->group(function () {
     Route::post('/approved-vendor','Vendor\VendorController@approved_vendor');
     // Service Price Route
     Route::resource('service-price', 'Admin\ServicePricingController');
+    // Service Extra Route
+    Route::resource('service-extra', 'Admin\ServiceExtraController');
+    // State
+    Route::resource('state', 'Admin\StateController');
+
+    // City
+    Route::resource('city', 'Admin\CityController');
+    
     // Category Route
     Route::resource('category', 'Admin\CategoryController');
     // SubCategory Route
@@ -37,11 +45,7 @@ Route::middleware(['admin-login'])->group(function () {
     Route::resource('setting', 'Admin\SettingController');
 
     Route::resource('holiday', 'Admin\PublicHolidaysController');
-    Route::resource('question', 'Admin\QuestionController');
-
-
-    
-    
+    Route::resource('question', 'Admin\QuestionController');  
 });
 
 

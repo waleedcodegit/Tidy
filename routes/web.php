@@ -19,6 +19,18 @@ Route::view('/admin/create-service', 'Admin');
 Route::view('/admin/edit-service/{id}', 'Admin');
 Route::view('/admin/list-service', 'Admin');
 
+Route::view('/admin/create-service-extra', 'Admin');
+Route::view('/admin/edit-service-extra/{id}', 'Admin');
+Route::view('/admin/list-service-extra', 'Admin');
+
+Route::view('/admin/create-state', 'Admin');
+Route::view('/admin/edit-state/{id}', 'Admin');
+Route::view('/admin/list-state', 'Admin');
+
+Route::view('/admin/create-city', 'Admin');
+Route::view('/admin/edit-city/{id}', 'Admin');
+Route::view('/admin/list-city', 'Admin');
+
 Route::view('/admin/create-category', 'Admin');
 Route::view('/admin/edit-category/{id}', 'Admin');
 Route::view('/admin/list-category', 'Admin');

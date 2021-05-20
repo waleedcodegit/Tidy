@@ -7,6 +7,21 @@ import {Route, BrowserRouter} from 'react-router-dom';
 import ServiceCreate from '../ServicePricing/create';
 import ServiceList from '../ServicePricing/List';
 import ServiceEdit from '../ServicePricing/edit';
+
+// Service Extra
+import ServiceExtraCreate from '../ServiceExtra/create';
+import ServiceExtraList from '../ServiceExtra/list';
+import ServiceExtraEdit from '../ServiceExtra/edit';
+// States
+import StateCreate from '../State/create';
+import StateEdit from '../State/edit';
+import StateList from '../State/list';
+
+// City
+import CityCreate from '../City/create';
+import CityEdit from '../City/edit';
+import CityList from '../City/list';
+
 // Category
 import CategoryCreate from '../Category/create';
 import CategoryEdit from '../Category/edit';
@@ -46,6 +61,21 @@ class Main extends Component {
                         <Route path="/admin/create-service" component={ServiceCreate}></Route>
                         <Route path="/admin/edit-service/:id" component={ServiceEdit}></Route>
                         <Route path="/admin/list-service" component={ServiceList}></Route>
+                        {/*Service Extra*/}
+                        <Route path="/admin/create-service-extra" component={ServiceExtraCreate}></Route>
+                        <Route path="/admin/edit-service-extra/:id" component={ServiceExtraEdit}></Route>
+                        <Route path="/admin/list-service-extra" component={ServiceExtraList}></Route>
+
+                        {/*State*/}
+                        <Route path="/admin/create-state" component={StateCreate}></Route>
+                        <Route path="/admin/edit-state/:id" component={StateEdit}></Route>
+                        <Route path="/admin/list-state" component={StateList}></Route>
+
+                        {/*City*/}
+                        <Route path="/admin/create-city" component={CityCreate}></Route>
+                        <Route path="/admin/edit-city/:id" component={CityEdit}></Route>
+                        <Route path="/admin/list-city" component={CityList}></Route>
+
                         {/*Category*/}
                         <Route path="/admin/create-category" component={CategoryCreate}></Route>
                         <Route path="/admin/edit-category/:id" component={CategoryEdit}></Route>
@@ -74,6 +104,7 @@ class Main extends Component {
                         <Route path="/admin/create-vendor" component={CreateVendor}></Route>
 
                         <Route path="/admin/setting-list" component={SettingList}></Route>
+                        
                     </div>
                     <Sidebar></Sidebar>
                 </div>
