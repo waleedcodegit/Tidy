@@ -2,6 +2,7 @@ import Axios from 'axios';
 import React, { Component } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
+import Swal from 'sweetalert2';
 
 class InsuranceCertificate extends Component {
     constructor(props) {
@@ -18,7 +19,13 @@ class InsuranceCertificate extends Component {
             expiry_year:'',
             expiry_month:'',
             insurance_certificate_type:'own',
-            vendor_id:this.props.match.params.vendor_id
+            vendor_id:this.props.match.params.vendor_id,
+            photo_id:[],
+            Npc:[],
+            ic:[],
+            btn1_prg:0,
+            btn2_prg:0,
+            btn2_prg:0
         };
     }
     
@@ -114,6 +121,135 @@ class InsuranceCertificate extends Component {
             insurance_certificate_type:type
         })
     }
+    upload_insurance(event) {
+        const formData = new FormData();
+        formData.append('file', event.target.files[0]);
+        formData.append('token', window.localStorage.getItem('al'));
+        let Configs = {
+            headers: {
+                token: window.localStorage.getItem('al'),
+                'content-type': false,
+                'mime-type': "multipart/form-data",
+            },
+            onUploadProgress: progressEvent => {this.setState({
+               btn1_prg: Math.round( (progressEvent.loaded * 100) / progressEvent.total )
+            })}
+        }
+        this.setState({
+            loading: true,
+        })
+        Axios.post('/api/file_upload', formData, Configs).then(res => {
+           
+            if (res.data.status == 200) {
+                let temp = this.state.ic;
+                temp.push({url:res.data.url})
+                this.setState({
+                    btn1_prg: false,
+                    ic: temp
+                })
+                Swal.fire({
+                    icon: 'success',
+                    title: 'File Uploaded Successfully',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: res.data.msg,
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        })
+
+    }
+    upload_NPC(event) {
+        const formData = new FormData();
+        formData.append('file', event.target.files[0]);
+        formData.append('token', window.localStorage.getItem('al'));
+        let Configs = {
+            headers: {
+                token: window.localStorage.getItem('al'),
+                'content-type': false,
+                'mime-type': "multipart/form-data",
+            },
+            onUploadProgress: progressEvent => {this.setState({
+               btn2_prg: Math.round( (progressEvent.loaded * 100) / progressEvent.total )
+            })}
+        }
+        this.setState({
+            loading: true,
+        })
+        Axios.post('/api/file_upload', formData, Configs).then(res => {
+          
+            if (res.data.status == 200) {
+                let temp = this.state.Npc;
+                temp.push({url:res.data.url})
+                this.setState({
+                    btn2_prg: false,
+                    Npc: temp
+                })
+                Swal.fire({
+                    icon: 'success',
+                    title: 'File Uploaded Successfully',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: res.data.msg,
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        })
+
+    }
+    upload_photo_id(event) {
+        const formData = new FormData();
+        formData.append('file', event.target.files[0]);
+        formData.append('token', window.localStorage.getItem('al'));
+        let Configs = {
+            headers: {
+                token: window.localStorage.getItem('al'),
+                'content-type': false,
+                'mime-type': "multipart/form-data",
+            },
+            onUploadProgress: progressEvent => {this.setState({
+               progress: Math.round( (progressEvent.loaded * 100) / progressEvent.total )
+            })}
+        }
+        this.setState({
+            loading: true,
+        })
+        Axios.post('/api/file_upload', formData, Configs).then(res => {
+          
+            if (res.data.status == 200) {
+                let temp = this.state.photo_id;
+                temp.push({url:res.data.url})
+                this.setState({
+                    btn2_prg: false,
+                    photo_id: temp
+                })
+                Swal.fire({
+                    icon: 'success',
+                    title: 'File Uploaded Successfully',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: res.data.msg,
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        })
+
+    }
     render() {
         return (
             <div >
@@ -128,17 +264,10 @@ class InsuranceCertificate extends Component {
                                 <div className="col-sm-12 ">
                                         <Tabs>
                                             <TabList>
-                                            <Tab onClick={this.InsuranceType.bind(this,'own')}>Upload Insurance Certificate</Tab>
-                                            <Tab onClick={this.InsuranceType.bind(this,'admin')}>Buy Insurance Certificate</Tab>
+                                            <Tab onClick={this.InsuranceType.bind(this,'own')}>Buy Public Liability Insurance</Tab>
+                                            <Tab onClick={this.InsuranceType.bind(this,'admin')}>Upload Documents</Tab>
                                             </TabList>
-                                            <TabPanel>
-                                            <div className="col-sm-12">
-                                                    <div className="form-group">
-                                                        <label className="control-label">Insurance Cerificate</label>
-                                                        <input onChange={this.insurance_certificate.bind(this)} type="file" className="form-control" />
-                                                    </div>
-                                            </div>
-                                            </TabPanel>
+                                            
                                             <TabPanel>
                                             <div className="col-sm-12">
                                                     <div className="form-group">
@@ -184,6 +313,65 @@ class InsuranceCertificate extends Component {
                                                         </select>
                                                     </div>
                                                 </div>*/}
+                                            </TabPanel>
+                                            <TabPanel>
+                                            <div className="col-sm-12 py-4">
+                                                    <div className="  card p-3 form-group">
+                                                        <label className="control-label p-2">Public Liability Insurance  </label>
+                                                        <input style={{border:'0px'}} onChange={this.upload_insurance.bind(this)} type="file" className="form-control col-md-8" />
+
+                                                        <table className="table table-hover table-light table-striped mt-2">
+                                                            <tbody>
+                                                               {
+                                                                   this.state.ic.map((data,index)=>{
+                                                                       return(
+                                                                        <tr key={index}>
+                                                                            <td>{data.url}</td>
+                                                                            <td><i className="fas fa-times"></i></td>
+                                                                        </tr>   
+                                                                       )
+                                                                   })
+                                                               }
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div className="  card p-3 form-group">
+                                                        <label className="control-label p-2">National Police Check (Only for sole trader)  </label>
+                                                        <input style={{border:'0px'}} onChange={this.upload_NPC.bind(this)} type="file" className="form-control col-md-8" />
+                                                        <table className="table table-hover table-light table-striped mt-2">
+                                                            <tbody>
+                                                               {
+                                                                   this.state.Npc.map((data,index)=>{
+                                                                       return(
+                                                                        <tr key={index}>
+                                                                            <td>{data.url}</td>
+                                                                            <td><i className="fas fa-times"></i></td>
+                                                                        </tr>   
+                                                                       )
+                                                                   })
+                                                               }
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div className="  card p-3 form-group">
+                                                        <label className="control-label p-2">Photo ID  </label>
+                                                        <input style={{border:'0px'}} onChange={this.upload_photo_id.bind(this)} type="file" className="form-control col-md-8" />
+                                                        <table className="table table-hover table-light table-striped mt-2">
+                                                            <tbody>
+                                                               {
+                                                                   this.state.photo_id.map((data,index)=>{
+                                                                       return(
+                                                                        <tr key={index}>
+                                                                            <td>{data.url}</td>
+                                                                            <td><i className="fas fa-times"></i></td>
+                                                                        </tr>   
+                                                                       )
+                                                                   })
+                                                               }
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                            </div>
                                             </TabPanel>
                                         </Tabs>
                                         

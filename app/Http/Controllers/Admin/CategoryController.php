@@ -127,7 +127,7 @@ class CategoryController extends Controller
             $category->name = $request->name;
             $category->type = $request->type;
             $category->save();
-            if ($request->image != $category->type) {
+            if ($request->image != $category->image) {
                 $name = time() . '.' . explode('/', explode(':', substr($request->image, 0, strpos($request->image, ';')))[1])[1];
                 \Image::make($request->image)->save(public_path('images/') . $name);
                 Category::where('id', $request->id)->update([

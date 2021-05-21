@@ -8,6 +8,7 @@ class SignUp extends Component {
         this.state = {
             btn_loading:false,
             services:[],
+            error_string:''
 
         };
     }
@@ -23,16 +24,29 @@ class SignUp extends Component {
             services:this.state.services,
             vendor_id:this.props.match.params.vendor_id
         }
-        this.setState({
-            btn_loading:true
+        let check = false;
+        this.state.services.map((data,index)=>{
+            if(data.check){
+                check = true;
+            }
         })
-        Axios.post('/api/save_vendor_services',payload).then(res=>{
+        if(check){
             this.setState({
-                btn_loading:false
+                btn_loading:true
             })
-            this.props.history.push('/vendor-signup/3/'+this.props.match.params.vendor_id);
-            console.log(res);
-        })
+            Axios.post('/api/save_vendor_services',payload).then(res=>{
+                this.setState({
+                    btn_loading:false
+                })
+                this.props.history.push('/vendor-signup/3/'+this.props.match.params.vendor_id);
+                console.log(res);
+            })
+        }else{
+            this.setState({
+                error_string:'Please Selct at least One Service'
+            })
+        }
+       
     }
     SelectService(index){
         let temp = this.state.services;
@@ -45,8 +59,8 @@ class SignUp extends Component {
         return (
             <div >
                 <div className="row">
-                    <div className="col-sm-3"></div>
-                    <div className="col-sm-6">
+                    <div className="col-sm-1"></div>
+                    <div className="col-sm-10">
                         <div className="panel">
                             <div className="panel-heading">
                                 <h3 className="text-center center_title">Select Services</h3>
@@ -76,6 +90,7 @@ class SignUp extends Component {
                                     <p className="text-danger text-center">{this.state.error_string}</p>
                                     :null
                                 }
+                              
                                 <div className="panel-footer text-center">
                                     <button onClick={this.submit_services.bind(this)} className="btn btn-success  col-sm-12 " type="submit">
                                     {
@@ -94,7 +109,7 @@ class SignUp extends Component {
                             {/*End Block Styled Form */}
                         </div>
                     </div>
-                    <div className="col-sm-3"></div>
+                    <div className="col-sm-1"></div>
                 </div>
 
             </div>

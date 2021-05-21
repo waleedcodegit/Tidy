@@ -114,7 +114,7 @@ textarea {
     outline: 0;
     background: 0 0;
     box-shadow: none;
-    -webkit-appearance: none;
+    /* -webkit-appearance: none; */
     -moz-appearance: none;
     -webkit-focus-ring-color: none
 }

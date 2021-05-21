@@ -63,4 +63,9 @@ Route::post('/getcategory','Frontend\CategoryController@getcategory');
 Route::post('/get-services','Vendor\VendorController@get_services');
 Route::post('/save_vendor_services','Vendor\VendorController@save_vendor_services');
 Route::post('/vendor_insurance_certificate','Vendor\VendorController@vendor_insurance_certificate');
+Route::post('/file_upload','Vendor\VendorController@file_upload');
+Route::post('/validate_vendor','Vendor\VendorController@validate_vendor');
+Route::post('/validate_card','Vendor\VendorController@validate_card');
+Route::post('/submit_vendor_request','Vendor\VendorController@submit_vendor_request');
+
 

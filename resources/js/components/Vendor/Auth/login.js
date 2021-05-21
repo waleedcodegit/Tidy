@@ -9,7 +9,10 @@ class Login extends Component {
         this.state = {
             email:'',
             password:'',
-            error_string:''
+            error_string:'',
+            services:[],
+            error_string:'',
+            
         };
     }
     email(e){

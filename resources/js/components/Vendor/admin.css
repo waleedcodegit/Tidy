@@ -13,6 +13,9 @@
 body{
   font-family: Poppins-Regular !important;
 }
+#progressbar h6 {
+  font-family: Poppins-Regular !important;
+}
 .MuiTypography-displayBlock h6 {
   padding: 0 0 0 !important;
 }
@@ -303,6 +306,20 @@ input:focus , select:focus , textarea:focus{
   font-size: 19px;
   border-radius: 100%;
 }
+.progress_icon .far{
+  background-color: #acacac;
+  color: white;
+  padding: 13px;
+  font-size: 19px;
+  border-radius: 100%;
+}
+.progress_active .far{
+  background-color: #34f822;
+  color: white;
+  padding: 13px;
+  font-size: 19px;
+  border-radius: 100%;
+}
 #msform {
   text-align: center;
   position: relative;
@@ -337,7 +354,7 @@ input:focus , select:focus , textarea:focus{
 #progressbar li {
   list-style-type: none;
   font-size: 12px;
-  width: 25%;
+  width: 19%;
   float: left;
   position: relative;
   list-style: none;

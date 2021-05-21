@@ -227,6 +227,8 @@ class SignUp extends Component {
                                         <div className="col-sm-12">
                                             <div className="form-group">
                                                 <label className="control-label">Australian Business Number</label>
+                                                <p style={{fontSize:'12px'}} className="mb-1 py-1">Please note your name on this application must match the first and last
+                                                 name registered to your ABN. If you do not have ABN yet, click here to <a target="blank" href="https://www.abr.gov.au/business-super-funds-charities/applying-abn">learn more</a>.</p>
                                                 <input onChange={this.australian_business_number.bind(this)} type="number" className="form-control" />
                                             </div>
                                         </div>
@@ -265,8 +267,8 @@ class SignUp extends Component {
                                     <p className="text-danger text-center">{this.state.error_string}</p>
                                     :null
                                 }
-                                <div className="panel-footer text-center">
-                                    <button onClick={this.Create_Vendor.bind(this)} className="btn btn-success  col-sm-12 " type="submit">
+                                <div className="panel-footer text-right">
+                                    <button onClick={this.Create_Vendor.bind(this)} className="btn btn-success   " type="submit">
                                     {
                                         this.state.btn_loading ? 
                                         <div id="displayspinner" style={{ display: 'block',}}>
@@ -274,7 +276,7 @@ class SignUp extends Component {
                                                                     <span className="sr-only">Loading...</span>
                                                                 </div>
                                                                 </div>
-                                                                :<>Continue...</>
+                                                                :<>Next</>
                                     }
                                     </button>
                                 </div>

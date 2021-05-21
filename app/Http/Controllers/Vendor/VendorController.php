@@ -14,6 +14,7 @@ use Exception;
 use Stripe;
 use Illuminate\Support\Facades\Crypt;
 use App\Category;
+use App\VendorDocuments;
 use App\VendorServices;
 
 class VendorController extends Controller
@@ -59,6 +60,170 @@ class VendorController extends Controller
             }
         }
     }
+    public function file_upload(Request $request){
+        try{
+            if ($request->hasFile('file')) {
+                $file = $request->file;
+                $filename = $file->getClientOriginalName();
+                $image = date('His') . $filename;
+                $destination_path = public_path() . '/files/';
+                $file->move($destination_path, $image);
+                $url = $image;
+                $response = ['status' => 200 , 'msg' =>'File Uploaded.','url' => $url];
+                return $response;
+            }
+        }catch(Exception $e){
+            $response = ['status' => 401 , 'msg' => 'File Uploaded.','error' => $e];
+            return $response;
+        }
+    }
+    public function validate_card(Request $request){
+        $validator = Validator::make($request->all(), [
+            'credit_card_number' => 'required',
+            'cvc' => 'required',
+            'expiry_month' => 'required',
+            'expiry_year' => 'required',
+        ]);
+        if($validator->fails()){
+            return response()->json([
+                'status' => false,
+                'message' => $validator->errors()->first(),
+                'errors' => $validator->errors()     
+            ]);
+        }
+        try{
+        $stripe = new \Stripe\StripeClient(
+            env("STRIPE_SK")
+          );
+        $token =  $stripe->tokens->create([
+            'card' => [
+              'number' =>  $request->credit_card_number,
+              'exp_month' => $request->expiry_month,
+              'exp_year' => $request->expiry_year,
+              'cvc' => $request->cvc,
+            ],
+          ]);
+          $customer = $stripe->customers->create([
+            "email" => $request->email,
+            "source" =>  $token->id
+        ]);
+        return response()->json([
+            'status' => true,
+            'customer' => $customer,
+        ]);
+        }catch(Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => 'Card Validation Error - Please check you card details.',
+                'errors' => $e     
+            ]);
+        }
+    }
+    public function validate_vendor(Request $request){
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            // 'password' => 'required',
+            'address' => 'required',
+            'email' => 'required|email|unique:vendors,email|max:255',
+            'phone' => 'required',
+            'dob' => 'required',
+            'australian_business_number' => 'required|min:11|max:11',
+            'type_of_business' => 'required',
+            'business_name' => 'required',
+            // 'trading' => 'required',
+        ]);
+
+        if($validator->fails()){
+            return response()->json([
+                'status' => false,
+                'message' => $validator->errors()->first(),
+                'errors' => $validator->errors()     
+            ]);
+        }else{
+            return response()->json([
+                'status' => true,  
+            ]);
+        }
+    }
+    public function submit_vendor_request(Request $request){
+        try{
+        $new_vendor = new Vendor();
+        $new_vendor->first_name = $request->first_name;
+        $new_vendor->last_name  = $request->last_name;
+        $new_vendor->email = $request->email;
+        // $new_vendor->password = Hash::make($request->password);
+        $new_vendor->address = $request->address;
+        $new_vendor->phone = $request->phone;
+        $new_vendor->dob = $request->dob;
+        $new_vendor->australian_business_number = $request->australian_business_number;
+        $new_vendor->type_of_business = $request->type_of_business;
+        $new_vendor->business_name = $request->business_name;
+        $new_vendor->trading = $request->trading;
+        // $new_vendor->vendor_stripe_id = $customer->id;
+        $new_vendor->insurance_certificate_type = $request->insurance_certificate_type;
+        $new_vendor->save();
+        $vendor = Vendor::find($new_vendor->id);
+        if($request->insurance_certificate_type == "admin") {
+            $ins = new InsuranceCertificateCCard();
+            $ins->vendor_id = $vendor->id;
+            $ins->credit_card_number = $request->credit_card_number;
+            $ins->cvc = $request->cvc;
+            $ins->expiry_month = $request->expiry_month;
+            $ins->expiry_year = $request->expiry_year;
+            $ins->card_holder_name = $request->card_holder_name;
+            $ins->duration_of_insu_charges = $request->duration_of_insu_charges;
+            $ins->status = "activate";
+            $ins->save();   
+            $vendor->vendor_stripe_id = $request->customer['id'];
+        }else{
+            if(sizeof($request->ic) > 0){
+                foreach($request->ic as $ic){
+                    $vendor_documents = new VendorDocuments();
+                    $vendor_documents->title = $ic['title'];
+                    $vendor_documents->document = $ic['url'];
+                    $vendor_documents->save();
+                }
+               
+            }
+            if(sizeof($request->Npc) > 0){
+                foreach($request->Npc as $Npc){
+                    $vendor_documents = new VendorDocuments();
+                    $vendor_documents->title = $Npc['title'];
+                    $vendor_documents->document = $Npc['url'];
+                    $vendor_documents->save();
+                }
+               
+            }
+            if(sizeof($request->photo_id) > 0){
+                foreach($request->photo_id as $photo_id){
+                    $vendor_documents = new VendorDocuments();
+                    $vendor_documents->title = $photo_id['title'];
+                    $vendor_documents->document = $photo_id['url'];
+                    $vendor_documents->save();
+                }
+               
+            }
+           
+        }
+
+        foreach($request->services as $s){
+            if($s['check']){
+                $servcie = new VendorServices();
+                $servcie->vendor_id = $vendor->id;
+                $servcie->service_id = $s['id'];
+                $servcie->save();
+            }
+        }
+        $vendor->save();
+        
+    $response = ['status' => 200 , 'msg' => 'Vendor added.'];
+    return $response;
+        }catch(Exception $e){
+        $response = ['status' => 404 , 'msg' => 'Error - '.$e];
+        return $response;
+        }
+    }
     public function create_vendor(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -69,7 +234,7 @@ class VendorController extends Controller
             'email' => 'required|email|unique:vendors,email|max:255',
             'phone' => 'required',
             'dob' => 'required',
-            'australian_business_number' => 'required',
+            'australian_business_number' => 'required|min:11|max:11',
             'type_of_business' => 'required',
             'business_name' => 'required',
             // 'trading' => 'required',
