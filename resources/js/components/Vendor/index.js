@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import MainIndex from '../Vendor/Admin_Sidebar';
+// import MainIndex from '../Vendor/Admin_Sidebar';
 import {Route , BrowserRouter , Switch} from 'react-router-dom';
 import Signup from '../Vendor/Auth/Signup';
 import Login from '../Vendor/Auth/login';
@@ -20,7 +20,7 @@ class Index extends Component {
         return (
             <div >
                 <BrowserRouter>
-                    <Route exact path="/vendor" component={MainIndex}></Route>
+                    {/* <Route exact path="/vendor" component={MainIndex}></Route> */}
                     <Route path="/vendor-signup/:step?/:vendor_id?" component={  Signup}></Route>
                     <Route path="/vendor-login" component={Login}></Route>
                     <Route exact path="/request-submitted" component={SignUpRequest}></Route>

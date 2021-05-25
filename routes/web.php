@@ -62,10 +62,10 @@ Route::view('/admin/list-question', 'Admin');
 
 
 Route::view('/vendor', 'vendor');
-Route::view('/vendor-signup', 'vendor');
-Route::view('/vendor-signup/{step}', 'vendor');
-Route::view('/vendor-signup/{step}/{vendor_id}', 'vendor');
-Route::view('/vendor-login', 'vendor');
+// Route::view('/vendor-signup', 'vendor');
+// Route::view('/vendor-signup/{step}', 'vendor');
+// Route::view('/vendor-signup/{step}/{vendor_id}', 'vendor');
+// Route::view('/vendor-login', 'vendor');
 
 
 

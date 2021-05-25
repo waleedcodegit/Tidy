@@ -344,11 +344,12 @@ input:focus , select:focus , textarea:focus{
 #progressbar {
   margin-bottom: 30px;
   overflow: hidden;
-  color: lightgrey
+  color: lightgrey;
+  margin-left: 40px;
 }
 
 #progressbar .active {
-  color: #000000
+  color: #000000;
 }
 
 #progressbar li {
@@ -359,7 +360,13 @@ input:focus , select:focus , textarea:focus{
   position: relative;
   list-style: none;
 }
-
+.form-control{
+  height:45px !important;
+}
+.sub_btn{
+  height: 45px;
+  border-radius: 1px;
+}
 /* 
 #progressbar li:after {
   content: '';

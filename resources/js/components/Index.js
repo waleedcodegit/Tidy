@@ -21,8 +21,8 @@ class Index extends Component{
                     <Route exact path="/admin-login" component={Admin_Login} />
                     <Route path="/admin"  component={AdminIndex}/>
                     <Route path="/vendor"  component={VendorIndex}/>
-                    <Route path="/vendor-signup/:step?/:vendor_id?"  component={VendorIndex}/>
-                    <Route path="/vendor-login"  component={VendorIndex}/>
+                    <Route path="/vendor-signup"  component={FrontIndex}/>
+                    <Route path="/vendor-login"  component={FrontIndex}/>
                 </div>
             </BrowserRouter>
         );

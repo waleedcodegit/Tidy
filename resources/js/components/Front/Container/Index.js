@@ -6,6 +6,9 @@ import Login from '../Auth/Login';
 import Signup from '../Auth/CustomerSignUp'
 import { Switch,BrowserRouter,Route} from 'react-router-dom';
 import TopHeader from '../LandingComponents/TopHeader';
+import VendorSignUp from '../../Vendor/Auth/Signup';
+import VendorLogin from '../../Vendor/Auth/login';
+
 import '../index.css'
 class Index extends Component {
     constructor(props) {
@@ -24,6 +27,8 @@ class Index extends Component {
                 <Route exact path="/login" component={Login}></Route>
                 <Route exact path="/signup" component={Signup}></Route>
                 <Route path="/services/:name?" component={Landing}></Route>
+                <Route exact path="/vendor-signup" component={VendorSignUp}></Route>
+                <Route exact path="/vendor-login" component={VendorLogin}></Route>
                 <Footer></Footer>
 
             </div>

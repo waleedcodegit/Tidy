@@ -45,9 +45,7 @@ class SignUp extends Component {
             customer:{},
             agree_check:false
         };
-        if (!this.props.match.params.step) {
-            this.props.history.push('/vendor-signup/1')
-        }
+     
     }
     nextStep() {
         this.setState({
@@ -334,7 +332,7 @@ class SignUp extends Component {
 
             if (res.data.status == 200) {
                 let temp = this.state.ic;
-                temp.push({ url: res.data.url })
+                temp.push({ url: res.data.url , title:'Insurance Certificate' })
                 this.setState({
                     btn1_prg: false,
                     ic: temp
@@ -380,7 +378,7 @@ class SignUp extends Component {
 
             if (res.data.status == 200) {
                 let temp = this.state.Npc;
-                temp.push({ url: res.data.url })
+                temp.push({ url: res.data.url , title:'National Police Check'})
                 this.setState({
                     btn2_prg: false,
                     Npc: temp
@@ -425,7 +423,7 @@ class SignUp extends Component {
 
             if (res.data.status == 200) {
                 let temp = this.state.photo_id;
-                temp.push({ url: res.data.url })
+                temp.push({ url: res.data.url , title:'Photo ID' })
                 this.setState({
                     btn2_prg: false,
                     photo_id: temp
@@ -538,9 +536,9 @@ class SignUp extends Component {
                     error_string:'Please Upload National Police Check'
                 }) 
             }
-        }else if(this.state.photo_id.length > 0){
+        }else if(this.state.photo_id.length == 0){
             this.setState({
-                error_string:'Please Photo Id'
+                error_string:'Please Upload  Photo Id'
             })
         }else{
             this.setState({
@@ -569,7 +567,7 @@ class SignUp extends Component {
     render() {
         return (
             <div >
-                <Navbar bg="light">
+                {/* <Navbar bg="light">
                     <div className="container">
                         <Navbar.Brand className="container" href="#home">
                             <img
@@ -580,14 +578,14 @@ class SignUp extends Component {
                         </Navbar.Brand>
                     </div>
 
-                </Navbar>
+                </Navbar> */}
                 <div>
 
                     <div className="container-fluid" id="grad1">
                         <div className="row justify-content-center mt-0">
-                            <div className="col-11 col-sm-9 col-md-7 col-lg-6  p-0 mt-3 mb-2">
+                            <div className="col-11 col-sm-9 col-md-7 col-lg-7  p-0 mt-3 mb-2">
                                 <div className="card card-signin p-3 animate_auth_modal  px-0 pt-4 pb-0 mt-3 mb-3">
-                                    <h2 className="text-center"><strong>Vendor Account SignUp</strong></h2>
+                                    <h2 className="text-center" style={{fontSize:'48px'}}><strong>Vendor Account SignUp</strong></h2>
                                     <p className="text-center">Fill all form field to go to next step</p>
                                     <div className="row">
                                         <div className="col-md-12 mx-0">
@@ -596,11 +594,11 @@ class SignUp extends Component {
                                                 <ul id="progressbar">
                                                     <li className={this.state.step >= 1 ? "progress_active" : 'progress_icon'}  >
                                                         <i className="fas fa-user"></i>
-                                                        <h6>Account Information</h6>
+                                                        <h6>Information</h6>
                                                     </li>
                                                     <li className={this.state.step >= 2 ? "progress_active" : 'progress_icon'} >
                                                         <i class="fas fa-solar-panel"></i>
-                                                        <h6> Choose one or more services</h6>
+                                                        <h6> Choose services</h6>
                                                     </li>
                                                     <li className={this.state.step >= 3 ? "progress_active" : 'progress_icon'}>
                                                         <i class="fas fa-certificate"></i>
@@ -827,8 +825,8 @@ class SignUp extends Component {
                                                                         <div className="col-sm-12 ">
                                                                             <Tabs>
                                                                                 <TabList>
-                                                                                    <Tab onClick={this.InsuranceType.bind(this, 'own')}>Buy Public Liability Insurance</Tab>
-                                                                                    <Tab onClick={this.InsuranceType.bind(this, 'admin')}>Upload Documents</Tab>
+                                                                                    <Tab onClick={this.InsuranceType.bind(this, 'admin')}>Buy Public Liability Insurance</Tab>
+                                                                                    <Tab onClick={this.InsuranceType.bind(this, 'own')}>Upload Documents</Tab>
                                                                                 </TabList>
 
                                                                                 <TabPanel>

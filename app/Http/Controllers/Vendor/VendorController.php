@@ -180,6 +180,7 @@ class VendorController extends Controller
             if(sizeof($request->ic) > 0){
                 foreach($request->ic as $ic){
                     $vendor_documents = new VendorDocuments();
+                    $vendor_documents->vendor_id = $new_vendor->id;
                     $vendor_documents->title = $ic['title'];
                     $vendor_documents->document = $ic['url'];
                     $vendor_documents->save();
@@ -189,6 +190,7 @@ class VendorController extends Controller
             if(sizeof($request->Npc) > 0){
                 foreach($request->Npc as $Npc){
                     $vendor_documents = new VendorDocuments();
+                    $vendor_documents->vendor_id = $new_vendor->id;
                     $vendor_documents->title = $Npc['title'];
                     $vendor_documents->document = $Npc['url'];
                     $vendor_documents->save();
@@ -198,6 +200,7 @@ class VendorController extends Controller
             if(sizeof($request->photo_id) > 0){
                 foreach($request->photo_id as $photo_id){
                     $vendor_documents = new VendorDocuments();
+                    $vendor_documents->vendor_id = $new_vendor->id;
                     $vendor_documents->title = $photo_id['title'];
                     $vendor_documents->document = $photo_id['url'];
                     $vendor_documents->save();

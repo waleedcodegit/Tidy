@@ -12,7 +12,7 @@ class Login extends Component {
             error_string:'',
             services:[],
             error_string:'',
-            
+
         };
     }
     email(e){
@@ -41,33 +41,21 @@ class Login extends Component {
     render() {
         return (
             <div >
-                <Navbar bg="light">
-                    <div className="container">
-                        <Navbar.Brand className="container" href="#home">
-                            <img
-                                src={`/images/tidy-home-logo.png`}
-                                className=" p-3"
-                                alt="React Bootstrap logo"
-                            />
-                        </Navbar.Brand>
-                    </div>
 
-                </Navbar>
-
-                <div className="row">
-                    <div className="col-sm-3"></div>
-                    <div className="col-sm-6">
+                   
                         <div className="panel">
-                            <div className="panel-heading">
-                                <h3 className="text-center center_title">Vendor Login</h3>
-                            </div>
+                           
                             {/*Block Styled Form */}
                             {/*===================================================*/}
                             <form>
-                                <div className="panel-body">
-                                    <div className="col-sm-2"></div>
-                                    <div className="row col-sm-8">
+                                <div className="panel-body row mt-5 mb-5">
+                                    <div className="col-sm-4"></div>
+                                    <div className=" col-sm-4">
+                                    <div className="panel-heading">
+                                <h3 className="text-center center_title">Vendor Login</h3>
+                            </div>
                                         <div className="col-sm-12">
+                                      
                                             <div className="form-group">
                                                 <label className="control-label">Email</label>
                                                 <input onChange={this.email.bind(this)} type="Email" name="email" className="form-control"  aria-autocomplete/>
@@ -88,7 +76,7 @@ class Login extends Component {
                                             :null
                                         }
                                         <div className="col-sm-12">
-                                        <button onClick={this.login.bind(this)} className="btn btn-success text-center col-sm-12" type="submit">Login</button>
+                                        <button onClick={this.login.bind(this)} className="btn btn-success text-center sub_btn col-sm-12" type="submit">Login</button>
                                         </div>
                                         
                                        <div className="col-sm-12">
@@ -107,9 +95,6 @@ class Login extends Component {
                             {/*===================================================*/}
                             {/*End Block Styled Form */}
                         </div>
-                    </div>
-                    <div className="col-sm-3"></div>
-                </div>
 
             </div>
         );
