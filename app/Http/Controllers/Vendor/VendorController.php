@@ -29,13 +29,55 @@ class VendorController extends Controller
     }
 
     public function show(Request $request) {
-        $vendor = Vendor::where('id', $request->id)->with('insurance_detail')->first();
+        $vendor = Vendor::where('id', $request->id)->with('insurance_detail', 'vendor_doc', 'vendor_servicess')->first();
+        $services_array = [];
+        if(count($vendor->vendor_servicess) > 0) {
+            foreach($vendor->vendor_servicess as $val) {
+                $service = Category::where('id', $val->service_id)->first();
+                array_push($services_array, $service);
+                $vendor->vendor_selected_services = $services_array;
+            }
+        }
+        $services = Category::get();
+        $vendor->services = $services;
         $response = [
             'status' => 200 ,
             'msg' => 'Vendor',
             'data' => $vendor
         ];
         return $response;
+    }
+
+    public function delete_vendor_selected_services(Request $request) {
+        $service = VendorServices::where('service_id', $request->id)->delete();
+        $response = [
+            'status' => 200 ,
+            'msg' => 'Vendor Selected Service Deleted',
+            'data' => $service
+        ];
+        return $response;
+    }
+
+    public function add_vendor_service(Request $request) {
+        $check = VendorServices::where('service_id', $request->service_id)->first();
+        if($check) {
+            $response = [
+                'status' => 200 ,
+                'msg' => 'Service Already Added',
+            ];
+            return $response;
+        } else {
+            $data = new VendorServices();
+            $data->service_id = $request->service_id;
+            $data->vendor_id = $request->vendor_id;
+            $data->save();
+
+            $response = [
+                'status' => 200 ,
+                'msg' => 'Vendor Service Added',
+            ];
+            return $response;
+        }  
     }
 
     public function get_services(Request $request) {

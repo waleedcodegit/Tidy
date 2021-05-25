@@ -31,4 +31,11 @@ class Vendor extends Model
     public function insurance_detail() {
         return $this->hasOne(InsuranceCertificateCCard::class);
     }
+    public function vendor_doc() {
+        return $this->hasMany(VendorDocuments::class);
+    }
+    public function vendor_servicess() {
+        return $this->hasMany(VendorServices::class);
+    }
+    
 }

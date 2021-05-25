@@ -67,5 +67,9 @@ Route::post('/file_upload','Vendor\VendorController@file_upload');
 Route::post('/validate_vendor','Vendor\VendorController@validate_vendor');
 Route::post('/validate_card','Vendor\VendorController@validate_card');
 Route::post('/submit_vendor_request','Vendor\VendorController@submit_vendor_request');
+Route::post('/delete-vendor-selected-services/{id}','Vendor\VendorController@delete_vendor_selected_services');
+Route::post('/add-vendor-service/{id}','Vendor\VendorController@add_vendor_service');
+
+
 
 

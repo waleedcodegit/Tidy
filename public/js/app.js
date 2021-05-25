@@ -9947,7 +9947,26 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "body {\r\n  margin: 0;\r\n  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',\r\n    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',\r\n    sans-serif;\r\n  -webkit-font-smoothing: antialiased;\r\n  -moz-osx-font-smoothing: grayscale;\r\n}\r\n\r\ncode {\r\n  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',\r\n    monospace;\r\n}\r\n.react-multi-carousel-item {\r\n  padding: 10px;\r\n}\r\n@font-face {\r\n  font-family: popinsbold;\r\n  src: url('/fonts/Poppins/Poppins-Bold.ttf');\r\n}\r\n@font-face {\r\n  font-family: Poppins-Regular;\r\n  src: url('/fonts/Poppins/Poppins-Light.ttf');\r\n}\r\n@font-face {\r\n  font-family: poopinmediumt;\r\n  src: url('/fonts/Poppins/Poppins-Medium.ttf');\r\n}\r\n@font-face {\r\n  font-family: poopilight;\r\n  src: url('/fonts/Poppins/Poppins-ExtraLight.ttf');\r\n}\r\n@font-face {\r\n  font-family: p22-regular;\r\n  src: url('/fonts/p22/P22UndergroundRegular.ttf');\r\n}\r\n@font-face {\r\n  font-family: p22-light;\r\n  src: url('/fonts/p22/P22Underground-Light.otf');\r\n}\r\n@media screen and (min-width:480px){\r\n  .padding_fluid{\r\n    padding-left: 5%;\r\n    padding-right: 5%;\r\n  }\r\n \r\n}\r\n@media screen and (max-width:480px){\r\n  .hide_on_mob{\r\n    display: none !important;\r\n  }\r\n  .login_img_div{\r\n    display: none;\r\n  }\r\n  .dl-slider .dl-caption {\r\n    font-size: 28px !important;\r\n}\r\n.navbar-nav{\r\n  margin-left: 0 !important;\r\n}\r\n.homemodal{\r\n  padding-top:90px;\r\n  padding-left: 0px !important;\r\n  padding-right: 0px !important;\r\n}\r\n.homemodal_card{\r\n  height: 100% !important;\r\n  width: 100% !important;\r\n  overflow: scroll;\r\n}\r\n}\r\n.dl-slider .dl-caption {\r\n  color: rgb(202, 76, 76);\r\n  font-family: popinsbold !important;\r\n}\r\n.navbar{\r\n  width: 100%;\r\n  height: 80px;\r\n  background-color: #fff !important;\r\n  margin-bottom: 2px !important;\r\n}\r\n.login_div{\r\n  text-align: center !important;\r\n}\r\n.auth-site-logo{\r\n  margin-top: 50px;\r\n}\r\n.login_page_heading{\r\n  font-family:p22-light ;\r\n  font-size: 30px;\r\n  color: #535353;\r\n  font-weight: 500;\r\n  margin-top: 50px;\r\n}\r\n.auth_div{\r\n  padding-left:0px !important;\r\n}\r\n.input_label{\r\n  font-size: 16px;\r\n  font-weight: bold;\r\n}\r\n.auth_input_box{\r\n  height: 40px;\r\n}\r\n.form_div{\r\n  padding: 10px;\r\n  text-align: left;\r\n}\r\n.auth_divider_text{\r\n  font-size: 14px;\r\n  color: #000;\r\n}\r\n.spinner-border{\r\n  width: 30px !important;\r\n  height: 30px !important;\r\n  font-size: 8px !important;\r\n}\r\n.radio_label{\r\n  padding-left: 5px;\r\n  padding-bottom: 10px;\r\n  margin-bottom: 20px;\r\n}\r\n.input_div{\r\n  padding-top: 0px;\r\n}\r\n.homemodal{\r\n  background-color: #f7f7f70e;\r\n  position: absolute;\r\n  top: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  right: 0;\r\n  padding: 30px;\r\n  padding-top: 90px;\r\n}\r\n.collapse{\r\n  padding-top: 30px !important;\r\n}\r\n.form_label{\r\n  font-size: 18px;\r\n  font-family: poopilight;\r\n  font-weight: 600;\r\n}\r\n.form_select{\r\n  height: 55px !important;\r\n}\r\n.homemodal_card{\r\n  background-color: white;\r\n  height: 600px;\r\n  width: 80%;\r\n  margin-left: auto;\r\n  margin-right: auto;\r\n  overflow: scroll;\r\n}\r\n.track {\r\n  position: relative;\r\n  background-color: #ddd;\r\n  height: 7px;\r\n  display: flex;\r\n  margin-bottom: 60px;\r\n  margin-top: 50px\r\n}\r\n\r\n.track .step {\r\n  flex-grow: 1;\r\n  width: 25%;\r\n  margin-top: -18px;\r\n  text-align: center;\r\n  position: relative;\r\n  margin-left: -15px;\r\n\r\n}\r\n\r\n.track .step.active:before {\r\n  background: #4BBF19\r\n}\r\n\r\n.track .step::before {\r\n  height: 7px;\r\n  position: absolute;\r\n  content: \"\";\r\n  width: 100%;\r\n  left: 0;\r\n  top: 18px\r\n\r\n}\r\n\r\n.track .step.active .icon {\r\n  background: #fff;\r\n  color: #fff\r\n}\r\n\r\n.track .icon {\r\n  display: inline-block;\r\n  width: 50px;\r\n  height: 50px;\r\n  line-height: 40px;\r\n  position: relative;\r\n  border-radius: 100%;\r\n  background: #ddd\r\n}\r\n\r\n.track .step.active .text {\r\n  font-weight: 400;\r\n  color: #000\r\n}\r\n\r\n.track .text {\r\n  display: block;\r\n  margin-top: 7px\r\n}\r\n.cross_div{\r\n  text-align: right;\r\n}\r\n.cross_div img{\r\n  cursor: pointer;\r\n}\r\n\r\n.service-items{\r\n  width: 48%;\r\n}\r\n.item-pading{\r\n  padding-left: 5px;\r\n}\r\n.nav-link{\r\n  text-align: center !important;\r\n\r\n}\r\n.nav_link{\r\n  font-weight: 600 !important;\r\n  font-family:  Poppins-Regular !important;\r\n  font-size: 14px !important;\r\n  margin-bottom: 0 !important;\r\n}\r\n.item-servies img{\r\n  width: 80px;\r\n  height: 80px;\r\n}\r\n.react-multi-carousel-track{\r\n  margin-left: auto !important;\r\n  margin-right: auto !important;\r\n}\r\n.cat_btn{\r\n  background-color: #1A7ABF;\r\n  border-radius: 2px;\r\n  border: none;\r\n}\r\n.info_btn{\r\n  background-color: #FF826E;\r\n  border-radius: 2px;\r\n  border: none;\r\n}\r\n.carousel .thumb{\r\n  display: none !important;\r\n}\r\n.carousel.carousel-slider{\r\n  width: 150px !important;\r\n  \r\n}\r\n.item_name{\r\n  /* font-weight: bold; */\r\n  font-family:poopinmediumt ;\r\n  color: #495464;\r\n  margin-bottom: 0 !important;\r\n  font-size: 18px;\r\n}\r\n.carousel *{\r\n  background: transparent !important;\r\n}\r\n.vendor_btn{\r\n  border-radius: 2px;\r\n  height: 30px;\r\n  padding: 0px;\r\n  border:1px solid #4BBF19 !important;\r\n  color: #4BBF19 !important;\r\n  margin-top: 17px;\r\n  padding-left: 15px;\r\n  padding-right: 15px;\r\n  font-size: 20px;\r\n  font-weight: 600;\r\n  padding-bottom: 2px !important;\r\n  line-height: 0.5;\r\n}\r\n.vendor_btn:hover{\r\n  background-color: #4BBF19;\r\n  color: white !important;\r\n}\r\n.login_btn{\r\n  background-color: #2D85C5;\r\n  border-radius: 2px;\r\n  height: 30px;\r\n  padding: 0px;\r\n  margin-top: 17px;\r\n  padding-left: 15px;\r\n  padding-right: 15px;\r\n  font-size: 18px;\r\n  font-weight: 600;\r\n  /* padding-bottom: 2px !important; */\r\n  line-height: 0.5;\r\n  padding: 10px;\r\n}\r\n\r\n.collapse.show{\r\n  display: block !important;\r\n  background: white !important;\r\n  z-index: 11 !important;\r\n}\r\n/* .collapse.show a {\r\n  text-align: left !;\r\n} */\r\n.price_btn{\r\n  background-color: #17aa30;\r\n  border-radius: 2px;\r\n  border: none;\r\n}\r\n.item-servies{\r\n  background: rgba(241, 241, 241 ,0.82);\r\n  margin-top: 30px;\r\n  height: 170px;\r\n}\r\n.item-servies:hover{\r\n  background: rgba(216, 216, 216, 0.973);\r\n  cursor: pointer;\r\n}\r\n .nav-link{\r\n  color: black !important;\r\n  font-weight: 600 !important;\r\n  font-family:  Poppins-Regular !important;\r\n  font-size: 14px !important;\r\n  margin-bottom: 0 !important;\r\n  padding-top: 0 !important;\r\n}\r\n.back_image{\r\n  position: fixed;\r\n  background-image: url(\"/images/page-header.jpg\");\r\n  background-repeat: no-repeat;\r\n  background-size: cover;\r\n  width: 100%;\r\n  height: 100%;\r\n  opacity: 60%;\r\n}\r\n.btn_continue{\r\n  height: 55px;\r\n  width: 100%;\r\n}\r\n/* .logo{\r\n  width: 100px;\r\n  height: 60px;\r\n} */", ""]);
+exports.push([module.i, "body {\r\n  margin: 0;\r\n  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',\r\n    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',\r\n    sans-serif;\r\n  -webkit-font-smoothing: antialiased;\r\n  -moz-osx-font-smoothing: grayscale;\r\n}\r\n\r\ncode {\r\n  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',\r\n    monospace;\r\n}\r\n.react-multi-carousel-item {\r\n  padding: 10px;\r\n}\r\n@font-face {\r\n  font-family: popinsbold;\r\n  src: url('/fonts/Poppins/Poppins-Bold.ttf');\r\n}\r\n@font-face {\r\n  font-family: Poppins-Regular;\r\n  src: url('/fonts/Poppins/Poppins-Light.ttf');\r\n}\r\n@font-face {\r\n  font-family: poopinmediumt;\r\n  src: url('/fonts/Poppins/Poppins-Medium.ttf');\r\n}\r\n@font-face {\r\n  font-family: poopilight;\r\n  src: url('/fonts/Poppins/Poppins-ExtraLight.ttf');\r\n}\r\n@font-face {\r\n  font-family: p22-regular;\r\n  src: url('/fonts/p22/P22UndergroundRegular.ttf');\r\n}\r\n@font-face {\r\n  font-family: p22-light;\r\n  src: url('/fonts/p22/P22Underground-Light.otf');\r\n}\r\n@media screen and (min-width:480px){\r\n  .padding_fluid{\r\n    padding-left: 5%;\r\n    padding-right: 5%;\r\n  }\r\n \r\n}\r\n@media screen and (max-width:480px){\r\n  .hide_on_mob{\r\n    display: none !important;\r\n  }\r\n  .login_img_div{\r\n    display: none;\r\n  }\r\n  .dl-slider .dl-caption {\r\n    font-size: 28px !important;\r\n}\r\n.navbar-nav{\r\n  margin-left: 0 !important;\r\n}\r\n.homemodal{\r\n  padding-top:90px;\r\n  padding-left: 0px !important;\r\n  padding-right: 0px !important;\r\n}\r\n.homemodal_card{\r\n  height: 100% !important;\r\n  width: 100% !important;\r\n  overflow: scroll;\r\n}\r\n}\r\n.dl-slider .dl-caption {\r\n  color: rgb(202, 76, 76);\r\n  font-family: popinsbold !important;\r\n}\r\n.navbar{\r\n  width: 100%;\r\n  height: 80px;\r\n  background-color: #fff !important;\r\n  margin-bottom: 2px !important;\r\n}\r\n.login_div{\r\n  text-align: center !important;\r\n}\r\n.auth-site-logo{\r\n  margin-top: 50px;\r\n}\r\n.login_page_heading{\r\n  font-family:p22-light ;\r\n  font-size: 30px;\r\n  color: #535353;\r\n  font-weight: 500;\r\n  margin-top: 50px;\r\n}\r\n.auth_div{\r\n  padding-left:0px !important;\r\n}\r\n.input_label{\r\n  font-size: 16px;\r\n  font-weight: bold;\r\n}\r\n.auth_input_box{\r\n  height: 40px;\r\n}\r\n.form_div{\r\n  padding: 10px;\r\n  text-align: left;\r\n}\r\n.auth_divider_text{\r\n  font-size: 14px;\r\n  color: #000;\r\n}\r\n.spinner-border{\r\n  width: 30px !important;\r\n  height: 30px !important;\r\n  font-size: 8px !important;\r\n}\r\n.radio_label{\r\n  padding-left: 5px;\r\n  padding-bottom: 10px;\r\n  margin-bottom: 20px;\r\n}\r\n.input_div{\r\n  padding-top: 0px;\r\n}\r\n.homemodal{\r\n  background-color: #f7f7f70e;\r\n  position: absolute;\r\n  top: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  right: 0;\r\n  padding: 30px;\r\n  padding-top: 90px;\r\n}\r\n.collapse{\r\n  padding-top: 30px !important;\r\n}\r\n.form_label{\r\n  font-size: 18px;\r\n  font-family: poopilight;\r\n  font-weight: 600;\r\n}\r\n.form_select{\r\n  height: 55px !important;\r\n}\r\n.homemodal_card{\r\n  background-color: white;\r\n  height: 600px;\r\n  width: 80%;\r\n  margin-left: auto;\r\n  margin-right: auto;\r\n  overflow: scroll;\r\n}\r\n.track {\r\n  position: relative;\r\n  background-color: #ddd;\r\n  height: 7px;\r\n  display: flex;\r\n  margin-bottom: 60px;\r\n  margin-top: 50px\r\n}\r\n\r\n.track .step {\r\n  flex-grow: 1;\r\n  width: 25%;\r\n  margin-top: -18px;\r\n  text-align: center;\r\n  position: relative;\r\n  margin-left: -15px;\r\n\r\n}\r\n\r\n.track .step.active:before {\r\n  background: #4BBF19\r\n}\r\n\r\n.track .step::before {\r\n  height: 7px;\r\n  position: absolute;\r\n  content: \"\";\r\n  width: 100%;\r\n  left: 0;\r\n  top: 18px\r\n\r\n}\r\n\r\n.track .step.active .icon {\r\n  background: #fff;\r\n  color: #fff\r\n}\r\n\r\n.track .icon {\r\n  display: inline-block;\r\n  width: 50px;\r\n  height: 50px;\r\n  line-height: 40px;\r\n  position: relative;\r\n  border-radius: 100%;\r\n  background: #ddd\r\n}\r\n\r\n.track .step.active .text {\r\n  font-weight: 400;\r\n  color: #000\r\n}\r\n\r\n.track .text {\r\n  display: block;\r\n  margin-top: 7px\r\n}\r\n.cross_div{\r\n  text-align: right;\r\n}\r\n.cross_div img{\r\n  cursor: pointer;\r\n}\r\n\r\n.service-items{\r\n  width: 48%;\r\n}\r\n.item-pading{\r\n  padding-left: 5px;\r\n}\r\n.front-app .nav-link{\r\n  text-align: center !important;\r\n\r\n}\r\n.nav_link{\r\n  font-weight: 600 !important;\r\n  font-family:  Poppins-Regular !important;\r\n  font-size: 14px !important;\r\n  margin-bottom: 0 !important;\r\n}\r\n.item-servies img{\r\n  width: 80px;\r\n  height: 80px;\r\n}\r\n.react-multi-carousel-track{\r\n  margin-left: auto !important;\r\n  margin-right: auto !important;\r\n}\r\n.cat_btn{\r\n  background-color: #1A7ABF;\r\n  border-radius: 2px;\r\n  border: none;\r\n}\r\n.info_btn{\r\n  background-color: #FF826E;\r\n  border-radius: 2px;\r\n  border: none;\r\n}\r\n.carousel .thumb{\r\n  display: none !important;\r\n}\r\n.carousel.carousel-slider{\r\n  width: 150px !important;\r\n  \r\n}\r\n.item_name{\r\n  /* font-weight: bold; */\r\n  font-family:poopinmediumt ;\r\n  color: #495464;\r\n  margin-bottom: 0 !important;\r\n  font-size: 18px;\r\n}\r\n.carousel *{\r\n  background: transparent !important;\r\n}\r\n.vendor_btn{\r\n  border-radius: 2px;\r\n  height: 30px;\r\n  padding: 0px;\r\n  border:1px solid #4BBF19 !important;\r\n  color: #4BBF19 !important;\r\n  margin-top: 17px;\r\n  padding-left: 15px;\r\n  padding-right: 15px;\r\n  font-size: 20px;\r\n  font-weight: 600;\r\n  padding-bottom: 2px !important;\r\n  line-height: 0.5;\r\n}\r\n.vendor_btn:hover{\r\n  background-color: #4BBF19;\r\n  color: white !important;\r\n}\r\n.login_btn{\r\n  background-color: #2D85C5;\r\n  border-radius: 2px;\r\n  height: 30px;\r\n  padding: 0px;\r\n  margin-top: 17px;\r\n  padding-left: 15px;\r\n  padding-right: 15px;\r\n  font-size: 18px;\r\n  font-weight: 600;\r\n  /* padding-bottom: 2px !important; */\r\n  line-height: 0.5;\r\n  padding: 10px;\r\n}\r\n\r\n.collapse.show{\r\n  display: block !important;\r\n  background: white !important;\r\n  z-index: 11 !important;\r\n}\r\n/* .collapse.show a {\r\n  text-align: left !;\r\n} */\r\n.price_btn{\r\n  background-color: #17aa30;\r\n  border-radius: 2px;\r\n  border: none;\r\n}\r\n.item-servies{\r\n  background: rgba(241, 241, 241 ,0.82);\r\n  margin-top: 30px;\r\n  height: 170px;\r\n}\r\n.item-servies:hover{\r\n  background: rgba(216, 216, 216, 0.973);\r\n  cursor: pointer;\r\n}\r\n .nav-link{\r\n  color: black !important;\r\n  font-weight: 600 !important;\r\n  font-family:  Poppins-Regular !important;\r\n  font-size: 14px !important;\r\n  margin-bottom: 0 !important;\r\n  padding-top: 0 !important;\r\n}\r\n.back_image{\r\n  position: fixed;\r\n  background-image: url(\"/images/page-header.jpg\");\r\n  background-repeat: no-repeat;\r\n  background-size: cover;\r\n  width: 100%;\r\n  height: 100%;\r\n  opacity: 60%;\r\n}\r\n.btn_continue{\r\n  height: 55px;\r\n  width: 100%;\r\n}\r\n/* .logo{\r\n  width: 100px;\r\n  height: 60px;\r\n} */", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./resources/js/components/Vendor/admin.css":
+/*!**********************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/postcss-loader/src??ref--6-2!./resources/js/components/Vendor/admin.css ***!
+  \**********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "@font-face {\r\n  font-family: popinsbold;\r\n  src: url('/fonts/Poppins/Poppins-Bold.ttf');\r\n}\r\n@font-face {\r\n  font-family: Poppins-Regular;\r\n  src: url('/fonts/Poppins/Poppins-Light.ttf');\r\n}\r\n@font-face {\r\n  font-family: poopinmediumt;\r\n  src: url('/fonts/Poppins/Poppins-Medium.ttf');\r\n}\r\nbody{\r\n  font-family: Poppins-Regular !important;\r\n}\r\n#progressbar h6 {\r\n  font-family: Poppins-Regular !important;\r\n}\r\n.MuiTypography-displayBlock h6 {\r\n  padding: 0 0 0 !important;\r\n}\r\n.makeStyles-ListItemstyles-3{\r\n    margin: 0 !important;\r\n}\r\n.heading_text_normal{\r\n  font-family:poopinmediumt ;\r\n  font-size: 30px;\r\n  color: rgb(30, 210, 126);\r\n}\r\n.makeStyles-sidebarchilds-5{\r\n    margin: 0 !important;\r\n\r\n}\r\n.top_section_title_div{\r\n    /* background-color: #fff5ea; */\r\n    padding-top: 30px;\r\n    padding-bottom: 30px;\r\n    margin-top: 10px;\r\n}\r\n.section_title{\r\n  font-family:poopinmediumt ;\r\n  font-size: 40px;\r\n    color: #686d76;\r\n}\r\n.makeStyles-content-12{\r\n    padding: 0px !important;\r\n}\r\n\r\n.input_label{\r\n    font-size: 16px;\r\n    font-weight: bold;\r\n}\r\n.control-label{\r\n  font-size: 16px;\r\n  font-weight: bold;\r\n}\r\ninput{\r\n  border-radius: 1px !important;\r\n}\r\n/* #customer_view .card{\r\n  border:none !important;\r\n} */\r\nselect,textarea{\r\n  border-radius: 1px !important;\r\n}\r\ninput:focus , select:focus , textarea:focus{\r\n  border: 1px solid #33AEFF !important;\r\n  box-shadow: none !important;\r\n}\r\n#adminpanel td , th {\r\n  text-align: center;\r\n}\r\n .modal-dialog {\r\n  margin-top: 10%;\r\n} \r\n.modal-content{\r\n  border-radius: 1px !important;\r\n}\r\n.input_div{\r\n    padding-top: 10px;\r\n}\r\n.varient_card{\r\n    width: 60%;\r\n    margin-left: auto;\r\n    margin-right: auto;\r\n    padding: 10px;\r\n}\r\n.img_card{\r\n    width: 120px;\r\n    height: 120px;\r\n    padding: 15px;\r\n    margin: 5px;\r\n}\r\n.img_card img{\r\n    width: 100px;\r\n    height: 100px;\r\n}\r\n\r\n.card-signin {\r\n    border: 0;\r\n    border-radius: 1rem;\r\n    box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);\r\n  }\r\n  \r\n  .card-signin .card-title {\r\n    margin-bottom: 2rem;\r\n    font-weight: 300;\r\n    font-size: 1.5rem;\r\n  }\r\n  \r\n  .card-signin .card-body {\r\n    padding: 2rem;\r\n  }\r\n  \r\n  .form-signin {\r\n    width: 100%;\r\n  }\r\n  \r\n  .form-signin .btn {\r\n    font-size: 80%;\r\n    border-radius: 5rem;\r\n    letter-spacing: .1rem;\r\n    font-weight: bold;\r\n    padding: 1rem;\r\n    transition: all 0.2s;\r\n  }\r\n  \r\n  .form-label-group {\r\n    position: relative;\r\n    margin-bottom: 1rem;\r\n  }\r\n  \r\n  .form-label-group input {\r\n    height: auto;\r\n    border-radius: 2rem;\r\n  }\r\n  \r\n  .form-label-group>input,\r\n  .form-label-group>label {\r\n    padding: var(--input-padding-y) var(--input-padding-x);\r\n  }\r\n  \r\n  .form-label-group>label {\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    display: block;\r\n    width: 100%;\r\n    margin-bottom: 0;\r\n    /* Override default `<label>` margin */\r\n    line-height: 1.5;\r\n    color: #495057;\r\n    border: 1px solid transparent;\r\n    border-radius: .25rem;\r\n    transition: all .1s ease-in-out;\r\n  }\r\n  \r\n  .form-label-group input:-ms-input-placeholder {\r\n    color: transparent;\r\n  }\r\n  \r\n  .form-label-group input::-moz-placeholder {\r\n    color: transparent;\r\n  }\r\n  \r\n  .form-label-group input::placeholder {\r\n    color: transparent;\r\n  }\r\n  \r\n  .form-label-group input:not(:-moz-placeholder-shown) {\r\n    padding-top: calc(var(--input-padding-y) + var(--input-padding-y) * (2 / 3));\r\n    padding-bottom: calc(var(--input-padding-y) / 3);\r\n  }\r\n  \r\n  .form-label-group input:not(:-ms-input-placeholder) {\r\n    padding-top: calc(var(--input-padding-y) + var(--input-padding-y) * (2 / 3));\r\n    padding-bottom: calc(var(--input-padding-y) / 3);\r\n  }\r\n  \r\n  .form-label-group input:not(:placeholder-shown) {\r\n    padding-top: calc(var(--input-padding-y) + var(--input-padding-y) * (2 / 3));\r\n    padding-bottom: calc(var(--input-padding-y) / 3);\r\n  }\r\n  \r\n  .form-label-group input:not(:-moz-placeholder-shown)~label {\r\n    padding-top: calc(var(--input-padding-y) / 3);\r\n    padding-bottom: calc(var(--input-padding-y) / 3);\r\n    font-size: 12px;\r\n    color: #777;\r\n  }\r\n  \r\n  .form-label-group input:not(:-ms-input-placeholder)~label {\r\n    padding-top: calc(var(--input-padding-y) / 3);\r\n    padding-bottom: calc(var(--input-padding-y) / 3);\r\n    font-size: 12px;\r\n    color: #777;\r\n  }\r\n  \r\n  .form-label-group input:not(:placeholder-shown)~label {\r\n    padding-top: calc(var(--input-padding-y) / 3);\r\n    padding-bottom: calc(var(--input-padding-y) / 3);\r\n    font-size: 12px;\r\n    color: #777;\r\n  }\r\n  \r\n  .btn-google {\r\n    color: white;\r\n    background-color: #ea4335;\r\n  }\r\n  \r\n  .btn-facebook {\r\n    color: white;\r\n    background-color: #3b5998;\r\n  }\r\n  \r\n  /* Fallback for Edge\r\n  -------------------------------------------------- */\r\n  \r\n  @supports (-ms-ime-align: auto) {\r\n    .form-label-group>label {\r\n      display: none;\r\n    }\r\n    .form-label-group input::-ms-input-placeholder {\r\n      color: #777;\r\n    }\r\n  }\r\n  \r\n  /* Fallback for IE\r\n  -------------------------------------------------- */\r\n  \r\n  @media all and (-ms-high-contrast: none),\r\n  (-ms-high-contrast: active) {\r\n    .form-label-group>label {\r\n      display: none;\r\n    }\r\n    .form-label-group input:-ms-input-placeholder {\r\n      color: #777;\r\n    }\r\n  }\r\n  .spinner-border{\r\n    color:#34495e !important;\r\n    font-size: 8px !important;\r\n  }\r\n  .adminlogin{\r\n    background: #007bff;\r\n    background: linear-gradient(to right, #0062E6, #33AEFF);\r\n    position: absolute;\r\n    top: 0;\r\n    bottom: 0;\r\n    left: 0;\r\n    right: 0;\r\n  }\r\n  /* .adminlogin input{\r\n    padding: 10px;\r\n  } */\r\n  :root {\r\n    --input-padding-x: 1.5rem;\r\n    --input-padding-y: .75rem;\r\n  }\r\n  @media screen and (min-width:481px){\r\n    @-webkit-keyframes fadeUpScale {\r\n        0% {\r\n            transform: translate(0,30%); \r\n            /* opacity: 0.7; */\r\n        }\r\n      \r\n        100% {\r\n            transform: translate(0,0%);\r\n            /* opacity: 1; */\r\n        }\r\n      }\r\n    @keyframes fadeUpScale {\r\n        0% {\r\n            transform: translate(0,30%); \r\n            /* opacity: 0.7; */\r\n        }\r\n      \r\n        100% {\r\n            transform: translate(0,0%);\r\n            /* opacity: 1; */\r\n        }\r\n      }\r\n    .animate_auth_modal{\r\n        -webkit-animation: fadeUpScale 0.5s;\r\n        animation: fadeUpScale 0.8s;\r\n        -moz-animation: fadeUpScale 0.8s;\r\n        -o-animation: fadeUpScale 0.8s;\r\n    }\r\n}\r\n.left_border{\r\n    border-left: 1px solid rgb(221, 221, 221);\r\n}\r\n@media screen and (max-width:480px){\r\n    @-webkit-keyframes fadeUpScale {\r\n        0% {\r\n            opacity: 0.7;\r\n            \r\n        }\r\n      \r\n        100% {\r\n            opacity: 1;\r\n        }\r\n      }\r\n    @keyframes fadeUpScale {\r\n        0% {\r\n            opacity: 0.7;\r\n            \r\n        }\r\n      \r\n        100% {\r\n            opacity: 1;\r\n        }\r\n      }\r\n    .animate_auth_modal{\r\n        -webkit-animation: fadeUpScale 0.5s;\r\n        animation: fadeUpScale 0.8s;\r\n        -moz-animation: fadeUpScale 0.8s;\r\n        -o-animation: fadeUpScale 0.8s;\r\n    }\r\n} \r\n\r\n.site_logo{\r\n    margin: 0 auto;\r\n}\r\n.progress_icon{\r\n  text-align: center;\r\n}\r\n.progress_active{\r\n  text-align: center;\r\n  font-weight: 700;\r\n}\r\n.progress_icon .fas{\r\n  background-color: #acacac;\r\n  color: white;\r\n  padding: 13px;\r\n  font-size: 19px;\r\n  border-radius: 100%;\r\n}\r\n.progress_active .fas{\r\n  background-color: #34f822;\r\n  color: white;\r\n  padding: 13px;\r\n  font-size: 19px;\r\n  border-radius: 100%;\r\n}\r\n.progress_icon .far{\r\n  background-color: #acacac;\r\n  color: white;\r\n  padding: 13px;\r\n  font-size: 19px;\r\n  border-radius: 100%;\r\n}\r\n.progress_active .far{\r\n  background-color: #34f822;\r\n  color: white;\r\n  padding: 13px;\r\n  font-size: 19px;\r\n  border-radius: 100%;\r\n}\r\n#msform {\r\n  text-align: center;\r\n  position: relative;\r\n  margin-top: 20px\r\n}\r\n.img_success{\r\n  width: 20%;\r\n  margin-left: auto;\r\n  margin-right: auto;\r\n}\r\n#progressbar li:before {\r\n  \r\n  display: none;\r\n  font-size: 18px;\r\n  color: #ffffff;\r\n  background: lightgray;\r\n  border-radius: 50%;\r\n  margin: 0 auto 10px auto;\r\n  padding: 2px\r\n}\r\n\r\n#progressbar {\r\n  margin-bottom: 30px;\r\n  overflow: hidden;\r\n  color: lightgrey;\r\n  margin-left: 40px;\r\n}\r\n\r\n#progressbar .active {\r\n  color: #000000;\r\n}\r\n\r\n#progressbar li {\r\n  list-style-type: none;\r\n  font-size: 12px;\r\n  width: 19%;\r\n  float: left;\r\n  position: relative;\r\n  list-style: none;\r\n}\r\n.form-control{\r\n  height:45px !important;\r\n}\r\n.sub_btn{\r\n  height: 45px;\r\n  border-radius: 1px;\r\n}\r\n/* \r\n#progressbar li:after {\r\n  content: '';\r\n  width: 100%;\r\n  height: 2px;\r\n  background: lightgray;\r\n  position: absolute;\r\n  left: 0;\r\n  top: 25px;\r\n  z-index: -1\r\n} */\r\n", ""]);
 
 // exports
 
@@ -82901,1186 +82920,6 @@ function pathToRegexp (path, keys, options) {
 
 /***/ }),
 
-/***/ "./node_modules/react-stripe-elements/es/components/Element.js":
-/*!*********************************************************************!*\
-  !*** ./node_modules/react-stripe-elements/es/components/Element.js ***!
-  \*********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _isEqual = __webpack_require__(/*! ../utils/isEqual */ "./node_modules/react-stripe-elements/es/utils/isEqual.js");
-
-var _isEqual2 = _interopRequireDefault(_isEqual);
-
-var _Elements = __webpack_require__(/*! ./Elements */ "./node_modules/react-stripe-elements/es/components/Elements.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-var noop = function noop() {};
-
-var _extractOptions = function _extractOptions(props) {
-  var id = props.id,
-      className = props.className,
-      onChange = props.onChange,
-      onFocus = props.onFocus,
-      onBlur = props.onBlur,
-      onReady = props.onReady,
-      options = _objectWithoutProperties(props, ['id', 'className', 'onChange', 'onFocus', 'onBlur', 'onReady']);
-
-  return options;
-};
-
-var capitalized = function capitalized(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-};
-
-var Element = function Element(type) {
-  var _class, _temp;
-
-  var hocOptions = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  return _temp = _class = function (_React$Component) {
-    _inherits(_class, _React$Component);
-
-    function _class(props, context) {
-      _classCallCheck(this, _class);
-
-      var _this = _possibleConstructorReturn(this, _React$Component.call(this, props, context));
-
-      _this.handleRef = function (ref) {
-        _this._ref = ref;
-      };
-
-      _this._element = null;
-
-      var options = _extractOptions(_this.props);
-      // We keep track of the extracted options on this._options to avoid re-rendering.
-      // (We would unnecessarily re-render if we were tracking them with state.)
-      _this._options = options;
-      return _this;
-    }
-
-    _class.prototype.componentDidMount = function componentDidMount() {
-      var _this2 = this;
-
-      this.context.addElementsLoadListener(function (elements) {
-        if (!_this2._ref) {
-          return;
-        }
-
-        var element = elements.create(type, _this2._options);
-        _this2._element = element;
-
-        _this2._setupEventListeners(element);
-
-        element.mount(_this2._ref);
-
-        // Register Element for automatic token / source / paymentMethod creation
-        _this2.context.registerElement(element, hocOptions.impliedTokenType, hocOptions.impliedSourceType, hocOptions.impliedPaymentMethodType);
-      });
-    };
-
-    _class.prototype.componentDidUpdate = function componentDidUpdate() {
-      var options = _extractOptions(this.props);
-      if (Object.keys(options).length !== 0 && !(0, _isEqual2.default)(options, this._options)) {
-        this._options = options;
-        if (this._element) {
-          this._element.update(options);
-        }
-      }
-    };
-
-    _class.prototype.componentWillUnmount = function componentWillUnmount() {
-      if (this._element) {
-        var element = this._element;
-        element.destroy();
-        this.context.unregisterElement(element);
-      }
-    };
-
-    _class.prototype._setupEventListeners = function _setupEventListeners(element) {
-      var _this3 = this;
-
-      element.on('ready', function () {
-        _this3.props.onReady(_this3._element);
-      });
-
-      element.on('change', function (change) {
-        _this3.props.onChange(change);
-      });
-
-      element.on('blur', function () {
-        var _props;
-
-        return (_props = _this3.props).onBlur.apply(_props, arguments);
-      });
-      element.on('focus', function () {
-        var _props2;
-
-        return (_props2 = _this3.props).onFocus.apply(_props2, arguments);
-      });
-    };
-
-    _class.prototype.render = function render() {
-      return _react2.default.createElement('div', {
-        id: this.props.id,
-        className: this.props.className,
-        ref: this.handleRef
-      });
-    };
-
-    return _class;
-  }(_react2.default.Component), _class.propTypes = {
-    id: _propTypes2.default.string,
-    className: _propTypes2.default.string,
-    onChange: _propTypes2.default.func,
-    onBlur: _propTypes2.default.func,
-    onFocus: _propTypes2.default.func,
-    onReady: _propTypes2.default.func
-  }, _class.defaultProps = {
-    id: undefined,
-    className: undefined,
-    onChange: noop,
-    onBlur: noop,
-    onFocus: noop,
-    onReady: noop
-  }, _class.contextTypes = _Elements.elementContextTypes, _class.displayName = capitalized(type) + 'Element', _temp;
-};
-
-exports.default = Element;
-
-/***/ }),
-
-/***/ "./node_modules/react-stripe-elements/es/components/Elements.js":
-/*!**********************************************************************!*\
-  !*** ./node_modules/react-stripe-elements/es/components/Elements.js ***!
-  \**********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.elementContextTypes = exports.injectContextTypes = undefined;
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _Provider = __webpack_require__(/*! ./Provider */ "./node_modules/react-stripe-elements/es/components/Provider.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var injectContextTypes = exports.injectContextTypes = {
-  getRegisteredElements: _propTypes2.default.func.isRequired,
-  elements: _propTypes2.default.object
-};
-
-var elementContextTypes = exports.elementContextTypes = {
-  addElementsLoadListener: _propTypes2.default.func.isRequired,
-  registerElement: _propTypes2.default.func.isRequired,
-  unregisterElement: _propTypes2.default.func.isRequired
-};
-
-var Elements = function (_React$Component) {
-  _inherits(Elements, _React$Component);
-
-  function Elements(props, context) {
-    _classCallCheck(this, Elements);
-
-    var _this = _possibleConstructorReturn(this, _React$Component.call(this, props, context));
-
-    _this._elements = null;
-
-    _this.handleRegisterElement = function (element, impliedTokenType, impliedSourceType, impliedPaymentMethodType) {
-      _this.setState(function (prevState) {
-        return {
-          registeredElements: [].concat(_toConsumableArray(prevState.registeredElements), [_extends({
-            element: element
-          }, impliedTokenType ? { impliedTokenType: impliedTokenType } : {}, impliedSourceType ? { impliedSourceType: impliedSourceType } : {}, impliedPaymentMethodType ? { impliedPaymentMethodType: impliedPaymentMethodType } : {})])
-        };
-      });
-    };
-
-    _this.handleUnregisterElement = function (el) {
-      _this.setState(function (prevState) {
-        return {
-          registeredElements: prevState.registeredElements.filter(function (_ref) {
-            var element = _ref.element;
-            return element !== el;
-          })
-        };
-      });
-    };
-
-    var _this$props = _this.props,
-        children = _this$props.children,
-        options = _objectWithoutProperties(_this$props, ['children']);
-
-    if (_this.context.tag === 'sync') {
-      _this._elements = _this.context.stripe.elements(options);
-    }
-
-    _this.state = {
-      registeredElements: []
-    };
-    return _this;
-  }
-
-  Elements.prototype.getChildContext = function getChildContext() {
-    var _this2 = this;
-
-    return {
-      addElementsLoadListener: function addElementsLoadListener(fn) {
-        // Return the existing elements instance if we already have one.
-        if (_this2.context.tag === 'sync') {
-          // This is impossible, but we need to make flow happy.
-          if (!_this2._elements) {
-            throw new Error('Expected elements to be instantiated but it was not.');
-          }
-
-          fn(_this2._elements);
-        } else {
-          _this2.context.addStripeLoadListener(function (stripe) {
-            if (_this2._elements) {
-              fn(_this2._elements);
-            } else {
-              var _props = _this2.props,
-                  _children = _props.children,
-                  options = _objectWithoutProperties(_props, ['children']);
-
-              _this2._elements = stripe.elements(options);
-              fn(_this2._elements);
-            }
-          });
-        }
-      },
-      registerElement: this.handleRegisterElement,
-      unregisterElement: this.handleUnregisterElement,
-      getRegisteredElements: function getRegisteredElements() {
-        return _this2.state.registeredElements;
-      },
-      elements: this._elements
-    };
-  };
-
-  Elements.prototype.render = function render() {
-    return _react2.default.Children.only(this.props.children);
-  };
-
-  return Elements;
-}(_react2.default.Component);
-
-Elements.childContextTypes = _extends({}, injectContextTypes, elementContextTypes);
-Elements.contextTypes = _Provider.providerContextTypes;
-Elements.defaultProps = {
-  children: null
-};
-exports.default = Elements;
-
-/***/ }),
-
-/***/ "./node_modules/react-stripe-elements/es/components/PaymentRequestButtonElement.js":
-/*!*****************************************************************************************!*\
-  !*** ./node_modules/react-stripe-elements/es/components/PaymentRequestButtonElement.js ***!
-  \*****************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _shallowEqual = __webpack_require__(/*! ../utils/shallowEqual */ "./node_modules/react-stripe-elements/es/utils/shallowEqual.js");
-
-var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
-
-var _Elements = __webpack_require__(/*! ./Elements */ "./node_modules/react-stripe-elements/es/components/Elements.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-var noop = function noop() {};
-
-var _extractOptions = function _extractOptions(props) {
-  var id = props.id,
-      className = props.className,
-      onBlur = props.onBlur,
-      onClick = props.onClick,
-      onFocus = props.onFocus,
-      onReady = props.onReady,
-      paymentRequest = props.paymentRequest,
-      options = _objectWithoutProperties(props, ['id', 'className', 'onBlur', 'onClick', 'onFocus', 'onReady', 'paymentRequest']);
-
-  return options;
-};
-
-var PaymentRequestButtonElement = function (_React$Component) {
-  _inherits(PaymentRequestButtonElement, _React$Component);
-
-  function PaymentRequestButtonElement(props, context) {
-    _classCallCheck(this, PaymentRequestButtonElement);
-
-    var _this = _possibleConstructorReturn(this, _React$Component.call(this, props, context));
-
-    _this.handleRef = function (ref) {
-      _this._ref = ref;
-    };
-
-    var options = _extractOptions(props);
-    // We keep track of the extracted options on this._options to avoid re-rendering.
-    // (We would unnecessarily re-render if we were tracking them with state.)
-    _this._options = options;
-    return _this;
-  }
-
-  PaymentRequestButtonElement.prototype.componentDidMount = function componentDidMount() {
-    var _this2 = this;
-
-    this.context.addElementsLoadListener(function (elements) {
-      _this2._element = elements.create('paymentRequestButton', _extends({
-        paymentRequest: _this2.props.paymentRequest
-      }, _this2._options));
-      _this2._element.on('ready', function () {
-        _this2.props.onReady(_this2._element);
-      });
-      _this2._element.on('focus', function () {
-        var _props;
-
-        return (_props = _this2.props).onFocus.apply(_props, arguments);
-      });
-      _this2._element.on('click', function () {
-        var _props2;
-
-        return (_props2 = _this2.props).onClick.apply(_props2, arguments);
-      });
-      _this2._element.on('blur', function () {
-        var _props3;
-
-        return (_props3 = _this2.props).onBlur.apply(_props3, arguments);
-      });
-      _this2._element.mount(_this2._ref);
-    });
-  };
-
-  PaymentRequestButtonElement.prototype.componentDidUpdate = function componentDidUpdate(prevProps) {
-    if (this.props.paymentRequest !== prevProps.paymentRequest) {
-      console.warn('Unsupported prop change: paymentRequest is not a customizable property.');
-    }
-    var options = _extractOptions(this.props);
-    if (Object.keys(options).length !== 0 && !(0, _shallowEqual2.default)(options, this._options)) {
-      this._options = options;
-      this._element.update(options);
-    }
-  };
-
-  PaymentRequestButtonElement.prototype.componentWillUnmount = function componentWillUnmount() {
-    this._element.destroy();
-  };
-
-  PaymentRequestButtonElement.prototype.render = function render() {
-    return _react2.default.createElement('div', {
-      id: this.props.id,
-      className: this.props.className,
-      ref: this.handleRef
-    });
-  };
-
-  return PaymentRequestButtonElement;
-}(_react2.default.Component);
-
-PaymentRequestButtonElement.propTypes = {
-  id: _propTypes2.default.string,
-  className: _propTypes2.default.string,
-  onBlur: _propTypes2.default.func,
-  onClick: _propTypes2.default.func,
-  onFocus: _propTypes2.default.func,
-  onReady: _propTypes2.default.func,
-  paymentRequest: _propTypes2.default.shape({
-    canMakePayment: _propTypes2.default.func.isRequired,
-    on: _propTypes2.default.func.isRequired,
-    show: _propTypes2.default.func.isRequired
-  }).isRequired
-};
-PaymentRequestButtonElement.defaultProps = {
-  id: undefined,
-  className: undefined,
-  onBlur: noop,
-  onClick: noop,
-  onFocus: noop,
-  onReady: noop
-};
-PaymentRequestButtonElement.contextTypes = _Elements.elementContextTypes;
-exports.default = PaymentRequestButtonElement;
-
-/***/ }),
-
-/***/ "./node_modules/react-stripe-elements/es/components/Provider.js":
-/*!**********************************************************************!*\
-  !*** ./node_modules/react-stripe-elements/es/components/Provider.js ***!
-  \**********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.providerContextTypes = undefined;
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-// TODO(jez) 'sync' and 'async' are bad tag names.
-// TODO(jez) What if redux also uses this.context.tag?
-var providerContextTypes = exports.providerContextTypes = {
-  tag: _propTypes2.default.string.isRequired,
-  stripe: _propTypes2.default.object,
-  addStripeLoadListener: _propTypes2.default.func
-};
-
-var getOrCreateStripe = function getOrCreateStripe(apiKey, options) {
-  /**
-   * Note that this is not meant to be a generic memoization solution.
-   * This is specifically a solution for `StripeProvider`s being initialized
-   * and destroyed regularly (with the same set of props) when users only
-   * use `StripeProvider` for the subtree that contains their checkout form.
-   */
-  window.Stripe.__cachedInstances = window.Stripe.__cachedInstances || {};
-  var cacheKey = 'key=' + apiKey + ' options=' + JSON.stringify(options);
-
-  var stripe = window.Stripe.__cachedInstances[cacheKey] || window.Stripe(apiKey, options);
-  window.Stripe.__cachedInstances[cacheKey] = stripe;
-
-  return stripe;
-};
-
-var ensureStripeShape = function ensureStripeShape(stripe) {
-  if (stripe && stripe.elements && stripe.createSource && stripe.createToken && stripe.createPaymentMethod && stripe.handleCardPayment) {
-    return stripe;
-  } else {
-    throw new Error("Please pass a valid Stripe object to StripeProvider. You can obtain a Stripe object by calling 'Stripe(...)' with your publishable key.");
-  }
-};
-
-var Provider = function (_React$Component) {
-  _inherits(Provider, _React$Component);
-
-  // on the other hand: childContextTypes is *required* to use context.
-  function Provider(props) {
-    _classCallCheck(this, Provider);
-
-    var _this = _possibleConstructorReturn(this, _React$Component.call(this, props));
-
-    if (_this.props.apiKey && _this.props.stripe) {
-      throw new Error("Please pass either 'apiKey' or 'stripe' to StripeProvider, not both.");
-    } else if (_this.props.apiKey) {
-      if (!window.Stripe) {
-        throw new Error("Please load Stripe.js (https://js.stripe.com/v3/) on this page to use react-stripe-elements. If Stripe.js isn't available yet (it's loading asynchronously, or you're using server-side rendering), see https://github.com/stripe/react-stripe-elements#advanced-integrations");
-      } else {
-        var _this$props = _this.props,
-            _apiKey = _this$props.apiKey,
-            _children = _this$props.children,
-            options = _objectWithoutProperties(_this$props, ['apiKey', 'children']);
-
-        var _stripe = getOrCreateStripe(_apiKey, options);
-        _this._meta = { tag: 'sync', stripe: _stripe };
-        _this._register();
-      }
-    } else if (_this.props.stripe) {
-      // If we already have a stripe instance (in the constructor), we can behave synchronously.
-      var _stripe2 = ensureStripeShape(_this.props.stripe);
-      _this._meta = { tag: 'sync', stripe: _stripe2 };
-      _this._register();
-    } else if (_this.props.stripe === null) {
-      _this._meta = {
-        tag: 'async',
-        stripe: null
-      };
-    } else {
-      throw new Error("Please pass either 'apiKey' or 'stripe' to StripeProvider. If you're using 'stripe' but don't have a Stripe instance yet, pass 'null' explicitly.");
-    }
-
-    _this._didWarn = false;
-    _this._didWakeUpListeners = false;
-    _this._listeners = [];
-    return _this;
-  }
-  // Even though we're using flow, also use PropTypes so we can take advantage of developer warnings.
-
-
-  Provider.prototype.getChildContext = function getChildContext() {
-    var _this2 = this;
-
-    // getChildContext is run after the constructor, so we WILL have access to
-    // the initial state.
-    //
-    // However, context doesn't update in respnse to state changes like you
-    // might expect: context is pulled by the child, not pushed by the parent.
-    if (this._meta.tag === 'sync') {
-      return {
-        tag: 'sync',
-        stripe: this._meta.stripe
-      };
-    } else {
-      return {
-        tag: 'async',
-        addStripeLoadListener: function addStripeLoadListener(fn) {
-          if (_this2._meta.stripe) {
-            fn(_this2._meta.stripe);
-          } else {
-            _this2._listeners.push(fn);
-          }
-        }
-      };
-    }
-  };
-
-  Provider.prototype.componentDidUpdate = function componentDidUpdate(prevProps) {
-    var apiKeyChanged = this.props.apiKey && prevProps.apiKey && this.props.apiKey !== prevProps.apiKey;
-
-    var stripeInstanceChanged = this.props.stripe && prevProps.stripe && this.props.stripe !== prevProps.stripe;
-    if (!this._didWarn && (apiKeyChanged || stripeInstanceChanged) && window.console && window.console.error) {
-      this._didWarn = true;
-      // eslint-disable-next-line no-console
-      console.error('StripeProvider does not support changing the apiKey parameter.');
-      return;
-    }
-
-    if (!this._didWakeUpListeners && this.props.stripe) {
-      // Wake up the listeners if we've finally been given a StripeShape
-      this._didWakeUpListeners = true;
-      var _stripe3 = ensureStripeShape(this.props.stripe);
-      this._meta.stripe = _stripe3;
-      this._register();
-      this._listeners.forEach(function (fn) {
-        fn(_stripe3);
-      });
-    }
-  };
-
-  Provider.prototype._register = function _register() {
-    var stripe = this._meta.stripe;
-
-
-    if (!stripe || !stripe._registerWrapper) {
-      return;
-    }
-
-    stripe._registerWrapper({
-      name: 'react-stripe-elements',
-      version: '6.1.2' || false
-    });
-  };
-
-  Provider.prototype.render = function render() {
-    return _react2.default.Children.only(this.props.children);
-  };
-
-  return Provider;
-}(_react2.default.Component);
-
-Provider.propTypes = {
-  apiKey: _propTypes2.default.string,
-  // PropTypes.object is the only way we can accept a Stripe instance
-  // eslint-disable-next-line react/forbid-prop-types
-  stripe: _propTypes2.default.object,
-  children: _propTypes2.default.node
-};
-Provider.childContextTypes = providerContextTypes;
-Provider.defaultProps = {
-  apiKey: undefined,
-  stripe: undefined,
-  children: null
-};
-exports.default = Provider;
-
-/***/ }),
-
-/***/ "./node_modules/react-stripe-elements/es/components/inject.js":
-/*!********************************************************************!*\
-  !*** ./node_modules/react-stripe-elements/es/components/inject.js ***!
-  \********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _Elements = __webpack_require__(/*! ./Elements */ "./node_modules/react-stripe-elements/es/components/Elements.js");
-
-var _Provider = __webpack_require__(/*! ./Provider */ "./node_modules/react-stripe-elements/es/components/Provider.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-// react-redux does a bunch of stuff with pure components / checking if it needs to re-render.
-// not sure if we need to do the same.
-var inject = function inject(WrappedComponent) {
-  var _class, _temp;
-
-  var componentOptions = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  var _componentOptions$wit = componentOptions.withRef,
-      withRef = _componentOptions$wit === undefined ? false : _componentOptions$wit;
-
-
-  return _temp = _class = function (_React$Component) {
-    _inherits(_class, _React$Component);
-
-    function _class(props, context) {
-      _classCallCheck(this, _class);
-
-      if (!context || !context.getRegisteredElements) {
-        throw new Error('It looks like you are trying to inject Stripe context outside of an Elements context.\nPlease be sure the component that calls createSource or createToken is within an <Elements> component.');
-      }
-
-      var _this = _possibleConstructorReturn(this, _React$Component.call(this, props, context));
-
-      _this.parseElementOrData = function (elementOrOptions) {
-        return elementOrOptions && (typeof elementOrOptions === 'undefined' ? 'undefined' : _typeof(elementOrOptions)) === 'object' && elementOrOptions._frame && _typeof(elementOrOptions._frame) === 'object' && elementOrOptions._frame.id && typeof elementOrOptions._frame.id === 'string' && typeof elementOrOptions._componentName === 'string' ? { type: 'element', element: elementOrOptions } : { type: 'data', data: elementOrOptions };
-      };
-
-      _this.findElement = function (filterBy, specifiedType) {
-        var allElements = _this.context.getRegisteredElements();
-        var filteredElements = allElements.filter(function (e) {
-          return e[filterBy];
-        });
-        var matchingElements = specifiedType === 'auto' ? filteredElements : filteredElements.filter(function (e) {
-          return e[filterBy] === specifiedType;
-        });
-
-        if (matchingElements.length === 1) {
-          return matchingElements[0].element;
-        } else if (matchingElements.length > 1) {
-          throw new Error('You did not specify the type of Source, Token, or PaymentMethod to create.\n        We could not infer which Element you want to use for this operation.');
-        } else {
-          return null;
-        }
-      };
-
-      _this.requireElement = function (filterBy, specifiedType) {
-        var element = _this.findElement(filterBy, specifiedType);
-        if (element) {
-          return element;
-        } else {
-          throw new Error('You did not specify the type of Source, Token, or PaymentMethod to create.\n        We could not infer which Element you want to use for this operation.');
-        }
-      };
-
-      _this.wrappedCreateToken = function (stripe) {
-        return function () {
-          var tokenTypeOrOptions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-          var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-          if (tokenTypeOrOptions && (typeof tokenTypeOrOptions === 'undefined' ? 'undefined' : _typeof(tokenTypeOrOptions)) === 'object') {
-            // First argument is options; infer the Element and tokenize
-            var opts = tokenTypeOrOptions;
-
-            var tokenType = opts.type,
-                rest = _objectWithoutProperties(opts, ['type']);
-
-            var specifiedType = typeof tokenType === 'string' ? tokenType : 'auto';
-            // Since only options were passed in, a corresponding Element must exist
-            // for the tokenization to succeed -- thus we call requireElement.
-            var element = _this.requireElement('impliedTokenType', specifiedType);
-            return stripe.createToken(element, rest);
-          } else if (typeof tokenTypeOrOptions === 'string') {
-            // First argument is token type; tokenize with token type and options
-            var _tokenType = tokenTypeOrOptions;
-            return stripe.createToken(_tokenType, options);
-          } else {
-            // If a bad value was passed in for options, throw an error.
-            throw new Error('Invalid options passed to createToken. Expected an object, got ' + (typeof tokenTypeOrOptions === 'undefined' ? 'undefined' : _typeof(tokenTypeOrOptions)) + '.');
-          }
-        };
-      };
-
-      _this.wrappedCreateSource = function (stripe) {
-        return function () {
-          var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-          if (options && (typeof options === 'undefined' ? 'undefined' : _typeof(options)) === 'object') {
-            if (typeof options.type !== 'string') {
-              throw new Error('Invalid Source type passed to createSource. Expected string, got ' + _typeof(options.type) + '.');
-            }
-
-            var element = _this.findElement('impliedSourceType', options.type);
-            if (element) {
-              // If an Element exists for the source type, use that to create the
-              // corresponding source.
-              //
-              // NOTE: this prevents users from independently creating sources of
-              // type `foo` if an Element that can create `foo` sources exists in
-              // the current <Elements /> context.
-              return stripe.createSource(element, options);
-            } else {
-              // If no Element exists for the source type, directly create a source.
-              return stripe.createSource(options);
-            }
-          } else {
-            // If a bad value was passed in for options, throw an error.
-            throw new Error('Invalid options passed to createSource. Expected an object, got ' + (typeof options === 'undefined' ? 'undefined' : _typeof(options)) + '.');
-          }
-        };
-      };
-
-      _this.wrappedCreatePaymentMethod = function (stripe) {
-        return function (paymentMethodType, elementOrData, maybeData) {
-          if (paymentMethodType && (typeof paymentMethodType === 'undefined' ? 'undefined' : _typeof(paymentMethodType)) === 'object') {
-            return stripe.createPaymentMethod(paymentMethodType);
-          }
-
-          if (!paymentMethodType || typeof paymentMethodType !== 'string') {
-            throw new Error('Invalid PaymentMethod type passed to createPaymentMethod. Expected a string, got ' + (typeof paymentMethodType === 'undefined' ? 'undefined' : _typeof(paymentMethodType)) + '.');
-          }
-
-          var elementOrDataResult = _this.parseElementOrData(elementOrData);
-
-          // Second argument is Element; use passed in Element
-          if (elementOrDataResult.type === 'element') {
-            var _element = elementOrDataResult.element;
-
-            if (maybeData) {
-              return stripe.createPaymentMethod(paymentMethodType, _element, maybeData);
-            } else {
-              return stripe.createPaymentMethod(paymentMethodType, _element);
-            }
-          }
-
-          // Second argument is data or undefined; infer the Element
-          var data = elementOrDataResult.data;
-
-          var element = _this.findElement('impliedPaymentMethodType', paymentMethodType);
-
-          if (element) {
-            return data ? stripe.createPaymentMethod(paymentMethodType, element, data) : stripe.createPaymentMethod(paymentMethodType, element);
-          }
-
-          if (data && (typeof data === 'undefined' ? 'undefined' : _typeof(data)) === 'object') {
-            return stripe.createPaymentMethod(paymentMethodType, data);
-          } else if (!data) {
-            throw new Error('Could not find an Element that can be used to create a PaymentMethod of type: ' + paymentMethodType + '.');
-          } else {
-            // If a bad value was passed in for data, throw an error.
-            throw new Error('Invalid data passed to createPaymentMethod. Expected an object, got ' + (typeof data === 'undefined' ? 'undefined' : _typeof(data)) + '.');
-          }
-        };
-      };
-
-      _this.wrappedHandleCardX = function (stripe, method) {
-        return function (clientSecret, elementOrData, maybeData) {
-          if (!clientSecret || typeof clientSecret !== 'string') {
-            // If a bad value was passed in for clientSecret, throw an error.
-            throw new Error('Invalid PaymentIntent client secret passed to handleCardPayment. Expected string, got ' + (typeof clientSecret === 'undefined' ? 'undefined' : _typeof(clientSecret)) + '.');
-          }
-
-          var elementOrDataResult = _this.parseElementOrData(elementOrData);
-
-          // Second argument is Element; handle with element
-          if (elementOrDataResult.type === 'element') {
-            var _element2 = elementOrDataResult.element;
-
-            if (maybeData) {
-              return stripe[method](clientSecret, _element2, maybeData);
-            } else {
-              return stripe[method](clientSecret, _element2);
-            }
-          }
-
-          // Second argument is data or undefined; see if we can find a mounted Element
-          // that can create card PaymentMethods
-          var data = elementOrDataResult.data;
-
-          var element = _this.findElement('impliedPaymentMethodType', 'card');
-
-          if (element) {
-            // If an Element exists that can create card PaymentMethods use it. Otherwise
-            // assume that we must be calling with data only.
-            //
-            // NOTE: this prevents users from using handleCard* with an existing
-            // Source or PaymentMethod if an Element that can create card PaymentMethods
-            // exists in the current <Elements /> context.
-            if (data) {
-              return stripe[method](clientSecret, element, data);
-            } else {
-              return stripe[method](clientSecret, element);
-            }
-          } else if (data) {
-            // if no element exists call handleCard* directly (with data)
-            return stripe[method](clientSecret, data);
-          } else {
-            // if no element exists call handleCard* directly (with only the clientSecret)
-            return stripe[method](clientSecret);
-          }
-        };
-      };
-
-      if (_this.context.tag === 'sync') {
-        _this.state = {
-          stripe: _this.stripeProps(_this.context.stripe)
-        };
-      } else {
-        _this.state = {
-          stripe: null
-        };
-      }
-      return _this;
-    }
-
-    _class.prototype.componentDidMount = function componentDidMount() {
-      var _this2 = this;
-
-      if (this.context.tag === 'async') {
-        this.context.addStripeLoadListener(function (stripe) {
-          _this2.setState({
-            stripe: _this2.stripeProps(stripe)
-          });
-        });
-      } else {
-        // when 'sync', it's already set in the constructor.
-      }
-    };
-
-    _class.prototype.getWrappedInstance = function getWrappedInstance() {
-      if (!withRef) {
-        throw new Error('To access the wrapped instance, the `{withRef: true}` option must be set when calling `injectStripe()`');
-      }
-      return this.wrappedInstance;
-    };
-
-    _class.prototype.stripeProps = function stripeProps(stripe) {
-      return _extends({}, stripe, {
-        // These are the only functions that take elements.
-        createToken: this.wrappedCreateToken(stripe),
-        createSource: this.wrappedCreateSource(stripe),
-        createPaymentMethod: this.wrappedCreatePaymentMethod(stripe),
-        handleCardPayment: this.wrappedHandleCardX(stripe, 'handleCardPayment'),
-        handleCardSetup: this.wrappedHandleCardX(stripe, 'handleCardSetup')
-      });
-    };
-
-    // Finds an Element by the specified type, if one exists.
-    // Throws if multiple Elements match.
-
-
-    // Require that exactly one Element is found for the specified type.
-    // Throws if no Element is found.
-
-
-    // Wraps createToken in order to infer the Element that is being tokenized.
-
-
-    // Wraps createSource in order to infer the Element that is being used for
-    // source creation.
-
-
-    // Wraps createPaymentMethod in order to infer the Element that is being
-    // used for PaymentMethod creation.
-
-
-    _class.prototype.render = function render() {
-      var _this3 = this;
-
-      return _react2.default.createElement(WrappedComponent, _extends({}, this.props, {
-        stripe: this.state.stripe,
-        elements: this.context.elements,
-        ref: withRef ? function (c) {
-          _this3.wrappedInstance = c;
-        } : null
-      }));
-    };
-
-    return _class;
-  }(_react2.default.Component), _class.contextTypes = _extends({}, _Provider.providerContextTypes, _Elements.injectContextTypes), _class.displayName = 'InjectStripe(' + (WrappedComponent.displayName || WrappedComponent.name || 'Component') + ')', _temp;
-};
-
-exports.default = inject;
-
-/***/ }),
-
-/***/ "./node_modules/react-stripe-elements/es/index.js":
-/*!********************************************************!*\
-  !*** ./node_modules/react-stripe-elements/es/index.js ***!
-  \********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.AuBankAccountElement = exports.FpxBankElement = exports.IdealBankElement = exports.IbanElement = exports.PaymentRequestButtonElement = exports.CardCVCElement = exports.CardCvcElement = exports.CardExpiryElement = exports.CardNumberElement = exports.CardElement = exports.Elements = exports.injectStripe = exports.StripeProvider = undefined;
-
-var _Provider = __webpack_require__(/*! ./components/Provider */ "./node_modules/react-stripe-elements/es/components/Provider.js");
-
-var _Provider2 = _interopRequireDefault(_Provider);
-
-var _inject = __webpack_require__(/*! ./components/inject */ "./node_modules/react-stripe-elements/es/components/inject.js");
-
-var _inject2 = _interopRequireDefault(_inject);
-
-var _Elements = __webpack_require__(/*! ./components/Elements */ "./node_modules/react-stripe-elements/es/components/Elements.js");
-
-var _Elements2 = _interopRequireDefault(_Elements);
-
-var _Element = __webpack_require__(/*! ./components/Element */ "./node_modules/react-stripe-elements/es/components/Element.js");
-
-var _Element2 = _interopRequireDefault(_Element);
-
-var _PaymentRequestButtonElement = __webpack_require__(/*! ./components/PaymentRequestButtonElement */ "./node_modules/react-stripe-elements/es/components/PaymentRequestButtonElement.js");
-
-var _PaymentRequestButtonElement2 = _interopRequireDefault(_PaymentRequestButtonElement);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// Define Elements, and register their implied token / source types for
-// automatic token / source creation.
-
-// Card
-var CardElement = (0, _Element2.default)('card', {
-  impliedTokenType: 'card',
-  impliedSourceType: 'card',
-  impliedPaymentMethodType: 'card'
-});
-
-// Split Fields
-// Note: we only register the CardNumberElement for split fields so that we have
-// a unique Element to infer when calling `wrappedCreateToken` or `wrappedCreateSource`.
-
-var CardNumberElement = (0, _Element2.default)('cardNumber', {
-  impliedTokenType: 'card',
-  impliedSourceType: 'card',
-  impliedPaymentMethodType: 'card'
-});
-var CardExpiryElement = (0, _Element2.default)('cardExpiry');
-var CardCvcElement = (0, _Element2.default)('cardCvc');
-var CardCVCElement = CardCvcElement; // deprecated in favor of CardCvcElement which better matches Elements API
-
-// IBAN
-var IbanElement = (0, _Element2.default)('iban', {
-  impliedTokenType: 'bank_account',
-  impliedSourceType: 'sepa_debit'
-});
-
-// iDEAL Bank
-var IdealBankElement = (0, _Element2.default)('idealBank', { impliedSourceType: 'ideal' });
-
-// fpx Bank
-var FpxBankElement = (0, _Element2.default)('fpxBank');
-
-// auBankAccount
-// Requires beta access. Contact Stripe support for more information:
-// https://support.stripe.com
-var AuBankAccountElement = (0, _Element2.default)('auBankAccount');
-
-exports.StripeProvider = _Provider2.default;
-exports.injectStripe = _inject2.default;
-exports.Elements = _Elements2.default;
-exports.CardElement = CardElement;
-exports.CardNumberElement = CardNumberElement;
-exports.CardExpiryElement = CardExpiryElement;
-exports.CardCvcElement = CardCvcElement;
-exports.CardCVCElement = CardCVCElement;
-exports.PaymentRequestButtonElement = _PaymentRequestButtonElement2.default;
-exports.IbanElement = IbanElement;
-exports.IdealBankElement = IdealBankElement;
-exports.FpxBankElement = FpxBankElement;
-exports.AuBankAccountElement = AuBankAccountElement;
-
-/***/ }),
-
-/***/ "./node_modules/react-stripe-elements/es/utils/isEqual.js":
-/*!****************************************************************!*\
-  !*** ./node_modules/react-stripe-elements/es/utils/isEqual.js ***!
-  \****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var PLAIN_OBJECT_STR = '[object Object]';
-
-var isEqual = function isEqual(left, right) {
-  if ((typeof left === 'undefined' ? 'undefined' : _typeof(left)) !== 'object' || (typeof right === 'undefined' ? 'undefined' : _typeof(right)) !== 'object') {
-    return left === right;
-  }
-
-  if (left === null || right === null) return left === right;
-
-  var leftArray = Array.isArray(left);
-  var rightArray = Array.isArray(right);
-
-  if (leftArray !== rightArray) return false;
-
-  var leftPlainObject = Object.prototype.toString.call(left) === PLAIN_OBJECT_STR;
-  var rightPlainObject = Object.prototype.toString.call(right) === PLAIN_OBJECT_STR;
-
-  if (leftPlainObject !== rightPlainObject) return false;
-
-  if (!leftPlainObject && !leftArray) return false;
-
-  var leftKeys = Object.keys(left);
-  var rightKeys = Object.keys(right);
-
-  if (leftKeys.length !== rightKeys.length) return false;
-
-  var keySet = {};
-  for (var i = 0; i < leftKeys.length; i += 1) {
-    keySet[leftKeys[i]] = true;
-  }
-  for (var _i = 0; _i < rightKeys.length; _i += 1) {
-    keySet[rightKeys[_i]] = true;
-  }
-  var allKeys = Object.keys(keySet);
-  if (allKeys.length !== leftKeys.length) {
-    return false;
-  }
-
-  var l = left;
-  var r = right;
-  var pred = function pred(key) {
-    return isEqual(l[key], r[key]);
-  };
-
-  return allKeys.every(pred);
-};
-
-exports.default = isEqual;
-
-/***/ }),
-
-/***/ "./node_modules/react-stripe-elements/es/utils/shallowEqual.js":
-/*!*********************************************************************!*\
-  !*** ./node_modules/react-stripe-elements/es/utils/shallowEqual.js ***!
-  \*********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var shallowEqual = function shallowEqual(a, b) {
-  var keysA = Object.keys(a);
-  var keysB = Object.keys(b);
-
-  return keysA.length === keysB.length && keysA.every(function (key) {
-    return b.hasOwnProperty(key) && b[key] === a[key];
-  });
-};
-
-exports.default = shallowEqual;
-
-/***/ }),
-
 /***/ "./node_modules/react-tabs/esm/components/Tab.js":
 /*!*******************************************************!*\
   !*** ./node_modules/react-tabs/esm/components/Tab.js ***!
@@ -100687,6 +99526,7 @@ var ShowVendor = /*#__PURE__*/function (_Component) {
 
     _this = _super.call(this, props);
     _this.state = {
+      vendor_id: '',
       address: '',
       australian_business_number: '',
       business_name: '',
@@ -100701,6 +99541,9 @@ var ShowVendor = /*#__PURE__*/function (_Component) {
       type_of_business: '',
       company_name: '',
       expiry_date_ins: '',
+      vendor_selected_services: [],
+      services: [],
+      vendor_docs: [],
       status: ''
     };
     return _this;
@@ -100724,6 +99567,7 @@ var ShowVendor = /*#__PURE__*/function (_Component) {
 
         if (res.data.status == 200) {
           _this2.setState({
+            vendor_id: res.data.data.id,
             address: res.data.data.address,
             australian_business_number: res.data.data.australian_business_number,
             business_name: res.data.data.business_name,
@@ -100737,15 +99581,53 @@ var ShowVendor = /*#__PURE__*/function (_Component) {
             trading: res.data.data.trading,
             type_of_business: res.data.data.type_of_business,
             company_name: res.data.data.company_name,
-            expiry_date_ins: res.data.data.expiry_date_ins
+            expiry_date_ins: res.data.data.expiry_date_ins,
+            vendor_selected_services: res.data.data.vendor_selected_services,
+            services: res.data.data.services,
+            vendor_docs: res.data.data.vendor_doc
           });
         }
       });
     }
   }, {
+    key: "deleteVendorSelectedServices",
+    value: function deleteVendorSelectedServices(id) {
+      var _this3 = this;
+
+      var Configs = {
+        headers: {
+          token: window.localStorage.getItem('testapistring')
+        }
+      };
+      var data = {
+        id: id
+      };
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/delete-vendor-selected-services/".concat(id), data, Configs).then(function (res) {
+        _this3.componentDidMount();
+      });
+    }
+  }, {
+    key: "addVendorService",
+    value: function addVendorService(id) {
+      var _this4 = this;
+
+      var Configs = {
+        headers: {
+          token: window.localStorage.getItem('testapistring')
+        }
+      };
+      var data = {
+        service_id: id,
+        vendor_id: this.state.vendor_id
+      };
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/add-vendor-service/".concat(id), data, Configs).then(function (res) {
+        _this4.componentDidMount();
+      });
+    }
+  }, {
     key: "vendorApproved",
     value: function vendorApproved() {
-      var _this3 = this;
+      var _this5 = this;
 
       var Configs = {
         headers: {
@@ -100757,7 +99639,7 @@ var ShowVendor = /*#__PURE__*/function (_Component) {
       };
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/api/approved-vendor', data, Configs).then(function (res) {
         if (res.data.status == 200) {
-          _this3.props.history.push('/admin/vendor-list');
+          _this5.props.history.push('/admin/vendor-list');
 
           sweetalert2__WEBPACK_IMPORTED_MODULE_3___default.a.fire({
             icon: 'success',
@@ -100778,6 +99660,8 @@ var ShowVendor = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this6 = this;
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "page-content"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -100787,7 +99671,7 @@ var ShowVendor = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "fixed-fluid"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "fixed-md-200 pull-sm-left fixed-right-border"
+        className: "fixed-md-250 pull-sm-left fixed-right-border"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "text-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -100825,23 +99709,25 @@ var ShowVendor = /*#__PURE__*/function (_Component) {
       }, "Bussiness Info")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         "data-toggle": "tab",
         href: "#demo-lft-tab-3"
-      }, "Insurance Info")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      }, "Vendor Selected Services")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         "data-toggle": "tab",
         href: "#demo-lft-tab-4"
-      }, "Services"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Insurance Docs"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "tab-content"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "demo-lft-tab-1",
         className: "tab-pane fade active in"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "text-main text-semibold"
-      }, "Date Of Birth"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.state.dob), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      }, "Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.state.first_name, " ", this.state.last_name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "text-main text-semibold"
       }, "Email"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.state.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "text-main text-semibold"
       }, "Phone"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.state.phone), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "text-main text-semibold"
-      }, "Address"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.state.address)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Address"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.state.address), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "text-main text-semibold"
+      }, "Date Of Birth"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.state.dob)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "demo-lft-tab-2",
         className: "tab-pane fade"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
@@ -100850,25 +99736,45 @@ var ShowVendor = /*#__PURE__*/function (_Component) {
         className: "text-main text-semibold"
       }, "Business Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.state.business_name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "text-main text-semibold"
-      }, "Australian Business Number"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.state.australian_business_number), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      }, "Australian Business Number"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.state.australian_business_number), this.state.trading != null ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "text-main text-semibold"
-      }, "Trading"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.state.trading)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Trading"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.state.trading)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "demo-lft-tab-3",
-        className: "tab-pane fade"
-      }, this.state.insurance_certificate_type == "admin" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: ""
-      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        className: "text-main text-semibold"
-      }, "Company Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.state.company_name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        className: "text-main text-semibold"
-      }, "Expiry Date Insurance"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.state.expiry_date_ins))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "demo-lft-tab-4",
         className: "tab-pane fade"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "text-main text-semibold"
-      }, "Home Services"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.state.type_of_business), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        className: "text-main text-semibold"
-      }, "Bussiness Services"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.state.type_of_business)))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Services"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+        id: "demo-dt-basic",
+        className: "table table-striped table-bordered",
+        cellspacing: "0",
+        width: "100%"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Sr"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Action"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, this.state.vendor_selected_services.map(function (data, index) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+          key: index
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, index + 1), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, data.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: _this6.deleteVendorSelectedServices.bind(_this6, data.id),
+          className: "btn btn-outline-danger"
+        }, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fa fa-trash"
+        }, " "))));
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "panel-body demo-nifty-btn"
+      }, this.state.services.map(function (data, index) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          key: index,
+          onClick: _this6.addVendorService.bind(_this6, data.id),
+          className: "btn btn-info btn-rounded"
+        }, data.name);
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "demo-lft-tab-4",
+        className: "tab-pane fade"
+      }, this.state.vendor_docs.map(function (data, index) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: "text-main text-semibold"
+        }, data.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: _Configs_Api__WEBPACK_IMPORTED_MODULE_2__["img_insurance"] + data.document
+        }));
+      })))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "panel-footer text-right"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "panel-body demo-nifty-btn"
@@ -101001,6 +99907,7 @@ var Index = /*#__PURE__*/function (_React$Component) {
 
 module.exports = {
   img_baseurl: '/images/',
+  img_insurance: '/files/',
   // Stripe Public Key
   STRIPE_PK: "pk_test_51IbjsHHQWHaaR6va0bLXwxEdBUqEMabWlnO0ubPyt26TNhD8YAQCHepUKRlDAWQFJZWFarLYi2cEgbH8U6iNvddM00lZ8jpMEd"
 };
@@ -103446,6 +102353,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_tabs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-tabs */ "./node_modules/react-tabs/esm/index.js");
 /* harmony import */ var react_tabs_style_react_tabs_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-tabs/style/react-tabs.css */ "./node_modules/react-tabs/style/react-tabs.css");
 /* harmony import */ var react_tabs_style_react_tabs_css__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_tabs_style_react_tabs_css__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _Vendor_admin_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../Vendor/admin.css */ "./resources/js/components/Vendor/admin.css");
+/* harmony import */ var _Vendor_admin_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_Vendor_admin_css__WEBPACK_IMPORTED_MODULE_6__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -103469,6 +102378,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -103701,7 +102611,7 @@ var SignUp = /*#__PURE__*/function (_Component) {
 
       e.preventDefault();
       console.log(this.state);
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/create-vendor', this.state).then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/validate_vendor', this.state).then(function (res) {
         if (res.data.status) {
           _this3.setState({
             step: 2,
@@ -104762,6 +103672,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _Configs_Api__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../Configs/Api */ "./resources/js/components/Configs/Api.js");
 /* harmony import */ var _Configs_Api__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_Configs_Api__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _Vendor_admin_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../Vendor/admin.css */ "./resources/js/components/Vendor/admin.css");
+/* harmony import */ var _Vendor_admin_css__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_Vendor_admin_css__WEBPACK_IMPORTED_MODULE_5__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -104785,6 +103697,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -104835,7 +103748,9 @@ var Login = /*#__PURE__*/function (_Component) {
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/vendor-login', this.state).then(function (res) {
         console.log(res);
 
-        if (res.data.status == 200) {} else {
+        if (res.data.status == 200) {
+          window.open('/vendor', '_blank');
+        } else {
           _this2.setState({
             error_string: res.data.message
           });
@@ -104909,10 +103824,10 @@ var Login = /*#__PURE__*/function (_Component) {
 
 /***/ }),
 
-/***/ "./resources/js/components/Vendor/index.js":
-/*!*************************************************!*\
-  !*** ./resources/js/components/Vendor/index.js ***!
-  \*************************************************/
+/***/ "./resources/js/components/Vendor/Index/App.js":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/Vendor/Index/App.js ***!
+  \*****************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -104920,18 +103835,6 @@ var Login = /*#__PURE__*/function (_Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _Vendor_Auth_Signup__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Vendor/Auth/Signup */ "./resources/js/components/Vendor/Auth/Signup.js");
-/* harmony import */ var _Vendor_Auth_login__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Vendor/Auth/login */ "./resources/js/components/Vendor/Auth/login.js");
-/* harmony import */ var _Vendor_Auth_SignUpRequest__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Vendor/Auth/SignUpRequest */ "./resources/js/components/Vendor/Auth/SignUpRequest.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var react_stripe_elements__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-stripe-elements */ "./node_modules/react-stripe-elements/es/index.js");
-/* harmony import */ var react_stripe_elements__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_stripe_elements__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _Configs_Api__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../Configs/Api */ "./resources/js/components/Configs/Api.js");
-/* harmony import */ var _Configs_Api__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_Configs_Api__WEBPACK_IMPORTED_MODULE_8__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -104955,53 +103858,533 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 
- // import MainIndex from '../Vendor/Admin_Sidebar';
 
+var VendorIndex = /*#__PURE__*/function (_Component) {
+  _inherits(VendorIndex, _Component);
 
+  var _super = _createSuper(VendorIndex);
 
+  function VendorIndex() {
+    _classCallCheck(this, VendorIndex);
 
-
-
-
-
- // import './App.css'
-
-var Index = /*#__PURE__*/function (_Component) {
-  _inherits(Index, _Component);
-
-  var _super = _createSuper(Index);
-
-  function Index(props) {
-    _classCallCheck(this, Index);
-
-    return _super.call(this, props);
+    return _super.apply(this, arguments);
   }
 
-  _createClass(Index, [{
+  _createClass(VendorIndex, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["BrowserRouter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-        path: "/vendor-signup/:step?/:vendor_id?",
-        component: _Vendor_Auth_Signup__WEBPACK_IMPORTED_MODULE_3__["default"]
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-        path: "/vendor-login",
-        component: _Vendor_Auth_login__WEBPACK_IMPORTED_MODULE_4__["default"]
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-        exact: true,
-        path: "/request-submitted",
-        component: _Vendor_Auth_SignUpRequest__WEBPACK_IMPORTED_MODULE_5__["default"]
-      })));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "app"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "main-wrapper main-wrapper-1"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "navbar-bg"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
+        className: "navbar navbar-expand-lg main-navbar sticky"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-inline "
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "navbar-nav mr-3"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#",
+        "data-toggle": "sidebar",
+        className: "nav-link nav-link-lg\r collapse-btn"
+      }, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "data-feather": "align-justify"
+      }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "navbar-nav navbar-right",
+        style: {
+          marginLeft: '65%'
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "dropdown dropdown-list-toggle"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#",
+        "data-toggle": "dropdown",
+        className: "nav-link notification-toggle nav-link-lg"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "data-feather": "bell",
+        className: "bell"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "dropdown-menu dropdown-list dropdown-menu-right pullDown"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "dropdown-header"
+      }, "Notifications", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "float-right"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#"
+      }, "Mark All As Read"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "dropdown-list-content dropdown-list-icons"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#",
+        className: "dropdown-item dropdown-item-unread"
+      }, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "dropdown-item-icon bg-primary text-white"
+      }, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas\r fa-code"
+      })), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "dropdown-item-desc"
+      }, " Template update is available now! ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "time"
+      }, "2 Min Ago"))), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#",
+        className: "dropdown-item"
+      }, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "dropdown-item-icon bg-info text-white"
+      }, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "far\r fa-user"
+      })), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "dropdown-item-desc"
+      }, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "You"), " and ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Dedik Sugiharto"), " are now friends ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "time"
+      }, "10 Hours Ago"))), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#",
+        className: "dropdown-item"
+      }, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "dropdown-item-icon bg-success text-white"
+      }, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas\r fa-check"
+      })), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "dropdown-item-desc"
+      }, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Kusnaedi"), " has moved task ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Fix bug header"), " to ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Done"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "time"
+      }, "12 Hours Ago"))), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#",
+        className: "dropdown-item"
+      }, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "dropdown-item-icon bg-danger text-white"
+      }, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-exclamation-triangle"
+      })), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "dropdown-item-desc"
+      }, " Low disk space. Let's clean it! ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "time"
+      }, "17 Hours Ago"))), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#",
+        className: "dropdown-item"
+      }, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "dropdown-item-icon bg-info text-white"
+      }, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas\r fa-bell"
+      })), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "dropdown-item-desc"
+      }, " Welcome to Otika template! ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "time"
+      }, "Yesterday")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "dropdown-footer text-center"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#"
+      }, "View All ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-chevron-right"
+      }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "dropdown"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#",
+        "data-toggle": "dropdown",
+        className: "nav-link dropdown-toggle nav-link-lg nav-link-user"
+      }, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        alt: "image",
+        src: "/vendor-assets/img/user.png",
+        className: "user-img-radious-style"
+      }), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "d-sm-none d-lg-inline-block"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "dropdown-menu dropdown-menu-right pullDown"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "dropdown-title"
+      }, "Hello Sarah Smith"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "profile.html",
+        className: "dropdown-item has-icon"
+      }, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "far\r fa-user"
+      }), " Profile"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "timeline.html",
+        className: "dropdown-item has-icon"
+      }, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-bolt"
+      }), "Activities"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#",
+        className: "dropdown-item has-icon"
+      }, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-cog"
+      }), "Settings"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "dropdown-divider"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "auth-login.html",
+        className: "dropdown-item has-icon text-danger"
+      }, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-sign-out-alt"
+      }), "Logout"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "main-sidebar sidebar-style-2"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("aside", {
+        id: "sidebar-wrapper"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sidebar-brand"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "index.html"
+      }, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        alt: "image",
+        src: "/images/site-logo.png",
+        className: "header-logo"
+      }), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "logo-name"
+      }, "Tidy Vendor Dashboard"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "sidebar-menu"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "menu-header"
+      }, "Main"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "dropdown active"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "index.html",
+        className: "nav-link"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "data-feather": "monitor"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Dashboard"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "dropdown"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#",
+        className: "menu-toggle nav-link has-dropdown"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "data-feather": "briefcase"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Manage Bookings")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "dropdown-menu"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "nav-link",
+        href: "/vendor"
+      }, "New Bookings")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "nav-link",
+        href: "/vendor"
+      }, "Accepted Bookings")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "nav-link",
+        href: "/vendor"
+      }, "Pending Bookings")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "dropdown"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#",
+        className: "menu-toggle nav-link has-dropdown"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "data-feather": "command"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Manage Accounts")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "dropdown-menu"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "nav-link",
+        href: "/vendor"
+      }, "Wallet")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "nav-link",
+        href: "/vendor"
+      }, "Withdraw Request")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "dropdown"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#",
+        className: "menu-toggle nav-link has-dropdown"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "data-feather": "mail"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Messages")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "dropdown-menu"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "nav-link",
+        href: "/vendor"
+      }, "Inbox")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "nav-link",
+        href: "/vendor"
+      }, "Compose")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "dropdown"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#",
+        className: "menu-toggle nav-link has-dropdown"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "data-feather": "mail"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Manage Employees")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "dropdown-menu"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "nav-link",
+        href: "/vendor"
+      }, "Employees")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "nav-link",
+        href: "/vendor"
+      }, "Add Employee")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "dropdown"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#",
+        className: "menu-toggle nav-link has-dropdown"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "data-feather": "copy"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Settings")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "dropdown-menu"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "nav-link",
+        href: "/vendor"
+      }, "Profile")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "nav-link",
+        href: "/vendor"
+      }, "Accounts"))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "main-content"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        className: "section"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row "
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-statistic-4"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "align-items-center justify-content-between"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row "
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-content"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+        className: "font-15"
+      }, "New Booking"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        className: "mb-3 font-18"
+      }, "258"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "mb-0"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "col-green"
+      }, "10%"), " Increase"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "banner-img"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: "/vendor-assets/img/banner/1.png",
+        alt: true
+      })))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-statistic-4"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "align-items-center justify-content-between"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row "
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-content"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+        className: "font-15"
+      }, " Customers"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        className: "mb-3 font-18"
+      }, "1,287"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "mb-0"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "col-orange"
+      }, "09%"), " Decrease"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "banner-img"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: "/vendor-assets/img/banner/2.png",
+        alt: true
+      })))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-statistic-4"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "align-items-center justify-content-between"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row "
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-content"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+        className: "font-15"
+      }, "Wallet"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        className: "mb-3 font-18"
+      }, "128"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "mb-0"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "col-green"
+      }, "18%"), "Increase"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "banner-img"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: "/vendor-assets/img/banner/3.png",
+        alt: true
+      })))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-statistic-4"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "align-items-center justify-content-between"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row "
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-content"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+        className: "font-15"
+      }, "Revenue"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        className: "mb-3 font-18"
+      }, "$48,697"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "mb-0"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "col-green"
+      }, "42%"), " Increase"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "banner-img"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: "/vendor-assets/img/banner/4.png",
+        alt: true
+      }))))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-12 col-sm-12 col-lg-12"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card "
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-header"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Revenue chart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-header-action"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "dropdown"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#",
+        "data-toggle": "dropdown",
+        className: "btn btn-warning dropdown-toggle"
+      }, "Options"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "dropdown-menu"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#",
+        className: "dropdown-item has-icon"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-eye"
+      }), " View"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#",
+        className: "dropdown-item has-icon"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "far fa-edit"
+      }), " Edit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "dropdown-divider"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#",
+        className: "dropdown-item has-icon text-danger"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "far fa-trash-alt"
+      }), "Delete"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#",
+        className: "btn btn-primary"
+      }, "View All")))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", {
+        className: "main-footer"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "footer-left"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "templateshub.net"
+      }, "Tidy Home")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "footer-right"
+      }))));
     }
   }]);
 
-  return Index;
+  return VendorIndex;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (Index);
+/* harmony default export */ __webpack_exports__["default"] = (VendorIndex);
 
-if (document.getElementById('root')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Index, null), document.getElementById('root'));
-}
+/***/ }),
+
+/***/ "./resources/js/components/Vendor/Index/Index.js":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/Vendor/Index/Index.js ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Index_App__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Index/App */ "./resources/js/components/Vendor/Index/App.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+var VendorMain = /*#__PURE__*/function (_Component) {
+  _inherits(VendorMain, _Component);
+
+  var _super = _createSuper(VendorMain);
+
+  function VendorMain() {
+    _classCallCheck(this, VendorMain);
+
+    return _super.apply(this, arguments);
+  }
+
+  _createClass(VendorMain, [{
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Index_App__WEBPACK_IMPORTED_MODULE_1__["default"], null));
+    }
+  }]);
+
+  return VendorMain;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (VendorMain);
+
+/***/ }),
+
+/***/ "./resources/js/components/Vendor/admin.css":
+/*!**************************************************!*\
+  !*** ./resources/js/components/Vendor/admin.css ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/postcss-loader/src??ref--6-2!./admin.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./resources/js/components/Vendor/admin.css");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
 
 /***/ }),
 
@@ -105022,7 +104405,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Admin_Login_Login__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Admin/Login/Login */ "./resources/js/components/Admin/Login/Login.js");
 /* harmony import */ var _Admin_index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Admin/index */ "./resources/js/components/Admin/index.js");
 /* harmony import */ var _Front_Index__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Front/Index */ "./resources/js/components/Front/Index.js");
-/* harmony import */ var _Vendor_index__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Vendor/index */ "./resources/js/components/Vendor/index.js");
+/* harmony import */ var _Vendor_Index_Index__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Vendor/Index/Index */ "./resources/js/components/Vendor/Index/Index.js");
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _Redux_reducer__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Redux/reducer */ "./resources/js/components/Redux/reducer.js");
@@ -105097,7 +104480,7 @@ var Index = /*#__PURE__*/function (_Component) {
         component: _Admin_index__WEBPACK_IMPORTED_MODULE_4__["default"]
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/vendor",
-        component: _Vendor_index__WEBPACK_IMPORTED_MODULE_6__["default"]
+        component: _Vendor_Index_Index__WEBPACK_IMPORTED_MODULE_6__["default"]
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/vendor-signup",
         component: _Front_Index__WEBPACK_IMPORTED_MODULE_5__["default"]
@@ -105139,8 +104522,8 @@ if (document.getElementById('root')) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\waleed.ahmed\Documents\GitHub\Tidy\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\waleed.ahmed\Documents\GitHub\Tidy\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\WanGard\Documents\GitHub\Tidy\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\WanGard\Documents\GitHub\Tidy\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

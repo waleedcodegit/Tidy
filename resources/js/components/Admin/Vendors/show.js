@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
-import {img_baseurl} from '../../Configs/Api'; 
+import {img_baseurl, img_insurance} from '../../Configs/Api'; 
 import Swal from 'sweetalert2';
 import { isNull } from 'lodash';
 
@@ -8,6 +8,7 @@ class ShowVendor extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            vendor_id: '',
             address: '',
             australian_business_number: '',
             business_name: '',
@@ -22,6 +23,9 @@ class ShowVendor extends Component {
             type_of_business: '',
             company_name: '',
             expiry_date_ins: '',
+            vendor_selected_services: [],
+            services: [],
+            vendor_docs: [],
             status: '',
         }
     }
@@ -39,6 +43,7 @@ class ShowVendor extends Component {
             console.log(res);
             if(res.data.status == 200) {
                 this.setState({
+                    vendor_id: res.data.data.id,
                     address: res.data.data.address,
                     australian_business_number: res.data.data.australian_business_number,
                     business_name: res.data.data.business_name,
@@ -52,10 +57,42 @@ class ShowVendor extends Component {
                     trading: res.data.data.trading,
                     type_of_business: res.data.data.type_of_business,
                     company_name: res.data.data.company_name,
-                    expiry_date_ins: res.data.data.expiry_date_ins
+                    expiry_date_ins: res.data.data.expiry_date_ins,
+                    vendor_selected_services: res.data.data.vendor_selected_services,
+                    services: res.data.data.services,
+                    vendor_docs: res.data.data.vendor_doc,
                 })
             }
         });
+    }
+
+    deleteVendorSelectedServices(id) {
+        let Configs = {
+            headers: {
+                token: window.localStorage.getItem('testapistring')
+            }
+        }
+        let data ={
+            id: id
+        }
+        Axios.post(`/api/delete-vendor-selected-services/${id}`, data, Configs).then(res=>{
+            this.componentDidMount();
+        })
+    }
+
+    addVendorService(id) {
+        let Configs = {
+            headers: {
+                token: window.localStorage.getItem('testapistring')
+            }
+        }
+        let data ={
+            service_id: id,
+            vendor_id: this.state.vendor_id,
+        }
+        Axios.post(`/api/add-vendor-service/${id}`, data, Configs).then(res=>{
+            this.componentDidMount();
+        })
     }
 
     vendorApproved() {
@@ -93,10 +130,10 @@ class ShowVendor extends Component {
                 <div className="panel">
                     <div className="panel-body">
                         <div className="fixed-fluid">
-                            <div className="fixed-md-200 pull-sm-left fixed-right-border">
+                            <div className="fixed-md-250 pull-sm-left fixed-right-border">
                             <div className="text-center">
                                 <div className="pad-ver">
-                                <img src={img_baseurl+"1.png"} className="img-lg img-circle" alt="Profile Picture" />
+                                    <img src={img_baseurl+"1.png"} className="img-lg img-circle" alt="Profile Picture" />
                                 </div>
                                 <h4 className="text-lg text-overflow mar-no">{this.state.first_name} {this.state.last_name}</h4>
                                 <p className="text-sm text-muted">{this.state.business_name}</p>
@@ -117,23 +154,25 @@ class ShowVendor extends Component {
                                         <a data-toggle="tab" href="#demo-lft-tab-2">Bussiness Info</a>
                                     </li>
                                     <li>
-                                        <a data-toggle="tab" href="#demo-lft-tab-3">Insurance Info</a>
+                                        <a data-toggle="tab" href="#demo-lft-tab-3">Vendor Selected Services</a>
                                     </li>
                                     <li>
-                                        <a data-toggle="tab" href="#demo-lft-tab-4">Services</a>
+                                        <a data-toggle="tab" href="#demo-lft-tab-4">Insurance Docs</a>
                                     </li>
                                 </ul>
                                     {/*Tabs Content*/}
                                     <div className="tab-content">
                                         <div id="demo-lft-tab-1" className="tab-pane fade active in">
-                                            <p className="text-main text-semibold">Date Of Birth</p>
-                                            <p>{this.state.dob}</p>
+                                            <p className="text-main text-semibold">Name</p>
+                                            <p>{this.state.first_name} {this.state.last_name}</p>
                                             <p className="text-main text-semibold">Email</p>
                                             <p>{this.state.email}</p>
                                             <p className="text-main text-semibold">Phone</p>
                                             <p>{this.state.phone}</p>
                                             <p className="text-main text-semibold">Address</p>
                                             <p>{this.state.address}</p>
+                                            <p className="text-main text-semibold">Date Of Birth</p>
+                                            <p>{this.state.dob}</p>
                                         </div>
                                         <div id="demo-lft-tab-2" className="tab-pane fade">
                                             <p className="text-main text-semibold">Type Of Business</p>
@@ -142,27 +181,61 @@ class ShowVendor extends Component {
                                             <p>{this.state.business_name}</p>
                                             <p className="text-main text-semibold">Australian Business Number</p>
                                             <p>{this.state.australian_business_number}</p>
-                                            <p className="text-main text-semibold">Trading</p>
-                                            <p>{this.state.trading}</p>   
+                                            {
+                                                this.state.trading != null ?
+                                                <div>
+                                                    <p className="text-main text-semibold">Trading</p>
+                                                    <p>{this.state.trading}</p> 
+                                                </div>
+                                                : 
+                                                <div></div>
+                                            }  
                                         </div>
                                         <div id="demo-lft-tab-3" className="tab-pane fade">
-                                            { 
-                                                this.state.insurance_certificate_type == "admin" ? 
-                                                    <img src="" />
-                                                :
-                                                    <div>
-                                                        <p className="text-main text-semibold">Company Name</p>
-                                                        <p>{this.state.company_name}</p>
-                                                        <p className="text-main text-semibold">Expiry Date Insurance</p>
-                                                        <p>{this.state.expiry_date_ins}</p>
-                                                    </div>
-                                            }
+                                            <p className="text-main text-semibold">Services</p>
+                                            <table id="demo-dt-basic" className="table table-striped table-bordered" cellspacing="0" width="100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Sr</th>
+                                                        <th>Name</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                {
+                                                    this.state.vendor_selected_services.map((data,index) =>{
+                                                        return(
+                                                            <tr key={index}>
+                                                                <td>{index + 1}</td>
+                                                                <td>{data.name}</td>
+                                                                <td><button onClick={this.deleteVendorSelectedServices.bind(this, data.id)} className="btn btn-outline-danger"> <i  className="fa fa-trash"> </i></button></td>
+                                                            </tr>
+                                                        )
+                                                    })
+                                                }
+                                                </tbody>
+                                            </table>
+                                            <div className="panel-body demo-nifty-btn">
+                                                {
+                                                    this.state.services.map((data,index) =>{
+                                                        return(
+                                                            <button key={index} onClick={this.addVendorService.bind(this, data.id)}  className="btn btn-info btn-rounded">{data.name}</button>
+                                                        )
+                                                    })
+                                                }
+                                            </div>
                                         </div>
                                         <div id="demo-lft-tab-4" className="tab-pane fade">
-                                            <p className="text-main text-semibold">Home Services</p>
-                                            <p>{this.state.type_of_business}</p>  
-                                            <p className="text-main text-semibold">Bussiness Services</p>
-                                            <p>{this.state.type_of_business}</p> 
+                                            {
+                                                this.state.vendor_docs.map((data,index) =>{
+                                                    return(
+                                                        <div>
+                                                            <p className="text-main text-semibold">{data.title}</p> 
+                                                            <img src={img_insurance+data.document} />
+                                                        </div>
+                                                    )
+                                                })
+                                            }                                            
                                         </div>
                                     </div>
                                 </div>
