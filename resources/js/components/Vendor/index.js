@@ -10,7 +10,7 @@ import {StripeProvider} from 'react-stripe-elements';
 import { STRIPE_PK } from '../Configs/Api';
 import {Elements} from 'react-stripe-elements';
 
-// import './App.css'
+import '../Vendor/admin.css';
 class Index extends Component {
     constructor(props) {
         super(props);
