@@ -4,7 +4,7 @@ import { Switch,BrowserRouter,Route} from 'react-router-dom';
 import Admin_Login from './Admin/Login/Login'; 
 import AdminIndex from './Admin/index';
 import FrontIndex from './Front/Index';
-import VendorIndex from './Vendor/index';
+import VendorIndex from './Vendor/Index/Index';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import reducer from './Redux/reducer';

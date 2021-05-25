@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import {Link } from 'react-router-dom';
 import { base_url } from '../../Configs/Api';
+import '../../Vendor/admin.css';
+
 class Login extends Component {
     constructor(props) {
         super(props);
@@ -30,7 +32,7 @@ class Login extends Component {
         Axios.post('/api/vendor-login',this.state).then(res=>{
             console.log(res);
             if(res.data.status == 200){
-
+                window.open('/vendor','_blank')
             }else{
                 this.setState({
                     error_string:res.data.message

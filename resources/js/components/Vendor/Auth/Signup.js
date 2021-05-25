@@ -5,6 +5,7 @@ import { Navbar, Nav } from 'react-bootstrap';
 import SignUpRequest from './SignUpRequest';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
+import '../../Vendor/admin.css';
 class SignUp extends Component {
     constructor(props) {
         super(props);
