@@ -173,7 +173,7 @@ class SignUp extends Component {
     validate_vendor(e) {
         e.preventDefault();
         console.log(this.state);
-        Axios.post('/api/create-vendor', this.state).then(res => {
+        Axios.post('/api/validate_vendor', this.state).then(res => {
             if (res.data.status) {
                 this.setState({
                     step: 2,
