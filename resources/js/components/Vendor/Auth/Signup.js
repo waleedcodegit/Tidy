@@ -12,7 +12,7 @@ class SignUp extends Component {
         this.state = {
 
             btn_loading: false,
-            insurance_certificate_type: 'admin',
+            insurance_certificate_type: 'own',
             first_name: '',
             last_name: '',
             email: '',
@@ -21,7 +21,7 @@ class SignUp extends Component {
             phone: '',
             dob: '',
             australian_business_number: '',
-            type_of_business: '',
+            type_of_business: 'sole',
             business_name: '',
             trading: '',
             insurance_certificate: '',
@@ -35,18 +35,18 @@ class SignUp extends Component {
             error_string: '',
             businessname: '',
             step: 1,
-            services:[],
-            vendor_id:this.props.match.params.vendor_id,
-            photo_id:[],
-            Npc:[],
-            ic:[],
-            btn1_prg:0,
-            btn2_prg:0,
-            btn2_prg:0,
-            customer:{},
-            agree_check:false
+            services: [],
+            vendor_id: this.props.match.params.vendor_id,
+            photo_id: [],
+            Npc: [],
+            ic: [],
+            btn1_prg: 0,
+            btn2_prg: 0,
+            btn2_prg: 0,
+            customer: {},
+            agree_check: false
         };
-     
+
     }
     nextStep() {
         this.setState({
@@ -178,7 +178,9 @@ class SignUp extends Component {
             if (res.data.status) {
                 this.setState({
                     step: 2,
-                    error_string:''
+                    error_string: ''
+                }, function () {
+                    window.scrollTo(0, 0);
                 })
             } else {
                 this.setState({
@@ -305,9 +307,9 @@ class SignUp extends Component {
             duration_of_insu_charges: e.target.value
         })
     }
-    InsuranceType(type) {
+    InsuranceType() {
         this.setState({
-            insurance_certificate_type: type
+            insurance_certificate_type: this.state.insurance_certificate_type == 'admin' ? 'own' : 'admin'
         })
     }
     upload_insurance(event) {
@@ -333,7 +335,7 @@ class SignUp extends Component {
 
             if (res.data.status == 200) {
                 let temp = this.state.ic;
-                temp.push({ url: res.data.url , title:'Insurance Certificate' })
+                temp.push({ url: res.data.url, title: 'Insurance Certificate' })
                 this.setState({
                     btn1_prg: false,
                     ic: temp
@@ -379,7 +381,7 @@ class SignUp extends Component {
 
             if (res.data.status == 200) {
                 let temp = this.state.Npc;
-                temp.push({ url: res.data.url , title:'National Police Check'})
+                temp.push({ url: res.data.url, title: 'National Police Check' })
                 this.setState({
                     btn2_prg: false,
                     Npc: temp
@@ -424,7 +426,7 @@ class SignUp extends Component {
 
             if (res.data.status == 200) {
                 let temp = this.state.photo_id;
-                temp.push({ url: res.data.url , title:'Photo ID' })
+                temp.push({ url: res.data.url, title: 'Photo ID' })
                 this.setState({
                     btn2_prg: false,
                     photo_id: temp
@@ -446,7 +448,7 @@ class SignUp extends Component {
         })
 
     }
-    validate_services(){
+    validate_services() {
         let payload = {
             services: this.state.services,
             vendor_id: this.props.match.params.vendor_id
@@ -459,8 +461,10 @@ class SignUp extends Component {
         })
         if (check) {
             this.setState({
-                step:3,
-                error_string:''
+                step: 3,
+                error_string: ''
+            }, function () {
+                window.scrollTo(0, 0);
             })
         } else {
             this.setState({
@@ -469,10 +473,12 @@ class SignUp extends Component {
         }
 
     }
-    change_step(step){
+    change_step(step) {
         this.setState({
-            step:step,
-            error_string:''
+            step: step,
+            error_string: ''
+        }, function () {
+            window.scrollTo(0, 0);
         })
     }
     submit_services() {
@@ -511,58 +517,72 @@ class SignUp extends Component {
             services: temp
         })
     }
-    validate_card(){
-        Axios.post('/api/validate_card',this.state).then(res=>{
-            if(res.data.status){
-               this.setState({
-                   customer:res.data.customer,
-                   step:4
-               })
-            }else{
+    validate_card() {
+        Axios.post('/api/validate_card', this.state).then(res => {
+            if (res.data.status) {
                 this.setState({
-                    error_string:res.data.message
+                    customer: res.data.customer,
+                    step: 4
+                })
+            } else {
+                this.setState({
+                    error_string: res.data.message
                 })
             }
-            
+
         })
     }
-    validate_documents(){
-        if(this.state.ic.length == 0){
-            this.setState({
-                error_string:'Please Upload Public Insurance Certificate'
-            })
-        }else if(this.state.Npc.length == 0){
-            if(this.state.type_of_business == 'sole'){
+    async  validate_documents() {
+        this.setState({
+            error_string:''
+        })
+        if (this.state.ic.length == 0) {
+            if(this.state.insurance_certificate_type == 'own' ){
                 this.setState({
-                    error_string:'Please Upload National Police Check'
-                }) 
+                    error_string: 'Please Upload Public Insurance Certificate'
+                })
             }
-        }else if(this.state.photo_id.length == 0){
+        } else if (this.state.Npc.length == 0) {
+            if (this.state.type_of_business == 'sole') {
+                this.setState({
+                    error_string: 'Please Upload National Police Check'
+                })
+            }
+        } else if (this.state.photo_id.length == 0) {
             this.setState({
-                error_string:'Please Upload  Photo Id'
+                error_string: 'Please Upload  Photo Id'
             })
-        }else{
+        } else {
             this.setState({
-                step:4
+                step: 4,
+                error_string: ''
+            }, function () {
+                window.scrollTo(0, 0);
             })
         }
+        if(this.state.insurance_certificate_type == 'admin'){
+            await this.validate_card();
+        }
     }
-    submit_request(){
-        Axios.post('/api/submit_vendor_request',this.state).then(res=>{
-            if(res.data.status == 200){
+    submit_request() {
+        Axios.post('/api/submit_vendor_request', this.state).then(res => {
+            if (res.data.status == 200) {
                 this.setState({
-                    step:5
+                    step: 5,
+                    error_string: ''
+                }, function () {
+                    window.scrollTo(0, 0);
                 })
-            }else{
+            } else {
                 this.setState({
-                    error_string:'Sorry. we are unable to submit your request.'
+                    error_string: 'Sorry. we are unable to submit your request.'
                 })
             }
         })
     }
-    agree_check(){
+    agree_check() {
         this.setState({
-            agree_check : !this.state.agree_check
+            agree_check: !this.state.agree_check
         })
     }
     render() {
@@ -586,7 +606,7 @@ class SignUp extends Component {
                         <div className="row justify-content-center mt-0">
                             <div className="col-11 col-sm-9 col-md-7 col-lg-7  p-0 mt-3 mb-2">
                                 <div className="card card-signin p-3 animate_auth_modal  px-0 pt-4 pb-0 mt-3 mb-3">
-                                    <h2 className="text-center" style={{fontSize:'48px'}}><strong>Vendor Account SignUp</strong></h2>
+                                    <h2 className="text-center" style={{ fontSize: '48px' }}><strong>Vendor Account SignUp</strong></h2>
                                     <p className="text-center">Fill all form field to go to next step</p>
                                     <div className="row">
                                         <div className="col-md-12 mx-0">
@@ -628,13 +648,13 @@ class SignUp extends Component {
                                                                                 <div className="col-sm-6">
                                                                                     <div className="form-group">
                                                                                         <label className="control-label">Firstname</label>
-                                                                                        <input onChange={this.first_name.bind(this)} type="firstname" name="firstname" className="form-control" />
+                                                                                        <input value={this.state.first_name || ""} onChange={this.first_name.bind(this)} type="firstname" name="firstname" className="form-control" />
                                                                                     </div>
                                                                                 </div>
                                                                                 <div className="col-sm-6">
                                                                                     <div className="form-group">
                                                                                         <label className="control-label">Lastname</label>
-                                                                                        <input onChange={this.last_name.bind(this)} type="lastname" name="lastname" className="form-control" />
+                                                                                        <input value={this.state.last_name || ""} onChange={this.last_name.bind(this)} type="lastname" name="lastname" className="form-control" />
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -642,7 +662,7 @@ class SignUp extends Component {
                                                                                 <div className="col-sm-12">
                                                                                     <div className="form-group">
                                                                                         <label className="control-label">Email</label>
-                                                                                        <input onChange={this.email.bind(this)} type="email" name="email" className="form-control" />
+                                                                                        <input value={this.state.email || ""} onChange={this.email.bind(this)} type="email" name="email" className="form-control" />
                                                                                     </div>
                                                                                 </div>
                                                                                 {/* <div className="col-sm-12">
@@ -654,19 +674,19 @@ class SignUp extends Component {
                                                                                 <div className="col-sm-12">
                                                                                     <div className="form-group">
                                                                                         <label className="control-label">Phone</label>
-                                                                                        <input onChange={this.phone.bind(this)} type="phone" name="phone" className="form-control" />
+                                                                                        <input value={this.state.phone || ""} onChange={this.phone.bind(this)} type="phone" name="phone" className="form-control" />
                                                                                     </div>
                                                                                 </div>
                                                                                 <div className="col-sm-12">
                                                                                     <div className="form-group">
                                                                                         <label className="control-label">Date of Birth</label>
-                                                                                        <input onChange={this.dob.bind(this)} type="date" name="dob" className="form-control" />
+                                                                                        <input value={this.state.dob || ""} onChange={this.dob.bind(this)} type="date" name="dob" className="form-control" />
                                                                                     </div>
                                                                                 </div>
                                                                                 <div className="col-sm-12">
                                                                                     <div className="form-group">
                                                                                         <label className="control-label">Address</label>
-                                                                                        <input onChange={this.address.bind(this)} type="text" name="address" className="form-control" />
+                                                                                        <input value={this.state.address || ""} onChange={this.address.bind(this)} type="text" name="address" className="form-control" />
                                                                                     </div>
                                                                                 </div>
                                                                                 <div className="col-sm-12">
@@ -674,13 +694,13 @@ class SignUp extends Component {
                                                                                         <label className="control-label">Australian Business Number</label>
                                                                                         <p style={{ fontSize: '12px' }} className="mb-1 py-1">Please note your name on this application must match the first and last
                                                  name registered to your ABN. If you do not have ABN yet, click here to <a target="blank" href="https://www.abr.gov.au/business-super-funds-charities/applying-abn">learn more</a>.</p>
-                                                                                        <input onChange={this.australian_business_number.bind(this)} type="number" className="form-control" />
+                                                                                        <input value={this.state.australian_business_number || ""} onChange={this.australian_business_number.bind(this)} type="number" className="form-control" />
                                                                                     </div>
                                                                                 </div>
                                                                                 <div className="col-sm-12">
                                                                                     <div className="form-group">
                                                                                         <label className="control-label">Type of Business</label>
-                                                                                        <select onChange={this.type_of_business.bind(this)} type="text" className="form-control" >
+                                                                                        <select value={this.state.type_of_business || ""} onChange={this.type_of_business.bind(this)} type="text" className="form-control" >
                                                                                             <option>-- Select type of business--</option>
                                                                                             <option value={'sole'}>Sole trader</option>
                                                                                             <option value={'company'}>Company</option>
@@ -690,7 +710,7 @@ class SignUp extends Component {
                                                                                 <div className="col-sm-12">
                                                                                     <div className="form-group">
                                                                                         <label className="control-label">Business Name</label>
-                                                                                        <input onChange={this.business_name.bind(this)} type="text" className="form-control" />
+                                                                                        <input value={this.state.business_name || ""} onChange={this.business_name.bind(this)} type="text" className="form-control" />
                                                                                     </div>
                                                                                 </div>
                                                                                 <div >
@@ -699,7 +719,7 @@ class SignUp extends Component {
                                                                                 <div className="col-sm-12">
                                                                                     <div className="form-group">
                                                                                         <label className="control-label">Trading as (optional)</label>
-                                                                                        <input onChange={this.trading.bind(this)} type="text" className="form-control" />
+                                                                                        <input value={this.state.trading || ""} onChange={this.trading.bind(this)} type="text" className="form-control" />
                                                                                     </div>
                                                                                 </div>
 
@@ -758,7 +778,8 @@ class SignUp extends Component {
                                                                                                     <i className="fas fa-check"></i>
                                                                                                     : null
                                                                                                 }
-                                                                                                {data.name}</button>
+                                                                                                {data.name}
+                                                                                            </button>
                                                                                         </div>
                                                                                     )
                                                                                 })
@@ -773,33 +794,33 @@ class SignUp extends Component {
                                                                     }
 
                                                                     <div className="panel-footer row mt-5">
-                                                                    <div className="text-left">
-                                                                            <button onClick={this.change_step.bind(this,1)} className="btn btn-info   " type="submit">
-                                                                                    {
-                                                                                        this.state.btn_loading ?
-                                                                                            <div id="displayspinner" style={{ display: 'block', }}>
-                                                                                                <div className="spinner-border  ml-2 text-light spinner_format" role="status">
-                                                                                                    <span className="sr-only">Loading...</span>
-                                                                                                </div>
+                                                                        <div className="text-left">
+                                                                            <button onClick={this.change_step.bind(this, 1)} className="btn btn-info   " type="submit">
+                                                                                {
+                                                                                    this.state.btn_loading ?
+                                                                                        <div id="displayspinner" style={{ display: 'block', }}>
+                                                                                            <div className="spinner-border  ml-2 text-light spinner_format" role="status">
+                                                                                                <span className="sr-only">Loading...</span>
                                                                                             </div>
-                                                                                            : <>Previous</>
-                                                                                    }
-                                                                                </button>
+                                                                                        </div>
+                                                                                        : <>Previous</>
+                                                                                }
+                                                                            </button>
                                                                         </div>
                                                                         <div className="text-right ml-auto">
                                                                             <button onClick={this.validate_services.bind(this)} className="btn btn-success   " type="submit">
-                                                                                    {
-                                                                                        this.state.btn_loading ?
-                                                                                            <div id="displayspinner" style={{ display: 'block', }}>
-                                                                                                <div className="spinner-border  ml-2 text-light spinner_format" role="status">
-                                                                                                    <span className="sr-only">Loading...</span>
-                                                                                                </div>
+                                                                                {
+                                                                                    this.state.btn_loading ?
+                                                                                        <div id="displayspinner" style={{ display: 'block', }}>
+                                                                                            <div className="spinner-border  ml-2 text-light spinner_format" role="status">
+                                                                                                <span className="sr-only">Loading...</span>
                                                                                             </div>
-                                                                                            : <>Next</>
-                                                                                    }
-                                                                                </button>
+                                                                                        </div>
+                                                                                        : <>Next</>
+                                                                                }
+                                                                            </button>
                                                                         </div>
-                                            
+
                                                                     </div>
 
                                                                     {/*===================================================*/}
@@ -824,201 +845,177 @@ class SignUp extends Component {
                                                                     </div>
                                                                     <div className="panel-body">
                                                                         <div className="col-sm-12 ">
-                                                                            <Tabs>
+                                                                            <div className="col-sm-12 py-4">
+
+                                                                                <div className="  card p-3 form-group">
+                                                                                    <label className="control-label p-2">National Police Check (Only for sole trader)  </label>
+                                                                                    <input style={{ border: '0px' }} onChange={this.upload_NPC.bind(this)} type="file" className="form-control col-md-8" />
+                                                                                    <table className="table table-hover table-light table-striped mt-2">
+                                                                                        <tbody>
+                                                                                            {
+                                                                                                this.state.Npc.map((data, index) => {
+                                                                                                    return (
+                                                                                                        <tr key={index}>
+                                                                                                            <td>{data.url}</td>
+                                                                                                            <td><i className="fas fa-times"></i></td>
+                                                                                                        </tr>
+                                                                                                    )
+                                                                                                })
+                                                                                            }
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                                <div className="  card p-3 form-group">
+                                                                                    <label className="control-label p-2">Photo ID  </label>
+                                                                                    <input style={{ border: '0px' }} onChange={this.upload_photo_id.bind(this)} type="file" className="form-control col-md-8" />
+                                                                                    <table className="table table-hover table-light table-striped mt-2">
+                                                                                        <tbody>
+                                                                                            {
+                                                                                                this.state.photo_id.map((data, index) => {
+                                                                                                    return (
+                                                                                                        <tr key={index}>
+                                                                                                            <td>{data.url}</td>
+                                                                                                            <td><i className="fas fa-times"></i></td>
+                                                                                                        </tr>
+                                                                                                    )
+                                                                                                })
+                                                                                            }
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                                <div className="  card p-3 form-group">
+                                                                                    <label className="control-label p-2">Public Liability Insurance  </label>
+                                                                                    <input style={{ border: '0px' }} onChange={this.upload_insurance.bind(this)} type="file" className="form-control col-md-8" />
+
+                                                                                    <table className="table table-hover table-light table-striped mt-2">
+                                                                                        <tbody>
+                                                                                            {
+                                                                                                this.state.ic.map((data, index) => {
+                                                                                                    return (
+                                                                                                        <tr key={index}>
+                                                                                                            <td>{data.url}</td>
+                                                                                                            <td><i className="fas fa-times"></i></td>
+                                                                                                        </tr>
+                                                                                                    )
+                                                                                                })
+                                                                                            }
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                                
+
+                                                                            </div>
+                                                                            <div className="col-sm-12">
+                                                                                <input onChange={this.InsuranceType.bind(this)} checked={this.state.insurance_certificate_type == 'admin'} type="checkbox" ></input>
+                                                                                        Buy Public Liability Certificate from admin
+                                                                                    </div>
+                                                                            {
+                                                                                this.state.insurance_certificate_type == 'admin' ?
+                                                                                    <div className="card p-3 col-sm-12">
+                                                                                        <div className="col-sm-12 card p-3">
+                                                                                            <div className="form-group">
+                                                                                                <label className="control-label">Name on Card</label>
+                                                                                                <input value={this.state.card_holder_name || ""} onChange={this.card_holder_name.bind(this)} type="name" className="form-control" />
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div className="col-sm-12">
+                                                                                            <div className="form-group">
+                                                                                                <label className="control-label">Card Number</label>
+                                                                                                <input value={this.state.credit_card_number || ""} onChange={this.credit_card_number.bind(this)} type="number" className="form-control" />
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div className="col-sm-12 row">
+                                                                                            <div className="col-sm-3">
+                                                                                                <div className="form-group">
+                                                                                                    <label className="control-label">CVC</label>
+                                                                                                    <input value={this.state.cvc || ""} onChange={this.cvc.bind(this)} type="number" placeholder="ex. 311" className="form-control" />
+
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div className="col-sm-1"></div>
+                                                                                            <div className="col-sm-3">
+                                                                                                <div className="form-group">
+                                                                                                    <label className="control-label">Expiration</label>
+                                                                                                    <input value={this.state.expiry_month || ""} onChange={this.expiry_month.bind(this)} type="number" placeholder="MM" className="form-control" />
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div className="col-sm-1"></div>
+                                                                                            <div className="col-sm-3">
+                                                                                                <div className="form-group">
+                                                                                                    <label className="control-label"></label>
+                                                                                                    <input value={this.state.expiry_year || ""} onChange={this.expiry_year.bind(this)} type="number" placeholder="YYYY" className="form-control" />
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                    <p>We will be charge [] $5 per month from you.</p>
+                                                                                    </div>
+                                                                                    : null
+                                                                            }
+                                                                            {
+                                                                                this.state.error_string != '' ?
+                                                                                    <p className="text-danger text-center">{this.state.error_string}</p>
+                                                                                    : null
+                                                                            }
+                                                                            <div className="panel-footer row mt-5">
+                                                                                <div className="text-left">
+                                                                                    <button onClick={this.change_step.bind(this, 2)} className="btn btn-info   " type="submit">
+                                                                                        {
+                                                                                            this.state.btn_loading ?
+                                                                                                <div id="displayspinner" style={{ display: 'block', }}>
+                                                                                                    <div className="spinner-border  ml-2 text-light spinner_format" role="status">
+                                                                                                        <span className="sr-only">Loading...</span>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                : <>Previous</>
+                                                                                        }
+                                                                                    </button>
+                                                                                </div>
+                                                                                <div className="text-right ml-auto">
+                                                                                    <button onClick={this.validate_documents.bind(this)} className="btn btn-success   " type="submit">
+                                                                                        {
+                                                                                            this.state.btn_loading ?
+                                                                                                <div id="displayspinner" style={{ display: 'block', }}>
+                                                                                                    <div className="spinner-border  ml-2 text-light spinner_format" role="status">
+                                                                                                        <span className="sr-only">Loading...</span>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                : <>Next</>
+                                                                                        }
+                                                                                    </button>
+                                                                                </div>
+
+                                                                            </div>
+
+
+
+                                                                        </div>
+                                                                        {/* <Tabs>
                                                                                 <TabList>
                                                                                     <Tab onClick={this.InsuranceType.bind(this, 'admin')}>Buy Public Liability Insurance</Tab>
                                                                                     <Tab onClick={this.InsuranceType.bind(this, 'own')}>Upload Documents</Tab>
                                                                                 </TabList>
 
                                                                                 <TabPanel>
-                                                                                    <div className="col-sm-12">
-                                                                                        <div className="form-group">
-                                                                                            <label className="control-label">Name on Card</label>
-                                                                                            <input onChange={this.card_holder_name.bind(this)} type="name" className="form-control" />
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div className="col-sm-12">
-                                                                                        <div className="form-group">
-                                                                                            <label className="control-label">Card Number</label>
-                                                                                            <input onChange={this.credit_card_number.bind(this)} type="number" className="form-control" />
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div className="col-sm-12 row">
-                                                                                        <div className="col-sm-3">
-                                                                                            <div className="form-group">
-                                                                                                <label className="control-label">CVC</label>
-                                                                                                <input onChange={this.cvc.bind(this)} type="number" placeholder="ex. 311" className="form-control" />
-
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div className="col-sm-1"></div>
-                                                                                        <div className="col-sm-3">
-                                                                                            <div className="form-group">
-                                                                                                <label className="control-label">Expiration</label>
-                                                                                                <input onChange={this.expiry_month.bind(this)} type="number" placeholder="MM" className="form-control" />
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div className="col-sm-1"></div>
-                                                                                        <div className="col-sm-3">
-                                                                                            <div className="form-group">
-                                                                                                <label className="control-label"></label>
-                                                                                                <input onChange={this.expiry_year.bind(this)} type="number" placeholder="YYYY" className="form-control" />
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        {
-                                                                        this.state.error_string != '' ?
-                                                                            <p className="text-danger text-center">{this.state.error_string}</p>
-                                                                            : null
-                                                                    }
-                                                                   
-                                                                                    </div>
-                                                                                    {/* <div className="col-sm-12">
-                                                    <div className="form-group">
-                                                        <label className="control-label">Recurring Payment Deduction</label>
-                                                        <select onChange={this.duration_of_insu_charges.bind(this)} type="number" placeholder="MM" className="form-control" >
-                                                            <option value="1">Weekly</option>
-                                                            <option value="2">Monthly</option>
-                                                        </select>
-                                                    </div>
-                                                </div>*/}
-                                                <div className="panel-footer row mt-5">
-                                                                    <div className="text-left">
-                                                                            <button onClick={this.change_step.bind(this,2)} className="btn btn-info   " type="submit">
-                                                                                    {
-                                                                                        this.state.btn_loading ?
-                                                                                            <div id="displayspinner" style={{ display: 'block', }}>
-                                                                                                <div className="spinner-border  ml-2 text-light spinner_format" role="status">
-                                                                                                    <span className="sr-only">Loading...</span>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            : <>Previous</>
-                                                                                    }
-                                                                                </button>
-                                                                        </div>
-                                                                        <div className="text-right ml-auto">
-                                                                            <button onClick={this.validate_card.bind(this)} className="btn btn-success   " type="submit">
-                                                                                    {
-                                                                                        this.state.btn_loading ?
-                                                                                            <div id="displayspinner" style={{ display: 'block', }}>
-                                                                                                <div className="spinner-border  ml-2 text-light spinner_format" role="status">
-                                                                                                    <span className="sr-only">Loading...</span>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            : <>Next</>
-                                                                                    }
-                                                                                </button>
-                                                                        </div>
-                                            
-                                                                    </div>
+                                                                                   
                                                                                 </TabPanel>
                                                                                 <TabPanel>
-                                                                                    <div className="col-sm-12 py-4">
-                                                                                        <div className="  card p-3 form-group">
-                                                                                            <label className="control-label p-2">Public Liability Insurance  </label>
-                                                                                            <input style={{ border: '0px' }} onChange={this.upload_insurance.bind(this)} type="file" className="form-control col-md-8" />
-
-                                                                                            <table className="table table-hover table-light table-striped mt-2">
-                                                                                                <tbody>
-                                                                                                    {
-                                                                                                        this.state.ic.map((data, index) => {
-                                                                                                            return (
-                                                                                                                <tr key={index}>
-                                                                                                                    <td>{data.url}</td>
-                                                                                                                    <td><i className="fas fa-times"></i></td>
-                                                                                                                </tr>
-                                                                                                            )
-                                                                                                        })
-                                                                                                    }
-                                                                                                </tbody>
-                                                                                            </table>
-                                                                                        </div>
-                                                                                        <div className="  card p-3 form-group">
-                                                                                            <label className="control-label p-2">National Police Check (Only for sole trader)  </label>
-                                                                                            <input style={{ border: '0px' }} onChange={this.upload_NPC.bind(this)} type="file" className="form-control col-md-8" />
-                                                                                            <table className="table table-hover table-light table-striped mt-2">
-                                                                                                <tbody>
-                                                                                                    {
-                                                                                                        this.state.Npc.map((data, index) => {
-                                                                                                            return (
-                                                                                                                <tr key={index}>
-                                                                                                                    <td>{data.url}</td>
-                                                                                                                    <td><i className="fas fa-times"></i></td>
-                                                                                                                </tr>
-                                                                                                            )
-                                                                                                        })
-                                                                                                    }
-                                                                                                </tbody>
-                                                                                            </table>
-                                                                                        </div>
-                                                                                        <div className="  card p-3 form-group">
-                                                                                            <label className="control-label p-2">Photo ID  </label>
-                                                                                            <input style={{ border: '0px' }} onChange={this.upload_photo_id.bind(this)} type="file" className="form-control col-md-8" />
-                                                                                            <table className="table table-hover table-light table-striped mt-2">
-                                                                                                <tbody>
-                                                                                                    {
-                                                                                                        this.state.photo_id.map((data, index) => {
-                                                                                                            return (
-                                                                                                                <tr key={index}>
-                                                                                                                    <td>{data.url}</td>
-                                                                                                                    <td><i className="fas fa-times"></i></td>
-                                                                                                                </tr>
-                                                                                                            )
-                                                                                                        })
-                                                                                                    }
-                                                                                                </tbody>
-                                                                                            </table>
-                                                                                        </div>
-
-                                                                                    </div>
-{
-                                                                        this.state.error_string != '' ?
-                                                                            <p className="text-danger text-center">{this.state.error_string}</p>
-                                                                            : null
-                                                                    }
-                                                                    <div className="panel-footer row mt-5">
-                                                                    <div className="text-left">
-                                                                            <button onClick={this.change_step.bind(this,2)} className="btn btn-info   " type="submit">
-                                                                                    {
-                                                                                        this.state.btn_loading ?
-                                                                                            <div id="displayspinner" style={{ display: 'block', }}>
-                                                                                                <div className="spinner-border  ml-2 text-light spinner_format" role="status">
-                                                                                                    <span className="sr-only">Loading...</span>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            : <>Previous</>
-                                                                                    }
-                                                                                </button>
-                                                                        </div>
-                                                                        <div className="text-right ml-auto">
-                                                                            <button onClick={this.validate_documents.bind(this)} className="btn btn-success   " type="submit">
-                                                                                    {
-                                                                                        this.state.btn_loading ?
-                                                                                            <div id="displayspinner" style={{ display: 'block', }}>
-                                                                                                <div className="spinner-border  ml-2 text-light spinner_format" role="status">
-                                                                                                    <span className="sr-only">Loading...</span>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            : <>Next</>
-                                                                                    }
-                                                                                </button>
-                                                                        </div>
-                                            
-                                                                    </div>
+                                                                                    
                                                                                 </TabPanel>
-                                                                            </Tabs>
+                                                                            </Tabs> */}
 
-                                                                        </div>
                                                                     </div>
-                                                                    
-
-                                                                    {/*===================================================*/}
-                                                                    {/*End Block Styled Form */}
                                                                 </div>
-                                                            </div>
-                                                            <div className="col-sm-3"></div>
-                                                        </div>
 
+
+                                                                {/*===================================================*/}
+                                                                {/*End Block Styled Form */}
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-sm-3"></div>
                                                     </div>
+
+
                                                     : null
                                             }
                                             {
@@ -1028,93 +1025,93 @@ class SignUp extends Component {
                                                             <h3 className="text-center center_title">Preview Request</h3>
                                                         </div>
                                                         <div className="card p-3">
-                                                        <div className="panel-heading">
-                                                            <h5 className="text-left center_title">Personal Information</h5>
-                                                        </div>
-                                                        <label className="control-label p-2">Name  </label>
-                                                        <p>{this.state.first_name} {this.state.last_name}</p>
-                                                        <label className="control-label p-2">Email  </label>
-                                                        <p>{this.state.email}</p>
-                                                        <label className="control-label p-2">Phone  </label>
-                                                        <p>{this.state.phone}</p>
-                                                        <label className="control-label p-2">Date of Birth  </label>
-                                                        <p>{this.state.dob}</p>
-                                                        <label className="control-label p-2">Australian Business Number  </label>
-                                                        <p>{this.state.australian_business_number}</p>
-                                                        <label className="control-label p-2">Type Of Business  </label>
-                                                        <p>{this.state.type_of_business}</p>
-                                                        <label className="control-label p-2">Business Name  </label>
-                                                        <p>{this.state.business_name}</p>
-                                                       
+                                                            <div className="panel-heading">
+                                                                <h5 className="text-left center_title">Personal Information</h5>
+                                                            </div>
+                                                            <label className="control-label p-2">Name  </label>
+                                                            <p>{this.state.first_name} {this.state.last_name}</p>
+                                                            <label className="control-label p-2">Email  </label>
+                                                            <p>{this.state.email}</p>
+                                                            <label className="control-label p-2">Phone  </label>
+                                                            <p>{this.state.phone}</p>
+                                                            <label className="control-label p-2">Date of Birth  </label>
+                                                            <p>{this.state.dob}</p>
+                                                            <label className="control-label p-2">Australian Business Number  </label>
+                                                            <p>{this.state.australian_business_number}</p>
+                                                            <label className="control-label p-2">Type Of Business  </label>
+                                                            <p>{this.state.type_of_business}</p>
+                                                            <label className="control-label p-2">Business Name  </label>
+                                                            <p>{this.state.business_name}</p>
+
                                                         </div>
                                                         <div className="card p-3 mt-2">
-                                                        <div className="panel-heading">
-                                                            <h5 className="text-left center_title">Selected Services</h5>
-                                                        </div>
-                                                        <label className="control-label p-2">Services  </label>
-                                                      {
-                                                          this.state.services.map((data,index)=>{
-                                                              return(
-                                                                  <>
-                                                                      {
-                                                                          data.check ?
-                                                                          <div>
-                                                                            {data.name}
-                                                                          </div>
-                                                                          :null
-                                                                      }
-                                                                  </>
-                                                              )
-                                                          })
-                                                      }
-                                                        
-                                                       
+                                                            <div className="panel-heading">
+                                                                <h5 className="text-left center_title">Selected Services</h5>
+                                                            </div>
+                                                            <label className="control-label p-2">Services  </label>
+                                                            {
+                                                                this.state.services.map((data, index) => {
+                                                                    return (
+                                                                        <>
+                                                                            {
+                                                                                data.check ?
+                                                                                    <div>
+                                                                                        {data.name}
+                                                                                    </div>
+                                                                                    : null
+                                                                            }
+                                                                        </>
+                                                                    )
+                                                                })
+                                                            }
+
+
                                                         </div>
 
                                                         <div className="panel-footer row mt-5 px-3">
-                                                        <div > 
-                                                        <p style={{fontSize:'12px'}}>
-                                                        <input id="demo-checkbox-1" className="magic-checkbox" onChange={this.agree_check.bind(this)} value="helo" checked={this.state.agree_check} type="checkbox" name="acceptTerms" data-bv-field="acceptTerms"></input>
-                                                    
-                                                         I agree to TidyHome’s Terms and Conditions and by clicking the box and proceeding, 
-                                                        I agree that TidyHome or its representatives may contact me by email, phone or SMS 
-                                                        (including by automatic telephone dialling system) at the email address or number 
+                                                            <div >
+                                                                <p style={{ fontSize: '12px' }}>
+                                                                    <input id="demo-checkbox-1" className="magic-checkbox" onChange={this.agree_check.bind(this)} value="helo" checked={this.state.agree_check} type="checkbox" name="acceptTerms" data-bv-field="acceptTerms"></input>
+
+                                                         I agree to TidyHome’s Terms and Conditions and by clicking the box and proceeding,
+                                                        I agree that TidyHome or its representatives may contact me by email, phone or SMS
+                                                        (including by automatic telephone dialling system) at the email address or number
                                                         I provide, including for marketing purposes. I have read and understand the relevant Privacy Statement.
                                                         </p>
-                                                        {
-                                                                        this.state.error_string != '' ?
-                                                                            <p className="text-danger text-center">{this.state.error_string}</p>
-                                                                            : null
+                                                                {
+                                                                    this.state.error_string != '' ?
+                                                                        <p className="text-danger text-center">{this.state.error_string}</p>
+                                                                        : null
+                                                                }
+                                                            </div>
+                                                            <div className="text-left">
+                                                                <button onClick={this.change_step.bind(this, 3)} className="btn btn-info   " type="submit">
+                                                                    {
+                                                                        this.state.btn_loading ?
+                                                                            <div id="displayspinner" style={{ display: 'block', }}>
+                                                                                <div className="spinner-border  ml-2 text-light spinner_format" role="status">
+                                                                                    <span className="sr-only">Loading...</span>
+                                                                                </div>
+                                                                            </div>
+                                                                            : <>Previous</>
                                                                     }
+                                                                </button>
+                                                            </div>
+                                                            <div className="text-right ml-auto">
+                                                                <button disabled={!this.state.agree_check} onClick={this.submit_request.bind(this)} className="btn btn-success   " type="submit">
+                                                                    {
+                                                                        this.state.btn_loading ?
+                                                                            <div id="displayspinner" style={{ display: 'block', }}>
+                                                                                <div className="spinner-border  ml-2 text-light spinner_format" role="status">
+                                                                                    <span className="sr-only">Loading...</span>
+                                                                                </div>
+                                                                            </div>
+                                                                            : <>Submit</>
+                                                                    }
+                                                                </button>
+                                                            </div>
+
                                                         </div>
-                                                                    <div className="text-left">
-                                                                            <button onClick={this.change_step.bind(this,3)} className="btn btn-info   " type="submit">
-                                                                                    {
-                                                                                        this.state.btn_loading ?
-                                                                                            <div id="displayspinner" style={{ display: 'block', }}>
-                                                                                                <div className="spinner-border  ml-2 text-light spinner_format" role="status">
-                                                                                                    <span className="sr-only">Loading...</span>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            : <>Previous</>
-                                                                                    }
-                                                                                </button>
-                                                                        </div>
-                                                                        <div className="text-right ml-auto">
-                                                                            <button disabled={!this.state.agree_check} onClick={this.submit_request.bind(this)} className="btn btn-success   " type="submit">
-                                                                                    {
-                                                                                        this.state.btn_loading ?
-                                                                                            <div id="displayspinner" style={{ display: 'block', }}>
-                                                                                                <div className="spinner-border  ml-2 text-light spinner_format" role="status">
-                                                                                                    <span className="sr-only">Loading...</span>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            : <>Submit</>
-                                                                                    }
-                                                                                </button>
-                                                                        </div>
-                                            
-                                                                    </div>
                                                     </div>
                                                     : null
                                             }

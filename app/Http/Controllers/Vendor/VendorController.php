@@ -206,6 +206,7 @@ class VendorController extends Controller
         $new_vendor->insurance_certificate_type = $request->insurance_certificate_type;
         $new_vendor->save();
         $vendor = Vendor::find($new_vendor->id);
+        
         if($request->insurance_certificate_type == "admin") {
             $ins = new InsuranceCertificateCCard();
             $ins->vendor_id = $vendor->id;
@@ -218,7 +219,7 @@ class VendorController extends Controller
             $ins->status = "activate";
             $ins->save();   
             $vendor->vendor_stripe_id = $request->customer['id'];
-        }else{
+        }
             if(sizeof($request->ic) > 0){
                 foreach($request->ic as $ic){
                     $vendor_documents = new VendorDocuments();
@@ -250,7 +251,6 @@ class VendorController extends Controller
                
             }
            
-        }
 
         foreach($request->services as $s){
             if($s['check']){
