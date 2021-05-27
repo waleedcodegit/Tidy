@@ -1,7 +1,8 @@
 
 const current_state = {
     user:{data:{},is_login:false},
-    services_modal:false
+    services_modal:false,
+    vendor:{is_login:false,data:{}}
 }
 const reducer = (state = current_state,action) =>{
     if(action.type == 'CHANGE_USER'){
@@ -13,6 +14,11 @@ const reducer = (state = current_state,action) =>{
         return {
             ...state,
             services_modal:action.payload
+        }
+    }else if(action.type == 'CHANGE_VENDOR'){
+        return {
+            ...state,
+            vendor:action.payload
         }
     }
    

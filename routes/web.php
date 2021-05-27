@@ -66,7 +66,8 @@ Route::view('/vendor', 'vendor');
 // Route::view('/vendor-signup/{step}', 'vendor');
 // Route::view('/vendor-signup/{step}/{vendor_id}', 'vendor');
 // Route::view('/vendor-login', 'vendor');
-
+Route::view('/vendor/profile', 'vendor');
+Route::view('/vendor/dashboard', 'vendor');
 
 
 // Front Client Routes

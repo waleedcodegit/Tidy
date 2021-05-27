@@ -16,7 +16,8 @@
         <link rel="stylesheet" href="/vendor-assets/css/components.css">
         <!-- Custom style CSS -->
         <link rel="stylesheet" href="/vendor-assets/css/custom.css">
-       
+        <link rel="stylesheet" href="/vendor-assets/bundles/bootstrap-social/bootstrap-social.css">
+        <link rel="stylesheet" href="/vendor-assets/bundles/summernote/summernote-bs4.css">
     </head>
     <body>
         <div >
@@ -41,6 +42,7 @@
         <!-- Custom JS File -->
         <script src="/vendor-assets/js/custom.js"></script>
 
+        <script src="/vendor-assets/bundles/summernote/summernote-bs4.js"></script>
 
     </body>
 </html>
