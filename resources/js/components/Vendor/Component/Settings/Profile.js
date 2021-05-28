@@ -1,6 +1,21 @@
+import Axios from 'axios';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class Profile extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
+    
+    componentDidMount(){
+        let payload ={
+            id:this.props.vendor.vendor_id
+        }
+        Axios.post('/api/get-vendor-info/'+this.props.vendor.vendor_id).then(res=>{
+            console.log(res);
+        })
+    }
     render() {
         return (
             <section className="section">
@@ -282,5 +297,9 @@ class Profile extends Component {
         );
     }
 }
-
-export default Profile;
+const mapStateToProps = (state) =>{
+    return{
+        vendor:state.vendor
+    }
+}
+export default connect(mapStateToProps)(Profile);

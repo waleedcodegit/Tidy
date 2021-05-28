@@ -69,7 +69,8 @@ Route::post('/validate_card','Vendor\VendorController@validate_card');
 Route::post('/submit_vendor_request','Vendor\VendorController@submit_vendor_request');
 Route::post('/delete-vendor-selected-services/{id}','Vendor\VendorController@delete_vendor_selected_services');
 Route::post('/add-vendor-service/{id}','Vendor\VendorController@add_vendor_service');
-
+Route::post('/vendor_check_auth','Vendor\VendorController@vendor_check_auth');
+Route::post('/get-vendor-info/{id}','Vendor\VendorController@show');
 
 
 

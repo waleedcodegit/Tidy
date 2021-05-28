@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Main from './Main';
 class VendorIndex extends Component {
@@ -7,6 +8,7 @@ class VendorIndex extends Component {
         this.state = {
             profileDropDown:false
         };
+        console.log(this.props);
     }
     ProfileDropDown(){
         console.log(this.state)
@@ -169,5 +171,9 @@ class VendorIndex extends Component {
         );
     }
 }
- 
-export default VendorIndex;
+const mapStateToProps = (state) =>{
+    return{
+        vendor:state.vendor
+    }
+}
+export default connect(mapStateToProps)(VendorIndex);
