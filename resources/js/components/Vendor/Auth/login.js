@@ -32,7 +32,7 @@ class Login extends Component {
         Axios.post('/api/vendor-login',this.state).then(res=>{
             console.log(res);
             if(res.data.status == 200){
-                window.open('/vendor','_blank')
+                window.open('/vendor/dashboard','_self')
             }else{
                 this.setState({
                     error_string:res.data.message
