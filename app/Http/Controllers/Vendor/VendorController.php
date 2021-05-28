@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Crypt;
 use App\Category;
 use App\VendorDocuments;
 use App\VendorServices;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ApprovalEmail;
 
 class VendorController extends Controller
 {
@@ -194,7 +196,7 @@ class VendorController extends Controller
         $new_vendor->first_name = $request->first_name;
         $new_vendor->last_name  = $request->last_name;
         $new_vendor->email = $request->email;
-        // $new_vendor->password = Hash::make($request->password);
+        // $new_vendor->password = Hash::make('tidyhome123');
         $new_vendor->address = $request->address;
         $new_vendor->phone = $request->phone;
         $new_vendor->dob = $request->dob;
@@ -380,8 +382,12 @@ class VendorController extends Controller
     }
     public function approved_vendor(Request $request) {
         $data = Vendor::where('id', $request->id)->update([
+            'password' => Hash::make('tidy'.$request->id.'home'),
             'status' => 'approved'
         ]);
+
+        $data = Vendor::where('id', $request->id)->first();
+        Mail::to($data->email)->send(new ApprovalEmail($data));
 
         $response = [
             'status' => 200 ,

@@ -229,7 +229,7 @@ class ShowVendor extends Component {
                                             {
                                                 this.state.vendor_docs.map((data,index) =>{
                                                     return(
-                                                        <div>
+                                                        <div key={index}>
                                                             <p className="text-main text-semibold">{data.title}</p> 
                                                             <img src={img_insurance+data.document} />
                                                         </div>

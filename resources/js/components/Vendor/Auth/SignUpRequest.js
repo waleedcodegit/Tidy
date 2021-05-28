@@ -16,8 +16,8 @@ class SignUpRequest extends Component {
                             </div>
                             <div className="text-center success_text">
                                 <h2>Success!</h2>
-                                <h4>Thank You ! for submitting your request. 
-                                    Site admin will review your request and you will notify by email.</h4>
+                                <h4>Thank You for submitting your request. 
+                                    We will review your request and you will be contacted by one of our staff.</h4>
                             </div>
                         </div>
                     </div>
