@@ -476,4 +476,17 @@ class VendorController extends Controller
             }
         }
     }
+
+    public function vendor_check_auth(Request $request){
+        $vendor_auth = VendorAuthMeta::where('token',$request->token)
+            ->where('ip',$request->ip())
+            ->first();
+        if($vendor_auth){
+            $response = ['status' => 200 , 'vendor'=>$vendor_auth];
+            return $response;
+        }else{
+        $response = ['status' => 401 , 'msg' => 'Sorry, Incorrect Token'];
+            return $response;
+        }
+    }
 }
