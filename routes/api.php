@@ -72,5 +72,6 @@ Route::post('/add-vendor-service/{id}','Vendor\VendorController@add_vendor_servi
 Route::post('/vendor_check_auth','Vendor\VendorController@vendor_check_auth');
 Route::post('/get-vendor-info/{id}','Vendor\VendorController@show');
 
+Route::post('/update_vendor_profile','Vendor\VendorController@update_vendor_profile');
 
 

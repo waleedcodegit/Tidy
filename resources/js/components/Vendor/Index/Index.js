@@ -16,7 +16,7 @@ class VendorMain extends Component {
         }
         Axios.post('/api/vendor_check_auth',payload).then(res=>{
             if(res.data.status == 200){
-                this.props.changeVendor(res.data.vendor);
+                this.props.changeVendor({is_login:true,data:res.data.vendor});
                 this.setState({
                     display:true
                 })
@@ -28,14 +28,10 @@ class VendorMain extends Component {
     render() { 
         return (
             <div>
-            {
-                this.state.display ?
+            <div className={this.state.display ? '':'opacityZero'} >
                 <App {...this.props}></App>
-                :
-                <div className="text-center">
-                    <img  style={{marginTop:'25%'}} src="/images/spinner.gif"></img>
-                </div>
-            }
+            </div>
+            
             </div>
         );
     }
