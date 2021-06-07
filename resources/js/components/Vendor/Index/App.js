@@ -156,7 +156,15 @@ class VendorIndex extends Component {
                     </div>
                     {/* Main Content */}
                     <div className="main-content">
-                    <Main></Main>
+                    {
+                        this.props.vendor.is_login ? 
+                        <Main></Main>
+                        :
+                        <div className="text-center">
+                            <img  style={{marginTop:'5%'}} src="/images/spinner.gif"></img>
+                        </div>
+                    }
+                    
                     
                     </div>
                     <footer className="main-footer">

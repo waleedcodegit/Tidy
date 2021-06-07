@@ -16,6 +16,9 @@ body{
 #progressbar h6 {
   font-family: Poppins-Regular !important;
 }
+.opacityZero{
+  opacity: 0;
+}
 .MuiTypography-displayBlock h6 {
   padding: 0 0 0 !important;
 }

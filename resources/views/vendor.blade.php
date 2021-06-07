@@ -34,7 +34,7 @@
          <!-- General JS Scripts -->
         <script src="/vendor-assets/js/app.min.js"></script>
         <!-- JS Libraies -->
-        <script src="assets/bundles/apexcharts/apexcharts.min.js"></script>
+        {{-- <script src="assets/bundles/apexcharts/apexcharts.min.js"></script> --}}
         <!-- Page Specific JS File -->
         <script src="/vendor-assets/js/page/index.js"></script>
         <!-- Template JS File -->
