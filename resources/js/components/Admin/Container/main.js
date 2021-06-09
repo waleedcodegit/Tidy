@@ -93,7 +93,7 @@ class Main extends Component {
 
                         {/*Question */}
                         <Route path="/admin/create-question" component={CreateQuestion}></Route>
-                        <Route path="/admin/edit-question" component={EditQuestion}></Route>
+                        <Route path="/admin/edit-question/:id" component={EditQuestion}></Route>
                         <Route path="/admin/list-question" component={ListQuestion}></Route>
 
                         <Route path="/admin/customer-list" component={CustomerList}></Route>

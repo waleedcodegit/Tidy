@@ -68,7 +68,8 @@ Route::view('/vendor', 'vendor');
 // Route::view('/vendor-login', 'vendor');
 Route::view('/vendor/profile', 'vendor');
 Route::view('/vendor/dashboard', 'vendor');
-
+Route::view('/vendor/employee-list', 'vendor');
+Route::view('/vendor/create-employee', 'vendor');
 
 // Front Client Routes
 

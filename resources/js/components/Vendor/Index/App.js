@@ -135,8 +135,8 @@ class VendorIndex extends Component {
                         <li className="dropdown">
                             <a href="#" className="menu-toggle nav-link has-dropdown"><i data-feather="mail" /><span>Manage Employees</span></a>
                             <ul className="dropdown-menu">
-                            <li><a className="nav-link" href="/vendor">Employees</a></li>
-                            <li><a className="nav-link" href="/vendor">Add Employee</a></li>
+                                <li><a className="nav-link" href="/vendor/employee-list">Employees</a></li>
+                                <li><a className="nav-link" href="/vendor/create-employee">Add Employee</a></li>
                             </ul>
                         </li>
                         {/* <li className="menu-header">UI Elements</li> */}
@@ -167,15 +167,15 @@ class VendorIndex extends Component {
                     
                     
                     </div>
-                    <footer className="main-footer">
+                    {/* <footer className="main-footer">
                     <div className="footer-left">
                         <a href="templateshub.net">Tidy Home</a>
                     </div>
                     <div className="footer-right">
                     </div>
-                    </footer>
+                    </footer> */}
                 </div>
-                </div>
+            </div>
         );
     }
 }

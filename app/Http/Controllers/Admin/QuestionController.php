@@ -16,7 +16,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $question = Question::get();
+        $question = Question::with('service')->get();
         $response = ['status' => 200 ,
                 'question' => $question];
         return $response;
@@ -78,7 +78,7 @@ class QuestionController extends Controller
      */
     public function edit($id)
     {
-        $question = Question::with('category')->find($id);
+        $question = Question::where('id', $id)->with('service')->first();
         $response = ['status' => 200 ,
             'question' => $question
         ];
@@ -94,7 +94,14 @@ class QuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $question = Question::find($request->id);
+        $question->title = $request->title;
+        $question->category_id = $request->category_id;
+        $question->save();
+
+        $response = ['status' => 200 ,
+            'msg' => 'Question updated successfully'];
+        return $response;
     }
 
     /**

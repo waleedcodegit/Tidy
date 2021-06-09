@@ -152,8 +152,8 @@ class Sidebar extends Component {
                                             {
                                                 this.state.nav_item_visible == 5 ?
                                                 <ul >
-                                                    <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/create-customer">Create</Link></li>
-                                                    <li onClick={this.active_sub_item.bind(this, 2)} className={this.state.active_sub_item == 2 ? "active-link" : ""}><Link to="/admin/customer-list">List</Link></li>
+                                                    {/* <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/create-customer">Create</Link></li> */}
+                                                    <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/customer-list">List</Link></li>
                                                 </ul>
                                                 :null
                                             }

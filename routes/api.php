@@ -27,6 +27,10 @@ Route::middleware(['admin-login'])->group(function () {
     Route::get('/vendor-list','Vendor\VendorController@list');
     Route::post('/vendor-info/{id}','Vendor\VendorController@show');
     Route::post('/approved-vendor','Vendor\VendorController@approved_vendor');
+
+    //employee
+    Route::resource('employee', 'Vendor\EmployeeController');
+
     // Service Price Route
     Route::resource('service-price', 'Admin\ServicePricingController');
     // Service Extra Route

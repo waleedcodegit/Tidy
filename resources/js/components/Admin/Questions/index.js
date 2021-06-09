@@ -33,6 +33,7 @@ class Index extends React.Component{
                                     <thead>
                                         <tr>
                                             <th>Sr</th>
+                                            <th>Service</th>
                                             <th>Question</th>
                                             <th>Actions</th>
                                         </tr>
@@ -43,6 +44,7 @@ class Index extends React.Component{
                                                     return(
                                                         <tr key={index}>
                                                             <td>{index+1}</td>
+                                                            <td>{data.service.name}</td>
                                                             <td>{data.title}</td>
                                                             <td>
                                                                 <Link to={`/admin/edit-question/${data.id}`}><button className="btn btn-outline-success"> <i  className="fa fa-pencil"> </i></button></Link>

@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Route } from 'react-router';
 import DashBoard from '../Component/DashBoard/Dashboard';
 import Profile from '../Component/Settings/Profile';
+import EmployeeList from '../Component/Employee/index';
+import CreateEmployee from '../Component/Employee/create';
+
 
 class Main extends Component {
     render() { 
@@ -9,6 +12,8 @@ class Main extends Component {
             <div>
                 <Route path='/vendor/profile' component={Profile}></Route>
                 <Route path='/vendor/dashboard' component={DashBoard}></Route>
+                <Route path='/vendor/employee-list' component={EmployeeList}></Route>
+                <Route path='/vendor/create-employee' component={CreateEmployee}></Route>
             </div>
         );
     }
