@@ -16,6 +16,7 @@ const reducer = (state = current_state,action) =>{
             services_modal:action.payload
         }
     }else if(action.type == 'CHANGE_VENDOR'){
+        console.log('hetre');
         return {
             ...state,
             vendor:action.payload

@@ -2,24 +2,41 @@ import React, { Component } from 'react';
 import {Navbar , Nav , NavDropdown}  from 'react-bootstrap';
 import {img_baseurl} from '../../Configs/Api';
 import {connect} from 'react-redux';
+import Axios from 'axios';
 
 class Navbar2 extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            category: [],
+        };
     }
      
     open_link(link){
         console.log(123);
         this.props.changeModal(true);
     }
+
+    componentDidMount(){
+        Axios.get(`/api/category`,{ headers: {
+            token: window.localStorage.getItem('testapistring')
+        }}).then(res=>{
+            if(res.data.status == 200) {
+                this.setState({
+                    category: res.data.categories
+                })
+            } 
+        })
+    }
+
+
     render() {
         return (
             <div>
                 <Navbar  bg="light" expand="lg" >
                     <div className="container-fluid">
                     <div class="header-logo">
-                    <a href="#"><img className="logo" src={img_baseurl+"site-logo.png"} alt="Indico"/></a>
+                    <a href="/"><img className="logo" src={img_baseurl+"site-logo.png"} alt="TidyHome"/></a>
                 </div>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav ">
@@ -36,8 +53,15 @@ class Navbar2 extends Component {
                         <span><img src="https://img.icons8.com/ios/24/000000/dot-logo.png"/></span>
                         <br></br>
                         <NavDropdown title="Services" id="basic-nav-dropdown">
-                        <NavDropdown.Item onClick={()=>{this.props.changeModal(true)}} ><a  target="blank">Home Services</a></NavDropdown.Item>
-                        <NavDropdown.Item onClick={()=>{this.props.changeModal(true)}}><a target="blank">Business Services</a></NavDropdown.Item>
+                        {
+                            this.state.category.map((data,index)=>{
+                                return(
+                                    <NavDropdown.Item onClick={()=>{this.props.changeModal(true)}} ><a  target="blank">{data.name}</a></NavDropdown.Item>
+                                )
+                            })
+                        }
+                        
+                        {/* <NavDropdown.Item onClick={()=>{this.props.changeModal(true)}}><a target="blank">Business Services</a></NavDropdown.Item> */}
                       
                     </NavDropdown>
                     </Nav.Link>

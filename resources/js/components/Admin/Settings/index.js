@@ -10,6 +10,9 @@ class Index extends React.Component{
             holidays_price:0,
             level_price:0,
             house_additional_charges:0,
+            per_bathroom: 0,
+            per_bedroom: 0
+
 
         }
     }
@@ -24,6 +27,8 @@ class Index extends React.Component{
                     holidays_price: res.data.settings.holidays_price,
                     level_price: res.data.settings.level_price,
                     house_additional_charges: res.data.settings.house_additional_charges,
+                    per_bathroom: res.data.settings.per_bathroom,
+                    per_bedroom: res.data.settings.per_bedroom,                    
                 })
             } 
         })
@@ -44,6 +49,18 @@ class Index extends React.Component{
     getHouseExtraCharges(event){
         this.setState({
             house_additional_charges: event.target.value
+        })
+    }
+
+    getBedroom(event) {
+        this.setState({
+            per_bedroom: event.target.value
+        })
+    }
+
+    getBathroom(event) {
+        this.setState({
+            per_bathroom: event.target.value
         })
     }
     uploadSettings(e){
@@ -93,6 +110,18 @@ class Index extends React.Component{
                                                 <th>House Extra Charges</th>
                                                 <td>
                                                     <input  type="number" onChange={this.getHouseExtraCharges.bind(this)} className="form-control" value={this.state.house_additional_charges || ""}/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Per BedRoom</th>
+                                                <td>
+                                                    <input  type="number" onChange={this.getBedroom.bind(this)} className="form-control" value={this.state.per_bedroom || ""}/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Per BathRooms</th>
+                                                <td>
+                                                    <input  type="number" onChange={this.getBathroom.bind(this)} className="form-control" value={this.state.per_bathroom || ""}/>
                                                 </td>
                                             </tr>
                                         </thead>

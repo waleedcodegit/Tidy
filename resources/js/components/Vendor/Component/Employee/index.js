@@ -58,8 +58,7 @@ class Index extends React.Component{
                                             <td>{data.image}</td>
                                             <td>{data.vendor_id}</td>
                                             <td>
-                                                <Link to={`/admin/edit-subcategory/${data.id}`}><button className="btn btn-outline-success"> <i  className="fa fa-pencil"> </i></button></Link>
-                                                <button  className="btn btn-outline-primary"> <i  className="fa fa-trash"> </i></button>    
+                                                <Link to={`/vendor/edit-employee/${data.id}`}><button className="btn btn-outline-primary"> <i  className="fa fa-edit"> </i></button></Link>   
                                             </td>
                                                               
                                           </tr>

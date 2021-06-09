@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import {Link } from 'react-router-dom';
 import { base_url } from '../../Configs/Api';
+import {connect} from "react-redux";
 import '../../Vendor/admin.css';
 
 class Login extends Component {
@@ -14,6 +15,7 @@ class Login extends Component {
             error_string:'',
             services:[],
             error_string:'',
+            vendorsss: ''
 
         };
     }
@@ -30,8 +32,12 @@ class Login extends Component {
     login(e){
         e.preventDefault();
         Axios.post('/api/vendor-login',this.state).then(res=>{
-            console.log(res);
+            this.props.vendorObject({
+                is_login: true,
+                data: res.data.data
+            })
             if(res.data.status == 200){
+                // console.log(this.props.vendor);
                 window.localStorage.setItem('vt',res.data.data.token)
                 window.open('/vendor/dashboard','_self')
             }else{
@@ -44,8 +50,6 @@ class Login extends Component {
     render() {
         return (
             <div >
-
-                   
                         <div className="panel">
                            
                             {/*Block Styled Form */}
@@ -104,4 +108,21 @@ class Login extends Component {
     }
 }
 
-export default Login;
+const mapStateToProps = (state) => {
+    return {
+        vendor: state.vendor
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        vendorObject: (vendor) => {
+            dispatch({
+                type: "CHANGE_VENDOR",
+                payload: vendor
+            })
+        }
+    }
+}
+
+export default connect(mapStateToProps , mapDispatchToProps)(Login);
