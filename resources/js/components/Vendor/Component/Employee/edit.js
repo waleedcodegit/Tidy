@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Axios from 'axios';
 import Swal from 'sweetalert2';
+import { img_baseurl } from '../../../Configs/Api';
 
 class Index extends React.Component{
     constructor(props){
@@ -138,9 +139,8 @@ class Index extends React.Component{
                                     <label>Image</label>
                                     <input type="file" class="form-control" onChange={this.getImage.bind(this)} />
                                 </div>
-                                <img src={this.state.image}></img>
+                                <img src={img_baseurl+this.state.image}></img>
                             </div>
-                            
                         </div>
                     </div>
                     <div class="card-footer text-right">

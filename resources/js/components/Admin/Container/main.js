@@ -48,6 +48,13 @@ import CreateQuestion from '../Questions/create';
 import EditQuestion from '../Questions/edit';
 import ListQuestion from '../Questions/index';
 
+import Faqpage from '../Faqs/FaqsPage';
+import AddFaq from '../Faqs/AddFaqs';
+import EditFaq from '../Faqs/edit';
+import GiftCardsList from '../GiftCards/GiftcardsList';
+import Create from '../ManageServiceContent/create';
+import Edit from '../ManageServiceContent/edit';
+import ManageServiceContent from '../ManageServiceContent/ManageServiceContent';
 
 
 class Main extends Component {
@@ -103,8 +110,18 @@ class Main extends Component {
                         <Route path="/admin/vendor-info/:id" component={VendorInfo}></Route>
                         <Route path="/admin/create-vendor" component={CreateVendor}></Route>
 
-                        <Route path="/admin/setting-list" component={SettingList}></Route>
+                        <Route path="/admin/setting-list" component={SettingList}></Route>\
+
+
+                        <Route path="/admin/add-faq" component={AddFaq}></Route>
+                        <Route path="/admin/edit-faq/:id" component={EditFaq}></Route>
+                        <Route path="/admin/faqs" component={Faqpage}></Route>
                         
+                        <Route path="/admin/gift-cards" component={GiftCardsList}></Route>
+
+                        <Route path="/admin/create-service-content" component={Create}></Route>
+                        <Route path="/admin/edit-service-content/:id" component={Edit}></Route>
+                        <Route path="/admin/manage-services-content" component={ManageServiceContent}></Route>
                     </div>
                     <Sidebar></Sidebar>
                 </div>

@@ -24,6 +24,9 @@
     display: none !important;
   }
 }
+label{
+  font-weight: bold;
+}
 body{
     font-family: poopinmedium;
 }
@@ -42,4 +45,8 @@ td, th {
   padding-left: 13px;
   padding-right: 13px;
   border-radius: 3px;
+}
+
+.ql-container{
+  height: 300px !important;
 }

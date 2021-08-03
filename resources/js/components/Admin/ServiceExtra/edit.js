@@ -8,10 +8,21 @@ class Edit extends Component {
         this.state = {
             title: '',
             price: '',
+            categories:[],
+            cat_id:0
         };
     }
 
     componentDidMount() {
+        Axios.get(`/api/category`,{ headers: {
+            token: window.localStorage.getItem('testapistring')
+        }}).then(res=>{
+            if(res.data.status == 200) {
+                this.setState({
+                    categories: res.data.categories
+                })
+            } 
+        })
         Axios.get(`/api/service-extra/${this.props.match.params.id}/edit`, {
             headers: {
                 token: window.localStorage.getItem('testapistring')
@@ -20,7 +31,8 @@ class Edit extends Component {
             if(res.data.status == 200) {
                 this.setState({
                     title: res.data.service_extras.title,
-                    price: res.data.service_extras.price
+                    price: res.data.service_extras.price,
+                    cat_id:res.data.service_extras.category_id
                 })
             }
         })
@@ -43,7 +55,8 @@ class Edit extends Component {
         let data = {
             id: this.props.match.params.id,
             title: this.state.title,
-            price: this.state.price
+            price: this.state.price,
+            category:this.state.cat_id
         }
         let Configs = {
             headers: {
@@ -64,7 +77,11 @@ class Edit extends Component {
             }
         })
     }
-
+    getCategory(event) {
+        this.setState({
+            cat_id: event.target.value
+        })  
+    }
     render() {
         return(
             <div id="page-content">
@@ -79,6 +96,21 @@ class Edit extends Component {
                             <form encType="multipart/form-data">
                             <div className="panel-body">
                                 <div className="row">
+                                <div className="col-sm-12">
+                                    <div className="form-group">
+                                        <label htmlFor="cat_id">Category:</label>
+                                        <select className="form-control" name="cat_id" value={this.state.cat_id}  onChange={this.getCategory.bind(this)}>
+                                            {
+                                                this.state.categories.map((data,index)=>{
+                                                    return(
+                                                        <option key={index} value={data.id}>{data.name}</option>
+                                                    )
+                                                })
+                                            }
+                                            
+                                        </select>
+                                    </div>
+                                </div>
                                     <div className="col-sm-6">
                                         <div className="form-group">
                                             <label htmlFor="title">Title:</label>

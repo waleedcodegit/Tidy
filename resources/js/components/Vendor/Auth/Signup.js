@@ -6,6 +6,11 @@ import SignUpRequest from './SignUpRequest';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import '../../Vendor/admin.css';
+
+import { MAP_PLACES_API_KEY } from '../../Configs/Api';
+
+import Autocomplete from "react-google-autocomplete";
+
 class SignUp extends Component {
     constructor(props) {
         super(props);
@@ -44,7 +49,13 @@ class SignUp extends Component {
             btn2_prg: 0,
             btn2_prg: 0,
             customer: {},
-            agree_check: false
+            agree_check: false,
+            addresses:[],
+            radius:0,
+            places:'',
+            lat:0,
+            long:0,
+            loc_address:''
         };
 
     }
@@ -532,12 +543,12 @@ class SignUp extends Component {
 
         })
     }
-    async  validate_documents() {
+    async validate_documents() {
         this.setState({
-            error_string:''
+            error_string: ''
         })
         if (this.state.ic.length == 0) {
-            if(this.state.insurance_certificate_type == 'own' ){
+            if (this.state.insurance_certificate_type == 'own') {
                 this.setState({
                     error_string: 'Please Upload Public Insurance Certificate'
                 })
@@ -554,13 +565,13 @@ class SignUp extends Component {
             })
         } else {
             this.setState({
-                step: 4,
+                step: 5,
                 error_string: ''
             }, function () {
                 window.scrollTo(0, 0);
             })
         }
-        if(this.state.insurance_certificate_type == 'admin'){
+        if (this.state.insurance_certificate_type == 'admin') {
             await this.validate_card();
         }
     }
@@ -568,7 +579,7 @@ class SignUp extends Component {
         Axios.post('/api/submit_vendor_request', this.state).then(res => {
             if (res.data.status == 200) {
                 this.setState({
-                    step: 5,
+                    step: 6,
                     error_string: ''
                 }, function () {
                     window.scrollTo(0, 0);
@@ -584,6 +595,72 @@ class SignUp extends Component {
         this.setState({
             agree_check: !this.state.agree_check
         })
+    }
+    removeAddress(index) {
+        let NPC_ = this.state.addresses;
+        NPC_.splice(index, 1);
+        this.setState({
+            addresses: NPC_
+        })
+    }
+    removeNPC(index) {
+        let NPC_ = this.state.Npc;
+        NPC_.splice(index, 1);
+        this.setState({
+            Npc: NPC_
+        })
+    }
+    removePhotoId(index) {
+        let NPC_ = this.state.photo_id
+        NPC_.splice(index, 1);
+        this.setState({
+            photo_id: NPC_
+        })
+    }
+    removeIC(index) {
+        let NPC_ = this.state.ic;
+        NPC_.splice(index, 1);
+        this.setState({
+            ic: NPC_
+        })
+    }
+
+    AddAddress(){
+        console.log(this.state.places);
+        let temp = this.state.addresses;
+        temp.push({address:this.state.loc_address,lat:this.state.lat,long:this.state.long,radius:this.state.radius})
+        this.setState({
+            addresses:temp
+        })
+        console.log(temp)
+    }
+    places(place){
+
+        let lat  = place.geometry.location.lat();
+        let long = place.geometry.location.lng();
+        this.setState({
+            places:place,
+            lat:lat,
+            long:long,
+            loc_address:place.formatted_address
+        })
+    }
+    radius(e){
+        this.setState({
+            radius:e.target.value
+        })
+    }
+    validate_addresses(){
+        if(this.state.addresses.length > 0){
+            this.setState({
+                step:4,
+                error_string:''
+            })
+        }else{
+            this.setState({
+                error_string:'Please enter atleast one address.'
+            })
+        }
     }
     render() {
         return (
@@ -622,6 +699,10 @@ class SignUp extends Component {
                                                         <h6> Choose services</h6>
                                                     </li>
                                                     <li className={this.state.step >= 3 ? "progress_active" : 'progress_icon'}>
+                                                        <i class="fas fa-certificate"></i>
+                                                        <h6>Area's of Service</h6>
+                                                    </li>
+                                                    <li className={this.state.step >= 4 ? "progress_active" : 'progress_icon'}>
                                                         <i class="fas fa-certificate"></i>
                                                         <h6>Documents</h6>
                                                     </li>
@@ -693,7 +774,7 @@ class SignUp extends Component {
                                                                                     <div className="form-group">
                                                                                         <label className="control-label">Australian Business Number</label>
                                                                                         <p style={{ fontSize: '12px' }} className="mb-1 py-1">Please note your name on this application must match the first and last
-                                                 name registered to your ABN. If you do not have ABN yet, click here to <a target="blank" href="https://www.abr.gov.au/business-super-funds-charities/applying-abn">learn more</a>.</p>
+                                                                                            name registered to your ABN. If you do not have ABN yet, click here to <a target="blank" href="https://www.abr.gov.au/business-super-funds-charities/applying-abn">learn more</a>.</p>
                                                                                         <input value={this.state.australian_business_number || ""} onChange={this.australian_business_number.bind(this)} type="number" className="form-control" />
                                                                                     </div>
                                                                                 </div>
@@ -836,6 +917,85 @@ class SignUp extends Component {
                                             {
                                                 this.state.step == 3 ?
                                                     <div >
+                                                    <div className="col-sm-12">
+                                                        <div className="form-group">
+                                                            <label className="control-label">Enter your Address</label>
+                                                            <Autocomplete
+                                                                apiKey={MAP_PLACES_API_KEY}
+                                                                options={{types:'sublocality'}}
+                                                                onPlaceSelected={(place) => {
+                                                                    this.places(place);
+                                                                }}
+                                                                style={{ width: '100%' }}
+                                                                className="form-control input_box"
+                                                            />
+                                                        </div>
+                                                        </div>
+                                                        <div className="col-sm-12">
+                                                            <div className="form-group">
+                                                                <label className="control-label">Enter Radius</label>
+                                                                <input value={this.state.radius || ""} onChange={this.radius.bind(this)} type="number" placeholder="Enter Radius" className="form-control" />
+                                                            </div>
+                                                            
+                                                        </div>
+                                                        <div className="col-sm-12">
+                                                            <button onClick={this.AddAddress.bind(this)} className="btn btn-info" style={{width:'100%',borderRadius:'0px'}}>Add Address</button>
+                                                                
+                                                            <table className="table table-hover table-light table-striped mt-2">
+                                                                                        <tbody>
+                                                                                            {
+                                                                                                this.state.addresses.map((data, index) => {
+                                                                                                    return (
+                                                                                                        <tr key={index}>
+                                                                                                            <td>{data.address}</td>
+                                                                                                            <td onClick={this.removeAddress.bind(this, index)}><i className="fas fa-times"></i></td>
+                                                                                                        </tr>
+                                                                                                    )
+                                                                                                })
+                                                                                            }
+                                                                                        </tbody>
+                                                                                    </table>
+                                                        </div>
+                                                        {
+                                                                                this.state.error_string != '' ?
+                                                                                    <p className="text-danger text-center">{this.state.error_string}</p>
+                                                                                    : null
+                                                                            }
+                                                                            <div className="panel-footer col-sm-12 row mt-5">
+                                                                                <div className="text-left">
+                                                                                    <button onClick={this.change_step.bind(this, 2)} className="btn btn-info   " type="submit">
+                                                                                        {
+                                                                                            this.state.btn_loading ?
+                                                                                                <div id="displayspinner" style={{ display: 'block', }}>
+                                                                                                    <div className="spinner-border  ml-2 text-light spinner_format" role="status">
+                                                                                                        <span className="sr-only">Loading...</span>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                : <>Previous</>
+                                                                                        }
+                                                                                    </button>
+                                                                                </div>
+                                                                                <div className="text-right ml-auto">
+                                                                                    <button onClick={this.validate_addresses.bind(this)} className="btn btn-success   " type="submit">
+                                                                                        {
+                                                                                            this.state.btn_loading ?
+                                                                                                <div id="displayspinner" style={{ display: 'block', }}>
+                                                                                                    <div className="spinner-border  ml-2 text-light spinner_format" role="status">
+                                                                                                        <span className="sr-only">Loading...</span>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                : <>Next</>
+                                                                                        }
+                                                                                    </button>
+                                                                                </div>
+
+                                                                            </div>
+                                                    </div>
+                                                    : null
+                                            }
+                                            {
+                                                this.state.step == 4 ?
+                                                    <div >
                                                         <div className="row">
                                                             <div className="col-sm-1"></div>
                                                             <div className="col-sm-10">
@@ -857,7 +1017,7 @@ class SignUp extends Component {
                                                                                                     return (
                                                                                                         <tr key={index}>
                                                                                                             <td>{data.url}</td>
-                                                                                                            <td><i className="fas fa-times"></i></td>
+                                                                                                            <td onClick={this.removeNPC.bind(this, index)}><i className="fas fa-times"></i></td>
                                                                                                         </tr>
                                                                                                     )
                                                                                                 })
@@ -875,7 +1035,7 @@ class SignUp extends Component {
                                                                                                     return (
                                                                                                         <tr key={index}>
                                                                                                             <td>{data.url}</td>
-                                                                                                            <td><i className="fas fa-times"></i></td>
+                                                                                                            <td onClick={this.removePhotoId.bind(this, index)}><i className="fas fa-times"></i></td>
                                                                                                         </tr>
                                                                                                     )
                                                                                                 })
@@ -894,7 +1054,7 @@ class SignUp extends Component {
                                                                                                     return (
                                                                                                         <tr key={index}>
                                                                                                             <td>{data.url}</td>
-                                                                                                            <td><i className="fas fa-times"></i></td>
+                                                                                                            <td onClick={this.removeIC.bind(this, index)}><i className="fas fa-times"></i></td>
                                                                                                         </tr>
                                                                                                     )
                                                                                                 })
@@ -902,13 +1062,15 @@ class SignUp extends Component {
                                                                                         </tbody>
                                                                                     </table>
                                                                                 </div>
-                                                                                
+
 
                                                                             </div>
-                                                                            <div className="col-sm-12">
-                                                                                <input onChange={this.InsuranceType.bind(this)} checked={this.state.insurance_certificate_type == 'admin'} type="checkbox" ></input>
-                                                                                        Buy Public Liability Certificate from admin
-                                                                                    </div>
+                                                                            <div className="col-sm-12 d-flex">
+                                                                                <input className="mt-1" onChange={this.InsuranceType.bind(this)} checked={this.state.insurance_certificate_type == 'admin'} type="checkbox" ></input>
+                                                                                <label className="control-label ml-1"> Buy Public Liability Certificate from admin</label>
+
+
+                                                                            </div>
                                                                             {
                                                                                 this.state.insurance_certificate_type == 'admin' ?
                                                                                     <div className="card p-3 col-sm-12">
@@ -948,7 +1110,7 @@ class SignUp extends Component {
                                                                                             </div>
                                                                                         </div>
 
-                                                                                    <p>We will be charge [] $5 per month from you.</p>
+                                                                                        <p>We will be charge [] $5 per month from you.</p>
                                                                                     </div>
                                                                                     : null
                                                                             }
@@ -959,7 +1121,7 @@ class SignUp extends Component {
                                                                             }
                                                                             <div className="panel-footer row mt-5">
                                                                                 <div className="text-left">
-                                                                                    <button onClick={this.change_step.bind(this, 2)} className="btn btn-info   " type="submit">
+                                                                                    <button onClick={this.change_step.bind(this, 3)} className="btn btn-info   " type="submit">
                                                                                         {
                                                                                             this.state.btn_loading ?
                                                                                                 <div id="displayspinner" style={{ display: 'block', }}>
@@ -1019,7 +1181,7 @@ class SignUp extends Component {
                                                     : null
                                             }
                                             {
-                                                this.state.step == 4 ?
+                                                this.state.step == 5 ?
                                                     <div>
                                                         <div className="panel-heading">
                                                             <h3 className="text-center center_title">Preview Request</h3>
@@ -1073,11 +1235,11 @@ class SignUp extends Component {
                                                                 <p style={{ fontSize: '12px' }}>
                                                                     <input id="demo-checkbox-1" className="magic-checkbox" onChange={this.agree_check.bind(this)} value="helo" checked={this.state.agree_check} type="checkbox" name="acceptTerms" data-bv-field="acceptTerms"></input>
 
-                                                         I agree to TidyHome’s Terms and Conditions and by clicking the box and proceeding,
-                                                        I agree that TidyHome or its representatives may contact me by email, phone or SMS
-                                                        (including by automatic telephone dialling system) at the email address or number
-                                                        I provide, including for marketing purposes. I have read and understand the relevant Privacy Statement.
-                                                        </p>
+                                                                    I agree to TidyHome’s Terms and Conditions and by clicking the box and proceeding,
+                                                                    I agree that TidyHome or its representatives may contact me by email, phone or SMS
+                                                                    (including by automatic telephone dialling system) at the email address or number
+                                                                    I provide, including for marketing purposes. I have read and understand the relevant Privacy Statement.
+                                                                </p>
                                                                 {
                                                                     this.state.error_string != '' ?
                                                                         <p className="text-danger text-center">{this.state.error_string}</p>
@@ -1085,7 +1247,7 @@ class SignUp extends Component {
                                                                 }
                                                             </div>
                                                             <div className="text-left">
-                                                                <button onClick={this.change_step.bind(this, 3)} className="btn btn-info   " type="submit">
+                                                                <button onClick={this.change_step.bind(this, 4)} className="btn btn-info   " type="submit">
                                                                     {
                                                                         this.state.btn_loading ?
                                                                             <div id="displayspinner" style={{ display: 'block', }}>
@@ -1116,7 +1278,7 @@ class SignUp extends Component {
                                                     : null
                                             }
                                             {
-                                                this.state.step == 5 ?
+                                                this.state.step == 6 ?
                                                     <SignUpRequest {...this.props}></SignUpRequest>
                                                     : null
                                             }

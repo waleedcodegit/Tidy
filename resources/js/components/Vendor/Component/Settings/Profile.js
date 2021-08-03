@@ -2,8 +2,11 @@ import { RateReviewSharp } from '@material-ui/icons';
 import Axios from 'axios';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {img_baseurl} from '../../../Configs/Api';
-import Swal from 'sweetalert2'
+import {img_baseurl, MAP_PLACES_API_KEY} from '../../../Configs/Api';
+import Swal from 'sweetalert2';
+import Autocomplete from "react-google-autocomplete";
+import toast from 'react-hot-toast';
+
 class Profile extends Component {
     constructor(props) {
         super(props);
@@ -27,7 +30,28 @@ class Profile extends Component {
             bio:'',
             status:'',
             error_string:'',
-            id:this.props.vendor.vendor_id
+            id:this.props.vendor.vendor_id,
+            vendor_services:[],
+            card_details:{},
+            no_card_details:false,
+            credit_card_number: '',
+            cvc: '',
+            card_holder_name: '',
+            expiry_year: '',
+            expiry_month: '',
+            update_card:false,
+            vendor_id:this.props.vendor.data.vendor_id,
+            vendor_addresses:[],
+            loc_address:'',
+            lat:0,
+            long:0,
+            lat_u:0,
+            long_u:0,
+            radius:0,
+            loc_u_address:'',
+            addresses:[],
+            show_add_address:false,
+            last_address_updater:0
         };
     }
     
@@ -51,9 +75,32 @@ class Profile extends Component {
                 company_name:res.data.data.company_name,
                 business_name:res.data.data.business_name,
                 trading:res.data.data.trading,
-                bio:res.data.data.bio
+                bio:res.data.data.bio,
+                vendor_id:this.props.vendor.data.vendor_id
 
             })
+        })
+        Axios.post('/api/get_vendor_services',{vendor_id:this.props.vendor.data.vendor_id}).then(res=>{
+            this.setState({
+                vendor_services:res.data
+            })
+        })
+        Axios.post('/api/get_vendor_addresses',{vendor_id:this.props.vendor.data.vendor_id}).then(res=>{
+            this.setState({
+                vendor_addresses:res.data
+            })
+        })
+        Axios.post('/api/get_vendor_card_details',{vendor_id:this.props.vendor.data.vendor_id}).then(res=>{
+            console.log(res);
+          if(res.data.status == 200){
+              this.setState({
+                  card_details:res.data.details
+              })
+          }else{
+              this.setState({
+                  no_card_details:true
+              })
+          }
         })
     }
 
@@ -131,6 +178,149 @@ class Profile extends Component {
             
         })
     }
+    delete_vendor_service(id){
+        Axios.post('/api/delete_vendor_service',{id:id}).then(res=>{
+            Axios.post('/api/get_vendor_services',{vendor_id:this.props.vendor.data.vendor_id}).then(res=>{
+                this.setState({
+                    vendor_services:res.data
+                })
+            })
+            Swal.fire({
+                icon: 'success',
+                title: 'Service deleted Successfully',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        })
+    }
+    update_card(){
+        this.setState({
+            update_card:true
+        })
+    }
+    credit_card_number(e) {
+        this.setState({
+            credit_card_number: e.target.value
+        })
+    }
+    cvc(e) {
+        this.setState({
+            cvc: e.target.value
+        })
+    }
+    expiry_month(e) {
+        this.setState({
+            expiry_month: e.target.value
+        })
+    }
+    expiry_year(e) {
+        this.setState({
+            expiry_year: e.target.value
+        })
+    }
+    card_holder_name(e) {
+        this.setState({
+            card_holder_name: e.target.value
+        })
+    }
+    validate_card() {
+        Axios.post('/api/update_vendor_card', this.state).then(res => {
+            console.log(res);
+            if (res.data.status) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Payment details updated Successfully',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            } else {
+                this.setState({
+                    error_string: res.data.message
+                })
+            }
+
+        })
+    }
+    AddAddress(){
+        let payload = {address:this.state.loc_address,lat:this.state.lat,long:this.state.long,radius:this.state.radius,vendor_id:this.props.match.params.id};
+        Axios.post('/api/add_vendor_address',this.state).then(res=>{
+            if(res.data.status){
+                toast.success('Address Added SuccessFully');
+                this.componentDidMount();
+            }else{
+                toast.error(res.data.message);
+            }
+        })
+
+    }
+    places(place){
+
+        let lat  = place.geometry.location.lat();
+        let long = place.geometry.location.lng();
+        this.setState({
+            lat:lat,
+            long:long,
+            loc_address:place.formatted_address
+        })
+    }
+    places_u(place,index){
+        console.log(place)
+        let lat  = place.geometry.location.lat();
+        let long = place.geometry.location.lng();
+        let temp = this.state.vendor_addresses;
+        temp[index].lat = lat;
+        temp[index].lng = long;
+        temp[index].address = place.formatted_address;
+        this.setState({
+            vendor_addresses:temp
+        })
+    }
+    radius(e){
+        this.setState({
+            radius:e.target.value
+        })
+    }
+    removeAddress(index) {
+        let NPC_ = this.state.addresses;
+        NPC_.splice(index, 1);
+        this.setState({
+            addresses: NPC_
+        })
+    }
+    changeRadius(val,index){
+        console.log(val)
+        let temp = this.state.vendor_addresses;
+        temp[index].radius = val;
+        this.setState({
+            vendor_addresses:temp
+        })
+    }
+    update_address(data,index){
+        var payload ;
+        payload = {
+            address:data.address,
+            lat:data.lat,
+            long:data.lng,
+            vendor_id:this.state.vendor_id,
+            radius:data.radius,
+            id:data.id
+        }
+        Axios.post('/api/update_vendor_address',payload).then(res=>{
+            if(res.data.status){
+                toast.success('Address Updated SuccessFully.')
+            }else{
+                toast.error('Error - '+res.data.message)
+            }
+        })
+
+    }
+    delete_vendor_address(id){
+        Axios.post('/api/delete_vendor_address',{id:id}).then(res=>{
+            toast.success('Address deleted successfully.');
+            this.componentDidMount();
+        })
+    }
+
     render() {
         return (
             <section className="section">
@@ -169,7 +359,16 @@ class Profile extends Component {
                                     <ul className="nav nav-tabs" id="myTab2" role="tablist">
                                        
                                         <li className="nav-item">
-                                            <a className="nav-link active" id="profile-tab2" data-toggle="tab" href="#settings" role="tab" aria-selected="true">Setting</a>
+                                            <a className="nav-link active" id="profile-tab2" data-toggle="tab" href="#settings" role="tab" aria-selected="true">Edit Profile</a>
+                                        </li>
+                                        <li className="nav-item">
+                                            <a className="nav-link " id="profile-tab3" data-toggle="tab" href="#services" role="tab" aria-selected="false">My Services</a>
+                                        </li>
+                                        <li className="nav-item">
+                                            <a className="nav-link " id="profile-tab5" data-toggle="tab" href="#services_areas" role="tab" aria-selected="false">My Services Areas</a>
+                                        </li>
+                                        <li className="nav-item">
+                                            <a className="nav-link " id="profile-tab4" data-toggle="tab" href="#payments" role="tab" aria-selected="false">Payment Setting</a>
                                         </li>
                                     </ul>
                                     <div className="tab-content tab-bordered" id="myTab3Content">
@@ -277,6 +476,209 @@ class Profile extends Component {
                                                     <button onClick={this.update.bind(this)} className="btn btn-primary">Save Changes</button>
                                                 </div>
                                             </form>
+                                        </div>
+                                        <div className="tab-pane show  fade" id="services" role="tabpanel" aria-labelledby="profile-tab4">
+                                            <form >
+                                                <div className="card-header">
+                                                    <h4>My Services</h4>
+                                                </div>
+                                                <div className="card-body">
+                                                   <div className="row">
+                                                      {
+                                                          this.state.vendor_services.map((data,index)=>{
+                                                              return(
+                                                                <div className="row ml-4 mt-2 vendor_service_name p-2">
+                                                                    <h6 className="mt-2 ">{data.service.name}</h6>
+                                                                    <li onClick={this.delete_vendor_service.bind(this,data.id)} className="far fa-times-circle mt-1 ml-2 cross_icon"></li>
+                                                                </div>
+                                                              )
+                                                          })
+                                                      }
+                                                   </div>
+                                                </div>
+                                                    
+                                                    
+                                               
+                                                
+                                            </form>
+                                        </div>
+                                        <div className="tab-pane show  fade" id="services_areas" role="tabpanel" aria-labelledby="profile-tab5">
+                                        
+                                                <div className="card-header">
+                                                    <h4>My Services Areas</h4>
+                                                </div>
+                                                <div className="card-body">
+                                                <div className="col-md-12 text-right">
+                                                    <button onClick={(e)=>{
+                                                        e.preventDefault();
+                                                        this.setState({show_add_address:!this.state.show_add_address})}} className="btn btn-info" >Add new Address</button>
+                                                </div>
+                                                {
+                                                    this.state.show_add_address ? 
+
+                                                
+                                                <div className="col-md-12">
+                                                
+                                                <div className="form-group">
+                                                            <label className="control-label">Enter your Address</label>
+                                                            <Autocomplete
+                                                                apiKey={MAP_PLACES_API_KEY}
+                                                                options={{types:'sublocality'}}
+                                                                onPlaceSelected={(place) => {
+                                                                    this.places(place);
+                                                                }}
+                                                                style={{ width: '100%' }}
+                                                                className="form-control input_box"
+                                                            />
+                                                        </div>
+                                                        
+                                                        <div className="form-group">
+                                                                <label className="control-label">Enter Radius</label>
+                                                                <input value={this.state.radius || ""} onChange={this.radius.bind(this)} type="number" placeholder="Enter Radius" className="form-control" />
+                                                            </div>
+                                                        <div>
+                                                            <button onClick={this.AddAddress.bind(this)} className="btn btn-info" style={{width:'100%',borderRadius:'0px'}}>Add Address</button>
+                                                                
+                                                            
+                                                        </div>
+                                                </div>
+                                                :
+                                                null
+                                                }
+                                                <table className="table table-hover table-light table-striped mt-2">
+                                                    <tbody>
+                                                        {
+                                                            this.state.vendor_addresses.map((data, index) => {
+                                                                return (
+                                                                    <tr key={index}>
+                                                                    <td>
+                                                                    <Autocomplete
+                                                                    apiKey={MAP_PLACES_API_KEY}
+                                                                    options={{types:'sublocality'}}
+                                                                    onPlaceSelected={(place) => {
+                                                                        this.places_u(place,index);
+                                                                    }}
+                                                                    style={{ width: '100%' }}
+                                                                    className="form-control input_box"
+                                                                    defaultValue={data.address}
+                                                                    
+                                                                    onChange={(place) => {
+                                                                        this.places_u(place,index);
+                                                                    }}
+                                                                />
+                                                                    </td>
+                                                                    <td>
+                                                                        <input onChange={(e)=>{this.changeRadius(e.target.value,index)}} className="form-control" value={data.radius} type="number"></input>
+                                                                    </td>
+                                                                    <td onClick={this.update_address.bind(this,data, index)}><button className="btn btn-outline-success"> <i className="fas fa-save"></i></button></td>
+                                                                    <td onClick={this.delete_vendor_address.bind(this, data.id)}><button className="btn btn-outline-danger"> <i className="fas fa-trash"></i></button></td>
+                                                                   
+                                                                    </tr>
+                                                                    )
+                                                            })
+                                                        }
+                                                    </tbody>
+                                                    </table>
+                                                </div>
+                                                    
+                                                    
+                                               
+                                                
+                                            
+                                        </div>
+                                        <div className="tab-pane show  fade" id="payments" role="tabpanel" aria-labelledby="profile-tab3">
+                                           
+                                                <div className="card-header">
+                                                    <h4>Payment Settings</h4>
+                                                </div>
+                                                <div className="card-body">
+                                                   {
+                                                       this.state.no_card_details ?
+                                                       <div className="text-center " >
+                                                            Payment Card not Integrated
+                                                       </div>
+                                                       :
+                                                       <div className="row">
+                                                        <div className="col-md-4">
+                                                        <strong><h6>Name on Card</h6></strong><br></br>
+                                                        <h6>{this.state.card_details.card_holder_name}</h6>
+                                                        </div>
+                                                        <div className="col-md-4">
+                                                        <strong><h6>Card Number</h6></strong><br></br>
+                                                        <h6>xxxx xxxx xxxx {this.state.card_details.credit_card_number}</h6>
+                                                        </div>    
+                                                        <div className="col-md-2">
+                                                        <strong><h6>CVC</h6></strong><br></br>
+                                                        <h6>{this.state.card_details.cvc}</h6>
+                                                        </div>   
+                                                        <div className="col-md-2">
+                                                        <strong><h6>Expiry</h6></strong><br></br>
+                                                        <h6>{this.state.card_details.expiry_month}/{this.state.card_details.expiry_year}</h6>
+                                                        </div>                                                
+                                                    </div>
+                                                   }
+                                                   <div className="row">
+                                                    <button onClick={this.update_card.bind(this)} className="btn btn-info"> 
+                                                        {
+                                                            this.state.no_card_details ? <>Add New Card</> : <>Change Card</>
+                                                        }
+                                                    </button>
+                                                   </div>
+                                                   {
+                                                       this.state.update_card ?
+                                                       <div className="card p-3 col-sm-12 mt-5">
+                                                                                        <div className="col-sm-12  p-3">
+                                                                                            <div className="form-group">
+                                                                                                <label className="control-label">Name on Card</label>
+                                                                                                <input value={this.state.card_holder_name || ""} onChange={this.card_holder_name.bind(this)} type="name" className="form-control" />
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div className="col-sm-12">
+                                                                                            <div className="form-group">
+                                                                                                <label className="control-label">Card Number</label>
+                                                                                                <input value={this.state.credit_card_number || ""} onChange={this.credit_card_number.bind(this)} type="number" className="form-control" />
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div className="col-sm-12 row">
+                                                                                            <div className="col-sm-3">
+                                                                                                <div className="form-group">
+                                                                                                    <label className="control-label">CVC</label>
+                                                                                                    <input value={this.state.cvc || ""} onChange={this.cvc.bind(this)} type="number" placeholder="ex. 311" className="form-control" />
+
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div className="col-sm-1"></div>
+                                                                                            <div className="col-sm-3">
+                                                                                                <div className="form-group">
+                                                                                                    <label className="control-label">Expiration</label>
+                                                                                                    <input value={this.state.expiry_month || ""} onChange={this.expiry_month.bind(this)} type="number" placeholder="MM" className="form-control" />
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div className="col-sm-1"></div>
+                                                                                            <div className="col-sm-3">
+                                                                                                <div className="form-group">
+                                                                                                    <label className="control-label"></label>
+                                                                                                    <input value={this.state.expiry_year || ""} onChange={this.expiry_year.bind(this)} type="number" placeholder="YYYY" className="form-control" />
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        {
+                                                                                            this.state.error_string != ''?
+                                                                                            <p className="text-center text-danger">{this.state.error_string}</p>
+                                                                                            :null
+                                                                                        }
+                                                                                        <div className="col-sm-12  text-right p-3">
+                                                                                           <button onClick={this.validate_card.bind(this)} className="btn btn-success ">Save</button>
+                                                                                        </div>
+                                                                                        </div>
+                                                    :null
+                                                   }
+                                                </div>
+                                                    
+                                                    
+                                               
+                                                
+                                            
                                         </div>
                                     </div>
                                 </div>

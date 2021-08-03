@@ -1,5 +1,6 @@
 import Axios from 'axios';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {img_baseurl } from '../../Configs/Api';
  
 class CustomerSignUp extends Component {
@@ -56,6 +57,8 @@ class CustomerSignUp extends Component {
         e.preventDefault();
         Axios.post('/api/create-customer',this.state).then(res=>{
             if(res.data.status == 200){
+                window.localStorage.setItem('cus_token',res.data.customer.token);
+                this.props.changeUser({is_login:true,data:res.data.customer});
                 this.props.history.push('/');
             }else{
                 this.setState({
@@ -132,5 +135,10 @@ class CustomerSignUp extends Component {
         );
     }
 }
+const mapDispatchToProps = (disptach) => {
+    return{
+        changeUser:(user)=>{disptach({type:'CHANGE_USER', payload:user})}
+    }
+}
  
-export default CustomerSignUp;
+export default connect(null,mapDispatchToProps)(CustomerSignUp);

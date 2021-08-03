@@ -45,6 +45,7 @@ class Index extends React.Component{
                                         <tr>
                                             <th>Sr</th>
                                             <th>Name</th>
+                                            <th>Price</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -55,6 +56,7 @@ class Index extends React.Component{
                                                         <tr key={index}>
                                                             <td>{index+1}</td>
                                                             <td>{data.name}</td>
+                                                            <td>{data.price}</td>
                                                             <td>
                                                                 <Link to={`/admin/edit-subcategory/${data.id}`}><button className="btn btn-outline-success"> <i  className="fa fa-pencil"> </i></button></Link>
                                                                 <button onClick={this.deleteSubCategory.bind(this, data.id)} className="btn btn-outline-primary"> <i  className="fa fa-trash"> </i></button>    

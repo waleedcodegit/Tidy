@@ -21,6 +21,7 @@ class Navbar2 extends Component {
         Axios.get(`/api/category`,{ headers: {
             token: window.localStorage.getItem('testapistring')
         }}).then(res=>{
+            console.log(res);
             if(res.data.status == 200) {
                 this.setState({
                     category: res.data.categories
@@ -28,7 +29,10 @@ class Navbar2 extends Component {
             } 
         })
     }
-
+    logout(){
+        window.localStorage.setItem('cus_token','');
+        window.location.reload();
+    }
 
     render() {
         return (
@@ -42,7 +46,7 @@ class Navbar2 extends Component {
                 <Navbar.Collapse id="basic-navbar-nav ">
                     <Nav className="ml-auto ml-5 ">
                         
-                    <Nav.Link href="#home"><span className="text-center"><img src="https://img.icons8.com/ios/24/000000/home--v2.png"/></span>
+                    <Nav.Link href="/"><span className="text-center"><img src="https://img.icons8.com/ios/24/000000/home--v2.png"/></span>
                     <br></br><p className="nav_link">Home</p></Nav.Link>
                     <Nav.Link href="#home">
                         <span><img src="https://img.icons8.com/ios/24/000000/how-quest.png"/></span>
@@ -56,7 +60,11 @@ class Navbar2 extends Component {
                         {
                             this.state.category.map((data,index)=>{
                                 return(
-                                    <NavDropdown.Item onClick={()=>{this.props.changeModal(true)}} ><a  target="blank">{data.name}</a></NavDropdown.Item>
+                                    <NavDropdown.Item onClick={()=>{
+
+                                    window.localStorage.setItem('service',data.id);
+                                    window.open('/service/'+data.slug,'_self');
+                                    } } ><a  target="self">{data.name}</a></NavDropdown.Item>
                                 )
                             })
                         }
@@ -70,14 +78,42 @@ class Navbar2 extends Component {
                         <br></br>
                         <p className="nav_link"> About Us</p>
                     </Nav.Link>
-                    <Nav.Link href="/signup">
+                    <Nav.Link href="/book-service">
                         <span><img src="https://img.icons8.com/windows/24/000000/add-ticket.png"/></span>
                         <br></br>
                         <p className="nav_link"> Book Now </p></Nav.Link>
+                    <Nav.Link href="/gift-card">
+                        <span><img src="https://img.icons8.com/dotty/24/000000/gift-card.png"/></span>
+                        <br></br>
+                        <p className="nav_link"> Gift Card </p></Nav.Link>
+
                     <Nav.Link target="blank" href={"/vendor-signup"}><button className="btn  vendor_btn">Became a Vendor</button></Nav.Link>
-                    <Nav.Link href="/login">
+                    
+                        
+                        {
+                                this.props.user.is_login ? 
+                                <div>
+                                    <ul class="nav">
+                                        <li class="dropdown  my_account_dropdown">
+                                            <a class="dropdown-toggle drop_a" data-toggle="dropdown" href="#">
+                                            My Account
+                                            </a>
+                                            <ul style={{width:'153px'}} class=" card  card-dropdown display_none animate_auth_modal dropdown-menu" role="menu">
+                                            <li><a href="#" style={{fontWeight:'700'}}>{this.props.user.data.first_name}</a></li>
+                                            <li ><a href="/profile">Profile</a></li>
+                                            <li class="divider"></li>
+                                            <li onClick={this.logout.bind(this)}><a href="#">Logout</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                                :
+                                <>
+                                <Nav.Link href="/login">
                     <button className="btn btn-info login_btn">Login</button>
                         </Nav.Link>
+                                </>
+                            }
                     <Nav.Link href="#home"></Nav.Link>
                     
                     </Nav>
@@ -91,7 +127,8 @@ class Navbar2 extends Component {
 }
 const mapStateToProps = (state) =>{
     return{
-        modal:state.services_modal
+        modal:state.services_modal,
+        user:state.user
     }
 }
 const mapDistpatchToProps = (dispatch) =>{

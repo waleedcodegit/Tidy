@@ -15,6 +15,9 @@ body{
 }
 #progressbar h6 {
   font-family: Poppins-Regular !important;
+  font-size: 10px;
+  padding-top: 5px;
+  font-weight: 700;
 }
 .opacityZero{
   opacity: 0;
@@ -24,6 +27,15 @@ body{
 }
 .makeStyles-ListItemstyles-3{
     margin: 0 !important;
+}
+.vendor_service_name{
+  background-color: #f0f0f09a;
+  border: 2px solid #8d8d8d47;
+  border-radius: 5px ;
+}
+.cross_icon{
+  font-size: 24px !important;
+cursor: pointer;
 }
 .heading_text_normal{
   font-family:poopinmediumt ;
@@ -298,28 +310,28 @@ input:focus , select:focus , textarea:focus{
 .progress_icon .fas{
   background-color: #acacac;
   color: white;
-  padding: 13px;
+  padding: 9px;
   font-size: 19px;
   border-radius: 100%;
 }
 .progress_active .fas{
   background-color: #34f822;
   color: white;
-  padding: 13px;
+  padding: 9px;
   font-size: 19px;
   border-radius: 100%;
 }
 .progress_icon .far{
   background-color: #acacac;
   color: white;
-  padding: 13px;
+  padding: 9px;
   font-size: 19px;
   border-radius: 100%;
 }
 .progress_active .far{
   background-color: #34f822;
   color: white;
-  padding: 13px;
+  padding: 9px;
   font-size: 19px;
   border-radius: 100%;
 }
@@ -358,7 +370,7 @@ input:focus , select:focus , textarea:focus{
 #progressbar li {
   list-style-type: none;
   font-size: 12px;
-  width: 19%;
+  width: 16%;
   float: left;
   position: relative;
   list-style: none;

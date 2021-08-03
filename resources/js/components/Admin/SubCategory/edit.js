@@ -12,7 +12,8 @@ class Edit extends Component {
             categories: [],
             image: '',
             display: false,
-            loading:false
+            loading:false,
+            price:0
         };
     }
 
@@ -24,7 +25,8 @@ class Edit extends Component {
                 this.setState({
                     name: res.data.subcategory.name,
                     category_id: res.data.subcategory.category_id,
-                    image: res.data.subcategory.image
+                    image: res.data.subcategory.image,
+                    price:res.data.subcategory.price
                 })
             }
         })
@@ -51,7 +53,11 @@ class Edit extends Component {
             category_id: event.target.value
         })
     }
-
+    price(e){
+        this.setState({
+            price:e.target.value
+        })
+    }
     getImage(event) {
         if (event.target.files) {
             const files = Array.from(event.target.files);
@@ -80,7 +86,8 @@ class Edit extends Component {
             name: this.state.name,
             category_id: this.state.category_id,
             image: this.state.image,
-            id: this.props.match.params.id
+            id: this.props.match.params.id,
+            price:this.state.price
         }
         this.setState({
             loading: true
@@ -145,10 +152,18 @@ class Edit extends Component {
                                         <div className="col-sm-12">
                                             <div className="form-group">
                                                 <label htmlFor="price">Name:</label>
-                                                <input onChange={this.category.bind(this)} type="text" className="form-control" id="price" value={this.state.name || ""} placeholder="Enter Price" name="price"/>
+                                                <input onChange={this.category.bind(this)} type="text" className="form-control" id="price" value={this.state.name || ""} placeholder="Enter Price" name="Name"/>
                                             </div>
                                         </div>
                                     </div>
+                                    <div className="row">
+                                <div className="col-sm-12">
+                                    <div className="form-group">
+                                        <label htmlFor="price">Price:</label>
+                                        <input onChange={this.price.bind(this)} type="text" className="form-control" id="price" placeholder="Enter Price" name="price"/>
+                                    </div>
+                                </div>
+                            </div>
                                     <div className="row">
                                         <div className="col-sm-12">
                                             <div className="form-group">

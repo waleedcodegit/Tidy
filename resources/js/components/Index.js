@@ -3,26 +3,50 @@ import ReactDOM from 'react-dom';
 import { Switch,BrowserRouter,Route} from 'react-router-dom';
 import Admin_Login from './Admin/Login/Login'; 
 import AdminIndex from './Admin/index';
-import FrontIndex from './Front/Index';
+import FrontIndex from './Front/Container/Index';
 import VendorIndex from './Vendor/Index/Index';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import reducer from './Redux/reducer';
+import DefaultPage from './Front/Pages/Default/DefaultPage';
+import { Toaster } from 'react-hot-toast';
 
 const store = createStore(reducer);
 class Index extends Component{ 
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            paths:['/book-service','/signup','/login','/vendor-signup','/vendor-login','/gift-card','/profile','/service/:slug']
+        };
+        
+    }
+     
     render(){
         return (
             <BrowserRouter>
+
                 <div id="main-div">
+
+
+
+                <Switch>
+                    {
+                        this.state.paths.map((data,index)=>{
+                            return(
+                                <Route key={index} path={data}  component={FrontIndex}/>
+                            )
+                        })
+                    } 
                     <Route exact path="/"  component={FrontIndex}/>
-                    <Route exact path="/signup"  component={FrontIndex}/>
-                    <Route exact path="/login"  component={FrontIndex}/>
+                    
                     <Route exact path="/admin-login" component={Admin_Login} />
                     <Route path="/admin"  component={AdminIndex}/>
                     <Route path="/vendor"  component={VendorIndex}/>
-                    <Route path="/vendor-signup"  component={FrontIndex}/>
-                    <Route path="/vendor-login"  component={FrontIndex}/>
+                    <Route   component={DefaultPage}/>
+                    </Switch>
+            <Toaster></Toaster>
+
                 </div>
             </BrowserRouter>
         );

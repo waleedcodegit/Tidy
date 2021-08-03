@@ -193,7 +193,142 @@ code {
   background: #fff;
   color: #fff
 }
+html {
+  scroll-behavior: smooth;
 
+}
+.shadow_card{
+  box-shadow: rgb(0 0 0 / 16%) 0px 1px 4px;
+}
+
+ul.nav li.dropdown:hover > ul.dropdown-menu {
+  display: block;    
+}
+.drop_a{
+  color: #333333;
+  padding: 3px 15px !important;
+  border: none !important;
+}
+.drop_a:hover{
+  color: black !important;
+  background-color: #eeeeeec9 !important ;
+}
+.my_account_dropdown:hover{
+  background-color: #eeeeeec9 !important ;
+}
+.my_account_dropdown li {
+  font-size: 18px;
+  color: #050606 !important;
+  font-weight: 300;
+  padding-left: 10px;
+}
+.my_account_dropdown{
+  background-color: #eeeeeec9;
+  font-size: 18px;
+  padding: 2px !important;
+  margin-top: 17px;
+}
+@media screen and (min-width:481px){
+  @keyframes fadeUpScale {
+      0% {
+          transform: translate(0,30%); 
+          /* opacity: 0.7; */
+      }
+    
+      100% {
+          transform: translate(0,0%);
+          /* opacity: 1; */
+      }
+    }
+  .animate_auth_modal{
+      -webkit-animation: fadeUpScale 0.5s;
+      animation: fadeUpScale 0.3s;
+      -moz-animation: fadeUpScale 0.3s;
+      -o-animation: fadeUpScale 0.3s;
+  }
+}
+.error-template {padding: 40px 15px;text-align: center;}
+.error-actions {margin-top:15px;margin-bottom:15px;}
+.error-actions .btn { margin-right:10px; }
+@media screen and (max-width:480px){
+  @keyframes fadeUpScale {
+      0% {
+          opacity: 0.7;
+          
+      }
+    
+      100% {
+          opacity: 1;
+      }
+    }
+  .animate_auth_modal{
+      -webkit-animation: fadeUpScale 0.5s;
+      animation: fadeUpScale 0.3s;
+      -moz-animation: fadeUpScale 0.3s;
+      -o-animation: fadeUpScale 0.3s;
+  }
+} 
+
+.card-dropdown {
+  border: 0;
+  border-radius: 2px;
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+ 
+}
+.display_none{
+  display: none;
+}
+
+.product-item{
+  cursor: pointer;
+}
+.featureButton:hover {
+  width: 65%;
+  border: 1px solid #1e5896;
+  background-color: #0d55a2;
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(#050606),
+    to(#5c5f62)
+  );
+  background-image: -webkit-linear-gradient(top, #050606, #5c5f62);
+  background-image: -moz-linear-gradient(top, #050606, #5c5f62);
+  background-image: -ms-linear-gradient(top, #050606, #5c5f62);
+  background-image: -o-linear-gradient(top, #050606, #5c5f62);
+  background-image: linear-gradient(to bottom, #050606, #5c5f62);
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#0D55A2, endColorstr=#418AD9);
+}
+.card-dropdown  {
+  margin-bottom: 2rem;
+  font-weight: 300;
+  font-size: 1.7rem;
+}
+
+.card-dropdown .card-body {
+  padding: 2rem;
+}
+.card-dropdown li:hover{
+    background-color: #f7f7f7 !important;
+}
+.card-dropdown a:hover{
+    background-color: none !important;
+}
+
+.submit_button{
+  width: 100%;
+}
+.radio_btn{
+  width: 40px;
+  margin-top: 5px;
+}
+.btn_plus_minus{
+  border: solid 1px #ccc !important;
+    background-color: #fff !important;
+    background-repeat: repeat-x;
+    border-radius: 0px !important;
+}
 .track .icon {
   display: inline-block;
   width: 50px;
@@ -229,6 +364,9 @@ code {
 .front-app .nav-link{
   text-align: center !important;
 
+}
+.select_no_border{
+  border:0px solid;
 }
 .nav_link{
   font-weight: 600 !important;

@@ -57,6 +57,8 @@ class CityController extends Controller
             $city = new City();
             $city->name = $request->name;
             $city->state_id = $request->state_id;
+            $city->lat = $request->lat;
+            $city->long = $request->long;
             $city->save();
             $response = [
                 'status' => 200,
@@ -118,6 +120,8 @@ class CityController extends Controller
             $city = City::find($request->id);
             $city->name = $request->name;
             $city->state_id = $request->state_id;
+            $city->lat = $request->lat;
+            $city->long = $request->long;
             $city->save();
             $response = [
                 'status' => 200 ,

@@ -8,18 +8,34 @@ import { Switch,BrowserRouter,Route} from 'react-router-dom';
 import TopHeader from '../LandingComponents/TopHeader';
 import VendorSignUp from '../../Vendor/Auth/Signup';
 import VendorLogin from '../../Vendor/Auth/login';
+import BookService from '../Pages/BookService/BookService';
 
 import '../index.css'
+import GiftCard from '../Pages/GiftCard.js/GiftCard';
+import Axios from 'axios';
+import { connect } from 'react-redux';
+import Profile from '../Pages/UserProfile/Profile';
+import ServicePage from '../Pages/BookService/ServicePage';
 class Index extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
-        console.log('Container-iNDEX');
+        this.state = {
+
+        };
+      
     }
-     
+    componentDidMount(){
+        Axios.post('/api/customer_check_auth',{token:window.localStorage.getItem('cus_token')}).then(res=>{
+            if(res.data.status == 200){
+                this.props.changeUser({is_login:true,data:res.data.customer,is_apicall:true})
+            }else{
+                this.props.changeUser({is_login:false,data:[],is_apicall:true})
+            }
+        })
+    }
     render() { 
         return (
-            <div>
+            <div className="front-app">
                 
                 {/* <Route path="/" component={TopHeader}></Route> */}
                 <Navbar  {...this.props}></Navbar>
@@ -29,11 +45,20 @@ class Index extends Component {
                 <Route path="/services/:name?" component={Landing}></Route>
                 <Route exact path="/vendor-signup" component={VendorSignUp}></Route>
                 <Route exact path="/vendor-login" component={VendorLogin}></Route>
-                <Footer></Footer>
+                <Route  path="/book-service" component={BookService}></Route>
+                <Route  path="/gift-card" component={GiftCard}></Route>
+                <Route  path="/profile" component={Profile}></Route>
+                <Route  path="/service/:slug" component={ServicePage}></Route>
 
+                <Footer></Footer>
             </div>
         );
     }
 }
+ const mapDispatchToProps = (disptach) => {
+    return{
+        changeUser:(user)=>{disptach({type:'CHANGE_USER', payload:user})}
+    }
+}
  
-export default Index;   	
+export default connect(null,mapDispatchToProps)(Index);

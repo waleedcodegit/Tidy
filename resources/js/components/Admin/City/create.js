@@ -10,6 +10,8 @@ class Create extends Component {
             name:'',
             state_id: '',
             states: [],
+            lat:0,
+            long:0
         };
     }
 
@@ -36,13 +38,24 @@ class Create extends Component {
             state_id: event.target.value
         })
     }
-
+    lat(event) {
+        this.setState({
+            lat: event.target.value
+        })
+    }
+    long(event) {
+        this.setState({
+            long: event.target.value
+        })
+    }
     createCity(event) {
         
         event.preventDefault();
         let senderData = {
             name: this.state.name,
             state_id: this.state.state_id,
+            lat:this.state.lat,
+            long:this.state.long
         }
         let Configs = {
             headers: {
@@ -106,7 +119,19 @@ class Create extends Component {
                                 <div className="col-sm-12">
                                     <div className="form-group">
                                         <label htmlFor="name">Name:</label>
-                                        <input onChange={this.getName.bind(this)} type="text" className="form-control" id="name" placeholder="Enter Name"/>
+                                        <input  value={this.state.name} onChange={this.getName.bind(this)} type="text" className="form-control" id="name" placeholder="Enter Name"/>
+                                    </div>
+                                </div>
+                                <div className="col-sm-6">
+                                    <div className="form-group">
+                                        <label htmlFor="name">Latitude</label>
+                                        <input  value={this.state.lat} onChange={this.lat.bind(this)} type="text" className="form-control" id="name" placeholder="Enter Name"/>
+                                    </div>
+                                </div>
+                                <div className="col-sm-6">
+                                    <div className="form-group">
+                                        <label htmlFor="name">Longitude</label>
+                                        <input  value={this.state.long} onChange={this.long.bind(this)} type="text" className="form-control" id="name" placeholder="Enter Name"/>
                                     </div>
                                 </div>
                             </div>

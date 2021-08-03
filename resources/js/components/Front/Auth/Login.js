@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { img_baseurl } from '../../Configs/Api';
 import Axios from 'axios';
+import { connect } from 'react-redux';
 class Login extends Component {
     constructor(props) {
         super(props);
@@ -34,12 +35,15 @@ class Login extends Component {
     login(e){
         e.preventDefault();
         Axios.post('/api/customer-login',this.state).then(res=>{
-            if(res.data.status){
-                this.props.history.push('/');
+            if(res.data.status == 200){
+                console.log(res);
+                window.localStorage.setItem('cus_token',res.data.customer.token);
+                this.props.changeUser({is_login:true,data:res.data.customer});
+                window.open('/profile','_self');
             }else{
                 this.setState({
                     form_error:true,
-                    error_string:res.data.msg
+                    error_string:res.data.message
                 })
             }
         })
@@ -100,7 +104,7 @@ class Login extends Component {
                             <div>
                                 {
                                     this.state.form_error ?
-                                    <p className="text-danger">{this.state.error_string}</p>
+                                    <p className="text-danger text-center">{this.state.error_string}</p>
                                     :null
                                 }
                             </div>
@@ -131,5 +135,11 @@ class Login extends Component {
         );
     }
 }
+
+const mapDispatchToProps = (disptach) => {
+    return{
+        changeUser:(user)=>{disptach({type:'CHANGE_USER', payload:user})}
+    }
+}
  
-export default Login;
+export default connect(null,mapDispatchToProps)(Login);

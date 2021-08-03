@@ -18,6 +18,7 @@ use App\VendorDocuments;
 use App\VendorServices;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ApprovalEmail;
+use App\VendorLocation;
 
 class VendorController extends Controller
 {
@@ -29,7 +30,60 @@ class VendorController extends Controller
             'data' => $vendor
         ]);
     }
-
+    
+    public function delete_vendor_address(Request $request){
+        $address = VendorLocation::where('id',$request->id)->delete();
+        return $address;
+    }
+    public function get_vendor_addresses(Request $request){
+        $address = VendorLocation::where('vendor_id',$request->vendor_id)->get();
+        return $address;
+    }
+    public function update_vendor_address(Request $request){
+        $validator = Validator::make($request->all(), [
+            'address' => 'required',
+            'radius' => 'required',
+        ]);
+        if($validator->fails()){
+            return response()->json([
+                'status' => false,
+                'message' => $validator->errors()->first(),
+                'errors' => $validator->errors()     
+            ]);
+        }
+        $address = VendorLocation::where('id',$request->id)->first();
+        $address->address = $request->address;
+        $address->lat = $request->lat;
+        $address->lng = $request->long;
+        $address->radius = $request->radius;
+        $address->save();
+        return response()->json([
+            'status' => true
+        ]);
+    }
+    public function add_vendor_address(Request $request){
+        $validator = Validator::make($request->all(), [
+            'address' => 'required',
+            'radius' => 'required',
+        ]);
+        if($validator->fails()){
+            return response()->json([
+                'status' => false,
+                'message' => $validator->errors()->first(),
+                'errors' => $validator->errors()     
+            ]);
+        }
+        $address = new VendorLocation();
+        $address->vendor_id = $request->vendor_id;
+        $address->address = $request->loc_address;
+        $address->lat = $request->lat;
+        $address->lng = $request->long;
+        $address->radius = $request->radius;
+        $address->save();
+        return response()->json([
+            'status' => true
+        ]);
+    }
     public function show(Request $request) {
         $vendor = Vendor::where('id', $request->id)->with('insurance_detail', 'vendor_doc', 'vendor_servicess')->first();
         $services_array = [];
@@ -121,6 +175,93 @@ class VendorController extends Controller
             return $response;
         }
     }
+    public function get_vendor_services(Request $request){
+        $services = VendorServices::where('vendor_id',$request->vendor_id)->with('service')->get();
+        return $services;
+    }
+    public function delete_vendor_service(Request $request){
+        $services = VendorServices::where('id',$request->id)->delete();
+        // return $services;
+    }
+    public function get_vendor_card_details(Request $request){
+        $details = InsuranceCertificateCCard::where('vendor_id',$request->vendor_id)->first();
+        if($details){
+            $card = (string) $details->credit_card_number;
+            $details->credit_card_number =  $card[-4].$card[-3].$card[-2].$card[-1];
+            $response = ['status' => '200' , 'details' => $details];
+            return $response;
+        }else{
+            $response = ['status' => 404 ];
+            return $response;
+        }
+    }
+    
+    public function update_vendor_card(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'credit_card_number' => 'required',
+            'cvc' => 'required',
+            'expiry_month' => 'required',
+            'expiry_year' => 'required',
+        ]);
+        if($validator->fails()){
+            return response()->json([
+                'status' => false,
+                'message' => $validator->errors()->first(),
+                'errors' => $validator->errors()     
+            ]);
+        }
+        try{
+        $vendor = Vendor::where('id',$request->vendor_id)->first();
+
+        $stripe = new \Stripe\StripeClient(
+            env("STRIPE_SK")
+          );
+        $token =  $stripe->tokens->create([
+            'card' => [
+              'number' =>  $request->credit_card_number,
+              'exp_month' => $request->expiry_month,
+              'exp_year' => $request->expiry_year,
+              'cvc' => $request->cvc,
+            ],
+          ]);
+          $customer = $stripe->customers->create([
+            "email" => $vendor->email,
+            "source" =>  $token->id
+        ]);
+        // return $customer;
+        $vendor->vendor_stripe_id = $customer->id;
+        $vendor->save();
+        $vendor_card = InsuranceCertificateCCard::where('vendor_id',$vendor->id)->first();
+        if($vendor_card){
+            $vendor_card->credit_card_number = $request->credit_card_number;
+            $vendor_card->expiry_month = $request->expiry_month;
+            $vendor_card->expiry_year = $request->expiry_year;
+            $vendor_card->cvc = $request->cvc;
+            $vendor_card->card_holder_name = $request->card_holder_name;
+            $vendor_card->save();
+        }else{
+            $vendor_card = new InsuranceCertificateCCard();
+            $vendor_card->credit_card_number = $request->credit_card_number;
+            $vendor_card->expiry_month = $request->expiry_month;
+            $vendor_card->expiry_year = $request->expiry_year;
+            $vendor_card->cvc = $request->cvc;
+            $vendor_card->card_holder_name = $request->card_holder_name;
+            $vendor_card->vendor_id = $vendor->id;
+            $vendor_card->save();
+        }
+        return response()->json([
+            'status' => true,
+            'customer' => $customer,
+        ]);
+        }catch(Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => 'Card Validation Error - Please check you card details.',
+                'errors' => $e     
+            ]);
+        }
+    }
     public function validate_card(Request $request){
         $validator = Validator::make($request->all(), [
             'credit_card_number' => 'required',
@@ -208,7 +349,19 @@ class VendorController extends Controller
         $new_vendor->insurance_certificate_type = $request->insurance_certificate_type;
         $new_vendor->save();
         $vendor = Vendor::find($new_vendor->id);
+
+        foreach($request->addresses as $va){
+
+            $vendor_location = new VendorLocation();
+            $vendor_location->vendor_id = $vendor->id;
+            $vendor_location->address = $va['address'];
+            $vendor_location->lat = $va['lat'];
+            $vendor_location->lng = $va['long'];
+            $vendor_location->radius = $va['radius'];
+            $vendor_location->save();
+        }
         
+
         if($request->insurance_certificate_type == "admin") {
             $ins = new InsuranceCertificateCCard();
             $ins->vendor_id = $vendor->id;
@@ -316,6 +469,68 @@ class VendorController extends Controller
                     'vendor' => $new_vendor,     
                 ]);
         }
+    }
+    public function update_vendor_profile(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            // 'password' => 'required',
+            'address' => 'required',
+            // 'email' => 'required|email|unique:vendors,email|max:255',
+            'phone' => 'required',
+            'dob' => 'required',
+            'australian_business_number' => 'required|min:11|max:11',
+            'type_of_business' => 'required',
+            'business_name' => 'required',
+            // 'trading' => 'required',
+        ]);
+
+        if($validator->fails()){
+            return response()->json([
+                'status' => false,
+                'message' => $validator->errors()->first(),
+                'errors' => $validator->errors()     
+            ]);
+        
+        }else{
+
+                // $new_vendor = new Vendor();
+                // $new_vendor->first_name = $request->first_name;
+                // $new_vendor->last_name  = $request->last_name;
+                // $new_vendor->email = $request->email;
+                // // $new_vendor->password = Hash::make($request->password);
+                // $new_vendor->address = $request->address;
+                // $new_vendor->phone = $request->phone;
+                // $new_vendor->dob = $request->dob;
+                // $new_vendor->australian_business_number = $request->australian_business_number;
+                // $new_vendor->type_of_business = $request->type_of_business;
+                // $new_vendor->business_name = $request->business_name;
+                // $new_vendor->trading = $request->trading;
+                // // $new_vendor->vendor_stripe_id = $customer->id;
+                // $new_vendor->insurance_certificate_type = $request->insurance_certificate_type;
+                $new_vendor = Vendor::find($request->data['id']);
+                
+                $new_vendor->first_name = $request->data['first_name'];
+                $new_vendor->last_name  = $request->data['last_name'];
+                $new_vendor->address = $request->data['address'];
+                $new_vendor->phone = $request->data['phone'];
+                $new_vendor->dob = $request->data['dob'];
+                $new_vendor->australian_business_number = $request->data['australian_business_number'];
+                $new_vendor->type_of_business = $request->data['type_of_business'];
+                $new_vendor->business_name = $request->data['business_name'];
+                $new_vendor->trading = $request->data['trading'];
+                $new_vendor->insurance_certificate_type = $request->data['insurance_certificate_type'];
+                $new_vendor->save();
+                return response()->json([
+                    'status' => true,
+                    // 'message' => "Vendor Created Successfully",
+                    'message' => "Vendor Updated Successfully",
+                    'vendor' => $new_vendor,     
+                ]);
+        }
+            
+        
     }
     public function vendor_insurance_certificate(Request $request){
         $vendor = Vendor::find($request->vendor_id);

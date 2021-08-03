@@ -51,6 +51,8 @@ class ServiceList extends Component {
                                                         <td>{data.title}</td>
                                                         <td>{data.price}</td>
                                                         <td><Link to={`/admin/edit-service/${data.id}`}><button className="btn btn-outline-success"> <i  className="fa fa-pencil"> </i></button></Link></td>
+                                                        <td><button className="btn btn-outline-success"> <i  className="fa fa-trash"> </i></button></td>
+                                                    
                                                     </tr>
                                                 )
                                             })

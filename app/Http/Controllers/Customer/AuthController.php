@@ -68,6 +68,22 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function customer_check_auth(Request $request){
+        $customer_auth = CustomerAuthMeta::where('token',$request->token)
+            ->where('ip',$request->ip())
+            ->first();
+        if($customer_auth){
+            $customer = Customer::where('id',$customer_auth->customer_id)->first();
+            $response = ['status' => 200 , 'customer'=>$customer_auth , 'customer' => $customer];
+            return $response;
+        }else{
+        $response = ['status' => 401 , 'msg' => 'Sorry, Incorrect Token'];
+            return $response;
+        }
+    }
+
+    
     public function customer_login(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -78,7 +94,7 @@ class AuthController extends Controller
             return response()->json([
                 'status' => false,
                 'errors' => $validator->messages(),
-                'msg' => $validator->errors()->first()
+                'message' => $validator->errors()->first()
             ]);
         }else{
             $customer = Customer::where('email', $request->email)->where('status', 1)->first();
@@ -101,9 +117,9 @@ class AuthController extends Controller
                     }
                     $customer->token = $token;
                     return response()->json([
-                       'status' => true,     
+                       'status' => 200,     
                        'message' => "Successfull login",
-                       'data' => $customer, 
+                       'customer' => $customer, 
                     ]);
                 }else{
                     return response()->json([
@@ -121,6 +137,9 @@ class AuthController extends Controller
             }
         }
     }
+
+  
+
 
     public function customer_forget_password(Request $request){
         $validator = Validator::make($request->all(), [
@@ -191,18 +210,31 @@ class AuthController extends Controller
     }
 
     public function update_customer(Request $request) {
-        $user = Customer::where('id' , $id)->update([
-            'first_name' => $request->first_name,
-            'last_name'  => $request->last_name,
-            'email' => $request->email,
-            'address' => $request->address,
-            'phone' => $request->phone
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required|min:3',
+            'last_name' => 'required|min:3',
+            'address' => 'required|min:3',
+            'email' => 'required',
+            'phone' => 'required|min:11',
         ]);
+        if($validator->fails()){
+            $response = ['status' => false , 'msg' => $validator->errors()->first() , 
+            'errors' => $validator->errors()];
+            return $response;
+        }
+        $user = Customer::where('id' , $request->id)->first();
+        $user->first_name = $request->first_name;
+        $user->last_name  = $request->last_name;
+        $user->email = $request->email;
+        $user->address = $request->address;
+        $user->phone = $request->phone;
+        $user->image = $request->profile_image;
+        $user->save();
 
         return response()->json([
             'status' => true,
             'message' => "Edit Customer Successfully",
-            'data' => $new_customer,     
+            'customer' => $user,     
         ]);
     }
     

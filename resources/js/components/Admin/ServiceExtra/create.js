@@ -8,7 +8,19 @@ class Create extends Component {
         this.state = {
             title: '',
             price: '',
+            categories:[],
+            cat_id:0
         }
+    }componentDidMount(){
+        Axios.get(`/api/category`,{ headers: {
+            token: window.localStorage.getItem('testapistring')
+        }}).then(res=>{
+            if(res.data.status == 200) {
+                this.setState({
+                    categories: res.data.categories
+                })
+            } 
+        })
     }
 
     getTitle(event) {
@@ -27,7 +39,9 @@ class Create extends Component {
         event.preventDefault();
         let data = {
             title: this.state.title,
-            price: this.state.price
+            price: this.state.price,
+            category:this.state.cat_id
+
         }
         let Configs = {
             headers: {
@@ -47,7 +61,11 @@ class Create extends Component {
             }
         })
     }
-
+    getCategory(event) {
+        this.setState({
+            cat_id: event.target.value
+        })  
+    }
     render() {
         return (
         <div id="page-content">
@@ -61,8 +79,23 @@ class Create extends Component {
                     <div className="panel">
                         <form encType="multipart/form-data">
                         <div className="panel-body">
+                      
                             <div className="row">
-
+                            <div className="col-sm-12">
+                                    <div className="form-group">
+                                        <label htmlFor="cat_id">Category:</label>
+                                        <select className="form-control" name="cat_id"  onChange={this.getCategory.bind(this)}>
+                                            {
+                                                this.state.categories.map((data,index)=>{
+                                                    return(
+                                                        <option key={index} value={data.id}>{data.name}</option>
+                                                    )
+                                                })
+                                            }
+                                            
+                                        </select>
+                                    </div>
+                                </div>
                                 <div className="col-sm-6">
                                     <div className="form-group">
                                         <label htmlFor="title">Title:</label>

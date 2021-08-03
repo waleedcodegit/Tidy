@@ -32,7 +32,12 @@
     
     <link rel="stylesheet" href="{{asset('css/venobox/venobox.css')}}">
     
-    <link rel="stylesheet" href="{{asset('css/owl.carousel.css')}}">
+    {{-- <link rel="stylesheet" href="{{asset('css/owl.carousel.css')}}"> --}}
+
+    {{-- <link rel="stylesheet" href="{{asset('js/vendor/select2/select2.min.css')}}">
+    <link rel="stylesheet" href="{{asset('js/vendor/datepicker/daterangepicker.css')}}"> --}}
+    <link rel="stylesheet" href="{{asset('js/vendor/main.css')}}">
+
     
     <link rel="stylesheet" href="{{asset('css/main.css')}}">
       <link rel="stylesheet" href="{{asset('css/app.css')}}">
@@ -47,7 +52,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 
-    <script src="{{asset('js/vendor/jquery.ajaxchimp.min.js')}}v"></script>
+    {{-- <script src="{{asset('js/vendor/jquery.ajaxchimp.min.js')}}v"></script> --}}
    
 
     <script src="{{asset('js/vendor/bootstrap.min.js')}}"></script>
@@ -56,7 +61,7 @@
     
     <script src="{{asset('js/vendor/headroom.min.js')}}"></script>
     
-    <script src="{{asset('js/vendor/owl.carousel.min.js')}}"></script>
+    {{-- <script src="{{asset('js/vendor/owl.carousel.min.js')}}"></script> --}}
     
     <script src="{{asset('js/vendor/smooth-scroll.min.js')}}"></script>
     
@@ -70,7 +75,12 @@
     <script src="{{asset('js/vendor/odometer.min.js')}}"></script>
     
     <script src="{{asset('js/vendor/wow.min.js')}}"></script>
-</body>
+{{-- 
+    <script src="{{asset('js/vendor/select2/select2.min.js')}}"></script>
+    <script src="{{asset('js/vendor/datepicker/moment.min.js')}}"></script>
+    <script src="{{asset('js/vendor/datepicker/daterangepicker.js')}}"></script> --}}
+
+  </body>
 </html>
 
 

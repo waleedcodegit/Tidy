@@ -43,6 +43,7 @@ class ServiceExtraController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => 'required',
             'price' => 'required',
+            'category' => 'required'
         ]);
         if($validator->fails()){
             $response = ['status' => 219 , 'msg' => $validator->errors()->first() , 
@@ -52,6 +53,7 @@ class ServiceExtraController extends Controller
             $new_service = new ServiceExtra();
             $new_service->title = $request->title;
             $new_service->price = $request->price;
+            $new_service->category_id = $request->category;
             $new_service->save();
             $response = [
                     'status' => 200,
@@ -100,6 +102,7 @@ class ServiceExtraController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => 'required',
             'price' => 'required',
+            'category' => 'required'
         ]);
         if($validator->fails()){
             $response = ['status' => 219 , 'msg' => $validator->errors()->first() , 
@@ -108,7 +111,8 @@ class ServiceExtraController extends Controller
         }else{
             ServiceExtra::where('id', $request->id)->update([
                 'title' => $request->title,
-                'price' => $request->price
+                'price' => $request->price,
+                'category_id' => $request->category
             ]);
             $response = [
                 'status' => 200 ,
@@ -126,22 +130,14 @@ class ServiceExtraController extends Controller
      */
     public function destroy($id)
     {
-        $validator = Validator::make($request->all(), [
-            'id' => 'required',
-        ]);
-        if($validator->fails()){
-            $response = ['status' => 219 , 'msg' => $validator->errors()->first() , 
-            'errors' => $validator->errors()];
-            return $response;
-        }else{
-            $extra = ServiceExtra::find($request->id);
-            $extra->is_deleted = 1;
-            $extra->save();
-            $response = [
-                'status' => 200,
-                'msg' => 'Extra deleted successfully.'
-            ];
-            return $response;
-        }
+     
+        $extra = ServiceExtra::find($id);
+        $extra->is_deleted = 1;
+        $extra->save();
+        $response = [
+            'status' => 200,
+            'msg' => 'Extra deleted successfully.'
+        ];
+        return $response;
     }
 }

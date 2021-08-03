@@ -43,6 +43,7 @@ class SubCategoryController extends Controller
         $validator = Validator::make($request->all(), [
             'category_id' => 'required',
             'name' => 'required',
+            'price' => 'required'
         ]);
         if($validator->fails()){
             $response = ['status' => 219 , 'msg' => $validator->errors()->first() , 
@@ -52,6 +53,7 @@ class SubCategoryController extends Controller
             $new_category = new SubCategory();
             $new_category->name = $request->name;
             $new_category->category_id = $request->category_id;
+            $new_category->price = $request->price;
             $new_category->save();
             // if ($request->image != $new_category->image) {
             //     $name = time() . '.' . explode('/', explode(':', substr($request->image, 0, strpos($request->image, ';')))[1])[1];
@@ -105,6 +107,7 @@ class SubCategoryController extends Controller
         $category = SubCategory::find($request->id);
         $category->name = $request->name;
         $category->category_id = $request->category_id;
+        $category->price = $request->price;
         $category->save();
         if ($request->image != $category->image) {
             $name = time() . '.' . explode('/', explode(':', substr($request->image, 0, strpos($request->image, ';')))[1])[1];

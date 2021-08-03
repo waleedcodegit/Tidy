@@ -143,8 +143,8 @@ class VendorIndex extends Component {
                         <li className="dropdown">
                             <a href="#" className="menu-toggle nav-link has-dropdown"><i data-feather="copy" /><span>Settings</span></a>
                             <ul className="dropdown-menu">
-                            <li><Link to={'/vendor/profile'}> Profile</Link></li>
-                            <li><a className="nav-link" href="/vendor">Accounts</a></li>
+                            <li><Link to={'/vendor/profile'} className="nav-link"> Profile</Link></li>
+                            {/* <li><a className="nav-link" href="/vendor">Accounts</a></li> */}
                             </ul>
                         </li>
                         

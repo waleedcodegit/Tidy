@@ -6,7 +6,7 @@ class Create extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            cat_id: '',
+            service: '',
             title: '',
             price: '',
             categories: [],
@@ -26,9 +26,9 @@ class Create extends Component {
         })
     }
 
-    getCategory(event) {
+    service(event) {
         this.setState({
-            cat_id: event.target.value
+            service: event.target.value
         })  
     }
 

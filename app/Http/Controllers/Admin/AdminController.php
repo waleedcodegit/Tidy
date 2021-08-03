@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Admin;
 use Illuminate\Support\Facades\Hash;
 use DB;
+use App\GiftCard;
 use App\AdminAuthMeta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -95,5 +96,10 @@ class AdminController extends Controller
     }
     public function test(Request $request){
         return $request->all();
+    }
+
+    public function get_gift_cards(Request $request){
+        $gift_cards = GiftCard::orderBy('id','desc')->get();
+        return $gift_cards;
     }
 }

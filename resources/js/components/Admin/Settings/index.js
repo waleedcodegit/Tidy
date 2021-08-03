@@ -27,8 +27,8 @@ class Index extends React.Component{
                     holidays_price: res.data.settings.holidays_price,
                     level_price: res.data.settings.level_price,
                     house_additional_charges: res.data.settings.house_additional_charges,
-                    per_bathroom: res.data.settings.per_bathroom,
-                    per_bedroom: res.data.settings.per_bedroom,                    
+                    per_bathroom: res.data.settings.bathroom,
+                    per_bedroom: res.data.settings.bedroom,                    
                 })
             } 
         })

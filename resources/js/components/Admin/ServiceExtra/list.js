@@ -21,7 +21,16 @@ class ServiceExtraList extends Component {
             }
         })
     }
-
+    deleteSubCategory(id) {
+        let Configs = {
+            headers: {
+                token: window.localStorage.getItem('testapistring')
+            }
+        }
+        Axios.delete(`/api/service-extra/${id}`, Configs).then(res=>{
+            this.componentDidMount();
+        })
+    }
     render() {
         return (
             <div>
@@ -48,7 +57,9 @@ class ServiceExtraList extends Component {
                                                         <td>{index+1}</td>
                                                         <td>{data.title}</td>
                                                         <td>{data.price}</td>
-                                                        <td><Link to={`/admin/edit-service-extra/${data.id}`}><button className="btn btn-outline-success"> <i  className="fa fa-pencil"> </i></button></Link></td>
+                                                        <td><Link to={`/admin/edit-service-extra/${data.id}`}><button className="btn btn-outline-success"> <i  className="fa fa-pencil"> </i></button></Link>
+                                                        <button onClick={this.deleteSubCategory.bind(this, data.id)} className="btn btn-outline-primary"> <i  className="fa fa-trash"> </i></button>    
+                                                        </td>
                                                     </tr>
                                                 )
                                             })

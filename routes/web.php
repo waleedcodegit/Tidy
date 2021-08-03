@@ -58,6 +58,18 @@ Route::view('/admin/edit-question/{id}', 'Admin');
 Route::view('/admin/list-question', 'Admin');
 
 
+Route::view('/admin/add-faq', 'Admin');
+Route::view('/admin/edit-faq/{id}', 'Admin');
+Route::view('/admin/faqs', 'Admin');
+
+Route::view('/admin/gift-cards', 'Admin');
+
+Route::view('/admin/create-service-content', 'Admin');
+Route::view('/admin/edit-service-content/{id}', 'Admin');
+Route::view('/admin/manage-services-content', 'Admin');
+
+
+
 // Vendor Routes
 
 
@@ -78,6 +90,9 @@ Route::view('/vendor/edit-employee/{id}', 'vendor');
 Route::view('/services/{name?}', 'Front');
 Route::view('/signup', 'Front');
 Route::view('/login', 'Front');
+Route::view('/service/{slug}', 'Front');
+
+Route::view('/profile', 'Front');
 
 Route::view('/{path?}', 'Front');
 Route::get('{reactRoutes}', function () {

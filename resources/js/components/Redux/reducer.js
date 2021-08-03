@@ -1,8 +1,12 @@
 
 const current_state = {
-    user:{data:{},is_login:false},
+    user:{data:{},is_login:false,is_apicall:false},
     services_modal:false,
-    vendor:{is_login:false,data:{}}
+    vendor:{is_login:false,data:{}},
+    booking_step:1,
+    select_service_state:{},
+    add_information:{},
+    auth_type:'login'
 }
 const reducer = (state = current_state,action) =>{
     if(action.type == 'CHANGE_USER'){
@@ -16,13 +20,39 @@ const reducer = (state = current_state,action) =>{
             services_modal:action.payload
         }
     }else if(action.type == 'CHANGE_VENDOR'){
-        console.log('hetre');
         return {
             ...state,
             vendor:action.payload
         }
+    }else if(action.type == 'CHANGE_BOOKING_STEP'){
+        window.scrollTo(0,0);
+        return {
+
+            ...state,
+            booking_step:action.payload
+        }
     }
-   
+    else if(action.type == 'CHANGE_SELECT_SERVICE'){
+        console.log(action.payload)
+        return {
+            ...state,
+            select_service_state:action.payload
+        }
+    }
+    else if(action.type == 'ADD_INFORMATION'){
+        console.log(action.payload)
+        return {
+            ...state,
+            add_information:action.payload
+        }
+    }
+    else if(action.type == 'CHANGE_AUTH_TYPE'){
+        console.log(action.payload)
+        return {
+            ...state,
+            auth_type:action.payload
+        }
+    }
     return state;
 }
 

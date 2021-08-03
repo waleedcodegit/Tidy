@@ -36,6 +36,8 @@ class Index extends React.Component{
                                             <th>Sr</th>
                                             <th>State</th>
                                             <th>City</th>
+                                            <th>Latitude</th>
+                                            <th>Longitude</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -47,6 +49,8 @@ class Index extends React.Component{
                                                             <td>{index+1}</td>
                                                             <td>{data.state_name.name}</td>
                                                             <td>{data.name}</td>
+                                                            <td>{data.lat}</td>
+                                                            <td>{data.long}</td>
                                                             <td>
                                                                 <Link to={`/admin/edit-city/${data.id}`}><button className="btn btn-outline-success"> <i  className="fa fa-pencil"> </i></button></Link>
                                                             </td>

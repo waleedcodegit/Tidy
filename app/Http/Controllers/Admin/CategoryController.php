@@ -51,6 +51,7 @@ class CategoryController extends Controller
         }else{
             $new_category = new Category();
             $new_category->name = $request->name;
+            $new_category->slug = str_replace("/", "-", str_replace(" ", "-", strtolower($request->name)));
             $new_category->type = $request->type;
 
             if ($request->image) {
@@ -125,6 +126,7 @@ class CategoryController extends Controller
         }else{
             $category = Category::find($request->id);
             $category->name = $request->name;
+            $category->slug =  str_replace("/", "-", str_replace(" ", "-", strtolower($request->name)));
             $category->type = $request->type;
             $category->save();
             if ($request->image != $category->image) {

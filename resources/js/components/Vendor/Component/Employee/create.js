@@ -69,7 +69,7 @@ class Index extends React.Component{
         // console.log(senderData);
         Axios.post('/api/employee', senderData , Configs).then(res=>{
             if(res.data.status == 200){
-                this.props.history.push('/admin/list-employee');
+                this.props.history.push('/vendor/employee-list');
                 Swal.fire({
                     icon: 'success',
                     title: 'Employee Added Successfully',
