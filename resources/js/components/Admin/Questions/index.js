@@ -20,6 +20,20 @@ class Index extends React.Component{
             } 
         })
     }
+    deletequestion(id) {
+        let data = {
+            id: id
+        }
+        Axios.post('/api/delete-question',data).then(res=>{
+            Swal.fire({
+                icon: 'success',
+                title: 'Successfully Deleted',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            this.componentDidMount();
+        })
+    }
     render(){
         return (
             <div>
@@ -47,8 +61,9 @@ class Index extends React.Component{
                                                             <td>{data.service.name}</td>
                                                             <td>{data.title}</td>
                                                             <td>
-                                                                <Link to={`/admin/edit-question/${data.id}`}><button className="btn btn-outline-success"> <i  className="fa fa-pencil"> </i></button></Link>
-                                                            </td>
+                                                                <Link to={`/admin/edit-question/${data.id}`}><button className="btn btn-outline-success"> <i  className="fa fa-pencil"> </i></button></Link></td>
+                                                                <td><button onClick={this.deletequestion.bind(this, data.id)}  className="btn btn-outline-danger"> <i  className="fa fa-trash"> </i></button></td>
+                                                            
                                                         </tr>
                                                     )
                                                 })

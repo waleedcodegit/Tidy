@@ -16,7 +16,7 @@ class CityController extends Controller
      */
     public function index()
     {
-        $city = City::with('state_name')->get();
+        $city = City::where('delete_status',0)->get();
         $response = [
             'status' => 200,
             'cities' => $city
@@ -91,6 +91,18 @@ class CityController extends Controller
         $response = [
             'status' => 200,
             'cities' => $city
+        ];
+        return $response;
+    }
+    public function delete_city(Request $request) {
+        
+        $city = City::where('id', $request->id)->update([
+            'delete_status' => true,
+           
+        ]);
+        $response = [
+            'status' => 200,
+            'msg' => 'City added successfully', 
         ];
         return $response;
     }

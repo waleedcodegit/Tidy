@@ -62,7 +62,7 @@ class ServicesController extends Controller
 
     }
     public function get_all_service_content (Request $request){
-        $ServiceContent = ServiceContent::with('service')->get();
+        $ServiceContent = ServiceContent::where('delete_status',0)->with('service')->get();
         return $ServiceContent;
     }
     public function get_service_content_by_id (Request $request){
@@ -136,8 +136,16 @@ class ServicesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function delete_ManageService(Request $request) {
+        
+        $ServiceContent = ServiceContent::where('id', $request->id)->update([
+            'delete_status' => true,
+           
+        ]);
+        $response = [
+            'status' => 200,
+            'msg' => 'Successfully Deleted'
+        ];
+        return $response;
     }
 }

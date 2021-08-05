@@ -1,6 +1,7 @@
 import React , {Component} from 'react';
 import Axios from 'axios';
 import {Link} from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 class ServiceExtraList extends Component {
     constructor(props){
@@ -21,13 +22,17 @@ class ServiceExtraList extends Component {
             }
         })
     }
-    deleteSubCategory(id) {
-        let Configs = {
-            headers: {
-                token: window.localStorage.getItem('testapistring')
-            }
+    deleteServiceExtra(id) {
+        let data = {
+            id: id
         }
-        Axios.delete(`/api/service-extra/${id}`, Configs).then(res=>{
+        Axios.post('/api/delete-serviceextra',data).then(res=>{
+            Swal.fire({
+                icon: 'success',
+                title: 'Successfully Deleted',
+                showConfirmButton: false,
+                timer: 1500
+            })
             this.componentDidMount();
         })
     }
@@ -46,7 +51,7 @@ class ServiceExtraList extends Component {
                                             <th>Sr</th>
                                             <th>Title</th>
                                             <th>Price</th>
-                                            <th>Action</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -57,9 +62,9 @@ class ServiceExtraList extends Component {
                                                         <td>{index+1}</td>
                                                         <td>{data.title}</td>
                                                         <td>{data.price}</td>
-                                                        <td><Link to={`/admin/edit-service-extra/${data.id}`}><button className="btn btn-outline-success"> <i  className="fa fa-pencil"> </i></button></Link>
-                                                        <button onClick={this.deleteSubCategory.bind(this, data.id)} className="btn btn-outline-primary"> <i  className="fa fa-trash"> </i></button>    
-                                                        </td>
+                                                        <td><Link to={`/admin/edit-service-extra/${data.id}`}><button className="btn btn-outline-success"> <i  className="fa fa-pencil"> </i></button></Link></td>
+                                                        <td><button onClick={this.deleteServiceExtra.bind(this, data.id)} className="btn btn-outline-danger"> <i  className="fa fa-trash"> </i></button></td>
+                                                       
                                                     </tr>
                                                 )
                                             })

@@ -99,7 +99,20 @@ class AdminController extends Controller
     }
 
     public function get_gift_cards(Request $request){
-        $gift_cards = GiftCard::orderBy('id','desc')->get();
+        $gift_cards = GiftCard::where('delete_status',0)->get();
         return $gift_cards;
     }
+    public function delete_GiftCard(Request $request) {
+        
+        $gift_cards = GiftCard::where('id', $request->id)->update([
+            'delete_status' => true,
+           
+        ]);
+        $response = [
+            'status' => 200,
+            'msg' => 'Successfully Deleted'
+        ];
+        return $response;
+    }
+
 }

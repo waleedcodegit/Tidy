@@ -14,14 +14,15 @@ class SubCategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $sub_categories = SubCategory::all();
-        $response = ['status' => 200 ,
-                'subcategory' => $sub_categories];
+        $subcategory = SubCategory::where('delete_status',0)->get();
+        $response = [
+            'status' => 200,
+            'subcategory' => $subcategory
+        ];
         return $response;
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -127,9 +128,17 @@ class SubCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        $subcategory = SubCategory::where('id', $id)->delete();
-        return 1;
+    public function delete_SubCategory(Request $request) {
+        
+        $category = SubCategory::where('id', $request->id)->update([
+            'delete_status' => true,
+           
+        ]);
+        $response = [
+            'status' => 200,
+            'msg' => 'Successfully Deleted'
+        ];
+        return $response;
     }
+   
 }

@@ -23,7 +23,7 @@ use App\VendorLocation;
 class VendorController extends Controller
 {
     public function list(Request $request) {
-        $vendor = Vendor::get();
+        $vendor = Vendor::where('delete_status',0)->get();
         return response()->json([
             'status' => true,
             'message' => "All Vendors",
@@ -703,5 +703,17 @@ class VendorController extends Controller
         $response = ['status' => 401 , 'msg' => 'Sorry, Incorrect Token'];
             return $response;
         }
+    }
+    public function delete_vendor(Request $request) {
+        
+        $vendor = Vendor::where('id', $request->id)->update([
+            'delete_status' => true,
+           
+        ]);
+        $response = [
+            'status' => 200,
+            'msg' => 'Successfully Deleted'
+        ];
+        return $response;
     }
 }

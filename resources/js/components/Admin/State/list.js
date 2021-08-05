@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Axios from 'axios';
 import {Link} from 'react-router-dom';
+import Swal from 'sweetalert2';
 class Index extends React.Component{
     constructor(props){
         super(props);
@@ -18,6 +19,20 @@ class Index extends React.Component{
                     states: res.data.states
                 })
             } 
+        })
+    }
+    deleteState(id) {
+        let data = {
+            id: id
+        }
+        Axios.post('/api/delete-state',data).then(res=>{
+            Swal.fire({
+                icon: 'success',
+                title: 'Successfully Deleted',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            this.componentDidMount();
         })
     }
 
@@ -46,8 +61,9 @@ class Index extends React.Component{
                                                             <td>{index+1}</td>
                                                             <td>{data.name}</td>
                                                             <td>
-                                                                <Link to={`/admin/edit-state/${data.id}`}><button className="btn btn-outline-success"> <i  className="fa fa-pencil"> </i></button></Link>
-                                                            </td>
+                                                                <Link to={`/admin/edit-state/${data.id}`}><button className="btn btn-outline-success"> <i  className="fa fa-pencil"> </i></button></Link></td>
+                                                                <td><button onClick={this.deleteState.bind(this, data.id)} className="btn btn-outline-danger"> <i  className="fa fa-trash"> </i></button></td>
+                                                          
                                                         </tr>
                                                     )
                                                 })

@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import Axios from 'axios';
 import {Link} from 'react-router-dom';
+import Swal from 'sweetalert2';
 class Index extends React.Component{
+
     constructor(props){
         super(props);
         this.state = {
@@ -20,6 +22,20 @@ class Index extends React.Component{
             } 
         })
     }
+    deleteCity(id) {
+        let data = {
+            id: id
+        }
+        Axios.post('/api/delete-city',data).then(res=>{
+            Swal.fire({
+                icon: 'success',
+                title: 'Successfully Deleted',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            this.componentDidMount();
+        })
+    }
 
     render(){
         return (
@@ -35,9 +51,10 @@ class Index extends React.Component{
                                         <tr>
                                             <th>Sr</th>
                                             <th>State</th>
-                                            <th>City</th>
+                                            {/* <th>City</th> */}
                                             <th>Latitude</th>
                                             <th>Longitude</th>
+                                            <th>Actions</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -47,13 +64,14 @@ class Index extends React.Component{
                                                     return(
                                                         <tr key={index}>
                                                             <td>{index+1}</td>
-                                                            <td>{data.state_name.name}</td>
+                                                            {/* <td>{data.state_name.name}</td> */}
                                                             <td>{data.name}</td>
                                                             <td>{data.lat}</td>
                                                             <td>{data.long}</td>
                                                             <td>
-                                                                <Link to={`/admin/edit-city/${data.id}`}><button className="btn btn-outline-success"> <i  className="fa fa-pencil"> </i></button></Link>
-                                                            </td>
+                                                                <Link to={`/admin/edit-city/${data.id}`}><button className="btn btn-outline-success"> <i  className="fa fa-pencil"> </i></button></Link></td>
+                                                                <td><button onClick={this.deleteCity.bind(this, data.id)} className="btn btn-outline-danger"> <i  className="fa fa-trash"> </i></button></td>
+                                                            
                                                         </tr>
                                                     )
                                                 })

@@ -16,7 +16,7 @@ class StateController extends Controller
      */
     public function index()
     {
-        $states = State::get();
+        $states = State::where('delete_status',0)->get();
         $response = [
             'status' => 200,
             'states' => $states
@@ -148,5 +148,17 @@ class StateController extends Controller
                 'msg' => 'State deleted successfully.'];
             return $response;
         }
+    }
+    public function delete_State(Request $request) {
+        
+        $state = State::where('id', $request->id)->update([
+            'delete_status' => true,
+           
+        ]);
+        $response = [
+            'status' => 200,
+            'msg' => 'Successfully Deleted'
+        ];
+        return $response;
     }
 }

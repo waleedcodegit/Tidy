@@ -1,6 +1,7 @@
 import React from 'react';
 import Axios from 'axios';
 import {Link} from 'react-router-dom';
+import Swal from 'sweetalert2';
 class GiftCardsList extends React.Component{
     constructor(props){
         super(props);
@@ -15,6 +16,20 @@ class GiftCardsList extends React.Component{
             this.setState({
                 gift_cards: res.data
             })
+        })
+    }
+    deleteGiftCard(id) {
+        let data = {
+            id: id
+        }
+        Axios.post('/api/delete-giftcard',data).then(res=>{
+            Swal.fire({
+                icon: 'success',
+                title: 'Successfully Deleted',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            this.componentDidMount();
         })
     }
     render(){
@@ -58,6 +73,7 @@ class GiftCardsList extends React.Component{
                                                             <td>{data.email_status}</td>
                                                             {/* <td>{data.title}</td>
                                                             <td>{data.title}</td> */}
+                                                            <td><button onClick={this.deleteGiftCard.bind(this, data.id)} className="btn btn-outline-danger"> <i  className="fa fa-trash"> </i></button></td>
                                                         </tr>
                                                     )
                                                 })

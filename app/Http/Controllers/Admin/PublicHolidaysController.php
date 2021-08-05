@@ -16,7 +16,7 @@ class PublicHolidaysController extends Controller
      */
     public function index()
     {
-        $holidays = PublicHoliday::all();
+        $holidays = PublicHoliday::where('delete_status',0)->get();
         $response = ['status' => 200 ,
                 'holidays' => $holidays];
         return $response;
@@ -160,5 +160,17 @@ class PublicHolidaysController extends Controller
             ];
             return $response;
         }
+    }
+    public function delete_holiday(Request $request) {
+        
+        $data = PublicHoliday::where('id', $request->id)->update([
+            'delete_status' => true,
+           
+        ]);
+        $response = [
+            'status' => 200,
+            'msg' => 'Successfully Deleted'
+        ];
+        return $response;
     }
 }

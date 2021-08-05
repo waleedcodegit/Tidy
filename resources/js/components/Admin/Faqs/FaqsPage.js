@@ -87,9 +87,14 @@ class Index extends React.Component{
                                                             </td>
                                                             <td>
                                                                 <Link to={`/admin/edit-faq/${data.id}`}><button className="btn btn-outline-success"> <i  className="fa fa-pencil"> </i></button></Link>
+                                                                
+                                                            </td>
+                                                            <td>
+                                                                
                                                                 <button onClick={this.deleteFaq.bind(this, data.id)} className="btn btn-outline-primary"> <i  className="fa fa-trash"> </i></button>
                                                             </td>
                                                         </tr>
+                                                        
                                                     )
                                                 })
                                             }

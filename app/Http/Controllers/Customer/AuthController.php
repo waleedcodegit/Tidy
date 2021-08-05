@@ -21,7 +21,7 @@ class AuthController extends Controller
      */
 
     public function index(Request $request) {
-        $customers = Customer::get();
+        $customers = Customer::where('delete_status',0)->get();
         // return $customers;
         return response()->json([
             'status' => true,
@@ -138,7 +138,7 @@ class AuthController extends Controller
         }
     }
 
-  
+    
 
 
     public function customer_forget_password(Request $request){
@@ -237,5 +237,19 @@ class AuthController extends Controller
             'customer' => $user,     
         ]);
     }
+  
+    public function delete_customer(Request $request) {
+        
+        $user = Customer::where('id', $request->id)->update([
+            'delete_status' => true,
+           
+        ]);
+        $response = [
+            'status' => 200,
+            'msg' => 'Customer deleted successfully', 
+        ];
+        return $response;
+    }
+
     
 }

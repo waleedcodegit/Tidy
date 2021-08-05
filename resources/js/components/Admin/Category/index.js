@@ -21,6 +21,20 @@ class Index extends React.Component{
             } 
         })
     }
+    deleteCategory(id) {
+        let data = {
+            id: id
+        }
+        Axios.post('/api/delete-category',data).then(res=>{
+            Swal.fire({
+                icon: 'success',
+                title: 'Successfully Deleted',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            this.componentDidMount();
+        })
+    }
     search(e){
         this.setState({
             search_string:e.target.value
@@ -63,6 +77,8 @@ class Index extends React.Component{
                                                             <td>{data.name}</td>
                                                             <td>{data.type}</td>
                                                             <td><Link to={`/admin/edit-category/${data.id}`}><button className="btn btn-outline-success"> <i  className="fa fa-pencil"> </i></button></Link></td>
+                                                            <td><button onClick={this.deleteCategory.bind(this, data.id)} className="btn btn-outline-danger"> <i  className="fa fa-trash"> </i></button></td>
+                                                       
                                                         </tr>
                                                     )
                                                 })

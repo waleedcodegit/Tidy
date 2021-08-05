@@ -1,6 +1,7 @@
 import React from 'react';
 import Axios from 'axios';
 import Link from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 class CustomerList extends React.Component {
     constructor(props) {
@@ -23,6 +24,22 @@ class CustomerList extends React.Component {
             // console.log(res);
         })
     }
+    deleteCustomer(id) {
+        let data = {
+            id: id
+        }
+        Axios.post('/api/delete-customer',data).then(res=>{
+            Swal.fire({
+                icon: 'success',
+                title: 'Successfully Deleted',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            this.componentDidMount();
+        })
+    }
+
+
 
     render() {
         return (
@@ -57,6 +74,8 @@ class CustomerList extends React.Component {
                                                         <td>{data.address}</td>
                                                         <td>{data.phone}</td>
                                                         <td><button className="btn btn-outline-success"> <i  className="fa fa-pencil"> </i></button></td>
+                                                        <td> <button onClick={this.deleteCustomer.bind(this, data.id)} className="btn btn-outline-primary"> <i  className="fa fa-trash"> </i></button> </td>
+                                                        
                                                     </tr>
                                                 )
                                             })

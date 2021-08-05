@@ -16,7 +16,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $question = Question::with('service')->get();
+        $question = Question::where('delete_status',0)->with('service')->get();
         $response = ['status' => 200 ,
                 'question' => $question];
         return $response;
@@ -113,5 +113,17 @@ class QuestionController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function delete_question(Request $request) {
+        
+        $question = Question::where('id', $request->id)->update([
+            'delete_status' => true,
+           
+        ]);
+        $response = [
+            'status' => 200,
+            'msg' => 'Successfully Deleted'
+        ];
+        return $response;
     }
 }

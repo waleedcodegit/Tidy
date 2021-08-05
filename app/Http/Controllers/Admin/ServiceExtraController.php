@@ -16,7 +16,7 @@ class ServiceExtraController extends Controller
      */
     public function index()
     {
-        $serviceExtra = ServiceExtra::where('is_deleted', 0)->get();
+        $serviceExtra = ServiceExtra::where('delete_status',0)->get();
         $response = ['status' => 200 ,
                 'serviceExtra' => $serviceExtra];
         return $response;
@@ -128,15 +128,15 @@ class ServiceExtraController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-     
-        $extra = ServiceExtra::find($id);
-        $extra->is_deleted = 1;
-        $extra->save();
+    public function delete_ServiceExtra(Request $request) {
+        
+        $service = ServiceExtra::where('id', $request->id)->update([
+            'delete_status' => true,
+           
+        ]);
         $response = [
             'status' => 200,
-            'msg' => 'Extra deleted successfully.'
+            'msg' => 'Successfully Deleted'
         ];
         return $response;
     }

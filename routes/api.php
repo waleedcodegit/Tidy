@@ -17,6 +17,22 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// delete api///
+
+Route::post('/delete-customer','Customer\AuthController@delete_customer');
+Route::post('delete-city','Admin\CityController@delete_city');
+Route::post('delete-subcategory','Admin\SubCategoryControllerr@delete_subcategory');
+Route::post('delete-holiday','Admin\PublicHolidaysController@delete_holiday');
+Route::post('delete-question', 'Admin\QuestionController@delete_question');
+Route::post('delete-vendor','Vendor\VendorController@delete_vendor');
+Route::post('delete-serviceextra','Admin\ServiceExtraController@delete_ServiceExtra');
+Route::post('delete-state','Admin\StateController@delete_State');
+Route::post('delete-giftcard','Admin\AdminController@delete_GiftCard');
+Route::post('delete-subcategory','Admin\SubCategoryController@delete_SubCategory');
+// Route::post('delete-subcategory','Admin\ServicesController@delete_SubCategory');
+
+Route::post('delete-manageservice','Admin\ServicesController@delete_ManageService');
+
 Route::post('/update_customer','Customer\AuthController@update_customer');
 
 Route::middleware(['admin-login'])->group(function () {
@@ -25,6 +41,7 @@ Route::middleware(['admin-login'])->group(function () {
     Route::post('/create-customer','Customer\AuthController@create_customer');
     Route::post('/edit-customer/{id}','Customer\AuthController@edit_customer');
     Route::post('/update-customer','Customer\AuthController@update_customer');
+     
 
 
     // Vendor Route
@@ -45,15 +62,18 @@ Route::middleware(['admin-login'])->group(function () {
 
     // City
     Route::resource('city', 'Admin\CityController');
+   
     
- 
+    
     // SubCategory Route
     Route::resource('subcategory', 'Admin\SubCategoryController');
+    
     // Setting Route
     Route::resource('setting', 'Admin\SettingController');
 
     Route::resource('holiday', 'Admin\PublicHolidaysController');
     Route::resource('question', 'Admin\QuestionController');  
+    
 });
    // Category Route
 Route::resource('category', 'Admin\CategoryController');
@@ -63,6 +83,7 @@ Route::post('/customer-login','Customer\AuthController@customer_login');
 Route::post('/customer_forget_password','Customer\AuthController@customer_forget_password');
 Route::post('/user-password','Customer\AuthController@user_password');
 Route::post('/customer_check_auth','Customer\AuthController@customer_check_auth');
+Route::post('delete-category','Admin\CategoryController@delete_category');
 
 // Admin COntroller
 Route::get('/test','Admin\AdminController@test');
@@ -86,7 +107,7 @@ Route::post('/create_services_content','Admin\ServicesController@create_services
 Route::post('/update_services_content','Admin\ServicesController@update_services_content');
 Route::post('/get_all_service_content','Admin\ServicesController@get_all_service_content');
 Route::post('/get_service_content_by_id','Admin\ServicesController@get_service_content_by_id');
-Route::post('/delete_service_content','Admin\ServicesController@delete_service_content');
+// Route::post('/delete_service_content','Admin\ServicesController@delete_service_content');
 
 
 

@@ -19,6 +19,21 @@ class ManageServiceContent extends React.Component{
             })
         })
     }
+    
+    deleteManageService(id) {
+    let data = {
+        id: id
+    }
+    Axios.post('/api/delete-manageservice',data).then(res=>{
+        Swal.fire({
+            icon: 'success',
+            title: 'Successfully Deleted',
+            showConfirmButton: false,
+            timer: 1500
+        })
+        this.componentDidMount();
+    })
+}
     render(){
         return (
             <div>
@@ -48,8 +63,9 @@ class ManageServiceContent extends React.Component{
                                                             </td>
                                                             <td>{data.service.name}</td>
                                                             <td>
-                                                                <Link to={`/admin/edit-service-content/${data.id}`}><button className="btn btn-outline-success"> <i  className="fa fa-pencil"> </i></button></Link>
-                                                            </td>
+                                                                <Link to={`/admin/edit-service-content/${data.id}`}><button className="btn btn-outline-success"> <i  className="fa fa-pencil"> </i></button></Link> </td>
+                                                                <td><button onClick={this.deleteManageService.bind(this, data.id)} className="btn btn-outline-danger"> <i  className="fa fa-trash"> </i></button></td>
+                                                           
                                                         </tr>
                                                     )
                                                 })

@@ -1,6 +1,7 @@
 import React from 'react';
 import Axios from 'axios';
 import {Link} from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 class VendorList extends React.Component {
     constructor(props) {
@@ -22,6 +23,21 @@ class VendorList extends React.Component {
             }
         });
     }
+    deleteVendor(id) {
+        let data = {
+            id: id
+        }
+        Axios.post('/api/delete-vendor',data).then(res=>{
+            Swal.fire({
+                icon: 'success',
+                title: 'Successfully Deleted',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            this.componentDidMount();
+        })
+    }
+
 
     render() {
         return(
@@ -60,6 +76,7 @@ class VendorList extends React.Component {
                                                         <td>{data.australian_business_number}</td>
                                                         <td>{data.status}</td>
                                                         <td><Link to={`/admin/vendor-info/${data.id}`}><button className="btn btn-outline-success"> <i  className="fa fa-eye"> </i></button></Link></td>
+                                                        <td><button onClick={this.deleteVendor.bind(this, data.id)}  className="btn btn-outline-danger"> <i  className="fa fa-trash"> </i></button></td>
                                                     </tr>
                                                 )
                                             })

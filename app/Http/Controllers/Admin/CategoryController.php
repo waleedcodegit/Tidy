@@ -15,7 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::where('delete_status',0)->get();
         $response = ['status' => 200 ,
                 'categories' => $categories];
         return $response;
@@ -140,6 +140,18 @@ class CategoryController extends Controller
                 'msg' => 'category updated successfully.'];
             return $response;
         }
+    }
+    public function delete_category(Request $request) {
+        
+        $category = Category::where('id', $request->id)->update([
+            'delete_status' => true,
+           
+        ]);
+        $response = [
+            'status' => 200,
+            'msg' => 'Successfully Deleted'
+        ];
+        return $response;
     }
 
     /**
