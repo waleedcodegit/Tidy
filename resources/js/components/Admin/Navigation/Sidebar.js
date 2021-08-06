@@ -324,6 +324,23 @@ class Sidebar extends Component {
                                                 :null
                                             }
                                         </li>
+                                        <li onClick={this.active_item.bind(this, 15)} className={this.state.nav_item_active.main == 15 ? "active-sub" : ""}>
+                                            <a onClick={this.change_visible_item.bind(this,15)} >
+                                                <i className="demo-pli-home"></i>
+                                                <span className="menu-title" 
+                                                >Emails</span>
+                                                <i className="arrow"></i>
+                                            </a>
+                                            {
+                                                this.state.nav_item_visible == 15 ?
+                                                <ul >
+                                                    <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/create-emails">Create</Link></li>
+                                                    <li onClick={this.active_sub_item.bind(this, 2)} className={this.state.active_sub_item == 2 ? "active-link" : ""}><Link to="/admin/emails">List</Link></li>
+                                                </ul>
+                                                :null
+                                            }
+                                        </li>
+                                       
                                     </ul>
                                 </div>
                             </div>

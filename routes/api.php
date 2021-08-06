@@ -157,3 +157,11 @@ Route::post('/get_customer_card','Frontend\FrontController@get_customer_card');
 Route::post('/image_upload','Frontend\FrontController@image_upload');
 Route::post('/get_service_content_by_slug','Frontend\FrontController@get_service_content_by_slug');
 
+
+//Emails Controller//
+Route::resource('emails', 'EmailsController');
+Route::post('create-emails', 'EmailsController@create_emails');
+Route::get('/api/emails','EmailsController@Emails_List');
+Route::post('/delete-email','EmailsController@delete_email');
+// Route::post('/edit-email','EmailsController@edit_email');
+

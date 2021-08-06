@@ -56,6 +56,11 @@ import Create from '../ManageServiceContent/create';
 import Edit from '../ManageServiceContent/edit';
 import ManageServiceContent from '../ManageServiceContent/ManageServiceContent';
 
+// Emails
+import CreateEmails from '../Emails/create';
+import EditEmails from '../Emails/edit';
+import ListEmails from '../Emails/list';
+
 
 class Main extends Component {
     render() {
@@ -122,6 +127,11 @@ class Main extends Component {
                         <Route path="/admin/create-service-content" component={Create}></Route>
                         <Route path="/admin/edit-service-content/:id" component={Edit}></Route>
                         <Route path="/admin/manage-services-content" component={ManageServiceContent}></Route>
+
+
+                        <Route path="/admin/create-emails" component={CreateEmails}></Route>
+                        {/* <Route path="/admin/edit-emails/:id" component={EditEmails}></Route> */}
+                        <Route path="/admin/emails" component={ListEmails}></Route>
                     </div>
                     <Sidebar></Sidebar>
                 </div>

@@ -62,6 +62,14 @@ Route::view('/admin/add-faq', 'Admin');
 Route::view('/admin/edit-faq/{id}', 'Admin');
 Route::view('/admin/faqs', 'Admin');
 
+
+Route::view('/admin/create-emails', 'Admin');
+// Route::view('/admin/edit-faq/{id}', 'Admin');
+Route::view('/admin/emails', 'Admin');
+
+
+
+
 Route::view('/admin/gift-cards', 'Admin');
 
 Route::view('/admin/create-service-content', 'Admin');
