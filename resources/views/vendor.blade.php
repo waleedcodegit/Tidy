@@ -43,6 +43,7 @@
         <script src="/vendor-assets/js/custom.js"></script>
 
         <script src="/vendor-assets/bundles/summernote/summernote-bs4.js"></script>
+        
 
     </body>
 </html>

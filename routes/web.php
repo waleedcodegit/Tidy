@@ -64,7 +64,7 @@ Route::view('/admin/faqs', 'Admin');
 
 
 Route::view('/admin/create-emails', 'Admin');
-// Route::view('/admin/edit-faq/{id}', 'Admin');
+ Route::view('/admin/edit-email/{id}', 'Admin');
 Route::view('/admin/emails', 'Admin');
 
 

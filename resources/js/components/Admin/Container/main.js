@@ -130,7 +130,7 @@ class Main extends Component {
 
 
                         <Route path="/admin/create-emails" component={CreateEmails}></Route>
-                        {/* <Route path="/admin/edit-emails/:id" component={EditEmails}></Route> */}
+                        <Route path="/admin/edit-email/:id" component={EditEmails}></Route>
                         <Route path="/admin/emails" component={ListEmails}></Route>
                     </div>
                     <Sidebar></Sidebar>

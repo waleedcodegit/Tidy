@@ -163,5 +163,5 @@ Route::resource('emails', 'EmailsController');
 Route::post('create-emails', 'EmailsController@create_emails');
 Route::get('/api/emails','EmailsController@Emails_List');
 Route::post('/delete-email','EmailsController@delete_email');
-// Route::post('/edit-email','EmailsController@edit_email');
+Route::get('/edit-email/{id}','EmailsController@edit_email');
 

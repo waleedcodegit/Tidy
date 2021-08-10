@@ -9,6 +9,7 @@ class Index extends React.Component{
         this.state = {
             emails: [],
         }
+        
     }
     componentDidMount(){
         Axios.get(`/api/emails`,{ headers: {
@@ -22,6 +23,7 @@ class Index extends React.Component{
             } 
         })
     }
+   
     deleteEmail(id) {
         let data = {
             id: id
@@ -39,6 +41,7 @@ class Index extends React.Component{
    
 
     render(){
+        const renderHTML = (escapedHTML) => React.createElement("div", { dangerouslySetInnerHTML: { __html: escapedHTML } });
         return (
             <div>
                 <div id="page-content">
@@ -53,6 +56,7 @@ class Index extends React.Component{
                                             <th>Sr</th>
                                             <th>Email Title</th>
                                             
+                                           
                                             <th>Email Content</th>
                                             
                                             <th>Edit</th>
@@ -67,10 +71,10 @@ class Index extends React.Component{
                                                             <td>{index+1}</td>
                                                             
                                                             <td>{data.email_title}</td>
-                                                            <td>{data.email_content}</td>
+                                                             <td>{renderHTML(data.email_content)}</td>
                                                             
                                                             <td>
-                                                                <Link to={`/admin/emails/${data.id}`}><button className="btn btn-outline-success"> <i  className="fa fa-pencil"> </i></button></Link></td>
+                                                            <Link to={`/admin/edit-email/${data.id}`}><button className="btn btn-outline-success"> <i  className="fa fa-pencil"> </i></button></Link></td>
                                                                 <td><button onClick={this.deleteEmail.bind(this, data.id)} className="btn btn-outline-danger"> <i  className="fa fa-trash"> </i></button></td>
                                                             
                                                         </tr>
