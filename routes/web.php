@@ -77,6 +77,8 @@ Route::view('/admin/edit-service-content/{id}', 'Admin');
 Route::view('/admin/manage-services-content', 'Admin');
 
 
+Route::view('/admin/Vendor-messages', 'Admin');
+Route::view('/admin/customer-messages', 'Admin');
 
 // Vendor Routes
 
@@ -91,6 +93,7 @@ Route::view('/vendor/dashboard', 'vendor');
 Route::view('/vendor/employee-list', 'vendor');
 Route::view('/vendor/create-employee', 'vendor');
 Route::view('/vendor/edit-employee/{id}', 'vendor');
+Route::view('/vendor/message-admin', 'vendor');
 
 
 // Front Client Routes
