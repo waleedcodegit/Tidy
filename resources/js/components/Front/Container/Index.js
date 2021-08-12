@@ -16,6 +16,7 @@ import Axios from 'axios';
 import { connect } from 'react-redux';
 import Profile from '../Pages/UserProfile/Profile';
 import ServicePage from '../Pages/BookService/ServicePage';
+import MessageAdmin from '../Pages/Messages/MessageAdmin';
 class Index extends Component {
     constructor(props) {
         super(props);
@@ -49,6 +50,8 @@ class Index extends Component {
                 <Route  path="/gift-card" component={GiftCard}></Route>
                 <Route  path="/profile" component={Profile}></Route>
                 <Route  path="/service/:slug" component={ServicePage}></Route>
+
+                <Route  path="/message-admin" component={MessageAdmin}></Route>
 
                 <Footer></Footer>
             </div>

@@ -13,7 +13,9 @@ class EmailsController extends Controller
         // return 1;
         $validator = Validator::make($request->all(), [
             'email_title' => 'required',
-            'email_content' => 'required'
+            // 'email_content' => 'required',
+            // 'editor_content' => 'required'
+            
             
         ]);
         if($validator->fails()){
@@ -24,6 +26,8 @@ class EmailsController extends Controller
             $email = new Email();
             $email->email_title = $request->email_title;
             $email->email_content = $request->email_content;
+            
+           
             
             $email->save();
             $response = ['status' => 200 , 'msg' => 'Email added.'];
@@ -49,6 +53,29 @@ class EmailsController extends Controller
         $response = [
             'status' => 200,
             'msg' => 'Successfully Deleted'
+        ];
+        return $response;
+    }
+    public function edit_email(Request $request)
+    {
+        $email = Email::where('id', $request->id)->first();
+        $response = [
+            'status' => 200,
+            'msg' => 'Email',
+            'data' =>  $email
+        ];
+        return $response;
+    }
+    public function update(Request $request) {
+        $email = Email::where('id', $request->id)->update([
+            'email_title' => $request->email_title,
+            'email_content' => $request->email_content
+            
+        ]);
+
+        $response = [
+            'status' => 200,
+            'msg' => 'Updated Successfully'
         ];
         return $response;
     }

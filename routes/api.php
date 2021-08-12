@@ -163,5 +163,19 @@ Route::resource('emails', 'EmailsController');
 Route::post('create-emails', 'EmailsController@create_emails');
 Route::get('/api/emails','EmailsController@Emails_List');
 Route::post('/delete-email','EmailsController@delete_email');
-// Route::post('/edit-email','EmailsController@edit_email');
+Route::get('/edit-email/{id}','EmailsController@edit_email');
 
+
+
+
+// Common Controller
+Route::post('/pusher_auth/{id}','Common\CommonController@pusher_auth');
+Route::post('/vendor_message_sender','Common\CommonController@vendor_message_sender');
+Route::post('/get_vendor_messages','Common\CommonController@get_vendor_messages');
+Route::post('/get_vendor_chat_messages','Common\CommonController@get_vendor_chat_messages');
+Route::post('/get_vendor_chats','Common\CommonController@get_vendor_chats');
+
+Route::post('/customer_message_sender','Common\CommonController@customer_message_sender');
+Route::post('/get_customer_messages','Common\CommonController@get_customer_messages');
+Route::post('/get_customer_chat_messages','Common\CommonController@get_customer_chat_messages');
+Route::post('/get_customer_chats','Common\CommonController@get_customer_chats');

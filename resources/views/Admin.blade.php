@@ -20,11 +20,13 @@
     <link href="{{asset('admin-assets/plugins/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{asset('admin-assets/plugins/summernote/summernote.min.css')}}" rel="stylesheet">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </head>
 <body>
     <div id="root">
        
     </div>
+    
     <script src="https://js.stripe.com/v3/"></script>
     <script src="{{asset('admin-assets/js/jquery.min.js')}}"></script>
     <script src="{{asset('admin-assets/js/bootstrap.min.js')}}"></script>

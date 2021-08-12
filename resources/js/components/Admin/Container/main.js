@@ -61,6 +61,8 @@ import CreateEmails from '../Emails/create';
 import EditEmails from '../Emails/edit';
 import ListEmails from '../Emails/list';
 
+import VendorMessages from '../Messages/VendorMessages';
+import CustomerMessages from '../Messages/CustomerMessages';
 
 class Main extends Component {
     render() {
@@ -130,8 +132,13 @@ class Main extends Component {
 
 
                         <Route path="/admin/create-emails" component={CreateEmails}></Route>
-                        {/* <Route path="/admin/edit-emails/:id" component={EditEmails}></Route> */}
+                        <Route path="/admin/edit-email/:id" component={EditEmails}></Route>
                         <Route path="/admin/emails" component={ListEmails}></Route>
+
+
+                        <Route path="/admin/vendor-messages" component={VendorMessages}></Route>
+
+<Route path="/admin/customer-messages" component={CustomerMessages}></Route>
                     </div>
                     <Sidebar></Sidebar>
                 </div>

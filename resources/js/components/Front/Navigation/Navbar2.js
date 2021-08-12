@@ -101,6 +101,7 @@ class Navbar2 extends Component {
                                             <ul style={{width:'153px'}} class=" card  card-dropdown display_none animate_auth_modal dropdown-menu" role="menu">
                                             <li><a href="#" style={{fontWeight:'700'}}>{this.props.user.data.first_name}</a></li>
                                             <li ><a href="/profile">Profile</a></li>
+                                            <li ><a href="/message-admin">Messages</a></li>
                                             <li class="divider"></li>
                                             <li onClick={this.logout.bind(this)}><a href="#">Logout</a></li>
                                             </ul>

@@ -17,7 +17,9 @@ class Index extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            paths:['/book-service','/signup','/login','/vendor-signup','/vendor-login','/gift-card','/profile','/service/:slug']
+            paths:['/book-service','/signup','/login','/vendor-signup','/vendor-login','/gift-card','/profile','/service/:slug'
+            ,'/message-admin'
+        ]
         };
         
     }

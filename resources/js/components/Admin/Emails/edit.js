@@ -2,6 +2,8 @@ import Axios from 'axios';
 import React , { Component } from 'react';
 import {img_baseurl} from '../../Configs/Api';
 import Swal from 'sweetalert2';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 class Edit extends Component {
     constructor(props) {
@@ -11,16 +13,17 @@ class Edit extends Component {
             email_content: ''
             
         };
+        this.handleChange = this.handleChange.bind(this)
+    
     }
 
-    componentDidMount() {
-        Axios.get(`/api/email/${this.props.match.params.id}/edit`,{ headers: {
-            token: window.localStorage.getItem('testapistring')
-        }}).then(res=>{
+    componentDidMount() {  
+        Axios.get(`/api/edit-email/${this.props.match.params.id}`).then(res=>{
             if(res.data.status == 200) {
                 this.setState({
-                    email_title: res.data.email.email_title,
-                    email_content: res.data.email.email_content
+                    email_title: res.data.data.email_title,
+                    email_content: res.data.data.email_content
+                    
                 })
             }
         })
@@ -32,18 +35,19 @@ class Edit extends Component {
         })
     }
 
-    getEmailContent(event) {
+      handleChange(value){
+        
         this.setState({
-            email_content: event.target.value
+            email_content:value
         })
     }
 
-    updateHoliday(event) {
+    updateEmail(event) {
         
         event.preventDefault();
         let senderData = {
-            email_title: this.email.email_title,
-            email_content: this.email.email_content,
+            email_title: this.state.email_title,
+            email_content: this.state.email_content,
             id: this.props.match.params.id
         }
         this.setState({
@@ -54,7 +58,7 @@ class Edit extends Component {
                 token: window.localStorage.getItem('testapistring')
             }
         }
-        Axios.put(`/api/email/${this.props.match.params.id}`, senderData , Configs).then(res=>{
+        Axios.put(`/api/emails/${this.props.match.params.id}`, senderData , Configs).then(res=>{
             this.setState({
                 loading: false
             })
@@ -62,7 +66,7 @@ class Edit extends Component {
                 this.props.history.push('/admin/emails');
                 Swal.fire({
                     icon: 'success',
-                    title: 'Emails Added Successfully',
+                    title: 'Email update Successfully',
                     showConfirmButton: false,
                     timer: 1500
                 })
@@ -87,37 +91,33 @@ class Edit extends Component {
                             <h3 className="panel-title">Edit Email</h3>
                             </div>
                             <div className="panel-body">
-                            <div className="panel">
-                                <form encType="multipart/form-data">
-                                <div className="panel-body">
-                                    
-                                    <div className="row">
-                                        <div className="col-sm-6">
-                                            <div className="form-group">
-                                                <label htmlFor="price">Email:</label>
-                                                <input onChange={this.getEmailTitle.bind(this)} type="text" className="form-control" id="title" value={this.email.email_title} />
-                                            </div>
-                                        </div>
+                        <div className="row">
+                            <div className="col-sm-12">
+                                <div className="form-group">
+                                    <label htmlFor="price">Email Title</label>
+                                    <input onChange={this.getEmailTitle.bind(this)} type="text" className="form-control" id="email_title" value={this.state.email_title}/>
+                                   
+                                </div>
+                            </div>
+                           
+                            
+                                 
+                                   
+                         </div>
+                         <label htmlFor="price">Email Content</label>
+                             <ReactQuill onChange={this.handleChange}  id="email_content" value={this.state.email_content}/>
+                           
 
-                                        <div className="col-sm-6">
-                                            <div className="form-group">
-                                                <label htmlFor="price">Date:</label>
-                                                <input onChange={this.getEmailContent.bind(this)} type="date" className="form-control" id="date" value={this.state.email_content} />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
                                 <div className="panel-footer text-right">
-                                    <button onClick={this.updateHoliday.bind(this)} type="submit" className="btn btn-primary">Submit</button>
+                                    <button onClick={this.updateEmail.bind(this)} type="submit" className="btn btn-primary">Submit</button>
                                 </div>
-                                </form>
+                                
                             </div>
                             </div>
                         </div>
                         </div>
                     </div>
-                </div>
+                
         );
     }
 }
