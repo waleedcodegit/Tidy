@@ -64,6 +64,12 @@ import ListEmails from '../Emails/list';
 import VendorMessages from '../Messages/VendorMessages';
 import CustomerMessages from '../Messages/CustomerMessages';
 
+
+import EditPage from '../ManagePages/Edit';
+import AddPage from '../ManagePages/create';
+import ManagePages from '../ManagePages/ManagePagesContent';
+
+
 class Main extends Component {
     render() {
         return (
@@ -138,7 +144,12 @@ class Main extends Component {
 
                         <Route path="/admin/vendor-messages" component={VendorMessages}></Route>
 
-<Route path="/admin/customer-messages" component={CustomerMessages}></Route>
+                        <Route path="/admin/customer-messages" component={CustomerMessages}></Route>
+
+                        <Route path="/admin/create-page" component={AddPage}></Route>
+                        <Route path="/admin/manage-pages" component={ManagePages}></Route>
+                        <Route path="/admin/edit-page/:id" component={EditPage}></Route>
+
                     </div>
                     <Sidebar></Sidebar>
                 </div>

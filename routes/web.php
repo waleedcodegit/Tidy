@@ -80,6 +80,11 @@ Route::view('/admin/manage-services-content', 'Admin');
 Route::view('/admin/Vendor-messages', 'Admin');
 Route::view('/admin/customer-messages', 'Admin');
 
+Route::view('/admin/create-page', 'Admin');
+Route::view('/admin/manage-pages', 'Admin');
+Route::view('/admin/edit-page/{id}', 'Admin');
+
+
 // Vendor Routes
 
 

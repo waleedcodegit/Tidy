@@ -29,7 +29,16 @@ Route::post('delete-serviceextra','Admin\ServiceExtraController@delete_ServiceEx
 Route::post('delete-state','Admin\StateController@delete_State');
 Route::post('delete-giftcard','Admin\AdminController@delete_GiftCard');
 Route::post('delete-subcategory','Admin\SubCategoryController@delete_SubCategory');
-// Route::post('delete-subcategory','Admin\ServicesController@delete_SubCategory');
+//
+// Pages Controller
+Route::post('add_page','Admin\PagesController@add_page');
+Route::post('update_page','Admin\PagesController@update_page');
+Route::post('get_page_by_id','Admin\PagesController@get_page_by_id');
+Route::post('delete_page_by_id','Admin\PagesController@delete_page_by_id');
+Route::post('get_pages','Admin\PagesController@get_pages');
+
+
+Route::post('delete-subcategory','Admin\ServicesController@delete_SubCategory');
 
 Route::post('delete-manageservice','Admin\ServicesController@delete_ManageService');
 
