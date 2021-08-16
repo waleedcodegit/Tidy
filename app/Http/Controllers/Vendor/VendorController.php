@@ -94,8 +94,23 @@ class VendorController extends Controller
                 $vendor->vendor_selected_services = $services_array;
             }
         }
+
         $services = Category::get();
-        $vendor->services = $services;
+        $not_used = [];
+
+
+        foreach($services as $sr){
+            $check = 0;
+            foreach($vendor->vendor_servicess as $val) {
+                if($sr->id == $val->service_id){
+                    $check = 1;
+                }
+            }
+            if($check == 0){
+                array_push($not_used,$sr);
+            }
+        }
+        $vendor->services = $not_used;
         $response = [
             'status' => 200 ,
             'msg' => 'Vendor',
@@ -118,7 +133,7 @@ class VendorController extends Controller
         $check = VendorServices::where('service_id', $request->service_id)->first();
         if($check) {
             $response = [
-                'status' => 200 ,
+                'status' => 401 ,
                 'msg' => 'Service Already Added',
             ];
             return $response;

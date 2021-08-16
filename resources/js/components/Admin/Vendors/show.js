@@ -3,6 +3,7 @@ import Axios from 'axios';
 import {img_baseurl, img_insurance} from '../../Configs/Api'; 
 import Swal from 'sweetalert2';
 import { isNull } from 'lodash';
+import toast from 'react-hot-toast';
 
 class ShowVendor extends Component {
     constructor(props) {
@@ -91,7 +92,13 @@ class ShowVendor extends Component {
             vendor_id: this.state.vendor_id,
         }
         Axios.post(`/api/add-vendor-service/${id}`, data, Configs).then(res=>{
+            if(res.data.status == 200){
+                toast.success('service added.');
             this.componentDidMount();
+
+            }else{
+                toast.error('Service Already Exists');
+            }
         })
     }
 
