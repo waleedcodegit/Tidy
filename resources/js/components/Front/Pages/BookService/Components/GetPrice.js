@@ -52,6 +52,13 @@ class GetPrice extends Component {
       console.log(res)
     })
   }
+  make_booking(){
+    let payload = {
+      select_service_state: this.props.select_service_state,
+      screen2: this.props.add_information,
+      customer_location: this.props.customer_location,
+    }
+  }
   render() {
     return (
       <div className>
@@ -74,13 +81,123 @@ class GetPrice extends Component {
 
                       {
 
-                        this.state.data.service.type == 'home' ?
+                        this.state.data.service.residential_type.type == 1 ?
                           <>
                             {
                               this.props.user.data.stripe_id ?
 
                                 <>
-                                  
+
+                                  <div className="row">
+                                  <div className="col-md-12 ">
+                                  <h1 className="text-center mb-3">Check Out</h1>
+                                  </div>
+                                  <hr></hr>
+                                    <h1 className="col-md-2"></h1>
+                                    <div className="card col-md-8 checkout_text">
+                                        {/* <h2 className="mb-4">Service Details</h2> */}
+                                        <h4>
+                                          Service 
+
+                                          <span className="float-right span_text" >
+                                            {this.state.data.service.name}
+                                          </span>
+
+                                        </h4>
+                                        <hr></hr>
+                                        <h4>
+                                          Service Type
+
+                                          <span className="float-right span_text" >
+                                            {this.props.select_service_state.recurring == 1 ? 'One Time' : 'Recurring'}
+                                          </span>
+
+                                        </h4>
+                                        <hr></hr>
+                                        <h4>
+                                          Resident 
+
+                                          <span className="float-right span_text" >
+                                            {this.props.add_information.resident_type}
+                                          </span>
+
+                                        </h4>
+                                        <hr></hr>
+                                        <h4>
+                                          Levels 
+
+                                          <span className="float-right span_text" >
+                                            {this.props.add_information.levels}
+                                          </span>
+
+                                        </h4>
+                                        <hr></hr>
+                                        <h4>
+                                          Bedrooms 
+
+                                          <span className="float-right span_text" >
+                                            {this.props.add_information.bedrooms}
+                                          </span>
+
+                                        </h4>
+                                        <hr></hr>
+                                        <h4>
+                                          Bathrooms 
+
+                                          <span className="float-right span_text" >
+                                            {this.props.add_information.bathrooms}
+                                          </span>
+
+                                        </h4>
+                                        <hr></hr>
+                                      
+                                        <h4>
+                                          Price 
+
+                                          <span className="float-right span_text" >
+                                           ${this.state.data.sub_service.price}
+                                          </span>
+                                        </h4>
+                                        <hr></hr>
+                                      
+                                       
+                                        <h4>
+                                         Service Extra's 
+
+                                          <span className="float-right span_text" >
+                                           ${
+                                          this.state.data.extra_total
+                                        }
+                                          </span>
+                                        </h4>
+                                        <hr></hr>
+                                    
+                              
+                                       
+                                        <h4>
+                                          Location 
+
+                                          <span className="float-right span_text" >
+                                           {
+                                          this.props.customer_location.loc_address
+                                        }
+                                          </span>
+                                        </h4>
+                                        <hr></hr>
+                                      
+                                       
+                                        <h4>
+                                          Total 
+
+                                          <span className="float-right span_text" >
+                                           ${
+                                          this.state.data.total
+                                           }
+                                          </span>
+                                        </h4>
+                                        <button className="btn btn_full btn-info">Book Now</button>
+                                    </div>
+                                  </div>
 
                                 </>
                                 :
@@ -91,13 +208,58 @@ class GetPrice extends Component {
 
                           :
                           <>
-                            <div className="col-sm-12">
-                              <div className="form-group text-center">
-                                <h1>Get Quotes Now</h1>
-                                <h6>You will get quotes </h6>
-                                <button className="btn btn-success">Get Quotes</button>
-                              </div>
+                          <div className="row">
+                          
+                          <h1 className="col-md-2"></h1>
+                          <div className="col-sm-8">
+                          <h4>
+                                          Service 
+
+                                          <span className="float-right span_text" >
+                                            {this.state.data.service.name}
+                                          </span>
+
+                                        </h4>
+                                        <hr></hr>
+                                        <h4>
+                                          Service Type
+
+                                          <span className="float-right span_text" >
+                                            {this.props.select_service_state.recurring == 1 ? 'One Time' : 'Recurring'}
+                                          </span>
+
+                                        </h4>
+                                        <hr></hr>
+                                        <h4>
+                                         Service Extra's 
+
+                                          <span className="float-right span_text" >
+                                           ${
+                                          this.state.data.extra_total
+                                        }
+                                          </span>
+                                        </h4>
+                                        <hr></hr>
+                                    
+                              
+                                       
+                                        <h4>
+                                          Location 
+
+                                          <span className="float-right span_text" >
+                                           {
+                                          this.props.customer_location.loc_address
+                                        }
+                                          </span>
+                                        </h4>
+                                        <hr></hr>
+                                        
+                                
+                                <button className="btn btn-info btn_full">Get Quotes</button>
+                              
                             </div>
+                          </div>
+                            
                           </>
                       }
 
@@ -137,7 +299,8 @@ const mapStateToProps = (state) => {
     select_service_state: state.select_service_state,
     add_information: state.add_information,
     user: state.user,
-    auth_type: state.auth_type
+    auth_type: state.auth_type,
+    customer_location:state.customer_location
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(GetPrice);

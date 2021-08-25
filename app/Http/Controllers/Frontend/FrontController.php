@@ -63,12 +63,15 @@ class FrontController extends Controller
                 $resident_total = $request->screen2['levels'] * $settings->levels  + $request->screen2['bedrooms'] * $settings->bedroom +  $request->screen2['bathrooms'] * $settings->bathroom ;
             }
             $total = $service_price  + $resident_total + $extra_total;
-            $response = ['service' => $service , 'total' => $total ];
+            $response = ['service' => $service , 'total' => $total , 'extra_total' => $extra_total , 'sub_service' => $sub_services ];
             return $response;
         }else{
-            $response = ['service' => $service , 'extras_total' => $extra_total ];
+            $response = ['service' => $service , 'extras_total' => $extra_total  ];
             return $response;
         }
+    }
+    public function make_booking(Request $request){
+        return $request();
     }
     public function validate_gift_card_details(Request $request){
         if($request->amount < 0 || $request->amount > 500){
