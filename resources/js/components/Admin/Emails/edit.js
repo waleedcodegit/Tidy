@@ -35,7 +35,7 @@ class Edit extends Component {
         })
     }
 
-      handleChange(value){
+    handleChange(value){
         
         this.setState({
             email_content:value

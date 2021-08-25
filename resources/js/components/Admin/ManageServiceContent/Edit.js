@@ -19,7 +19,8 @@ class Edit extends Component {
             categories: [],
             description:'',
             included_text:'',
-            id:this.props.match.params.id
+            id:this.props.match.params.id,
+            whychoose:''
         };
     }
 
@@ -31,7 +32,8 @@ class Edit extends Component {
         }}).then(res=>{
             if(res.data.status == 200) {
                 this.setState({
-                    categories: res.data.categories
+                    categories: res.data.categories,
+
                 })
             } 
         })
@@ -41,11 +43,17 @@ class Edit extends Component {
                 service:res.data.service_id,
                 image:res.data.image,
                 description:res.data.description,
-                included_text:res.data.included_text
+                included_text:res.data.included_text,
+                whychoose:res.data.whychoose
             })
         })
     }
 
+    whychoose(e){
+        this.setState({
+            whychoose:e.target.value
+        })
+    }
     service(event) {
         this.setState({
             service: event.target.value
@@ -192,11 +200,20 @@ class Edit extends Component {
                                         onChange={this.included_text.bind(this)}
                                              /> */}
                                         <textarea
-                                         value={this.state.included_text}
+                                        value={this.state.included_text}
                                         onChange={this.included_text.bind(this)}
-                                         style={{height:'300px',width:'100%'}}>
-
-                                        </textarea>
+                                        style={{height:'300px',width:'100%'}}
+                                        ></textarea>
+                                    </div>
+                                </div>
+                                <div className="col-sm-12">
+                                    <div className="form-group">
+                                    <label htmlFor="price">Why Choose TidyHome:</label>
+                                    <textarea
+                                        value={this.state.whychoose}
+                                        onChange={this.whychoose.bind(this)}
+                                        style={{height:'300px',width:'100%'}}
+                                    ></textarea>
                                     </div>
                                 </div>
                             </div>

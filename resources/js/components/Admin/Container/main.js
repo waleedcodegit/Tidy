@@ -39,6 +39,8 @@ import VendorInfo from '../Vendors/show';
 import CreateVendor from '../Vendors/create';
 // Setting
 import SettingList from '../Settings/index';
+import HomeContent from '../Settings/homeContent';
+import ReviewMod from '../Settings/reviews'
 
 import HolidayCreate from '../Holidays/create';
 import HolidayEdit from '../Holidays/edit';
@@ -68,6 +70,12 @@ import CustomerMessages from '../Messages/CustomerMessages';
 import EditPage from '../ManagePages/Edit';
 import AddPage from '../ManagePages/create';
 import ManagePages from '../ManagePages/ManagePagesContent';
+
+//SMS
+import CreateSms from '../Sms/create';
+import EditSms from '../Sms/edit';
+import SmsList from '../Sms/list';
+
 
 
 class Main extends Component {
@@ -123,7 +131,9 @@ class Main extends Component {
                         <Route path="/admin/vendor-info/:id" component={VendorInfo}></Route>
                         <Route path="/admin/create-vendor" component={CreateVendor}></Route>
 
-                        <Route path="/admin/setting-list" component={SettingList}></Route>\
+                        <Route path="/admin/setting-list" component={SettingList}></Route>
+                        <Route path="/admin/home-content" component={HomeContent}></Route>
+                        <Route path="/admin/create-review" component={ReviewMod}></Route>
 
 
                         <Route path="/admin/add-faq" component={AddFaq}></Route>
@@ -149,6 +159,10 @@ class Main extends Component {
                         <Route path="/admin/create-page" component={AddPage}></Route>
                         <Route path="/admin/manage-pages" component={ManagePages}></Route>
                         <Route path="/admin/edit-page/:id" component={EditPage}></Route>
+
+                        <Route path="/admin/create-sms" component={CreateSms}></Route>
+                        <Route path="/admin/edit-sms/:id" component={EditSms}></Route>
+                        <Route path="/admin/sms" component={SmsList}></Route>
 
                     </div>
                     <Sidebar></Sidebar>

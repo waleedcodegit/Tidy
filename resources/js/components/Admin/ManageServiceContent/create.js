@@ -13,7 +13,8 @@ class Create extends Component {
             image: '',
             categories: [],
             description:'',
-            included_text:''
+            included_text:'',
+            whychoose:''
         };
     }
 
@@ -26,6 +27,11 @@ class Create extends Component {
                     categories: res.data.categories
                 })
             } 
+        })
+    }
+    whychoose(e){
+        this.setState({
+            whychoose:e.target.value
         })
     }
 
@@ -145,7 +151,8 @@ class Create extends Component {
                                 <div className="col-sm-12">
                                     <div className="form-group">
                                         <label htmlFor="price">Service Description:</label>
-                                        <ReactQuill 
+                                        <textarea 
+                                         style={{height:'300px',width:'100%'}}
                                         onChange={this.description.bind(this)}
                                              />
                                     </div>
@@ -153,11 +160,20 @@ class Create extends Component {
                                 <div className="col-sm-12">
                                     <div className="form-group">
                                         <label htmlFor="price">Whats Included:</label>
-                                        <ReactQuill 
+                                        <textarea 
+                                         style={{height:'300px',width:'100%'}}
                                         onChange={this.included_text.bind(this)}
                                              />
                                     </div>
+                                    <div className="form-group">
+                                        <label htmlFor="price">Why Choose TidyHome:</label>
+                                        <textarea 
+                                         style={{height:'300px',width:'100%'}}
+                                        onChange={this.whychoose.bind(this)}
+                                             />
+                                    </div>
                                 </div>
+
                             </div>
                         </div>
                         <div className="panel-footer text-right">

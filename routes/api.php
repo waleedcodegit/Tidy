@@ -168,13 +168,28 @@ Route::post('/get_service_content_by_slug','Frontend\FrontController@get_service
 
 
 //Emails Controller//
-Route::resource('emails', 'EmailsController');
-Route::post('create-emails', 'EmailsController@create_emails');
-Route::get('/api/emails','EmailsController@Emails_List');
-Route::post('/delete-email','EmailsController@delete_email');
-Route::get('/edit-email/{id}','EmailsController@edit_email');
+Route::resource('emails','Admin\EmailsController');
+Route::post('create-emails','Admin\EmailsController@create_emails');
+Route::get('/api/emails','Admin\EmailsController@Emails_List');
+Route::post('/delete-email','Admin\EmailsController@delete_email');
+Route::get('/edit-email/{id}','Admin\EmailsController@edit_email');
 
+//SMS Controller//
+Route::resource('sms','Admin\SmsController');
+Route::post('create-sms','Admin\SmsController@create_sms');
+Route::get('/api/sms','Admin\SmsController@Sms_List');
+Route::post('/delete-sms','Admin\SmsController@delete_sms');
+Route::get('/edit-sms/{id}','Admin\SmsController@edit_sms');
 
+//HomeContent Controller
+
+Route::resource('content' , 'Admin\HomeContentController');
+Route::post('update-content' , 'Admin\HomeContentController@update_content');
+Route::get('/edit-content' , 'Admin\HomeContentController@edit_content');
+
+//Reviews Controller
+Route::resource('review' , 'Admin\ReviewsController');
+Route::post('create-review' , 'Admin\ReviewsController@create_review');
 
 
 // Common Controller

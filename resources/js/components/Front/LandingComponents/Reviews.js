@@ -3,6 +3,7 @@ import $ from 'jquery';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import {img_baseurl} from '../../Configs/Api';
+import Axios from 'axios';
 
 const responsive = {
     desktop: {
@@ -25,14 +26,27 @@ class Reviews extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            
+            reviews : {}
         };
+    }
+
+    componentDidMount(){
+        Axios.get('/api/edit-content').then(res=>{
+            console.log(res)
+           this.setState({
+               reviews : res.data.data.reviews
+           })
+        })
     }
      
     render() {
         return (
-            <section className="testimonial-section bg-grey padding">
-                <div className="dots"></div>
+            // <section className="testimonial-section bg-grey padding">
+            //     <div className="container" dangerouslySetInnerHTML={{__html:this.state.reviews}}>
+            //     </div>
+            // </section>
+            <div>
+            <div className="dots"></div>
                 <div className="container">
                 <div className="section-heading-rev text-center mb-40 wow fadeInUp" data-wow-delay="100ms">
                 <h2>Live reviews <span>NEAR YOU</span></h2>
@@ -128,7 +142,8 @@ class Reviews extends Component {
                         </div>
                 </Carousel>;
                 </div>
-                </section>
+                </div>
+            
         );
     }
 }

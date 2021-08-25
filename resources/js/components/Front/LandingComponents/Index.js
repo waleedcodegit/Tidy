@@ -7,6 +7,7 @@ import OntheGo from './OntheGo';
 import Beyouownboss from './BeyourOwnBoss';
 
 class Index extends Component {
+
     render() {
         return (
             <div>

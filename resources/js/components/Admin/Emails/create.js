@@ -3,9 +3,12 @@ import React, { Component } from 'react';
 import Swal from 'sweetalert2'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+
+
 class CreateEmail extends Component {
     constructor(props) {
         super(props);
+        this.handleChange = this.handleChange.bind(this)
         this.state = {
             email_title:'',
             
@@ -13,7 +16,7 @@ class CreateEmail extends Component {
             
             
         };
-        this.handleChange = this.handleChange.bind(this)
+        
     }
     email_title(e){
         

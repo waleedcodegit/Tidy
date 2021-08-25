@@ -47,7 +47,8 @@ Route::view('/admin/vendor-info/{id}', 'Admin');
 Route::view('/admin/create-vendor', 'Admin');
 
 Route::view('/admin/setting-list', 'Admin');
-
+Route::view('/admin/home-content' , 'Admin');
+Route::view('/admin/create-review' , 'Admin');
 
 Route::view('/admin/create-holiday', 'Admin');
 Route::view('/admin/edit-holiday/{id}', 'Admin');
@@ -64,8 +65,14 @@ Route::view('/admin/faqs', 'Admin');
 
 
 Route::view('/admin/create-emails', 'Admin');
- Route::view('/admin/edit-email/{id}', 'Admin');
+Route::view('/admin/edit-email/{id}', 'Admin');
 Route::view('/admin/emails', 'Admin');
+
+
+Route::view('/admin/create-sms', 'Admin');
+Route::view('/admin/edit-sms/{id}', 'Admin');
+Route::view('/admin/sms', 'Admin');
+
 
 
 

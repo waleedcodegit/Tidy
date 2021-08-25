@@ -32,6 +32,7 @@ class ServicesController extends Controller
         $ServiceContent->image = $request->image;
         $ServiceContent->description = $request->description;
         $ServiceContent->included_text = $request->included_text;
+        $ServiceContent->whychoose = $request->whychoose;
         $ServiceContent->save();
         $response = ['status' => 200 , 'msg' => 'Success'];
             return $response;
@@ -56,6 +57,7 @@ class ServicesController extends Controller
         $ServiceContent->image = $request->image;
         $ServiceContent->description = $request->description;
         $ServiceContent->included_text = $request->included_text;
+        $ServiceContent->whychoose = $request->whychoose;
         $ServiceContent->save();
         $response = ['status' => 200 , 'msg' => 'Success'];
             return $response;

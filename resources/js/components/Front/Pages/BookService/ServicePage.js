@@ -51,55 +51,11 @@ class ServicePage extends Component {
                     </section>
                     <section className="clean-include">
                         <div  dangerouslySetInnerHTML={{__html:this.state.service.included_text}} className="container">
-                            
                         </div>
                     </section>
                     <section className="choose-tidyhome">
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-lg-12 text-center">
-                                    <h2>Why Choose TidyHome</h2>
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="col-lg-4">
-                                    <div className="tidyhome-catgeory">
-                                        <img src="/images/trusted.png" />
-                                        <h3>Trusted Professionals</h3>
-                                        <p>All TidyHome professionals are experience-backed, verified and background-checked.</p>
-                                        <ul>
-                                            <li>Police Checked</li>
-                                            <li>ABN Verified</li>
-                                            <li>Interviewed</li>
-                                            <li>Service Tested</li>
-                                            <li>Insured</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div className="col-lg-4">
-                                    <div className="tidyhome-catgeory">
-                                        <img src="/images/100%-guarantee.png" />
-                                        <h3>Satisfaction Guarantee</h3>
-                                        <p>Your happiness is our top priority. Our professionals will ensure you are satisfied before they leave. We do our best to reach your satisfaction level.</p>
-                                        <ul>
-                                            <li>Upfront Pricing</li>
-                                            <li>If you’re not 100% happy, we’ll clean again without any extra charges.</li>
-                                            <li>Your feedback matters to us. The customer rating is what makes us trustworthy</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div className="col-lg-4">
-                                    <div className="tidyhome-catgeory">
-                                        <img src="/images/eco-friendly.png" />
-                                        <h3>Eco-Friendly Products</h3>
-                                        <p>Being environmentally conscious is not all about plastic bags; it’s about making everyday choices to ensure a healthy environment. In TidyHome, we make sure that no harm is caused to the environment during our service.</p>
-                                        <ul>
-                                            <li>100% Environmentally Friendly Products.</li>
-                                            <li>ComFitted to Making Our Surroundings Healthier.</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+                        <div className="container" dangerouslySetInnerHTML={{__html:this.state.service.whychoose}}>
+                                         
                         </div>
                     </section>
                 </div>
