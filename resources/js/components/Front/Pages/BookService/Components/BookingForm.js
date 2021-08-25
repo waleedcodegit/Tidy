@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import AddInformation from './AddInformation';
 import AddOns from './AddOns';
+import CustomerLocation from './CustomerLocation';
 import GetPrice from './GetPrice';
 import SelectServices from './SelectServices';
  
@@ -37,16 +38,16 @@ class BookingForm extends Component {
             Add Information
           </div>
         </div>
-        {/* <div className="step-item">
+        <div className="step-item">
           <button className="step-button text-center collapsed" type="button" data-toggle="collapse" data-target="#collapseThree"  aria-expanded={this.props.booking_step >= 3 ? "true" : "false"} aria-controls="collapseThree">
-            <i className="fa fa-location-arrow" aria-hidden="true" />
+            <i className="fas fa-map-marked-alt" aria-hidden="true" />
           </button>
           <div className="step-title">
-            Add-On's
+            Add Location
           </div>
-        </div> */}
+        </div>  
         <div className="step-item">
-          <button className="step-button text-center collapsed" type="button" data-toggle="collapse" data-target="#collapseFour"  aria-expanded={this.props.booking_step >= 3 ? "true" : "false"} aria-controls="collapseThree">
+          <button className="step-button text-center collapsed" type="button" data-toggle="collapse" data-target="#collapseFour"  aria-expanded={this.props.booking_step >= 4 ? "true" : "false"} aria-controls="collapseThree">
           <i className="fas fa-money-check-alt" aria-hidden="true"></i>
           </button>
           <div className="step-title">
@@ -64,9 +65,14 @@ class BookingForm extends Component {
         <AddInformation></AddInformation>
         :null
       }
+      {
+        this.props.booking_step == 3 ? 
+        <CustomerLocation></CustomerLocation>
+        :null
+      }
       
       {
-        this.props.booking_step == 3 ?
+        this.props.booking_step == 4 ?
         <GetPrice></GetPrice>
         :null
       } 

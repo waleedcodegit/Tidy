@@ -6,7 +6,8 @@ const current_state = {
     booking_step:1,
     select_service_state:{},
     add_information:{},
-    auth_type:'login'
+    auth_type:'login',
+    customer_location:{}
 }
 const reducer = (state = current_state,action) =>{
     if(action.type == 'CHANGE_USER'){
@@ -51,6 +52,12 @@ const reducer = (state = current_state,action) =>{
         return {
             ...state,
             auth_type:action.payload
+        }
+    }
+    else if(action.type == 'CHANGE_CUSTOMER_LOCATION'){
+        return {
+            ...state,
+            customer_location:action.payload
         }
     }
     return state;
