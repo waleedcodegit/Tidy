@@ -26,15 +26,15 @@ class Reviews extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            reviews : {}
+            reviews : []
         };
     }
 
     componentDidMount(){
-        Axios.get('/api/edit-content').then(res=>{
+        Axios.get('/api/get-all-reviews').then(res=>{
             console.log(res)
            this.setState({
-               reviews : res.data.data.reviews
+               reviews : res.data.data.review
            })
         })
     }

@@ -193,6 +193,7 @@ Route::post('create-review' , 'Admin\ReviewsController@create_review');
 Route::get('/api/review' , 'Admin\ReviewsController@list_reviews');
 Route::post('/delete-review' , 'Admin\ReviewsController@delete_review');
 Route::get('/edit-review/{id}','Admin\ReviewsController@edit_review');
+Route::get('/get-all-reviews' , 'Admin\ReviewsController@get_all_reviews');
 
 
 // Common Controller
