@@ -190,6 +190,9 @@ Route::get('/edit-content' , 'Admin\HomeContentController@edit_content');
 //Reviews Controller
 Route::resource('review' , 'Admin\ReviewsController');
 Route::post('create-review' , 'Admin\ReviewsController@create_review');
+Route::get('/api/review' , 'Admin\ReviewsController@list_reviews');
+Route::post('/delete-review' , 'Admin\ReviewsController@delete_review');
+Route::get('/edit-review/{id}','Admin\ReviewsController@edit_review');
 
 
 // Common Controller

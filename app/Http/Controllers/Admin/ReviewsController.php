@@ -15,7 +15,10 @@ class ReviewsController extends Controller
      */
     public function index()
     {
-        //
+        $review = Review::where('delete_status',0)->get();
+        $response= ['status' => 200 ,
+                'review' => $review];
+        return $response;
     }
 
     /**
@@ -37,59 +40,44 @@ class ReviewsController extends Controller
             return $response;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function edit_review(Request $request)
     {
-        //
+        $review = Review::where('id', $request->id)->first();
+        $response = [
+            'status' => 200,
+            'msg' => 'REVIEWS',
+            'data' =>  $review
+        ];
+        return $response;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+    public function update(Request $request) {
+        $review = Review::where('id', $request->id)->update([
+            'name' => $request->get_name,
+            'designation' => $request->get_designation,
+            'comment' => $request->get_comment,
+            'rating' => $request->get_rating,
+            'image' => $request->get_image
+            
+        ]);
+
+        $response = [
+            'status' => 200,
+            'msg' => 'Updated Successfully'
+        ];
+        return $response;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    public function delete_review(Request $request) {
+        
+        $review = Review::where('id', $request->id)->update([
+            'delete_status' => true,
+           
+        ]);
+        $response = [
+            'status' => 200,
+            'msg' => 'Successfully Deleted'
+        ];
+        return $response;
     }
 }

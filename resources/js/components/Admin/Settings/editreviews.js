@@ -1,19 +1,35 @@
 import React, { Component } from 'react';
+import Swal from 'sweetalert2';
 import Axios from 'axios';
-import Swal from 'sweetalert2'
-import toast from 'react-hot-toast';
 
-class ReviewMod extends Component {
+class EditReview extends Component {
 
     constructor(props){
         super(props);
         this.state = {
-        get_name : '',
-        get_designation : '',
-        get_comment : '',
-        get_rating : '',
-        get_image : ''
-        }
+        get_name: '',
+        get_designation: '',
+        get_comment: '',
+        get_rating: '',
+        get_image: ''
+        };
+    }
+
+    componentDidMount() {  
+        Axios.get(`/api/edit-review/${this.props.match.params.id}`).then(res=>{
+            console.log("cdm");
+            console.log(res.data.data);
+            if(res.data.status == 200) {
+                this.setState({
+                    get_name : res.data.data.name,
+                    get_designation : res.data.data.designation,
+                    get_comment : res.data.data.comment,
+                    get_rating : res.data.data.rating,
+                    get_image : res.data.data.image
+                    
+                })
+            }
+        })
     }
 
     get_name(e){
@@ -46,7 +62,45 @@ class ReviewMod extends Component {
         })
     }
 
-    get_image(event) {
+
+    updateReview(event) {
+        
+        event.preventDefault();
+        let reviewData = {
+            get_name : this.state.get_name,
+            get_designation : this.state.get_designation,
+            get_comment : this.state.get_comment,
+            get_rating : this.state.get_rating,
+            get_image : this.state.get_image,
+            id: this.props.match.params.id
+        }
+
+        let Configs = {
+            headers: {
+                token: window.localStorage.getItem('testapistring')
+            }
+        }
+        Axios.put(`/api/review/${this.props.match.params.id}`, reviewData , Configs).then(res=>{
+            
+            if(res.data.status == 200){
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Review updated Successfully',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: res.data.msg,
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        })
+    }
+
+    image_uploader(event) {
         const formData = new FormData();
         formData.append('file', event.target.files[0]);
         formData.append('token', window.localStorage.getItem('al'));
@@ -83,36 +137,7 @@ class ReviewMod extends Component {
 
     }
 
-
-    save(e){
-        e.preventDefault();
-        let UserReview = {
-            get_name : this.state.get_name,
-            get_designation : this.state.get_designation,
-            get_comment : this.state.get_comment,
-            get_rating : this.state.get_rating,
-            get_image : this.state.get_image 
-        }
-        Axios.post('/api/create-review', UserReview).then(res=>{
-            
-            if(res.data.status == 200){
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Content Added Successfully',
-                    showConfirmButton: false,
-                    timer: 1500
-                }) 
-            }else{
-                Swal.fire({
-                    icon: 'error',
-                    title: res.data.msg,
-                    showConfirmButton: false,
-                    timer: 1500
-                    })
-                }
-            }
-        )}
-
+    
     render() { 
         return ( 
             <div id="page-content">
@@ -128,14 +153,22 @@ class ReviewMod extends Component {
                         <div className="col-sm-12">
                                 <div className="form-group">
                                     <label htmlFor="price">Name</label>
-                                    <input onChange={this.get_name.bind(this)} type="text" className="form-control"/>
+                                    <input 
+                                    onChange={this.get_name.bind(this)}
+                                    value={this.state.get_name} 
+                                    type="text" 
+                                    className="form-control"/>
                                    
                                 </div>
                             </div>
                             <div className="col-sm-12">
                                 <div className="form-group">
                                     <label htmlFor="price">Designation</label>
-                                    <input onChange={this.get_designation.bind(this)} type="text" className="form-control" />
+                                    <input 
+                                    onChange={this.get_designation.bind(this)}
+                                    value={this.state.get_designation} 
+                                    type="text" 
+                                    className="form-control" />
                                    
                                 </div>
                             </div>
@@ -143,7 +176,11 @@ class ReviewMod extends Component {
                             <div className="col-sm-12">
                                 <div className="form-group">
                                     <label htmlFor="price">Rating</label>
-                                    <input onChange={this.get_rating.bind(this)} type="text" className="form-control" />
+                                    <input 
+                                    onChange={this.get_rating.bind(this)} 
+                                    value={this.state.get_rating} 
+                                    type="text" 
+                                    className="form-control" />
                                    
                                 </div>
                             </div>
@@ -151,20 +188,27 @@ class ReviewMod extends Component {
                             <div className="col-sm-12">
                                     <div className="form-group">
                                         <label htmlFor="price">User Image</label>
-                                        <input onChange={this.get_image.bind(this)} type="file"></input>
+                                        <input 
+                                        onChange={this.get_image.bind(this)} 
+                                        value={this.state.get_image} 
+                                        type="file"></input>
                                     </div>
                             </div>
 
                             <div className="form-group">
                                 <label htmlFor="price">Comment</label>
                                     <textarea
-                                        onChange={this.get_comment.bind(this)}
+                                        onChange={this.get_comment.bind(this)} 
+                                        value={this.state.get_comment} 
                                         style={{height:'100px',width:'100%'}}
                                     ></textarea>
                             </div>
                             
                             <div className="panel-footer text-right">
-                                <button onClick={this.save.bind(this)} type="submit" className="btn btn-primary">submit</button>
+                                <button 
+                                onClick={this.updateReview.bind(this)} 
+                                type="submit" 
+                                className="btn btn-primary">submit</button>
                             </div>
                         </div>
                     </div>
@@ -177,4 +221,4 @@ class ReviewMod extends Component {
     }
 }
  
-export default ReviewMod;
+export default EditReview;

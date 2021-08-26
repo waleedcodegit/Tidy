@@ -49,6 +49,8 @@ Route::view('/admin/create-vendor', 'Admin');
 Route::view('/admin/setting-list', 'Admin');
 Route::view('/admin/home-content' , 'Admin');
 Route::view('/admin/create-review' , 'Admin');
+Route::view('/admin/list-reviews' , 'Admin');
+Route::view('/admin/edit-review/{id}', 'Admin');
 
 Route::view('/admin/create-holiday', 'Admin');
 Route::view('/admin/edit-holiday/{id}', 'Admin');

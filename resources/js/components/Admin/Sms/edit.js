@@ -106,7 +106,7 @@ class Edit extends Component {
                                    
                          </div>
                          <label htmlFor="price">SMS Content</label>
-                             <ReactQuill onChange={this.handleChange}  id="email_content" value={this.state.sms_content}/>
+                             <ReactQuill onChange={this.handleChange} value={this.state.sms_content}/>
                            
 
                                 <div className="panel-footer text-right">

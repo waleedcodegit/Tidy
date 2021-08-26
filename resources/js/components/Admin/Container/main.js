@@ -41,6 +41,8 @@ import CreateVendor from '../Vendors/create';
 import SettingList from '../Settings/index';
 import HomeContent from '../Settings/homeContent';
 import ReviewMod from '../Settings/reviews'
+import ListReviews from '../Settings/listreviews';
+import EditReview from '../Settings/editreviews';
 
 import HolidayCreate from '../Holidays/create';
 import HolidayEdit from '../Holidays/edit';
@@ -75,6 +77,7 @@ import ManagePages from '../ManagePages/ManagePagesContent';
 import CreateSms from '../Sms/create';
 import EditSms from '../Sms/edit';
 import SmsList from '../Sms/list';
+
 
 
 
@@ -134,6 +137,8 @@ class Main extends Component {
                         <Route path="/admin/setting-list" component={SettingList}></Route>
                         <Route path="/admin/home-content" component={HomeContent}></Route>
                         <Route path="/admin/create-review" component={ReviewMod}></Route>
+                        <Route path="/admin/list-reviews" component={ListReviews}></Route>
+                        <Route path="/admin/edit-review/:id" component={EditReview}></Route>
 
 
                         <Route path="/admin/add-faq" component={AddFaq}></Route>
