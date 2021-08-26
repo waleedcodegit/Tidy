@@ -34,7 +34,7 @@ class Reviews extends Component {
         Axios.get('/api/get-all-reviews').then(res=>{
             console.log(res)
            this.setState({
-               reviews : res.data.data.review
+               reviews : res.data
            })
         })
     }
@@ -70,76 +70,30 @@ class Reviews extends Component {
                 dotListClass="custom-dot-list-style"
                 itemClass="carousel-item-padding-40-px"
                 >
-                    <div className="testi-item align-items-center testi-content">
+                  {
+                      this.state.reviews.map((data,index)=>{
+                          return(
+                            <div className="testi-item align-items-center testi-content">
 
-                    <img src={img_baseurl+"testi-1.jpg"} alt="img"/>
-                    <ul className="rattings">
-                    <li><i className="fa fa-star"></i></li>
-                    <li><i className="fa fa-star"></i></li>
-                    <li><i className="fa fa-star"></i></li>
-                    <li><i className="fa fa-star"></i></li>
-                    <li><i className="fa fa-star"></i></li>
-                    </ul>
-                    <div className="testi-content">
-                    <p>"Thank you for guiding us through the construction process, understanding, and always ready to accommodate our needs. We love our new space and know that it was built by the very best!"</p>
-                    <h3>Kyle Frederick</h3>
+                                <img src={img_baseurl+data.image} alt="img"/>
+                                <ul className="rattings">
+                                <li><i className="fa fa-star"></i></li>
+                                <li><i className="fa fa-star"></i></li>
+                                <li><i className="fa fa-star"></i></li>
+                                <li><i className="fa fa-star"></i></li>
+                                <li><i className="fa fa-star"></i></li>
+                                </ul>
+                                <div className="testi-content">
+                                <p>{data.comment}</p>
+                                <h3>{data.name}</h3>
 
-                    <span>Director</span>
-                    </div>
-                    <i className="fa fa-quote-right"></i>
-                    </div>
-                    <div className="testi-item align-items-center testi-content">
-
-                    <img src={img_baseurl+"testi-1.jpg"} alt="img"/>
-                    <ul className="rattings">
-                    <li><i className="fa fa-star"></i></li>
-                    <li><i className="fa fa-star"></i></li>
-                    <li><i className="fa fa-star"></i></li>
-                    <li><i className="fa fa-star"></i></li>
-                    <li><i className="fa fa-star"></i></li>
-                    </ul>
-                    <div className="testi-content">
-                    <p>"Thank you for guiding us through the construction process, understanding, and always ready to accommodate our needs. We love our new space and know that it was built by the very best!"</p>
-                    <h3>Kyle Frederick</h3>
-
-                    <span>Director</span>
-                    </div>
-                    <i className="fa fa-quote-right"></i>
-                    </div>
-                    <div className="testi-item align-items-center testi-content">
-                        <img src={img_baseurl+"testi-2.jpg"} alt="img"/>
-                            <ul className="rattings">
-                        <li><i className="fa fa-star"></i></li>
-                        <li><i className="fa fa-star"></i></li>
-                        <li><i className="fa fa-star"></i></li>
-                        <li><i className="fa fa-star"></i></li>
-                        <li><i className="fa fa-star"></i></li>
-                        </ul>
-                        <div className="testi-content">
-                        <p>"Thank you for guiding us through the construction process, understanding, and always ready to accommodate our needs. We love our new space and know that it was built by the very best!"</p>
-                        <h3>Valentin Lacoste</h3>
-
-                        <span>Director</span>
-                        </div>
-                        <i className="fa fa-quote-right"></i>
-                        </div>
-                        <div className="testi-item align-items-center testi-content">
-                        <img src={img_baseurl+"testi-3.jpg"} alt="img"/>
-                            <ul className="rattings">
-                        <li><i className="fa fa-star"></i></li>
-                        <li><i className="fa fa-star"></i></li>
-                        <li><i className="fa fa-star"></i></li>
-                        <li><i className="fa fa-star"></i></li>
-                        <li><i className="fa fa-star"></i></li>
-                        </ul>
-                        <div className="testi-content">
-                        <p>"Thank you for guiding us through the construction process, understanding, and always ready to accommodate our needs. We love our new space and know that it was built by the very best!"</p>
-                        <h3>José Carpio</h3>
-
-                        <span>Director</span>
-                        </div>
-                        <i className="fa fa-quote-right"></i>
-                        </div>
+                                <span>{data.designation}</span>
+                                </div>
+                                <i className="fa fa-quote-right"></i>
+                                </div>
+                          )
+                      })                  }  
+                  
                 </Carousel>;
                 </div>
                 </div>

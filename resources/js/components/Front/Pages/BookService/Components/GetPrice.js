@@ -58,6 +58,7 @@ class GetPrice extends Component {
       screen2: this.props.add_information,
       customer_location: this.props.customer_location,
     }
+    Axios.post('/api/make_booking')
   }
   render() {
     return (

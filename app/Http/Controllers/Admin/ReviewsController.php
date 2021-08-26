@@ -82,7 +82,7 @@ class ReviewsController extends Controller
     }
 
     public function get_all_reviews (Request $request){
-        $review = Review::where('delete_status',0)->with('review')->get();
+        $review = Review::where('delete_status',0)->get();
         return $review;
     }
 }
