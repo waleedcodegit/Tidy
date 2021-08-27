@@ -746,7 +746,7 @@ class CreateVendor extends Component {
                                                     <div >
                                                     <div className="col-md-12">
                                                         <div className="form-group">
-                                                            <label className="control-label">Enter your Address</label>
+                                                            <label className="control-label">Enter Address</label>
                                                             <Autocomplete
                                                                 apiKey={MAP_PLACES_API_KEY}
                                                                 options={{types:'sublocality'}}
@@ -760,7 +760,7 @@ class CreateVendor extends Component {
                                                         </div>
                                                         <div className="col-md-12">
                                                             <div className="form-group">
-                                                                <label className="control-label">Enter Radius</label>
+                                                                <label className="control-label">How far from your address would you like to work in km's</label>
                                                                 <input value={this.state.radius || ""} onChange={this.radius.bind(this)} type="number" placeholder="Enter Radius" className="form-control" />
                                                             </div>
                                                             
@@ -894,7 +894,7 @@ class CreateVendor extends Component {
                                                                             </div>
                                                                             <div className="d-flex">
                                                                                 <input className="mt-1" onChange={this.InsuranceType.bind(this)} checked={this.state.insurance_certificate_type == 'admin'} type="checkbox" ></input>
-                                                                                <label className="control-label ml-1"> Buy Public Liability Certificate from admin</label>
+                                                                                <label className="control-label ml-1"> Buy Public Liability Certificate from TidyHome</label>
 
 
                                                                             </div>
@@ -937,7 +937,7 @@ class CreateVendor extends Component {
                                                                                             </div>
                                                                                         </div>
 
-                                                                                        <p>We will be charge [] $5 per month from you.</p>
+                                                                                        <p>You will be charged 5$ per month</p>
                                                                                     </div>
                                                                                     : null
                                                                             }

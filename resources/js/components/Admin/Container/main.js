@@ -40,9 +40,9 @@ import CreateVendor from '../Vendors/create';
 // Setting
 import SettingList from '../Settings/index';
 import HomeContent from '../Settings/homeContent';
-import ReviewMod from '../Settings/reviews'
-import ListReviews from '../Settings/listreviews';
-import EditReview from '../Settings/editreviews';
+import ReviewMod from '../Reviews/reviews'
+import ListReviews from '../Reviews/listreviews';
+import EditReview from '../Reviews/editreviews';
 
 import HolidayCreate from '../Holidays/create';
 import HolidayEdit from '../Holidays/edit';
