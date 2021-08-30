@@ -58,7 +58,9 @@ class GetPrice extends Component {
       screen2: this.props.add_information,
       customer_location: this.props.customer_location,
     }
-    Axios.post('/api/make_booking')
+    Axios.post('/api/make_booking',payload).then(res=>{
+      console.log(res);
+    })
   }
   render() {
     return (
@@ -256,7 +258,7 @@ class GetPrice extends Component {
                                         <hr></hr>
                                         
                                 
-                                <button className="btn btn-info btn_full">Get Quotes</button>
+                                <button onClick={this.make_booking.bind(this)} className="btn btn-info btn_full">Get Quotes</button>
                               
                             </div>
                           </div>

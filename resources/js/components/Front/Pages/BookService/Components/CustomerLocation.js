@@ -47,7 +47,9 @@ class CustomerLocation extends Component {
                               <label className="control-label">Enter your Address</label>
                               <ReactGoogleAutocomplete
                                 apiKey={MAP_PLACES_API_KEY}
-                                options={{ types: 'sublocality' }}
+                                options={{ types: 'sublocality' ,
+                                componentRestrictions: { country: "au" },
+                                }}
                                 onPlaceSelected={(place) => {
                                     this.places(place);
                                 }}

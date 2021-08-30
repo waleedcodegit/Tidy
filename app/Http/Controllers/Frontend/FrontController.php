@@ -72,6 +72,7 @@ class FrontController extends Controller
     }
     public function make_booking(Request $request){
         return $request();
+        
     }
     public function validate_gift_card_details(Request $request){
         if($request->amount < 0 || $request->amount > 500){

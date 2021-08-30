@@ -633,13 +633,15 @@ class SignUp extends Component {
         temp.push({address:this.state.loc_address,lat:this.state.lat,long:this.state.long,radius:this.state.radius})
         this.setState({
             addresses:temp,
-            selected_address: ''
+        
+        },function(){
+            this.inputRef.value = '';
         })
         this.setState({
             error_string:''
         })
     }
-    places(place){
+    places(place,inputRef){
 
         let lat  = place.geometry.location.lat();
         let long = place.geometry.location.lng();
@@ -649,6 +651,8 @@ class SignUp extends Component {
             long:long,
             loc_address:place.formatted_address
         })
+        
+       
     }
     radius(e){
         this.setState({
@@ -931,10 +935,11 @@ class SignUp extends Component {
                                                                 types: 'sublocality' ,
                                                                 componentRestrictions: { country: "au" },
                                                                 }}
-                                                                onPlaceSelected={(place) => {
+                                                                onPlaceSelected={(place,inputRef) => {
+                                                                    console.log(inputRef);
+                                                                    this.inputRef = inputRef;
                                                                     this.places(place);
                                                                 }}
-                                                                value={this.state.selected_address}
                                                                 style={{ width: '100%' , fontSize:'1rem' }}
                                                                 className="form-control input_box "
                                                             />
