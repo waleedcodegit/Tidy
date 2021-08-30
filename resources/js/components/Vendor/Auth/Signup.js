@@ -39,7 +39,7 @@ class SignUp extends Component {
             expiry_month: '',
             error_string: '',
             businessname: '',
-            step: 3,
+            step: 1,
             services: [],
             vendor_id: this.props.match.params.vendor_id,
             photo_id: [],
