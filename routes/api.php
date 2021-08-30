@@ -57,6 +57,7 @@ Route::middleware(['admin-login'])->group(function () {
     Route::get('/vendor-list','Vendor\VendorController@list');
     Route::post('/vendor-info/{id}','Vendor\VendorController@show');
     Route::post('/approved-vendor','Vendor\VendorController@approved_vendor');
+    Route::post('/disapproved-vendor','Vendor\VendorController@disapproved_vendor');
 
     
     //employee

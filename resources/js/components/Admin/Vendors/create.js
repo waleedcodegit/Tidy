@@ -754,7 +754,7 @@ class CreateVendor extends Component {
                                                                     this.places(place);
                                                                 }}
                                                                 style={{ width: '100%' }}
-                                                                className="form-control input_box"
+                                                                className="form-control input_box fontSize = 40px"
                                                             />
                                                         </div>
                                                         </div>
@@ -768,7 +768,7 @@ class CreateVendor extends Component {
                                                         <div className="col-md-12">
                                                             <button onClick={this.AddAddress.bind(this)} className="btn btn-info" style={{width:'100%',borderRadius:'0px'}}>Add Address</button>
                                                                 
-                                                            <table className="table table-hover table-light table-striped mt-2">
+                                                            <table className="table table-hover table-light table-striped mt-2 fontSize = 40px">
                                                                                         <tbody>
                                                                                             {
                                                                                                 this.state.addresses.map((data, index) => {

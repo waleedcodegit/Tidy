@@ -131,6 +131,37 @@ class ShowVendor extends Component {
         })
     }
 
+    vendorDisApproved(){
+        let Configs = {
+            headers: {
+                token: window.localStorage.getItem('testapistring')
+            }
+        }
+        let data ={
+            id: this.props.match.params.id
+        }
+        Axios.post('/api/disapproved-vendor' , data ,Configs).then(res=>{
+            if(res.data.status == 200){
+                this.props.history.push('/admin/vendor-list');
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Vendor Approved Successfully',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }else{
+                Swal.fire({
+                    icon: 'error',
+                    title: res.data.msg,
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+
+            }
+        })
+    }
+
+
     render() {
         return (
             <div id="page-content">
@@ -253,7 +284,7 @@ class ShowVendor extends Component {
                         <div className="panel-footer text-right">
                             <div className="panel-body demo-nifty-btn">
                                 <button className="btn btn-primary" onClick={this.vendorApproved.bind(this)}>Approve</button>
-                                <button className="btn btn-danger">Disapprove</button>                
+                                <button className="btn btn-danger" onClick={this.vendorDisApproved.bind(this)}>Disapprove</button>                
                             </div>
                         </div>
                     </div>

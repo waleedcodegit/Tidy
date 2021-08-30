@@ -39,7 +39,7 @@ class SignUp extends Component {
             expiry_month: '',
             error_string: '',
             businessname: '',
-            step: 1,
+            step: 3,
             services: [],
             vendor_id: this.props.match.params.vendor_id,
             photo_id: [],
@@ -55,10 +55,12 @@ class SignUp extends Component {
             places:'',
             lat:0,
             long:0,
-            loc_address:''
+            loc_address:'',
+            selected_address:''
         };
 
     }
+
     nextStep() {
         this.setState({
             step: step + 1
@@ -630,9 +632,12 @@ class SignUp extends Component {
         let temp = this.state.addresses;
         temp.push({address:this.state.loc_address,lat:this.state.lat,long:this.state.long,radius:this.state.radius})
         this.setState({
-            addresses:temp
+            addresses:temp,
+            selected_address: ''
         })
-        console.log(temp)
+        this.setState({
+            error_string:''
+        })
     }
     places(place){
 
@@ -919,35 +924,56 @@ class SignUp extends Component {
                                                     <div >
                                                     <div className="col-sm-12">
                                                         <div className="form-group">
-                                                            <label className="control-label">Enter your Address</label>
+                                                            <label className="control-label">Enter Address</label>
                                                             <Autocomplete
                                                                 apiKey={MAP_PLACES_API_KEY}
-                                                                options={{types:'sublocality'}}
+                                                                options={{ 
+                                                                types: 'sublocality' ,
+                                                                componentRestrictions: { country: "au" },
+                                                                }}
                                                                 onPlaceSelected={(place) => {
                                                                     this.places(place);
                                                                 }}
-                                                                style={{ width: '100%' }}
-                                                                className="form-control input_box"
+                                                                value={this.state.selected_address}
+                                                                style={{ width: '100%' , fontSize:'1rem' }}
+                                                                className="form-control input_box "
                                                             />
                                                         </div>
                                                         </div>
                                                         <div className="col-sm-12">
                                                             <div className="form-group">
-                                                                <label className="control-label">Enter Radius</label>
-                                                                <input value={this.state.radius || ""} onChange={this.radius.bind(this)} type="number" placeholder="Enter Radius" className="form-control" />
+                                                                <label className="control-label">Enter Radius(How far from your address would you like to work in km's)</label>
+                                                                <input onChange={this.radius.bind(this)} type="number" 
+                                                                placeholder="Enter Radius" 
+                                                                className="form-control" />
                                                             </div>
                                                             
                                                         </div>
                                                         <div className="col-sm-12">
-                                                            <button onClick={this.AddAddress.bind(this)} className="btn btn-info" style={{width:'100%',borderRadius:'0px'}}>Add Address</button>
-                                                                
+                                                            
+                                                        {
+                                                            this.state.addresses.length != 0 ?
+                                                            <button 
+                                                                onClick={this.AddAddress.bind(this)} 
+                                                                className="btn btn-info" style={{width:'100%',borderRadius:'0px'}}>
+                                                                Add Another Address
+                                                            </button>
+                                                            :
+                                                            <button 
+                                                                onClick={this.AddAddress.bind(this)} 
+                                                                className="btn btn-info" style={{width:'100%',borderRadius:'0px'}}>
+                                                                Add Address
+                                                            </button>
+                                                        }
+                                            
+            
                                                             <table className="table table-hover table-light table-striped mt-2">
                                                                                         <tbody>
                                                                                             {
                                                                                                 this.state.addresses.map((data, index) => {
                                                                                                     return (
                                                                                                         <tr key={index}>
-                                                                                                            <td>{data.address}</td>
+                                                                                                            <td className="font-weight-bold">{data.address}</td>
                                                                                                             <td onClick={this.removeAddress.bind(this, index)}><i className="fas fa-times"></i></td>
                                                                                                         </tr>
                                                                                                     )
@@ -1067,7 +1093,7 @@ class SignUp extends Component {
                                                                             </div>
                                                                             <div className="col-sm-12 d-flex">
                                                                                 <input className="mt-1" onChange={this.InsuranceType.bind(this)} checked={this.state.insurance_certificate_type == 'admin'} type="checkbox" ></input>
-                                                                                <label className="control-label ml-1"> Buy Public Liability Certificate from admin</label>
+                                                                                <label className="control-label ml-1"> Buy Public Liability Certificate from TidyHome</label>
 
 
                                                                             </div>
@@ -1110,7 +1136,7 @@ class SignUp extends Component {
                                                                                             </div>
                                                                                         </div>
 
-                                                                                        <p>We will be charge [] $5 per month from you.</p>
+                                                                                        <p>You will be charged 5$ per month</p>
                                                                                     </div>
                                                                                     : null
                                                                             }

@@ -58,6 +58,7 @@ class VendorList extends React.Component {
                                             <th>Phone</th>
                                             <th>DOB</th>
                                             <th>Australian Business #</th>
+                                            <th>Created At</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
@@ -74,6 +75,7 @@ class VendorList extends React.Component {
                                                         <td>{data.phone}</td>
                                                         <td>{data.dob}</td>
                                                         <td>{data.australian_business_number}</td>
+                                                        <td>{data.created_at}</td>
                                                         <td>{data.status}</td>
                                                         <td><Link to={`/admin/vendor-info/${data.id}`}><button className="btn btn-outline-success"> <i  className="fa fa-eye"> </i></button></Link></td>
                                                         <td><button onClick={this.deleteVendor.bind(this, data.id)}  className="btn btn-outline-danger"> <i  className="fa fa-trash"> </i></button></td>

@@ -626,6 +626,18 @@ class VendorController extends Controller
         return $response;
     }
 
+    public function disapproved_vendor (Request $request){
+        $data = Vendor::where('id' , $request->id)->update([
+            'password' => Hash::make('tidy'.$request->id.'home'),
+            'status' => 'disapproved'
+        ]);
+        $response = [
+            'status' => 200,
+            'msg' => 'Vendor Disapproved'
+        ];
+        return $response;
+    }
+
 
     public function update_vendor(Request $request) {
         $data = Vendor::where('id', $request->id)->update([
