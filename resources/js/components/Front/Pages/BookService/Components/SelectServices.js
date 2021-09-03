@@ -52,8 +52,9 @@ class SelectServices extends Component {
                 service_id:window.localStorage.getItem('service'),
                 sub_service_id:window.localStorage.getItem('sub_service'),
                 categories:res.data.categories
+            },function(){
+              this.select_category(window.localStorage.getItem('service'));
             })
-            this.select_category(window.localStorage.getItem('service'));
         }) 
         
         // var input = document.getElementById("date");
@@ -197,11 +198,16 @@ class SelectServices extends Component {
                         <div className="row">
                         <div className="col-md-12">
                         
-                        <select value={this.state.sub_service_id} name="gender" className="input--style-1 form-control col-md-12">
-                                <option disabled="disabled" selected="selected">Please Select</option>
-                                <option>Apartment Cleaning</option>
-                                <option>House Cleaning</option>
-                                <option>Carpet Cleaning</option>
+                        <select onChange={this.select_sub_category.bind(this)} value={this.state.sub_service_id} name="gender" className="input--style-1 form-control col-md-12">
+                                <option disabled="disabled" selected="selected">Please Select</option>  
+                                {
+                                  this.state.sub_categories.map((data,index)=>{
+                                    return(
+                                    <option key={index} value={data.id}>{data.name}</option>
+                                      
+                                    )
+                                  })
+                                }
                                 </select>
                         </div>
                         </div>

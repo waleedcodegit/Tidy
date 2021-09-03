@@ -166,6 +166,8 @@ Route::post('/update_customer_card','Frontend\FrontController@update_customer_ca
 Route::post('/get_customer_card','Frontend\FrontController@get_customer_card');
 Route::post('/image_upload','Frontend\FrontController@image_upload');
 Route::post('/get_service_content_by_slug','Frontend\FrontController@get_service_content_by_slug');
+Route::post('/make_booking','Frontend\FrontController@make_booking');
+
 
 
 //Emails Controller//

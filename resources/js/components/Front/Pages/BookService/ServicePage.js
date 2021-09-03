@@ -36,7 +36,7 @@ class ServicePage extends Component {
                                         <p dangerouslySetInnerHTML={{__html:this.state.service.description}}>
                                         </p>
                                         <a onClick={()=>{
-                                        window.localStorage.setItem('service',this.state.category.if);
+                                        window.localStorage.setItem('service',this.state.category.id);
                                         window.open('/book-service/','_self')
                                         }} className="bk-book">Book Now</a>
                                     </div>

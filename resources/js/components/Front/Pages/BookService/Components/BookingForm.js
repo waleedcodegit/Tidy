@@ -57,23 +57,23 @@ class BookingForm extends Component {
       </div>
       {
         this.props.booking_step == 1 ? 
-        <SelectServices></SelectServices>
+        <SelectServices ></SelectServices>
         :null
       }
       {
         this.props.booking_step == 2 ? 
-        <AddInformation></AddInformation>
+        <AddInformation ></AddInformation>
         :null
       }
       {
         this.props.booking_step == 3 ? 
-        <CustomerLocation></CustomerLocation>
+        <CustomerLocation ></CustomerLocation>
         :null
       }
       
       {
         this.props.booking_step == 4 ?
-        <GetPrice></GetPrice>
+        <GetPrice {...this.props}></GetPrice>
         :null
       } 
    

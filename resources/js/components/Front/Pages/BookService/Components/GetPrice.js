@@ -1,6 +1,7 @@
 import Axios from 'axios';
 import React, { Component } from 'react';
 import ReactGoogleAutocomplete from 'react-google-autocomplete';
+import toast from 'react-hot-toast';
 import { connect } from 'react-redux';
 import { MAP_PLACES_API_KEY } from '../../../../Configs/Api';
 import CustomerSignUp from '../../../Auth/ComponentAuths.js/CustomerSignUp';
@@ -57,9 +58,16 @@ class GetPrice extends Component {
       select_service_state: this.props.select_service_state,
       screen2: this.props.add_information,
       customer_location: this.props.customer_location,
+      screen4:this.state,
+      customer:this.props.user
     }
     Axios.post('/api/make_booking',payload).then(res=>{
-      console.log(res);
+      if(res.data.status == 200){
+        toast.success('Booking Created Successfully');
+        this.props.history.push('/profile');
+      }
+    }).catch((e)=>{
+      toast.error('Error - unable to create booking. please try again' + e);
     })
   }
   render() {
@@ -84,7 +92,7 @@ class GetPrice extends Component {
 
                       {
 
-                        this.state.data.service.residential_type.type == 1 ?
+                        this.state.data.service.residential_type == 1 ?
                           <>
                             {
                               this.props.user.data.stripe_id ?
@@ -198,8 +206,8 @@ class GetPrice extends Component {
                                            }
                                           </span>
                                         </h4>
-                                        <button className="btn btn_full btn-info">Book Now</button>
-                                    </div>
+                                        <button onClick={this.make_booking.bind(this)} className="btn btn_full btn-info">Book Now</button>
+                                    </div> 
                                   </div>
 
                                 </>

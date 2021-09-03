@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Frontend;
+
+use App\Booking;
+use App\BookingInformation;
 use Illuminate\Support\Str;
 
 use App\Category;
@@ -71,8 +74,65 @@ class FrontController extends Controller
         }
     }
     public function make_booking(Request $request){
-        return $request();
+        // return $request;
+        $booking = new Booking();
+        $booking->customer_id = $request->customer['data']['id'];
+        $booking->service_id = $request->select_service_state['service_id'];
+        $booking->sub_service_id = $request->select_service_state['sub_service_id'];
+        $date = strtotime( $request->select_service_state['date']);;
+       
+        // return date('Y-m-d', $date);
+        $booking->date =  date('Y-m-d', $date);
+        $booking->time = $request->select_service_state['time'];
+        $booking->flexible_with_date = $request->select_service_state['date_flexible'];
+        $booking->flexible_with_time = $request->select_service_state['time_flexible'];
+        $booking->booking_type = $request->select_service_state['service_type'];
+        $booking->recurring_type = $request->select_service_state['recurring'];
+        $booking->custome_type = $request->select_service_state['custom_recurring'];
+        $booking->is_custom = $request->select_service_state['is_custom'];
+        if($request->select_service_state['is_custom'] == 1){
+            $booking->custom_days = json_encode($request->select_service_state['custom_days']);
+        }
+        $booking->booking_totals = $request->screen4['data']['total'];
+        $booking->booking_tax = 0;
+        $extras = [];
+        if(sizeof($request->screen2['extras'] ) > 0){
+            foreach($request->screen2['extras'] as $se){
+                if($se->quantity > 0){
+                    array_push($extras,$se);
+                }
+            }
+            $booking->booking_extras = json_encode($extras);
         
+        }
+        $booking->booking_extras_total = $request->screen4['data']['extra_total'];
+        $booking->gift_card_id = 0;
+        $booking->is_deleted = 0;
+        $booking->status = 0;
+        $booking->save();
+
+        $b_information = new BookingInformation();
+        $b_information->booking_id = $booking->id;
+        $b_information->resident_type = $request->screen2['resident_type'];
+        $b_information->levels = $request->screen2['levels'];
+        $b_information->bedrooms = $request->screen2['bedrooms'];
+        $b_information->bathrooms = $request->screen2['bathrooms'];
+        $b_information->is_parking_available = $request->screen2['is_parking_available'];
+        $b_information->will_be_at_home = $request->screen2['will_at_home'];
+        $b_information->premises_instruction = $request->screen2['prem_vendor_enterance'];
+        $b_information->is_parking_free = $request->screen2['is_free_parking'];
+        $b_information->parking_instruction = $request->screen2['where_parking'];
+        $b_information->location_address = $request->customer_location['loc_address'];
+        $b_information->lat = $request->customer_location['lat'];
+        $b_information->lng = $request->customer_location['long'];
+        if( sizeof($request->screen2['questions'] ) > 0){
+            $b_information->questions = json_encode( $request->screen2['questions']);
+        }
+        // $b_information->extras
+        $b_information->save();
+
+        $response = ['status' => '200' , 'message' => 'Booking created.'];
+        return $response = $response;
     }
     public function validate_gift_card_details(Request $request){
         if($request->amount < 0 || $request->amount > 500){
@@ -144,7 +204,7 @@ class FrontController extends Controller
             "email" => $customer->email,
             "source" =>  $token->id
         ]);
-        // return $customer;
+        // return $customer;e
         $customer->stripe_id = $stripe_customer->id;
         $customer->save();
         $customer_card = CustomerCard::where('customer_id',$customer->id)->first();

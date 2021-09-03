@@ -51,6 +51,10 @@ class CustomerCardIntegration extends Component {
                 })
             }
 
+        }).catch((e)=>{
+            this.setState({
+                error_string:'Your Payment method is declined please try another.'
+            })
         })
     }
     render() {
