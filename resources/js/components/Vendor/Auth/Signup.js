@@ -1,7 +1,7 @@
 import Axios from 'axios';
 import React, { Component } from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
-
+import Swal from 'sweetalert2';
 import SignUpRequest from './SignUpRequest';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';

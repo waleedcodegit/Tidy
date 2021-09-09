@@ -7,20 +7,22 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class SenderGiftCardMail extends Mailable
+class SignupRequestEmail extends Mailable
 {
     use Queueable, SerializesModels;
+
+    public $new_vendor , $emails , $content;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct($new_vendor , $emails ,$content)
     {
-        // $this->$code = $code;
-        view()->share('data', $data);      
-  
+        $this->new_vendor = $new_vendor;
+        $this->emails = $emails;
+        $this->content = $content;
     }
 
     /**
@@ -30,6 +32,6 @@ class SenderGiftCardMail extends Mailable
      */
     public function build()
     {
-        return $this->subject("Tidy Home Gift Card")->view('emails.SenderGiftCardEmail')->from("info@tidyhome.com.au","Tidy Home");
+        return $this->subject("SignUp Request")->from("admin@tidyhome.com.au")->view('emails.SignupRequest');
     }
 }

@@ -24,6 +24,7 @@ use App\Email;
 use DB;
 use App\VendorResetPassword;
 use App\Mail\VendorResetPass;
+use App\Mail\SignupRequestEmail;
 
 class VendorController extends Controller
 {
@@ -436,6 +437,17 @@ class VendorController extends Controller
             }
         }
         $vendor->save();
+
+        // Sending SignUp Request Email
+
+        $emails = Email::where('id', 25)->first();
+        if($emails){
+            $content = str_replace('[Vendor Name]', $request->first_name , $emails->email_content);
+            Mail::to($new_vendor->email)->send(new SignupRequestEmail($new_vendor , $emails , $content));
+        }else{
+            return $emails; 
+        }
+      
         
     $response = ['status' => 200 , 'msg' => 'Vendor added.'];
     return $response;

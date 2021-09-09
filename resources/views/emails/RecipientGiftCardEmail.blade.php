@@ -212,7 +212,7 @@
 																<table width="100%" border="0" cellspacing="0" cellpadding="0">
 																
 																	<tr>
-																		<td class="text pb25" style="color:#666666; font-family:'Roboto', Arial,sans-serif; font-size:16px; line-height:28px; text-align:left; padding-bottom:25px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
+																		<td class="text pb25" style="color:#666666; font-family:'Roboto', Arial,sans-serif; font-size:16px; line-height:28px; text-align:left; padding-bottom:25px;"></td>
 																	</tr>
 																	
 																</table>
