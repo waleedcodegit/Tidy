@@ -48,7 +48,7 @@ class VendorList extends React.Component {
                                 <h3 className="panel-title">Vendor List</h3>
                             </div>
                             <div className="panel-body">
-                                <table id="demo-dt-basic" className="table table-striped table-bordered" cellspacing="0" width="100%">
+                                <table id="demo-dt-basic" className="table table-striped table-bordered" cellSpacing="0" width="100%">
                                     <thead>
                                         <tr>
                                             <th>Sr</th>

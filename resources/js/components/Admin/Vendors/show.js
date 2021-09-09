@@ -141,11 +141,12 @@ class ShowVendor extends Component {
             id: this.props.match.params.id
         }
         Axios.post('/api/disapproved-vendor' , data ,Configs).then(res=>{
+            console.log(res);
             if(res.data.status == 200){
                 this.props.history.push('/admin/vendor-list');
                 Swal.fire({
                     icon: 'success',
-                    title: 'Vendor Approved Successfully',
+                    title: 'Vendor DisApproved Successfully',
                     showConfirmButton: false,
                     timer: 1500
                 })
@@ -231,7 +232,7 @@ class ShowVendor extends Component {
                                         </div>
                                         <div id="demo-lft-tab-3" className="tab-pane fade">
                                             <p className="text-main text-semibold">Services</p>
-                                            <table id="demo-dt-basic" className="table table-striped table-bordered" cellspacing="0" width="100%">
+                                            <table id="demo-dt-basic" className="table table-striped table-bordered" cellSpacing="0" width="100%">
                                                 <thead>
                                                     <tr>
                                                         <th>Sr</th>

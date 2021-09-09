@@ -74,8 +74,8 @@ class Login extends Component {
                                                 <input onChange={this.password.bind(this)} type="password" name="password" className="form-control" />
                                             </div>
                                         </div>
-                                        <div className="col-sm-12">
-                                            <p className="text-right">Forgot Password ?</p>
+                                        <div className="text-right ">
+                                            <span ><a href="/vendor-forget-password">Forgot Password ?</a></span>
                                         </div>
                                         {
                                             this.state.error_string != '' ?
@@ -83,7 +83,7 @@ class Login extends Component {
                                             :null
                                         }
                                         <div className="col-sm-12">
-                                        <button onClick={this.login.bind(this)} className="btn btn-success text-center sub_btn col-sm-12" type="submit">Login</button>
+                                        <button onClick={this.login.bind(this)} className="btn btn-info text-center sub_btn col-sm-12" type="submit">Login</button>
                                         </div>
                                         
                                        <div className="col-sm-12">

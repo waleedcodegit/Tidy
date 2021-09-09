@@ -81,6 +81,9 @@ class Login extends Component {
                                      aria-describedby="emailHelp" 
                                 />
                             </div>
+                            <div className="text-right">
+                                <span ><a href="/forgot-password">Forgot Password ?</a></span>
+                            </div>
                             <div >
                                 <div className="row ml-0">   
                                     <div className="col-md-6 row">

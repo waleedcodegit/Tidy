@@ -108,14 +108,17 @@ Route::view('/vendor/employee-list', 'vendor');
 Route::view('/vendor/create-employee', 'vendor');
 Route::view('/vendor/edit-employee/{id}', 'vendor');
 Route::view('/vendor/message-admin', 'vendor');
-
+Route::view('/vendor/vendor-forget-password', 'vendor');
+Route::view('/vendor-reset-password/{id}' , 'Front');
 
 // Front Client Routes
 
 Route::view('/services/{name?}', 'Front');
 Route::view('/signup', 'Front');
+Route::view('/forgot-password' , 'Front');
 Route::view('/login', 'Front');
 Route::view('/service/{slug}', 'Front');
+Route::view('/reset-password/{id}' , 'Front');
 
 Route::view('/profile', 'Front');
 

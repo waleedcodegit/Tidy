@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class ResetPassword extends Model
 {
-    protected $table = 'ResetPasswords';
+    protected $table = 'resetpasswords';
 }

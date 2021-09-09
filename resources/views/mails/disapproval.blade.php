@@ -49,10 +49,12 @@
         <h3>Subject:</h3> {{$emails -> email_title}}
     </header>
     <section>
+        
         <h3>Name:</h3> {{$data->first_name}} {{$data->last_name}}
         <h3>Email:</h3> {{$data->email}}
-        <h3>password:</h3> tidy{{$data->id}}home
-        <h3>This is from emails</h3> {!! $emails -> email_content !!}
+        <h3>This is from emails</h3> {!! $emails->email_content !!}
+        
+        <!-- <h3>password:</h3> tidy{{$data->id}}home -->
     </section>
     <footer>
         

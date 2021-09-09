@@ -9,8 +9,8 @@ import Axios from 'axios';
 import {StripeProvider} from 'react-stripe-elements';
 import { STRIPE_PK } from '../Configs/Api';
 import {Elements} from 'react-stripe-elements';
-
 import '../Vendor/admin.css';
+
 class Index extends Component {
     constructor(props) {
         super(props);
@@ -21,7 +21,7 @@ class Index extends Component {
             <div >
                 <BrowserRouter>
                     {/* <Route exact path="/vendor" component={MainIndex}></Route> */}
-                    <Route path="/vendor-signup/:step?/:vendor_id?" component={  Signup}></Route>
+                    <Route path="/vendor-signup/:step?/:vendor_id?" component={Signup}></Route>
                     <Route path="/vendor-login" component={Login}></Route>
                     <Route exact path="/request-submitted" component={SignUpRequest}></Route>
                 </BrowserRouter>

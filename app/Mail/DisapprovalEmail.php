@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ApprovalEmail extends Mailable
+class DisapprovalEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -31,6 +31,6 @@ class ApprovalEmail extends Mailable
      */
     public function build()
     {
-        return $this->subject("Approval")->from("admin@tidyhome.com.au")->view('mails.approval');
+        return $this->subject("Disapproval")->from("admin@tidyhome.com.au")->view('mails.disapproval');
     }
 }

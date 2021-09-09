@@ -17,6 +17,11 @@ import { connect } from 'react-redux';
 import Profile from '../Pages/UserProfile/Profile';
 import ServicePage from '../Pages/BookService/ServicePage';
 import MessageAdmin from '../Pages/Messages/MessageAdmin';
+import ForgotPassword from '../Auth/ComponentAuths.js/ForgotPassword';
+import ResetPassword from '../Auth/ComponentAuths.js/ResetPassword';
+import VendorForgotPassword from '../../Vendor/Auth/VendorForgotPassword';
+import VendorResetPassword from '../../Vendor/Auth/VendorResetPassword';
+
 class Index extends Component {
     constructor(props) {
         super(props);
@@ -50,8 +55,11 @@ class Index extends Component {
                 <Route  path="/gift-card" component={GiftCard}></Route>
                 <Route  path="/profile" component={Profile}></Route>
                 <Route  path="/service/:slug" component={ServicePage}></Route>
-
                 <Route  path="/message-admin" component={MessageAdmin}></Route>
+                <Route  path="/forgot-password" component={ForgotPassword}></Route>
+                <Route  path="/reset-password/:id" component={ResetPassword}></Route>
+                <Route path="/vendor-forget-password" component={VendorForgotPassword}></Route>
+                <Route path="/vendor-reset-password/:id" component={VendorResetPassword}></Route>
 
                 <Footer></Footer>
             </div>

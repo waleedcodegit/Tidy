@@ -163,7 +163,7 @@ class AuthController extends Controller
                 $p->token = $customer[0]->id;
                 $p->status = 1;
                 $p->save();
-                $link =Crypt::encrypt($p->token);
+                $link = 'reset-password/'.Crypt::encrypt($p->token);
                 $title = 'Password Reset';
                 Mail::to($request->email)->send(new CustomerResetPassword($link,$title));
                 $response = ['status' => 200 , 'msg' => 'success- password reset link mailed successfully'];
@@ -177,7 +177,7 @@ class AuthController extends Controller
     public function user_password(Request $request){
         $validator = Validator::make($request->all(), [
             'token' => 'required', 
-            'new_password' => 'required|min:6',         
+            'password' => 'required|min:6',         
         ]);
         if($validator->fails()){
             $response = ['status' => 219 , 'msg' => $validator->errors()->first() , 
@@ -188,7 +188,7 @@ class AuthController extends Controller
             if(sizeof($meta) > 0){
                     $customer =  DB::table('customers')->where('email', $meta[0]->email)->get(); 
                     $new_customer = Customer::find($customer[0]->id);                     
-                    $new_customer->password = Hash::make($request->new_password);
+                    $new_customer->password = Hash::make($request->password);
                     $new_customer->save();
                     DB::table('resetpasswords')->where('email', $meta[0]->email)->update(array('status' => 0));  
                     $response = ['status' => 200 , 'msg' => 'success- customer password updated successfully'];
@@ -251,5 +251,4 @@ class AuthController extends Controller
         return $response;
     }
 
-    
 }

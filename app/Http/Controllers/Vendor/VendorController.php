@@ -19,6 +19,11 @@ use App\VendorServices;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ApprovalEmail;
 use App\VendorLocation;
+use App\Mail\DisapprovalEmail;
+use App\Email;
+use DB;
+use App\VendorResetPassword;
+use App\Mail\VendorResetPass;
 
 class VendorController extends Controller
 {
@@ -617,7 +622,8 @@ class VendorController extends Controller
         ]);
 
         $data = Vendor::where('id', $request->id)->first();
-        Mail::to($data->email)->send(new ApprovalEmail($data));
+        $emails = Email::where('id', 21)->first();
+        Mail::to($data->email)->send(new ApprovalEmail($data , $emails));
 
         $response = [
             'status' => 200 ,
@@ -631,6 +637,11 @@ class VendorController extends Controller
             'password' => Hash::make('tidy'.$request->id.'home'),
             'status' => 'disapproved'
         ]);
+
+        $data = Vendor::where('id', $request->id)->first();
+        $emails = Email::where('id', 22)->first();
+        Mail::to($data->email)->send(new DisapprovalEmail($data , $emails));
+
         $response = [
             'status' => 200,
             'msg' => 'Vendor Disapproved'
@@ -742,5 +753,65 @@ class VendorController extends Controller
             'msg' => 'Successfully Deleted'
         ];
         return $response;
+    }
+
+    public function vendor_forget_password(Request $request){
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|max:255',  
+                     
+        ]);
+        if($validator->fails()){
+            $response = ['status' => 219 , 'msg' => $validator->errors()->first() , 
+            'errors' => $validator->errors()];
+            return $response;
+        }else{
+
+            $vendor = DB::table('vendors')
+                        ->where('email', $request->email)
+                        ->where('delete_status', 1)
+                        ->get();
+            if(sizeof($vendor) > 0){
+                DB::table('vendor_reset_passwords')->where('email', $request->email)->update(array('status' => '0'));  
+                $p = new VendorResetPassword();
+                $p->email = $request->email;
+                $p->token = $vendor[0]->id;
+                $p->status = 1;
+                $p->save();
+                $link = 'vendor-reset-password/'.Crypt::encrypt($p->token);
+                $title = 'Password Reset';
+                Mail::to($request->email)->send(new VendorResetPass($link,$title));
+                $response = ['status' => 200 , 'msg' => 'success- password reset link mailed successfully'];
+                return $response;
+            }else{
+                $response = ['status' => 404 , 'msg' => 'error- email not found'];
+                return $response;
+            }
+        }
+    }
+
+    public function vendor_reset_password(Request $request){
+        $validator = Validator::make($request->all(), [
+            'token' => 'required', 
+            'password' => 'required|min:6',         
+        ]);
+        if($validator->fails()){
+            $response = ['status' => 219 , 'msg' => $validator->errors()->first() , 
+            'errors' => $validator->errors()];
+            return $response;
+        }else{
+            $meta =  DB::table('vendor_reset_passwords')->where('token', Crypt::decrypt($request->token))->where('status',1)->get();
+            if(sizeof($meta) > 0){
+                    $vendor =  DB::table('vendors')->where('email', $meta[0]->email)->get(); 
+                    $new_vendor = Vendor::find($vendor[0]->id);                     
+                    $new_vendor->password = Hash::make($request->password);
+                    $new_vendor->save();
+                    DB::table('vendor_reset_passwords')->where('email', $meta[0]->email)->update(array('status' => 0));  
+                    $response = ['status' => 200 , 'msg' => 'success- customer password updated successfully'];
+                    return $response;
+            }else{
+                    $response = ['status' => 401 , 'msg' => 'error- Inavlid token or token is expierd'];
+                    return $response;
+            }
+        }
     }
 }

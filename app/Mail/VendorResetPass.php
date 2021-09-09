@@ -7,22 +7,22 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ApprovalEmail extends Mailable
+class VendorResetPass extends Mailable
 {
     use Queueable, SerializesModels;
-
-    public $data , $emails;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($data , $emails)
+    public function __construct($link,$title)
     {
-        $this->data = $data;
-        $this->emails = $emails;
+        // $this->$code = $code;
+        view()->share('link', $link);        
+        view()->share('title', $title);
     }
+
 
     /**
      * Build the message.
@@ -31,6 +31,6 @@ class ApprovalEmail extends Mailable
      */
     public function build()
     {
-        return $this->subject("Approval")->from("admin@tidyhome.com.au")->view('mails.approval');
+        return $this->subject("Reset Password Link")->view('emails.VendorResetPass')->from("familymatchemail@gmail.com","Booking App");
     }
 }

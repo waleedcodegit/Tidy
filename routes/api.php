@@ -44,22 +44,24 @@ Route::post('delete-manageservice','Admin\ServicesController@delete_ManageServic
 
 Route::post('/update_customer','Customer\AuthController@update_customer');
 
+// Customer Route
+Route::get('/customer-list','Customer\AuthController@index');
+Route::post('/create-customer','Customer\AuthController@create_customer');
+Route::post('/edit-customer/{id}','Customer\AuthController@edit_customer');
+Route::post('/update-customer','Customer\AuthController@update_customer');
+Route::post('/forgot-password','Customer\AuthController@customer_forget_password');
+Route::post('/reset-password','Customer\AuthController@user_password');
+
+// Vendor Route
+Route::get('/vendor-list','Vendor\VendorController@list');
+Route::post('/vendor-info/{id}','Vendor\VendorController@show');
+Route::post('/approved-vendor','Vendor\VendorController@approved_vendor');
+Route::post('/disapproved-vendor','Vendor\VendorController@disapproved_vendor');
+Route::post('/vendor-forget-password' , 'Vendor\VendorController@vendor_forget_password');
+Route::post('/vendor-reset-password' , 'Vendor\VendorController@vendor_reset_password');
+
 Route::middleware(['admin-login'])->group(function () {
-    // Customer Route
-    Route::get('/customer-list','Customer\AuthController@index');
-    Route::post('/create-customer','Customer\AuthController@create_customer');
-    Route::post('/edit-customer/{id}','Customer\AuthController@edit_customer');
-    Route::post('/update-customer','Customer\AuthController@update_customer');
-     
 
-
-    // Vendor Route
-    Route::get('/vendor-list','Vendor\VendorController@list');
-    Route::post('/vendor-info/{id}','Vendor\VendorController@show');
-    Route::post('/approved-vendor','Vendor\VendorController@approved_vendor');
-    Route::post('/disapproved-vendor','Vendor\VendorController@disapproved_vendor');
-
-    
     //employee
     Route::resource('employee', 'Vendor\EmployeeController');
 
