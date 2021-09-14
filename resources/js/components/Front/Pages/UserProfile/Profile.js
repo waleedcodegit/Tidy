@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { img_baseurl } from '../../../Configs/Api';
 import EditProfile from './EditProfile';
+import MessageAdmin from './MessageAdmin';
 import MyBookings from './MyBookings';
 import PaymentCards from './PaymentCards';
 
@@ -57,13 +58,18 @@ class Profile extends Component {
                                     <ul className="nav nav-tabs">
                                         <li className="cycle-tab-item ">
                                             <a className="nav-link active" role="tab" data-toggle="tab" href="#services" aria-expanded>
-                                            <img src="https://img.icons8.com/ios/16/000000/dot-logo.png "></img>Services
+                                            <img src="https://img.icons8.com/ios/16/000000/dot-logo.png "></img> Services
                                              </a>
+                                        </li>
+                                        <li className="cycle-tab-item">
+                                            <a className="nav-link" role="tab" data-toggle="tab" href="#message">
+                                            <img src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/16/000000/external-message-chat-flatart-icons-outline-flatarticons-4.png"/> Messages</a>
                                         </li>
                                         <li className="cycle-tab-item">
                                             <a className="nav-link" role="tab" data-toggle="tab" href="#profile">
                                             <img src="https://img.icons8.com/material-outlined/16/000000/edit--v1.png"/> Edit Profile</a>
                                         </li>
+                                        
                                         <li className="cycle-tab-item">
                                             <a className="nav-link" role="tab" data-toggle="tab" href="#payment">
                                             <img src="https://img.icons8.com/ios/16/000000/bank-card-back-side.png"/> Payment Card</a>
@@ -71,7 +77,8 @@ class Profile extends Component {
                                     </ul>
                                     <div className="tab-content">
                                         <MyBookings></MyBookings>
-                                       <EditProfile></EditProfile>
+                                        <MessageAdmin></MessageAdmin>
+                                        <EditProfile></EditProfile>
                                        <PaymentCards></PaymentCards>
                                     </div>
                                 </div>

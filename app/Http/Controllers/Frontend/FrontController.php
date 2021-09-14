@@ -134,6 +134,18 @@ class FrontController extends Controller
         $response = ['status' => '200' , 'message' => 'Booking created.'];
         return $response = $response;
     }
+    public function get_customer_bookings(Request $request){
+        $bookings = Booking::where('customer_id',$request->customer_id)->with('service','sub_service')->get();
+        if($bookings){
+            $response = ['status' => '200' , 'bookings' => $bookings];
+            return $response = $response;
+        }else{
+            $response = ['status' => '404' ];
+            return $response = $response;
+        }
+
+
+    }
     public function validate_gift_card_details(Request $request){
         if($request->amount < 0 || $request->amount > 500){
             return response()->json([

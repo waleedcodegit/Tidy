@@ -107,7 +107,7 @@ class EditProfile extends Component {
                                     {
                                         
                                      this.props.user.is_login == true && this.props.user.is_apicall == true ?
-                                     <div onLoad={()=>{this.setProps()}}>ffff
+                                     <div onLoad={()=>{this.setProps()}}>
                                      {
 
                                      }

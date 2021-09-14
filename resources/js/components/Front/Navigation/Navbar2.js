@@ -69,7 +69,7 @@ class Navbar2 extends Component {
                             })
                         }
                         
-                        {/* <NavDropdown.Item onClick={()=>{this.props.changeModal(true)}}><a target="blank">Business Services</a></NavDropdown.Item> */}
+                        {/* <NavDropdown.Item onClick={()=>{this.props.changeModal(true)}}><a target="blank">Business Services</a></NavDropdown.Item>  */}
                       
                     </NavDropdown>
                     </Nav.Link>
@@ -116,9 +116,7 @@ class Navbar2 extends Component {
                                 </>
                             }
                     <Nav.Link href="#home"></Nav.Link>
-                    
                     </Nav>
-                    
                 </Navbar.Collapse>
                     </div>
                 </Navbar>
