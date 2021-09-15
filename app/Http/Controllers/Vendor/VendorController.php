@@ -326,6 +326,16 @@ class VendorController extends Controller
         }
     }
     public function validate_vendor(Request $request){
+        $user = Vendor::where('email',$request->email)
+                        ->where('delete_status' , 1)
+                        ->first();
+        if($user){
+            return response()->json([
+                'status' => false,
+                'message' => 'The Email address is already registered to TIDYHOME'
+                //'errors' => $validator->errors()     
+            ]);
+        }
         $validator = Validator::make($request->all(), [
             'first_name' => 'required',
             'last_name' => 'required',

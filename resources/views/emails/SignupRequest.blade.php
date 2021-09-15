@@ -46,7 +46,7 @@
 <body>
 <div class="wrapper_div">
     <header>
-        <h3> {{$emails -> email_title}} </h3> 
+        <h3> {{$emails -> email_title}} </h3>
     </header>
     <section>
         <h3> {!! $content !!} </h3>
