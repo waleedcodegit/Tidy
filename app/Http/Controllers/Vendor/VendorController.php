@@ -336,6 +336,7 @@ class VendorController extends Controller
                 //'errors' => $validator->errors()     
             ]);
         }
+        
         $validator = Validator::make($request->all(), [
             'first_name' => 'required',
             'last_name' => 'required',
