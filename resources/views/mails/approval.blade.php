@@ -8,13 +8,13 @@
 
         header {
             text-align: center;
-            font-size: 30px;
+            font-size: 20px;
             font-family: sans-serif;
             color: #2db7c5;
         }
 
         section {
-            width: 35%;
+            width: 80%;
             margin: 0 auto;
             display: block;
         }
@@ -46,13 +46,22 @@
 <body>
 <div class="wrapper_div">
     <header>
-        <h3>Subject:</h3> {{$emails -> email_title}}
+        <h3>{{$emails -> email_title}}</h3>
     </header>
     <section>
-        <h3>Name:</h3> {{$data->first_name}} {{$data->last_name}}
-        <h3>Email:</h3> {{$data->email}}
-        <h3>password:</h3> tidy{{$data->id}}home
-        <h3>This is from emails</h3> {!! $emails -> email_content !!}
+        <img src="https://tidyhome.zacuta.com/public/images/site-logo.png"/>
+        <h3> {!! $content !!} </h3>
+        <table >
+            <tr>
+            <a href="https://www.facebook.com/tidyhomeAU"><img src="https://img.icons8.com/external-justicon-flat-justicon/50/000000/external-facebook-social-media-justicon-flat-justicon.png"
+            height="20" width="20"/></a>
+            <a href="https://www.instagram.com/tidyhome21/"><img src="https://img.icons8.com/color/48/000000/instagram-new--v1.png" 
+            height="20" width="20"/></a>
+            <a href="https://www.linkedin.com/company/tidyhome"><img src="https://img.icons8.com/external-justicon-flat-justicon/64/000000/external-linkedin-social-media-justicon-flat-justicon.png" 
+            height="20" width="20"/></a>
+            </tr>
+        </table>
+
     </section>
     <footer>
         

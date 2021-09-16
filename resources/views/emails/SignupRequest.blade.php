@@ -14,7 +14,7 @@
         }
 
         section {
-            width: 35%;
+            width: 80%;
             margin: 0 auto;
             display: block;
         }

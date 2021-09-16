@@ -644,8 +644,21 @@ class VendorController extends Controller
         ]);
 
         $data = Vendor::where('id', $request->id)->first();
-        $emails = Email::where('id', 21)->first();
-        Mail::to($data->email)->send(new ApprovalEmail($data , $emails));
+        $emails = Email::where('id', 27)->first();
+        if($emails){
+        $content = str_replace('[Vendor name]', $data->first_name , $emails->email_content);
+        $content = str_replace('[Name]', $data->first_name , $content);
+        $content = str_replace('[Email]', $data->email , $content );
+        $content = str_replace('[Password]', $data->id , $content);
+        $content = str_replace('[Vendor dashboard link]', url('/vendor/dashboard') , $content );
+        Mail::to($data->email)->send(new ApprovalEmail($data , $emails , $content));
+        }else{
+            return $emails;
+        }
+
+        // $content = str_replace(array('[Vendor name]','Name','Email','Password'),array($request->first_name,$request->first_name,$request->email,$request->id),$emails->email_content);
+
+        
 
         $response = [
             'status' => 200 ,
@@ -790,7 +803,7 @@ class VendorController extends Controller
 
             $vendor = DB::table('vendors')
                         ->where('email', $request->email)
-                        ->where('delete_status', 1)
+                        ->where('delete_status', 0)
                         ->get();
             if(sizeof($vendor) > 0){
                 DB::table('vendor_reset_passwords')->where('email', $request->email)->update(array('status' => '0'));  

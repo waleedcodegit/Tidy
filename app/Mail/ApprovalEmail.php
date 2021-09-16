@@ -11,17 +11,18 @@ class ApprovalEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $data , $emails;
+    public $data , $emails , $content;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($data , $emails)
+    public function __construct($data , $emails , $content)
     {
         $this->data = $data;
         $this->emails = $emails;
+        $this->content = $content;
     }
 
     /**
