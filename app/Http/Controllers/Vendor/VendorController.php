@@ -450,7 +450,7 @@ class VendorController extends Controller
 
         // Sending SignUp Request Email
 
-        $emails = Email::where('id', 25)->first();
+        $emails = Email::where('id', 26)->first();
         if($emails){
             $content = str_replace('[Vendor Name]', $request->first_name , $emails->email_content);
             Mail::to($new_vendor->email)->send(new SignupRequestEmail($new_vendor , $emails , $content));
