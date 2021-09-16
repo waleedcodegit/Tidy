@@ -3697,3 +3697,40 @@ background-color: #7db343;
     font-size: 18px;
 	
 }
+.booking-content ul li {
+    color: #858585;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 20px;
+    margin-bottom: 30px;
+    font-family: "poppins";
+    border-bottom: solid 1px #DEE2E6;
+    padding: 10px;
+}
+.srv-content{}
+.srv-content ul li{
+color: #858585;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 25px;
+    margin-bottom: 0px;
+	font-family: "poppins"
+}
+.srv-content ul li span{
+	color: #000;
+	font-size: 16px;
+	font-weight: 400;
+	font-family: "poppins"
+}
+.paid-cls {
+    background: #28A745;
+    border-radius: 10px;
+    padding: 1px 10px;
+    color: #fff!important;
+}
+.due-cls {
+    background: #DC3545;
+    border-radius: 10px;
+    padding: 1px 10px;
+    color: #fff!important;
+}
