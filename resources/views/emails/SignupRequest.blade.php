@@ -8,7 +8,7 @@
 
         header {
             text-align: center;
-            font-size: 30px;
+            font-size: 20px;
             font-family: sans-serif;
             color: #2db7c5;
         }
@@ -44,12 +44,23 @@
     </style>
 </head>
 <body>
-<div class="wrapper_div">
-    <header>
-        <h3> {{$emails -> email_title}} </h3> 
-    </header>
+<div class="panel panel-body">
     <section>
+        <header>
+            <h3> {{$emails -> email_title}} </h3>
+        </header>
+        <img src="https://tidyhome.zacuta.com/public/images/site-logo.png" />
         <h3> {!! $content !!} </h3>
+        <table >
+            <tr>
+            <a href="https://www.facebook.com/tidyhomeAU"><img src="https://img.icons8.com/external-justicon-flat-justicon/50/000000/external-facebook-social-media-justicon-flat-justicon.png"
+            height="20" width="20"/></a>
+            <a href="https://www.instagram.com/tidyhome21/"><img src="https://img.icons8.com/color/48/000000/instagram-new--v1.png" 
+            height="20" width="20"/></a>
+            <a href="https://www.linkedin.com/company/tidyhome"><img src="https://img.icons8.com/external-justicon-flat-justicon/64/000000/external-linkedin-social-media-justicon-flat-justicon.png" 
+            height="20" width="20"/></a>
+            </tr>
+        </table>
     </section>
     <footer>
         
