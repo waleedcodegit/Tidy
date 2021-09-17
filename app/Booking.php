@@ -14,4 +14,7 @@ class Booking extends Model
     public function sub_service() {
         return $this->belongsTo('App\SubCategory' , 'sub_service_id');
     }
+    public function information() {
+        return $this->hasOne('App\BookingInformation');
+    }
 }

@@ -1,10 +1,27 @@
+import Axios from 'axios';
 import React, { Component } from 'react';
+import CustomerVendorChat from './CustomerVendorChat';
 
 class BookingDetails extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            booking:{}
+        };
+    }
+
+    componentDidMount(){
+        Axios.post('/api/get_booking_by_id',{id:this.props.match.params.id}).then(res=>{
+            console.log(res);
+        })
+    }
     render() {
         return (<div>
             <section className="blog-section padding pr-sec">
                 <div className="container">
+                <div>
+                    <h1 className="text-center text-bold">Booking Details</h1>
+                </div>
                     <div className="blog-wrap row">
                         <div className="col-lg-12 sm-padding">
                             <div className="row">
@@ -221,9 +238,9 @@ class BookingDetails extends Component {
                             <div className="col-lg-12 sm-padding">
                                 <div className="comments-area">
                                     <div className="comments-section">
-                                        <h3 className="comments-title">Chat</h3>
+                                        <h3 className="comments-title">Chat With Vendor</h3>
                                         <div className="divid-line" />
-                                        <ol className="comments">
+                                        {/* <ol className="comments">
                                             <li className="comment even thread-even depth-1" id="comment-1">
                                                 <div id="div-comment-1">
                                                     <div className="comment-main-area">
@@ -284,9 +301,10 @@ class BookingDetails extends Component {
                                                     </div>
                                                 </div>
                                             </li>
-                                        </ol>
+                                        </ol> */}
+                                    
                                     </div>
-                                    <div className="comment-respond">
+                                    {/* <div className="comment-respond">
                                         <form method="post" id="commentform" className="comment-form">
                                             <div className="row">
                                                 <div className="col-md-10">
@@ -299,126 +317,9 @@ class BookingDetails extends Component {
                                                 </div>
                                             </div>
                                         </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section className="work-pro-section ">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-6 col-sm-12">
-                            <div className="work-pro-item">
-                                <img src="img/get-leads.png" alt />
-                            </div>
-                        </div>
-                        <div className="col-lg-6 col-sm-12 sm-padding">
-                            <div className="work-pro-item padding-top">
-                                <h3>Get leads on <span>THE GO</span></h3>
-                                <p>Here you can see just some of the areas we cover in Melbourne, Sydney, Brisbane and Perth. You can easily access information for your area and service directly from the list below. THere are services like carpet cleaning, end of
-                                    lease, general domestic cleaning and more.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <div className="cta-section padding">
-                <div className="container">
-                    <div className="section-heading dark-background text-center wow fadeInUp tab-des" data-wow-delay="100ms">
-                        <h2>Watch how <span>CLEANING WORKS</span></h2>
-                        <div className="heading-img"><img src="img/heading-bg.png" alt /></div>
-                    </div>
-                    <div className="row">
-                        <div className="col-md-1" />
-                        <div className="col-md-10">
-                            <div className="video-bottom">
-                                <a href="#"> <i className="fa fa-play-circle video-icn" aria-hidden="true" /></a>
-                                <img src="img/video-img.jpg" alt />
-                            </div>
-                        </div>
-                        <div className="col-md-1" />
-                    </div>
-                </div>
-            </div>
-            <section className="widget-section padding">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-3 col-sm-6 sm-padding">
-                            <div className="widget-content">
-                                <h4>Discover</h4>
-                                <ul className="widget-links">
-                                    <li><a href="#">How it works</a></li>
-                                    <li><a href="#">Services for business</a></li>
-                                    <li><a href="#">Earn money</a></li>
-                                    <li><a href="#">New users FAQ</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div className="col-lg-3 col-sm-6 sm-padding">
-                            <div className="widget-content">
-                                <h4>Company</h4>
-                                <ul className="widget-links">
-                                    <li><a href="#">About Us</a></li>
-                                    <li><a href="#">Careers</a></li>
-                                    <li><a href="#">Media enquiries</a></li>
-                                    <li><a href="#">Community guidelines</a></li>
-                                    <li><a href="#">Tasker principles</a></li>
-                                    <li><a href="#">Terms &amp; conditions</a></li>
-                                    <li><a href="#">Blog</a></li>
-                                    <li><a href="#">Contact us</a></li>
-                                    <li><a href="#">Privacy policy</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div className="col-lg-3 col-sm-6 sm-padding">
-                            <div className="widget-content">
-                                <h4>Popular Categories</h4>
-                                <ul className="widget-links">
-                                    <li><a href="#">Handyman Services</a></li>
-                                    <li><a href="#">Cleaning Services</a></li>
-                                    <li><a href="#">Delivery Services</a></li>
-                                    <li><a href="#">Removalists</a></li>
-                                    <li><a href="#">Gardening Services</a></li>
-                                    <li><a href="#">Automotive</a></li>
-                                    <li><a href="#">Assembly Services</a></li>
-                                    <li><a href="#">All Services</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div className="col-lg-3 col-sm-6 sm-padding">
-                            <div className="widget-content">
-                                <h4>Popular Locations</h4>
-                                <ul className="widget-links">
-                                    <li><a href="#">Services in Adelaide</a></li>
-                                    <li><a href="#">Services in Brisbane</a></li>
-                                    <li><a href="#">Services in Canberra</a></li>
-                                    <li><a href="#">Services in Melbourne</a></li>
-                                    <li><a href="#">Services in Perth</a></li>
-                                    <li><a href="#">Services in Sydney</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="bottom-footer">
-                        <div className="row">
-                            <div className="col-lg-4 col-sm-6 ">
-                                <div className="widget-content">
-                                    <p>Copyright 2020 Services. All Rights Reserved.</p>
-                                </div>
-                            </div>
-                            <div className="col-lg-5">
-                            </div>
-                            <div className="col-lg-3 col-sm-6 ">
-                                <div className="social-links">
-                                    <ul>
-                                        <li><a href="#"><i className="fab fa-facebook-square" /></a></li>
-                                        <li><a href="#"><i className="fab fa-twitter-square" /></a></li>
-                                        <li><a href="#"><i className="fab fa-linkedin" /></a></li>
-                                        <li><a href="#"><i className="fab fa-youtube-square" /></a></li>
-                                    </ul>
+                                    </div> */}
+                                    <CustomerVendorChat booking_id={this.props.match.params.id}></CustomerVendorChat>
+
                                 </div>
                             </div>
                         </div>

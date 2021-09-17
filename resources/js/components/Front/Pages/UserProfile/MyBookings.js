@@ -37,7 +37,7 @@ class MyBookings extends Component {
                                                 {
                                                     this.state.bookings.map((data,index)=>{
                                                         return(
-                                                            <div key={index} className="col-sm-12 padding-15">
+                                                            <div onClick={()=>{window.open('/booking-details/'+data.id,'_blank')}} key={index} style={{cursor:'pointer'}} className="col-sm-12 padding-15">
                                                                 <div className="blog-item profile-shadow">
                                                                     <div className="card-content">
                                                                         <h3>{data.sub_service ? data.sub_service.name : data.sub_service.name}</h3>

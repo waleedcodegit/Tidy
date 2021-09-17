@@ -134,6 +134,12 @@ class FrontController extends Controller
         $response = ['status' => '200' , 'message' => 'Booking created.'];
         return $response = $response;
     }
+
+    public function get_booking_by_id(Request $request){
+        $booking = Booking::where('id',$request->id)->with('information')->first();
+        return $booking;
+    }
+
     public function get_customer_bookings(Request $request){
         $bookings = Booking::where('customer_id',$request->customer_id)->with('service','sub_service')->get();
         if($bookings){

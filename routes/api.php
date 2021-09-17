@@ -171,6 +171,7 @@ Route::post('/get_service_content_by_slug','Frontend\FrontController@get_service
 Route::post('/make_booking','Frontend\FrontController@make_booking');
 Route::post('/get_customer_bookings','Frontend\FrontController@get_customer_bookings');
 
+Route::post('/get_booking_by_id','Frontend\FrontController@get_booking_by_id');
 
 
 //Emails Controller//
@@ -213,3 +214,9 @@ Route::post('/customer_message_sender','Common\CommonController@customer_message
 Route::post('/get_customer_messages','Common\CommonController@get_customer_messages');
 Route::post('/get_customer_chat_messages','Common\CommonController@get_customer_chat_messages');
 Route::post('/get_customer_chats','Common\CommonController@get_customer_chats');
+
+Route::post('/vendor_customer_message_sender','Common\CommonController@vendor_customer_message_sender');
+Route::post('/get_vendor_customer_messages','Common\CommonController@get_vendor_customer_messages');
+Route::post('/get_customer_vendor_chat_messages','Common\CommonController@get_customer_vendor_chat_messages');
+Route::post('/get_vendor_customer_chats','Common\CommonController@get_vendor_customer_chats');
+Route::post('/customer_ven_message_sender','Common\CommonController@customer_ven_message_sender');

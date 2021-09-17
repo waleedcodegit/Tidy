@@ -121,6 +121,7 @@ Route::view('/service/{slug}', 'Front');
 Route::view('/reset-password/{id}' , 'Front');
 
 Route::view('/profile', 'Front');
+Route::view('/booking-details/{id}', 'Front');
 
 Route::view('/{path?}', 'Front');
 Route::get('{reactRoutes}', function () {
