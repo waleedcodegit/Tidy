@@ -14,6 +14,7 @@ use Exception;
 use Stripe;
 use Illuminate\Support\Facades\Crypt;
 use App\Category;
+use App\Employee;
 use App\VendorDocuments;
 use App\VendorServices;
 use Illuminate\Support\Facades\Mail;
@@ -93,6 +94,7 @@ class VendorController extends Controller
     public function show(Request $request) {
         $vendor = Vendor::where('id', $request->id)->with('insurance_detail', 'vendor_doc', 'vendor_servicess')->first();
         $services_array = [];
+        $employees_array = [];
         if(count($vendor->vendor_servicess) > 0) {
             foreach($vendor->vendor_servicess as $val) {
                 $service = Category::where('id', $val->service_id)->first();
@@ -100,6 +102,8 @@ class VendorController extends Controller
                 $vendor->vendor_selected_services = $services_array;
             }
         }
+
+        $emp = Employee::where('vendor_id', $request->id)->get();
 
         $services = Category::get();
         $not_used = [];
@@ -117,6 +121,7 @@ class VendorController extends Controller
             }
         }
         $vendor->services = $not_used;
+        $vendor->employees = $emp;
         $response = [
             'status' => 200 ,
             'msg' => 'Vendor',

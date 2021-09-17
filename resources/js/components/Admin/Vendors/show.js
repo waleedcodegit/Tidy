@@ -28,6 +28,7 @@ class ShowVendor extends Component {
             services: [],
             vendor_docs: [],
             status: '',
+            employees: [],
         }
     }
 
@@ -62,6 +63,7 @@ class ShowVendor extends Component {
                     vendor_selected_services: res.data.data.vendor_selected_services,
                     services: res.data.data.services,
                     vendor_docs: res.data.data.vendor_doc,
+                    employees: res.data.data.employees,
                 })
             }
         });
@@ -162,6 +164,10 @@ class ShowVendor extends Component {
         })
     }
 
+    deleteSelectedEmployee(){
+        
+    }
+
 
     render() {
         return (
@@ -197,6 +203,9 @@ class ShowVendor extends Component {
                                     </li>
                                     <li>
                                         <a data-toggle="tab" href="#demo-lft-tab-4">Insurance Docs</a>
+                                    </li>
+                                    <li>
+                                        <a data-toggle="tab" href="#demo-lft-tab-5">Employees</a>
                                     </li>
                                 </ul>
                                     {/*Tabs Content*/}
@@ -275,6 +284,32 @@ class ShowVendor extends Component {
                                                     )
                                                 })
                                             }                                            
+                                        </div>
+                                        <div id="demo-lft-tab-5" className="tab-pane fade">
+                                            <p className="text-main text-semibold">Employees</p>
+                                                <table id="demo-dt-basic" className="table table-striped table-bordered" cellSpacing="0" width="100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Sr</th>
+                                                            <th>Employees Name</th>
+                                                            <th>User Name</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {
+                                                        this.state.employees.map((data,index) =>{
+                                                            return(
+                                                                <tr key={index}>
+                                                                    <td>{index + 1}</td>
+                                                                    <td>{data.name}</td>
+                                                                    <td>{data.username}</td>
+                                                                </tr>
+                                                            )
+                                                        })
+                                                    }
+                                                    </tbody>
+                                                </table>
+
                                         </div>
                                     </div>
                                 </div>

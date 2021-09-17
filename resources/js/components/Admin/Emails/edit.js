@@ -22,7 +22,7 @@ class Edit extends Component {
             if(res.data.status == 200) {
                 this.setState({
                     email_title: res.data.data.email_title,
-                    email_content: res.data.data.email_content
+                    email_content: res.data.data.email_content 
                     
                 })
             }

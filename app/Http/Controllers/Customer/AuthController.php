@@ -205,7 +205,7 @@ class AuthController extends Controller
         return response()->json([
             'status' => true,
             'message' => "Edit Customer Successfully",
-            'data' => $data,     
+            'data' => $data,   
         ]);
     }
 
@@ -228,7 +228,8 @@ class AuthController extends Controller
         $user->email = $request->email;
         $user->address = $request->address;
         $user->phone = $request->phone;
-        $user->image = $request->profile_image;
+        $user->status = $request->status;
+        // $user->image = $request->profile_image;
         $user->save();
 
         return response()->json([
