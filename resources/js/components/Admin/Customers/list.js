@@ -1,6 +1,6 @@
 import React from 'react';
 import Axios from 'axios';
-import Link from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 class CustomerList extends React.Component {
@@ -73,7 +73,7 @@ class CustomerList extends React.Component {
                                                         <td>{data.email}</td>
                                                         <td>{data.address}</td>
                                                         <td>{data.phone}</td>
-                                                        <td><button className="btn btn-outline-success"> <i  className="fa fa-pencil"> </i></button></td>
+                                                        <td> <Link to ={`/admin/edit-customer/${data.id}`}><button className="btn btn-outline-success"> <i  className="fa fa-pencil"> </i></button></Link></td>
                                                         <td> <button onClick={this.deleteCustomer.bind(this, data.id)} className="btn btn-outline-primary"> <i  className="fa fa-trash"> </i></button> </td>
                                                         
                                                     </tr>
