@@ -136,7 +136,7 @@ class FrontController extends Controller
     }
 
     public function get_booking_by_id(Request $request){
-        $booking = Booking::where('id',$request->id)->with('information')->first();
+        $booking = Booking::where('id',$request->id)->with('information' , 'sub_service' , 'service')->first();
         return $booking;
     }
 
