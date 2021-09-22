@@ -12,7 +12,7 @@ class ReviewMod extends Component {
         get_designation : '',
         get_comment : '',
         get_rating : '',
-        get_image : ''
+        get_image : '',
         }
     }
 
@@ -37,12 +37,6 @@ class ReviewMod extends Component {
     get_rating(e){
         this.setState({
             get_rating : e.target.value
-        })
-    }
-
-    get_image(e){
-        this.setState({
-            get_image : e.target.value
         })
     }
 
@@ -91,8 +85,9 @@ class ReviewMod extends Component {
             get_designation : this.state.get_designation,
             get_comment : this.state.get_comment,
             get_rating : this.state.get_rating,
-            get_image : this.state.get_image 
+            get_image : this.state.get_image,
         }
+        console.log(UserReview);
         Axios.post('/api/create-review', UserReview).then(res=>{
             
             if(res.data.status == 200){
@@ -162,7 +157,7 @@ class ReviewMod extends Component {
                                         style={{height:'100px',width:'100%'}}
                                     ></textarea>
                             </div>
-                            
+
                             <div className="panel-footer text-right">
                                 <button onClick={this.save.bind(this)} type="submit" className="btn btn-primary">submit</button>
                             </div>

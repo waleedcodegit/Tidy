@@ -11,7 +11,8 @@ class HomeContent extends Component {
             modern_lives :'',
             services : '',
             get_leads : '',
-            how_cleaning_works : ''
+            how_cleaning_works : '',
+            footer_content : ''
         }
     }
 
@@ -45,6 +46,12 @@ class HomeContent extends Component {
         })
     }
 
+    footer_content(e){
+        this.setState({
+            footer_content : e.target.value
+        })
+    }
+
     componentDidMount(){
         Axios.get(`/api/edit-content`).then(res=>{
             console.log(res);
@@ -54,7 +61,8 @@ class HomeContent extends Component {
                     modern_lives : res.data.data.modern_lives,
                     services : res.data.data.services,
                     get_leads : res.data.data.get_leads,
-                    how_cleaning_works : res.data.data.how_cleaning_works
+                    how_cleaning_works : res.data.data.how_cleaning_works,
+                    footer_content : res.data.data.footer_content
                 })
             }
         })
@@ -68,6 +76,7 @@ class HomeContent extends Component {
             services : this.state.services,
             get_leads : this.state.get_leads,
             how_cleaning_works : this.state.how_cleaning_works,
+            footer_content : this.state.footer_content,
             id : 1,
         }
         Axios.post(`/api/update-content`, dataBaseContents).then(res=>{
@@ -112,7 +121,7 @@ class HomeContent extends Component {
                                     ></textarea>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="price">Modern Lives:</label>
+                                <label htmlFor="price">Why Choose TidyHome:</label>
                                     <textarea
                                         value={this.state.modern_lives}
                                         onChange={this.modern_lives.bind(this)}
@@ -120,7 +129,7 @@ class HomeContent extends Component {
                                     ></textarea>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="price">Services:</label>
+                                <label htmlFor="price">Be Your Own Boss:</label>
                                     <textarea
                                         value={this.state.services}
                                         onChange={this.services.bind(this)}
@@ -140,6 +149,14 @@ class HomeContent extends Component {
                                     <textarea
                                         value={this.state.how_cleaning_works}
                                         onChange={this.how_cleaning_works.bind(this)}
+                                        style={{height:'300px',width:'100%'}}
+                                    ></textarea>
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="price">Footer Content:</label>
+                                    <textarea
+                                        value={this.state.footer_content}
+                                        onChange={this.footer_content.bind(this)}
                                         style={{height:'300px',width:'100%'}}
                                     ></textarea>
                             </div>

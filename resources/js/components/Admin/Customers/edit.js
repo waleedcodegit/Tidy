@@ -102,7 +102,7 @@ class EditCustomer extends Component{
                             </div>
                             <div className="panel-body">
                                 <div className="row">
-                                    <div className="col-sm-12">
+                                    <div>
                                         <div className="form-group col-sm-6">
                                             <label htmlFor="price">First Name</label>
                                             <input onChange={this.getFirstName.bind(this)} type="text" className="form-control" id="Customer_Name" value={this.state.first_name}/> 

@@ -94,7 +94,6 @@ class VendorController extends Controller
     public function show(Request $request) {
         $vendor = Vendor::where('id', $request->id)->with('insurance_detail', 'vendor_doc', 'vendor_servicess')->first();
         $services_array = [];
-        $employees_array = [];
         if(count($vendor->vendor_servicess) > 0) {
             foreach($vendor->vendor_servicess as $val) {
                 $service = Category::where('id', $val->service_id)->first();
@@ -661,9 +660,10 @@ class VendorController extends Controller
             return $emails;
         }
 
-        // $content = str_replace(array('[Vendor name]','Name','Email','Password'),array($request->first_name,$request->first_name,$request->email,$request->id),$emails->email_content);
+        // other method for multiple values to change with str_replace......
 
-        
+        // $content = str_replace(array('[Vendor name]','[Name]','[Email]','[Password]','[Vendor dashboard link]'),
+        // array($data->first_name,$data->first_name,$data->email,$data->id,url('/vendor/dashboard')),$emails->email_content);
 
         $response = [
             'status' => 200 ,

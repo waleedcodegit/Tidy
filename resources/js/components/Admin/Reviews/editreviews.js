@@ -11,7 +11,8 @@ class EditReview extends Component {
         get_designation: '',
         get_comment: '',
         get_rating: '',
-        get_image: ''
+        get_image: '',
+        status: ''
         };
     }
 
@@ -25,7 +26,8 @@ class EditReview extends Component {
                     get_designation : res.data.data.designation,
                     get_comment : res.data.data.comment,
                     get_rating : res.data.data.rating,
-                    get_image : res.data.data.image
+                    get_image : res.data.data.image,
+                    status : res.data.data.status
                     
                 })
             }
@@ -56,9 +58,9 @@ class EditReview extends Component {
         })
     }
 
-    get_image(e){
+    status(e){
         this.setState({
-            get_image : e.target.value
+            status : e.target.value
         })
     }
 
@@ -72,6 +74,7 @@ class EditReview extends Component {
             get_comment : this.state.get_comment,
             get_rating : this.state.get_rating,
             get_image : this.state.get_image,
+            status : this.state.status,
             id: this.props.match.params.id
         }
 
@@ -100,7 +103,7 @@ class EditReview extends Component {
         })
     }
 
-    image_uploader(event) {
+    get_image(event) {
         const formData = new FormData();
         formData.append('file', event.target.files[0]);
         formData.append('token', window.localStorage.getItem('al'));
@@ -158,7 +161,6 @@ class EditReview extends Component {
                                     value={this.state.get_name} 
                                     type="text" 
                                     className="form-control"/>
-                                   
                                 </div>
                             </div>
                             <div className="col-sm-12">
@@ -169,7 +171,6 @@ class EditReview extends Component {
                                     value={this.state.get_designation} 
                                     type="text" 
                                     className="form-control" />
-                                   
                                 </div>
                             </div>
 
@@ -181,7 +182,17 @@ class EditReview extends Component {
                                     value={this.state.get_rating} 
                                     type="text" 
                                     className="form-control" />
-                                   
+                                </div>
+                            </div>
+
+                            <div className="col-sm-12">
+                                <div className="form-group">
+                                <label htmlFor="type">Status:</label>
+                                    <select className="form-control" name="type" value={this.state.status} onChange={this.status.bind(this)}>
+                                        <option value="">Select</option>
+                                        <option value={1}>Publish</option>
+                                        <option value={0}>Discard</option>
+                                    </select>
                                 </div>
                             </div>
 
@@ -189,8 +200,7 @@ class EditReview extends Component {
                                     <div className="form-group">
                                         <label htmlFor="price">User Image</label>
                                         <input 
-                                        onChange={this.get_image.bind(this)} 
-                                        value={this.state.get_image} 
+                                        onChange={this.get_image.bind(this)}
                                         type="file"></input>
                                     </div>
                             </div>

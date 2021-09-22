@@ -69,7 +69,7 @@ class FrontController extends Controller
             $response = ['service' => $service , 'total' => $total , 'extra_total' => $extra_total , 'sub_service' => $sub_services ];
             return $response;
         }else{
-            $response = ['service' => $service , 'extras_total' => $extra_total  ];
+            $response = ['service' => $service , 'extra_total' => $extra_total , 'total' => $extra_total ];
             return $response;
         }
     }

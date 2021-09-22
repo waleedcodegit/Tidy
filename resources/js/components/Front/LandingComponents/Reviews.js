@@ -41,15 +41,11 @@ class Reviews extends Component {
      
     render() {
         return (
-            // <section className="testimonial-section bg-grey padding">
-            //     <div className="container" dangerouslySetInnerHTML={{__html:this.state.reviews}}>
-            //     </div>
-            // </section>
             <div>
             <div className="dots"></div>
                 <div className="container">
                 <div className="section-heading-rev text-center mb-40 wow fadeInUp" data-wow-delay="100ms">
-                <h2>Live reviews <span>NEAR YOU</span></h2>
+                <h2><span>LIVE REVIEWS</span></h2>
                     <div className="heading-img"><img src={img_baseurl+"heading-bg.png"} alt=""/></div>
                 </div>
                 <Carousel
@@ -88,11 +84,13 @@ class Reviews extends Component {
                                 <h3>{data.name}</h3>
 
                                 <span>{data.designation}</span>
-                                </div>
                                 <i className="fa fa-quote-right"></i>
                                 </div>
+                                </div>
+                                
                           )
-                      })                  }  
+                      })
+                      }  
                   
                 </Carousel>;
                 </div>

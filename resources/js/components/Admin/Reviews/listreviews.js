@@ -58,6 +58,7 @@ class ListReviews extends Component {
                                         <th>Comment</th>
                                         <th>Rating</th>
                                         <th>Image</th>
+                                        <th>Status</th>
                                         
                                         <th>Edit</th>
                                         <th>Delete</th>
@@ -75,6 +76,7 @@ class ListReviews extends Component {
                                                         <td>{data.comment}</td>
                                                         <td>{data.rating}</td>
                                                         <td><img src={img_baseurl+data.image} style={{width:'100px'}}></img></td>
+                                                        <td>{data.status == 0 ?'Discarded':'Published'}</td>
                                                          
                                                         
                                                         <td>

@@ -41,7 +41,8 @@ class HomeContentController extends Controller
             'modern_lives' => $request -> modern_lives,
             'services' => $request -> services,
             'get_leads' => $request -> get_leads,
-            'how_cleaning_works' => $request -> how_cleaning_works
+            'how_cleaning_works' => $request -> how_cleaning_works,
+            'footer_content' => $request -> footer_content
         ]);
         $response = [
             'status' => 200,

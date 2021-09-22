@@ -164,11 +164,6 @@ class ShowVendor extends Component {
         })
     }
 
-    deleteSelectedEmployee(){
-        
-    }
-
-
     render() {
         return (
             <div id="page-content">

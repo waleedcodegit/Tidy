@@ -24,7 +24,7 @@
             height: 50px;
             width: 100px;
             border-radius: 5px;
-            background: #2db7c5;
+            /* background: #2db7c5; */
             color: white;
             font-family: sans-serif;
             font-size: 20px;

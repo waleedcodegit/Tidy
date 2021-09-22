@@ -27,6 +27,8 @@ class ReviewsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create_review(Request $request){
+
+            return $request->all();
         
             $review = new Review();
             $review->name = $request->get_name;
@@ -34,6 +36,7 @@ class ReviewsController extends Controller
             $review->comment = $request->get_comment;
             $review->rating = $request->get_rating;
             $review->image = $request->get_image;
+            $review ->status = $request->status;
             
             $review->save();
             $response = ['status' => 200 , 'msg' => 'Review added.'];
@@ -57,7 +60,8 @@ class ReviewsController extends Controller
             'designation' => $request->get_designation,
             'comment' => $request->get_comment,
             'rating' => $request->get_rating,
-            'image' => $request->get_image
+            'image' => $request->get_image,
+            'status' => $request -> status
             
         ]);
 
@@ -82,7 +86,7 @@ class ReviewsController extends Controller
     }
 
     public function get_all_reviews (Request $request){
-        $review = Review::where('delete_status',0)->get();
+        $review = Review::where('delete_status',0)->where('status',1)->get();
         return $review;
     }
 }

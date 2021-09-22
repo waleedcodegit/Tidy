@@ -40,7 +40,7 @@ class MyBookings extends Component {
                                                             <div onClick={()=>{window.open('/booking-details/'+data.id,'_blank')}} key={index} style={{cursor:'pointer'}} className="col-sm-12 padding-15">
                                                                 <div className="blog-item profile-shadow">
                                                                     <div className="card-content">
-                                                                        <h3>{data.sub_service ? data.sub_service.name : data.sub_service.name}</h3>
+                                                                        <h3>{data.sub_service ? data.sub_service.name : data.service.name}</h3>
                                                                         <h4> {data.date}</h4>
                                                                         <div className="divid-line" />
                                                                         <div className="card-detail-left">
