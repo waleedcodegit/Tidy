@@ -149,7 +149,7 @@ class CustomerVendorChat extends Component {
                                             <div className="row">
                                                 <div className="col-md-10">
                                                     <div className="form-inputs">
-                                                        <input value={this.state.newmessage || ""} onChange={this.handle_new_message.bind(this)} placeholder="Type Message Here" type="email" />
+                                                        <input value={this.state.newmessage || ""} onChange={this.handle_new_message.bind(this)} placeholder="Type Message Here" type="text" />
                                                     </div>
                                                 </div>
                                                 <div   className="col-md-2">

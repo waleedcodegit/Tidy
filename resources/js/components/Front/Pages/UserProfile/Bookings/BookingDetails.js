@@ -6,13 +6,19 @@ class BookingDetails extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            booking:{}
+            booking:{},
+            loading:true
         };
     }
 
     componentDidMount(){
         Axios.post('/api/get_booking_by_id',{id:this.props.match.params.id}).then(res=>{
             console.log(res);
+
+            this.setState({
+                booking:res.data.booking,
+                loading:false
+            })
         })
     }
     render() {
@@ -20,8 +26,16 @@ class BookingDetails extends Component {
             <section className="blog-section padding pr-sec">
                 <div className="container">
                 <div>
-                    <h1 className="text-center text-bold">Booking Details</h1>
+                    <h1 className="text-center ">Booking Details</h1>
                 </div>
+                {
+                    this.state.loading ?
+                        <div id="displayspinner text-center mt-5" style={{ display: 'block', }}>
+                            <div className="spinner-border  ml-2 text-dark spinner_format" role="status">
+                                <span className="sr-only">Loading...</span>
+                            </div>
+                        </div>
+                        :
                     <div className="blog-wrap row">
                         <div className="col-lg-12 sm-padding">
                             <div className="row">
@@ -31,14 +45,16 @@ class BookingDetails extends Component {
                                             <div className="card ">
                                                 <div className="card-content" id="faqhead1">
                                                     <h3>Booking Details</h3>
-                                                    <h5> Feb  30,  2021  3:30pm</h5>
+                                                    <h5> {this.state.booking.date}</h5>
                                                     <div className="divid-line" />
                                                     <div className="dt-table">
                                                         <div className="row">
                                                             <div className="col-md-3">
                                                                 <div className="booking-content">
                                                                     <ul>
-                                                                        <li>Services Type<br /><span>Non Residential</span></li>
+                                                                        <li>Services Type<br /><span>
+                                                                            {this.state.booking.booking_type == 1 ? 'Residential Service' : 'Business Service' } 
+                                                                        </span></li>
                                                                         <li>How Often<br /><span> 1</span></li>
                                                                         <li>Bathrooms<br /><span>5</span></li>
                                                                     </ul>
@@ -324,6 +340,7 @@ class BookingDetails extends Component {
                             </div>
                         </div>
                     </div>
+                }
                 </div>
             </section>
         </div>
