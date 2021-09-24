@@ -6,6 +6,7 @@ import EmployeeList from '../Component/Employee/index';
 import CreateEmployee from '../Component/Employee/create';
 import EditEmployee from '../Component/Employee/edit';
 import AdminMessages from '../Component/Messages/AdminMessages';
+import CustomerMessages from '../Component/Messages/CustomerMessages';
 
 
 class Main extends Component {
@@ -18,6 +19,8 @@ class Main extends Component {
                 <Route path='/vendor/create-employee' component={CreateEmployee}></Route>
                 <Route path='/vendor/edit-employee/:id' component={EditEmployee}></Route>
                 <Route path='/vendor/message-admin' component={AdminMessages}></Route>
+                <Route path='/vendor/customer-messages' component={CustomerMessages}></Route>
+                
             </div>
         );
     }

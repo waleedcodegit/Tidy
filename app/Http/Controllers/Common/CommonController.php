@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Common;
 
+use App\Booking;
 use App\CustomerChat;
 use App\CustomerMessage;
 use App\CustomerVendorChats;
@@ -196,12 +197,16 @@ class CommonController extends Controller
         }
     }
     public function get_vendor_customer_chats(Request $request){
-        $vendor_chats = CustomerVendorChats::join('vendors','vendors.id','=','vendor_chats.vendor_id')
-        ->select('vendor_chats.id','vendor_chats.vendor_id','vendor_chats.last_active','vendors.first_name'
-        ,'vendors.last_name','vendors.email','vendors.business_name'
-        )
+        $chats = CustomerVendorChats::where('vendor_id', $request->vendor_id)
+        ->with('customer')
+        ->orderby('last_active','desc')
         ->get();
-        return $vendor_chats;
+        if(sizeof($chats) > 0){
+            foreach($chats as $c){
+                $c->booking = Booking::where('id',$c->booking_id)->with('information' , 'sub_service' , 'service')->first();
+            }
+        }
+        return $chats;
     }
 
     public function customer_ven_message_sender(Request $request){
@@ -225,7 +230,7 @@ class CommonController extends Controller
         $customer_chat =  CustomerVendorChats::where('id',$customer_chat->id)->first();
         $customer_chat->last_active = date("Y-m-d h:i:sa");
         $customer_chat->last_msg_id = $customer_message->id;
-        $customer_chat->save();
+        $customer_chat->save();+
         $response = ['status' => 200 , 'message' => 'Message Sent'];
         return $response;
     }

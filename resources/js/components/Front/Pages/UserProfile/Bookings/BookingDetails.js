@@ -16,7 +16,7 @@ class BookingDetails extends Component {
             console.log(res);
 
             this.setState({
-                booking:res.data.booking,
+                booking:res.data,
                 loading:false
             })
         })

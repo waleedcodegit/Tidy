@@ -111,6 +111,9 @@ Route::view('/vendor/edit-employee/{id}', 'vendor');
 Route::view('/vendor/message-admin', 'vendor');
 Route::view('/vendor/vendor-forget-password', 'vendor');
 Route::view('/vendor-reset-password/{id}' , 'Front');
+Route::view('/vendor/customer-messages' , 'vendor');
+
+
 
 // Front Client Routes
 
