@@ -144,16 +144,16 @@ class CustomerVendorChat extends Component {
                             No Messages Existed. <br></br> Please send a message to start a chat with vendor on this booking</h3>
                             </>
                             }
-                            <div className="comment-respond">
-                                        <form method="post" id="commentform" className="comment-form">
-                                            <div className="row">
+                            <div className="comment-respond ">
+                                        <form >
+                                            <div className="row pt-5">
                                                 <div className="col-md-10">
                                                     <div className="form-inputs">
-                                                        <input value={this.state.newmessage || ""} onChange={this.handle_new_message.bind(this)} placeholder="Type Message Here" type="text" />
+                                                        <input value={this.state.newmessage || ""} className="form-control input_box" onChange={this.handle_new_message.bind(this)} placeholder="Type Message Here" type="text" />
                                                     </div>
                                                 </div>
                                                 <div   className="col-md-2">
-                                                    <a  onClick={this.send_message.bind(this)} href="#" className="bk-btn2">Send </a>
+                                                    <button  onClick={this.send_message.bind(this)} href="#" className="bk-btn2">Send </button>
                                                 </div>
                                             </div>
                                         </form>

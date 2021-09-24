@@ -2545,7 +2545,7 @@ blockquote span {
 .blog-single-wrap .comment-respond form input,
 .blog-single-wrap .comment-respond form textarea {
     background-color: #f5f5f5;
-    border: 1px solid #e5e5e5;
+    border: 1px solid #7b7b7b;
     width: 100%;
     height: 50px;
     padding: 6px 15px;
@@ -3345,7 +3345,7 @@ background-color: #7db343;
     font-family: work sans, sans-serif;
     color: #fff;
     font-size: 18px;
-    border-radius: 10px;
+    border-radius: 1px;
     line-height: 45px;
     font-weight: 600;
     display: inline-block;
@@ -3532,7 +3532,7 @@ p .comments-area .comment-reply-link:hover {
  .comment-respond form input,
  .comment-respond form textarea {
     background-color: #fff;
-    border: 1px solid #fff;
+    border: 1px solid #a4a4a4;
     width: 100%;
     height: 50px;
     padding: 6px 15px;

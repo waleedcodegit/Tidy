@@ -26,11 +26,12 @@ class BookingDetails extends Component {
             <section className="blog-section padding pr-sec">
                 <div className="container">
                 <div>
-                    <h1 className="text-center ">Booking Details</h1>
+                    {/* <h1 className="text-center ">Booking Details</h1> */}
                 </div>
                 {
                     this.state.loading ?
-                        <div id="displayspinner text-center mt-5" style={{ display: 'block', }}>
+                   
+                        <div id="displayspinner text-center mt-5 " className="text-center" style={{ display: 'block', }}>
                             <div className="spinner-border  ml-2 text-dark spinner_format" role="status">
                                 <span className="sr-only">Loading...</span>
                             </div>
@@ -55,7 +56,7 @@ class BookingDetails extends Component {
                                                                         <li>Services Type<br /><span>
                                                                             {this.state.booking.booking_type == 1 ? 'Residential Service' : 'Business Service' } 
                                                                         </span></li>
-                                                                        <li>How Often<br /><span> 1</span></li>
+                                                                        <li>How Often<br /><span> {this.state.booking.booking_type == 1 ? 'One Time' : 'Recurring'} </span></li>
                                                                         <li>Bathrooms<br /><span>5</span></li>
                                                                     </ul>
                                                                 </div>
@@ -255,85 +256,11 @@ class BookingDetails extends Component {
                                 <div className="comments-area">
                                     <div className="comments-section">
                                         <h3 className="comments-title">Chat With Vendor</h3>
-                                        <div className="divid-line" />
-                                        {/* <ol className="comments">
-                                            <li className="comment even thread-even depth-1" id="comment-1">
-                                                <div id="div-comment-1">
-                                                    <div className="comment-main-area">
-                                                        <div className="comment-wrapper">
-                                                            <div className="comments-meta">
-                                                                <h4>Jhon Castellon <span className="comments-date">jan 05, 2020 at 8:00</span></h4>
-                                                            </div>
-                                                            <div className="comment-area">
-                                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <ul className="children">
-                                                    <li className="comment">
-                                                        <div>
-                                                            <div className="comment-main-area">
-                                                                <div className="comment-wrapper">
-                                                                    <div className="comments-meta">
-                                                                        <h4>José Carpio <span className="comments-date">jan 15, 2020 at 8:00</span></h4>
-                                                                    </div>
-                                                                    <div className="comment-area">
-                                                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <ul>
-                                                            <li className="comment">
-                                                                <div>
-                                                                    <div className="comment-main-area">
-                                                                        <div className="comment-wrapper">
-                                                                            <div className="comments-meta">
-                                                                                <h4>Valentin Lacoste <span className="comments-date">jan 25, 2020 at 8:00</span></h4>
-                                                                            </div>
-                                                                            <div className="comment-area">
-                                                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li className="comment">
-                                                <div>
-                                                    <div className="comment-main-area">
-                                                        <div className="comment-wrapper">
-                                                            <div className="comments-meta">
-                                                                <h4>Kyle Frederick <span className="comments-date">jan 02, 2020 at 8:00</span></h4>
-                                                            </div>
-                                                            <div className="comment-area">
-                                                                <p>Home renovations, especially those involving plentiful of demolition can be a very dusty affair. This nasty dust can easily free flow through your house.</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ol> */}
+                                        {/* <div className="divid-line" /> */}
+                                       
                                     
                                     </div>
-                                    {/* <div className="comment-respond">
-                                        <form method="post" id="commentform" className="comment-form">
-                                            <div className="row">
-                                                <div className="col-md-10">
-                                                    <div className="form-inputs">
-                                                        <input placeholder="Comment Here" type="email" />
-                                                    </div>
-                                                </div>
-                                                <div className="col-md-2">
-                                                    <a href="#" className="bk-btn2">Send </a>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div> */}
+                                  
                                     <CustomerVendorChat booking_id={this.props.match.params.id}></CustomerVendorChat>
 
                                 </div>

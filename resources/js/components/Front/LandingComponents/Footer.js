@@ -22,8 +22,8 @@ class Footer extends Component {
 
     render() {
         return (
-            <section class="about-section padding">
-                <div class="" dangerouslySetInnerHTML={{__html:this.state.footer_content}}>
+            <section class="about-section padding" >
+                <div class="footer_" dangerouslySetInnerHTML={{__html:this.state.footer_content}}>
                 </div>
             </section>
         );
