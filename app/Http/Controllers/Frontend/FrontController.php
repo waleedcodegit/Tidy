@@ -24,6 +24,8 @@ use Validator;
 // use Prophecy\Call\Call;
 use Illuminate\Support\Facades\Mail;
 use Monolog\Handler\SendGridHandler;
+use App\Email;
+use App\Mail\BookingConfirmation;
 
 class FrontController extends Controller
 {
@@ -74,7 +76,7 @@ class FrontController extends Controller
         }
     }
     public function make_booking(Request $request){
-        // return $request;
+        //return $request;
         $booking = new Booking();
         $booking->customer_id = $request->customer['data']['id'];
         $booking->service_id = $request->select_service_state['service_id'];
@@ -130,6 +132,24 @@ class FrontController extends Controller
         }
         // $b_information->extras
         $b_information->save();
+
+        $emails = Email::where('id', 12)->first();
+        $C_name = $request->customer['data']['first_name'];
+        $C_email = $request->customer['data']['email'];
+
+        $Ch_service = $request->select_service_state['service_id'];
+        $service_name = Category::where('id' , $Ch_service)->first();
+        if($emails){
+            $content = str_replace('[Customer name]', $C_name , $emails->email_content);
+            $content = str_replace('[date]', $booking->date , $content);
+            $content = str_replace('[Client Address]', $b_information->location_address , $content);
+            $content = str_replace('[time]', $booking->time , $content);
+            $content = str_replace('[Chosen service]', $service_name->name , $content);
+            $content = str_replace('[Visit your dashboard]', url('/vendor/dashboard') , $content );
+            Mail::to($C_email)->send(new BookingConfirmation($emails , $content));
+        }else{
+            return $emails; 
+        }
 
         $response = ['status' => '200' , 'message' => 'Booking created.'];
         return $response = $response;

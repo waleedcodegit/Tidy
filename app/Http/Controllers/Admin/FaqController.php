@@ -41,8 +41,6 @@ class FaqController extends Controller
             $response = ['status' => 200 , 'msg' => 'Faq added.'];
             return $response;
         }
-       
-
     }
     public function edit_faq(Request $request)
     {

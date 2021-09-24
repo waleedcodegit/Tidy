@@ -6,7 +6,7 @@ import Login from '../Auth/Login';
 import Signup from '../Auth/CustomerSignUp'
 import { Switch,BrowserRouter,Route} from 'react-router-dom';
 import TopHeader from '../LandingComponents/TopHeader';
-import VendorSignUp from '../../Vendor/Auth/Signup';
+import VendorSignUp from '../../Vendor/Auth/VendorSignup';
 import VendorLogin from '../../Vendor/Auth/login';
 import BookService from '../Pages/BookService/BookService';
 
