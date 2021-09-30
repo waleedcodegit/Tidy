@@ -2,6 +2,7 @@ import Axios from 'axios';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {img_baseurl } from '../../Configs/Api';
+import Swal from 'sweetalert2';
  
 class CustomerSignUp extends Component {
     constructor(props) {
@@ -56,10 +57,17 @@ class CustomerSignUp extends Component {
     signup(e){
         e.preventDefault();
         Axios.post('/api/create-customer',this.state).then(res=>{
+            console.log(res);
             if(res.data.status == 200){
-                window.localStorage.setItem('cus_token',res.data.customer.token);
-                this.props.changeUser({is_login:true,data:res.data.customer});
+                window.localStorage.setItem('cus_token',res.data.data.token);
+                this.props.changeUser({is_login:true,data:res.data.data});
                 this.props.history.push('/');
+                Swal.fire({
+                        icon: 'success',
+                        title: 'SignedUp Successfully',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
             }else{
                 this.setState({
                     form_error:true,
@@ -68,6 +76,7 @@ class CustomerSignUp extends Component {
             }
         })
     }
+    
     render() { 
         return (
         <React.Fragment>

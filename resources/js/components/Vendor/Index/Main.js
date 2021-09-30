@@ -7,6 +7,8 @@ import CreateEmployee from '../Component/Employee/create';
 import EditEmployee from '../Component/Employee/edit';
 import AdminMessages from '../Component/Messages/AdminMessages';
 import CustomerMessages from '../Component/Messages/CustomerMessages';
+import BookingsFeed from '../Component/ManageBookings/NewBookingsFeed';
+import AcceptedBookings from '../Component/ManageBookings/AcceptedBookings';
 
 
 class Main extends Component {
@@ -20,6 +22,8 @@ class Main extends Component {
                 <Route path='/vendor/edit-employee/:id' component={EditEmployee}></Route>
                 <Route path='/vendor/message-admin' component={AdminMessages}></Route>
                 <Route path='/vendor/customer-messages' component={CustomerMessages}></Route>
+                <Route path='/vendor/bookings-feed' component={BookingsFeed}></Route>
+                <Route path='/vendor/accepted-bookings' component={AcceptedBookings}></Route> 
                 
             </div>
         );

@@ -44,7 +44,7 @@ class BookingDetails extends Component {
                                     <div className="blog-item profile-shadow">
                                         <div id="main" className="blog-item profile-shadow">
                                             <div className="card ">
-                                                <div className="card-content" id="faqhead1">
+                                                {this.state.booking.service.residential_type == 1 ? <div className="card-content" id="faqhead1">
                                                     <h3>Booking Details</h3>
                                                     <h5> {this.state.booking.date}</h5>
                                                     <div className="divid-line" />
@@ -53,44 +53,90 @@ class BookingDetails extends Component {
                                                             <div className="col-md-3">
                                                                 <div className="booking-content">
                                                                     <ul>
-                                                                        <li>Services Type<br /><span>
-                                                                            {this.state.booking.booking_type == 1 ? 'Residential Service' : 'Business Service' } 
+                                                                        <li>Services Type<br /><span>{this.state.booking.booking_type == 1 ? 'Residential Service' : 'Business Service' } 
                                                                         </span></li>
                                                                         <li>How Often<br /><span> {this.state.booking.booking_type == 1 ? 'One Time' : 'Recurring'} </span></li>
-                                                                        <li>Bathrooms<br /><span>5</span></li>
+                                                                        <li>Bathrooms<br /><span> {this.state.booking.information.bathrooms} </span></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
                                                             <div className="col-md-3">
                                                                 <div className="booking-content">
                                                                     <ul>
-                                                                        <li>Sub Service<br /><span>House Cleaning</span></li>
-                                                                        <li>Home<br /><span>House</span></li>
-                                                                        <li>Parking Available<br /><span>yes</span></li>
+                                                                        <li>Sub Service<br /><span>{this.state.booking.sub_service.name}</span></li>
+                                                                        <li>Resident Type<br /><span>{this.state.booking.information.resident_type}</span></li>
+                                                                        <li>Parking Available<br /><span>{this.state.booking.information.is_parking_available}</span></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
                                                             <div className="col-md-3">
                                                                 <div className="booking-content">
                                                                     <ul>
-                                                                        <li>Coming Date<br /><span>April 4, 2021</span></li>
-                                                                        <li>No of Levels<br /><span>2</span></li>
-                                                                        <li>At Home<br /><span>Yes</span></li>
+                                                                        <li>Coming Date<br /><span>{this.state.booking.date}</span></li>
+                                                                        <li>No of Levels<br /><span>{this.state.booking.information.levels}</span></li>
+                                                                        <li>At Home<br /><span>{this.state.booking.information.will_be_at_home}</span></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
                                                             <div className="col-md-3">
                                                                 <div className="booking-content">
                                                                     <ul>
-                                                                        <li>Coming Time<br /><span>11:00 - 11:50 am</span></li>
-                                                                        <li>Bedrooms<br /><span>4</span></li>
-                                                                        <li>Status<br /><span>Pending</span></li>
+                                                                        <li>Coming Time<br /><span>{this.state.booking.time}</span></li>
+                                                                        <li>Bedrooms<br /><span>{this.state.booking.information.bedrooms}</span></li>
+                                                                        <li>Status<br /><span>{this.state.booking.status == 0 ? "Pending" : "Acitve"}</span></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> 
+                                                :   <div className="card-content" id="faqhead1">
+                                                    <h3>Booking Details</h3>
+                                                    <h5> {this.state.booking.date}</h5>
+                                                    <div className="divid-line" />
+                                                    <div className="dt-table">
+                                                        <div className="row">
+                                                            <div className="col-md-3">
+                                                                <div className="booking-content">
+                                                                    <ul>
+                                                                        <li>Services Type<br /><span>{this.state.booking.service.residential_type == 0 ? 'Non-Residential Service' : 'Residential Service' } 
+                                                                        </span></li>
+                                                                        <li>How Often<br /><span> {this.state.booking.booking_type == 1 ? 'One Time' : 'Recurring'} </span></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            <div className="col-md-3">
+                                                                <div className="booking-content">
+                                                                    <ul>
+                                                                        <li>Parking Available<br /><span>{this.state.booking.information.is_parking_available}</span></li>
+                                                                        <li>Bathrooms<br /><span> {this.state.booking.information.bathrooms} </span></li>
+                                                                        {/* <li>Sub Service<br /><span>-----------</span></li> */}
+                                                                        {/* <li>Resident Type<br /><span>{this.state.booking.information.resident_type}</span></li> */}
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            <div className="col-md-3">
+                                                                <div className="booking-content">
+                                                                    <ul>
+                                                                        <li>Coming Date<br /><span>{this.state.booking.date}</span></li>
+                                                                        <li>No of Levels<br /><span>{this.state.booking.information.levels}</span></li>
+                                                                        {/* <li>At Home<br /><span>{this.state.booking.information.will_be_at_home}</span></li> */}
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            <div className="col-md-3">
+                                                                <div className="booking-content">
+                                                                    <ul>
+                                                                        <li>Coming Time<br /><span>{this.state.booking.time}</span></li>
+                                                                        {/* <li>Bedrooms<br /><span>{this.state.booking.information.bedrooms}</span></li> */}
+                                                                        <li>Status<br /><span>{this.state.booking.status == 0 ? "Pending" : "Acitve"}</span></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div> }
+                                                
                                             </div>
                                         </div>
                                     </div>

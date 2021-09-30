@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="/vendor-assets/css/app.min.css">
         <!-- Template CSS -->
         <link rel="stylesheet" href="/vendor-assets/css/style.css">
+        <link rel="stylesheet" href="/css/main.css">
         <link rel="stylesheet" href="/vendor-assets/css/components.css">
         <!-- Custom style CSS -->
         <link rel="stylesheet" href="/vendor-assets/css/custom.css">

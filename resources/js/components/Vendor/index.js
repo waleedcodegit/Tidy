@@ -22,7 +22,7 @@ class Index extends Component {
             <div >
                 <BrowserRouter>
                     {/* <Route exact path="/vendor" component={MainIndex}></Route> */}
-                    <Route path="/vendor-signup/:step?/:vendor_id?" component={Signup}></Route>
+                    <Route path="/vendor-signup/:step?/:vendor_id?" component={VendorSignup}></Route>
                     <Route path="/vendor-login" component={Login}></Route>
                     <Route exact path="/request-submitted" component={SignUpRequest}></Route>
                 </BrowserRouter>

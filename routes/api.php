@@ -147,6 +147,8 @@ Route::post('/get_vendor_addresses','Vendor\VendorController@get_vendor_addresse
 Route::post('/update_vendor_address','Vendor\VendorController@update_vendor_address');
 Route::post('/add_vendor_address','Vendor\VendorController@add_vendor_address');
 Route::post('/delete_vendor_address','Vendor\VendorController@delete_vendor_address');
+Route::post('/get-vendor-bookings' , 'Vendor\VendorController@get_vendor_bookings');
+// Route::post('/accept-booking' , 'Vendor\VendorController@accept_booking');
 
 
 

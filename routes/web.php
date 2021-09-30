@@ -112,6 +112,8 @@ Route::view('/vendor/message-admin', 'vendor');
 Route::view('/vendor/vendor-forget-password', 'vendor');
 Route::view('/vendor-reset-password/{id}' , 'Front');
 Route::view('/vendor/customer-messages' , 'vendor');
+Route::view('/vendor/bookings-feed' , 'vendor');
+Route::view('/vendor/accepted-bookings' , 'vendor');
 
 
 

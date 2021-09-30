@@ -21,7 +21,6 @@ class CustomerList extends React.Component {
                     customers: res.data.data
                 })
             }
-            // console.log(res);
         })
     }
     deleteCustomer(id) {

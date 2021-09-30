@@ -26,6 +26,7 @@ use DB;
 use App\VendorResetPassword;
 use App\Mail\VendorResetPass;
 use App\Mail\SignupRequestEmail;
+use App\Booking;
 
 class VendorController extends Controller
 {
@@ -103,6 +104,8 @@ class VendorController extends Controller
         }
 
         $emp = Employee::where('vendor_id', $request->id)->get();
+        $bookings = Booking::where('vendor_id',$request->id)->with('service','sub_service' , 'information')->get();
+
 
         $services = Category::get();
         $not_used = [];
@@ -121,6 +124,7 @@ class VendorController extends Controller
         }
         $vendor->services = $not_used;
         $vendor->employees = $emp;
+        $vendor->bookings = $bookings;
         $response = [
             'status' => 200 ,
             'msg' => 'Vendor',
@@ -854,4 +858,26 @@ class VendorController extends Controller
             }
         }
     }
+
+    public function get_vendor_bookings(Request $request) {
+        $bookings = Booking::where('vendor_id',$request->vendor_id)->with('service','sub_service' , 'information')->get();
+        return response()->json([
+            'status' => true,
+            'message' => "Vendor Bookings",
+            'data' => $bookings
+        ]);
+    }
+
+    // public function accept_booking (Request $request){
+    //     $booking = Booking::where('vendor_id',$request->vendor_id)
+    //                     ->where('id',$request->bookingId)
+    //                     ->update([
+    //                         'status' => 1
+    //                     ]);
+    //     return response()->json([
+    //         'status' => true,
+    //         'message' => "Accepted Booking",
+    //         'data' => $booking
+    //     ]);
+    // }
 }

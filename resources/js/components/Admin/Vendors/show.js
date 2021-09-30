@@ -29,6 +29,7 @@ class ShowVendor extends Component {
             vendor_docs: [],
             status: '',
             employees: [],
+            bookings: []
         }
     }
 
@@ -64,6 +65,7 @@ class ShowVendor extends Component {
                     services: res.data.data.services,
                     vendor_docs: res.data.data.vendor_doc,
                     employees: res.data.data.employees,
+                    bookings: res.data.data.bookings,
                 })
             }
         });
@@ -194,13 +196,16 @@ class ShowVendor extends Component {
                                         <a data-toggle="tab" href="#demo-lft-tab-2">Bussiness Info</a>
                                     </li>
                                     <li>
-                                        <a data-toggle="tab" href="#demo-lft-tab-3">Vendor Selected Services</a>
+                                        <a data-toggle="tab" href="#demo-lft-tab-3">Selected Services</a>
                                     </li>
                                     <li>
                                         <a data-toggle="tab" href="#demo-lft-tab-4">Insurance Docs</a>
                                     </li>
                                     <li>
                                         <a data-toggle="tab" href="#demo-lft-tab-5">Employees</a>
+                                    </li>
+                                    <li>
+                                        <a data-toggle="tab" href="#demo-lft-tab-6">Vendor Bookings</a>
                                     </li>
                                 </ul>
                                     {/*Tabs Content*/}
@@ -304,7 +309,37 @@ class ShowVendor extends Component {
                                                     }
                                                     </tbody>
                                                 </table>
-
+                                        </div>
+                                        <div id="demo-lft-tab-6" className="tab-pane fade">
+                                            <p className="text-main text-semibold">Bookings</p>
+                                            <table id="demo-dt-basic" className="table table-striped table-bordered" cellSpacing="0" width="100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Sr</th>
+                                                            <th>Bookings Type</th>
+                                                            <th>Service Name</th>
+                                                            <th>Customer Name</th>
+                                                            <th>Price</th>
+                                                            <th>Details</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {
+                                                    this.state.bookings.map((data,index) =>{
+                                                        return(
+                                                            <tr key={index}>
+                                                                <td>{index + 1}</td>
+                                                                <td>{data.booking_type == 1 ? "One Time" : "Recurring"}</td>
+                                                                <td>{data.service.name}</td>
+                                                                <td>Zeeshan</td>
+                                                                <td>{data.booking_totals}</td>
+                                                                <td><button className="btn btn-outline-success"> <i  className="fa fa-eye"> </i></button></td>
+                                                            </tr>
+                                                        )
+                                                    })
+                                                    }
+                                                    </tbody>
+                                                </table>
                                         </div>
                                     </div>
                                 </div>

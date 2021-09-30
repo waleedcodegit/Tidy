@@ -55,10 +55,19 @@ class AuthController extends Controller
             $new_customer->status = 1;
             $new_customer->save();
 
+            $meta = new CustomerAuthMeta();
+            $meta->customer_id = $new_customer->id;
+            $meta->ip = $request->ip();
+            $meta->token = Hash::make(time());
+            $new_time = date('H:i', strtotime('+15 minutes'));
+            $meta->token_valid_till = $new_time;
+            $meta->save();
+            $new_customer->token = $meta->token;
+            
             return response()->json([
-                'status' => true,
+                'status' => 200,
                 'message' => "Customer Created Successfully",
-                'data' => $new_customer,     
+                'data' => $new_customer   
             ]);   
         }
     }
