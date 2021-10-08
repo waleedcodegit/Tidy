@@ -4,24 +4,6 @@ import React, { Component } from 'react';
 
 class Header extends Component {
 
-    constructor(props){
-        super(props);
-        this.state = {
-            adminInfo : []
-        }
-    }
-
-    componentDidMount(){
-        Axios.post('/api/check-auth-admin').then(res=>{
-            if(res.data.status == 200) {
-                console.log(res);
-                this.setState({
-                    adminInfo : res.data
-                })
-            }
-        })
-    }
-
     logout(){
         window.localStorage.setItem('testapistring','');
         window.location.reload();
@@ -297,7 +279,6 @@ class Header extends Component {
                             {/*<div class="username hidden-xs">Aaron Chavez</div>*/}
                             {/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/}
                         </a>
-                        <a>Zeeshan</a>
                         <div className="dropdown-menu dropdown-menu-sm dropdown-menu-right panel-default">
                             <ul className="head-list">
                             <li>

@@ -114,6 +114,12 @@ Route::view('/vendor-reset-password/{id}' , 'Front');
 Route::view('/vendor/customer-messages' , 'vendor');
 Route::view('/vendor/bookings-feed' , 'vendor');
 Route::view('/vendor/accepted-bookings' , 'vendor');
+Route::view('/vendor/employee-login' , 'vendor');
+Route::view('/vendor/Empdashboard' , 'vendor');
+
+//Employee Routes
+Route::view('/employee/employee-login' , 'employee');
+Route::view('/employee/Empdashboard' , 'employee');
 
 
 

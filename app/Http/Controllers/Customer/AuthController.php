@@ -237,8 +237,8 @@ class AuthController extends Controller
         $user->email = $request->email;
         $user->address = $request->address;
         $user->phone = $request->phone;
-        $user->status = $request->status;
-        // $user->image = $request->profile_image;
+        // $user->status = $request->status;
+        $user->image = $request->profile_image;
         $user->save();
 
         return response()->json([

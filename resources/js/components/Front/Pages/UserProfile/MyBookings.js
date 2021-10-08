@@ -17,7 +17,6 @@ class MyBookings extends Component {
              color:'#fff'
          }});
         Axios.post('/api/get_customer_bookings',{customer_id:this.props.user.data.id}).then(res=>{
-            console.log(res);
             toast.remove();
             if(res.data.status == 200){
                 this.setState({

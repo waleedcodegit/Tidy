@@ -14,18 +14,18 @@ class EditProfile extends Component {
             phone:'',
             loading:false,
             id:this.props.user.data.id,
-            profile_image:'profile.jpg'
+            profile_image:''
         };
     }
      
     componentDidMount(){
-        console.log('calling')
         this.setState({
             first_name:this.props.user.data.first_name,
             last_name:this.props.user.data.last_name,
             email:this.props.user.data.email,
             address:this.props.user.data.address,
             phone:this.props.user.data.phone,
+            profile_image:this.props.user.data.image
             
         })
     }

@@ -50,7 +50,7 @@ class AddFaqs extends Component {
             <div id="page-content">
                 <div className="panel">
                     <div className="panel-heading">
-                        <h3 className="panel-title">General Settings</h3>
+                        <h3 className="panel-title">Frequently Asked Question's</h3>
                     </div>
                     <div className="panel-body">
                         <div className="row">

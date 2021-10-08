@@ -20,12 +20,6 @@ class Login extends Component {
         Axios.post('/api/check-auth-admin', senderData).then(res=>{
             if(res.data.status == 200) {
                 this.props.history.push('/admin');
-                // Swal.fire({
-                //     icon: 'success',
-                //     title: 'You Are Successfully Logedin',
-                //     showConfirmButton: false,
-                //     timer: 1500
-                // })
             }
         })
     }

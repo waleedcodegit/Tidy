@@ -67,8 +67,11 @@ class AdminController extends Controller
                         $token = $meta->token;
                     }
                     $admin->token = $token;
-                    $response = ['status' => 200 , 'msg' => 'success- admin Authenticated Successfully',
-                        'admin' => $admin];
+                    $response = [   
+                        'status' => 200 , 
+                        'msg' => 'success- admin Authenticated Successfully',
+                        'admin' => $admin
+                    ];
                     return $response;
                 }else{
                     $response = ['status' => 401 , 'msg' => 'Error- Invalid Password'];
@@ -113,6 +116,18 @@ class AdminController extends Controller
             'msg' => 'Successfully Deleted'
         ];
         return $response;
+    }
+
+    public function admin_info(Request $request){
+        $admin = admin::where('email', $request->email)->get();
+        if($admin){
+            $response = ['status' => 200];
+            return $response;
+        }else{
+            $response =['status' => 401 , 'msg' => 'Sorry, nothing found'];
+            return $response;
+        }
+        
     }
 
 }

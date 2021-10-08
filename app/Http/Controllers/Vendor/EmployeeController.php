@@ -8,6 +8,7 @@ use App\Employee;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\VendorAuthMeta;
+use App\EmployeeAuthMeta;
 
 class EmployeeController extends Controller
 {
@@ -18,12 +19,25 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $emp = Employee::get();
+        $emp = Employee::where('delete_status', 0)->get();
         $response = [
             'status' => 200,
             'employee' => $emp
         ];
         return $response;
+    }
+
+    public function employee_check_auth(Request $request){
+        $employee_auth = EmployeeAuthMeta::where('token',$request->token)
+            ->where('ip',$request->ip())
+            ->first();
+        if($employee_auth){
+            $response = ['status' => 200 , 'employee'=>$employee_auth];
+            return $response;
+        }else{
+        $response = ['status' => 401 , 'msg' => 'Sorry, Incorrect Token'];
+            return $response;
+        }
     }
 
     /**
@@ -34,6 +48,68 @@ class EmployeeController extends Controller
     public function create()
     {
         //
+    }
+
+    public function employee_login(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'username' => 'required',
+            'password' => 'required',
+        ]);
+        if($validator->fails()){
+            return response()->json([
+                'status' => 401,
+                'errors' => $validator->messages(),
+                'message' => $validator->errors()->first()
+            ]);
+        }else{
+            $Emp = Employee::where('username', $request->username)->first();
+            if($Emp){
+                if($Emp->status) {
+                    if(Hash::check($request->password, $Emp->password)){
+                        $meta_check = EmployeeAuthMeta::where('employee_id',$Emp->id)
+                                        ->where('ip',$request->ip())
+                                        ->first();
+                        if($meta_check){
+                            $token = $meta_check->token;
+                        } else {
+                            $meta = new EmployeeAuthMeta();
+                            $meta->employee_id = $Emp->id;
+                            $meta->ip = $request->ip();
+                            $meta->token = Hash::make(time());
+                            $new_time = date('H:i', strtotime('+15 minutes'));
+                            $meta->token_valid_till = $new_time;
+                            $meta->save();
+                            $token = $meta->token;
+                        }
+                        $Emp->token = $token;
+                        return response()->json([
+                           'status' => 200,     
+                           'message' => "Successfull login",
+                           'data' => $Emp, 
+                        ]);
+                    }else{
+                        return response()->json([
+                            'status' => 401,     
+                            'message' => "Invalid Password",
+                            'data' => null, 
+                         ]);
+                    }
+                } else {
+                    return response()->json([
+                        'status' => 401,     
+                        'message' => "Sorry you are no approved from the admin yet",
+                        'data' => null, 
+                     ]);
+                }
+                
+            }else{
+                return response()->json([
+                    'status' => 401,     
+                    'message' => "Invalid Email",
+                    'data' => null, 
+                 ]);
+            }
+        }
     }
 
     /**
@@ -61,7 +137,7 @@ class EmployeeController extends Controller
             $emp->password = Hash::make($request->password);
             $emp->password_string = $request->password;
             if($vendor){
-                $emp->vendor_id = $vendor->id;
+                $emp->vendor_id = $vendor->vendor_id;
             } else {
                 $response = ['status' => 219 , 'msg' => 'vendor not found' , 
                 'errors' => 'vendor not found'];
@@ -134,6 +210,18 @@ class EmployeeController extends Controller
         } 
         $response = ['status' => 200 ,
             'msg' => 'Subcategory updated successfully.'];
+        return $response;
+    }
+
+    public function delete_employee(Request $request) {
+        
+        $user = Employee::where('id', $request->id)->update([
+            'delete_status' => true, 
+        ]);
+        $response = [
+            'status' => 200,
+            'msg' => 'Employee deleted successfully', 
+        ];
         return $response;
     }
 

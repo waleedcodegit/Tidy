@@ -66,7 +66,7 @@ class Index extends React.Component{
                 token: window.localStorage.getItem('testapistring')
             }
         }
-        // console.log(senderData);
+        console.log(senderData);
         Axios.post('/api/employee', senderData , Configs).then(res=>{
             if(res.data.status == 200){
                 this.props.history.push('/vendor/employee-list');
@@ -89,46 +89,46 @@ class Index extends React.Component{
 
     render(){
       return (
-          <section className="section">
-            <div className="section-body">
-              <div className="row">
-                <div className="col-12">
-                  <div className="card">
-                    <div className="card-header">
+          <section classNameName="section">
+            <div classNameName="section-body">
+              <div classNameName="row">
+                <div classNameName="col-12">
+                  <div classNameName="card">
+                    <div classNameName="card-header">
                       <h4>Employees</h4>
                     </div>
-                    <div className="card-body">
-                        <div className="row">
-                            <div className="col-6">
-                                <div class="form-group">
+                    <div classNameName="card-body">
+                        <div classNameName="row">
+                            <div classNameName="col-6">
+                                <div className="form-group">
                                     <label>Name</label>
-                                    <input type="text" class="form-control" onChange={this.getName.bind(this)} />
+                                    <input type="text" className="form-control" onChange={this.getName.bind(this)} />
                                 </div>
                             </div>
-                            <div className="col-6">
-                                <div class="form-group">
+                            <div classNameName="col-6">
+                                <div className="form-group">
                                     <label>User Name</label>
-                                    <input type="text" class="form-control" onChange={this.getUsername.bind(this)} />
+                                    <input type="text" className="form-control" onChange={this.getUsername.bind(this)} />
                                 </div>
                             </div>
                         </div>
-                        <div className="row">
-                            <div className="col-6">
-                                <div class="form-group">
+                        <div classNameName="row">
+                            <div classNameName="col-6">
+                                <div className="form-group">
                                     <label>Password</label>
-                                    <input type="text" class="form-control" onChange={this.getPassword.bind(this)} />
+                                    <input type="text" className="form-control" onChange={this.getPassword.bind(this)} />
                                 </div>
                             </div>
-                            <div className="col-6">
-                                <div class="form-group">
+                            <div classNameName="col-6">
+                                <div className="form-group">
                                     <label>Image</label>
-                                    <input type="file" class="form-control" onChange={this.getImage.bind(this)} />
+                                    <input type="file" className="form-control" onChange={this.getImage.bind(this)} />
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer text-right">
-                        <button onClick={this.createEmployee.bind(this)} class="btn btn-primary mr-1" type="submit">Submit</button>
+                    <div className="card-footer text-right">
+                        <button onClick={this.createEmployee.bind(this)} className="btn btn-primary mr-1" type="submit">Submit</button>
                     </div>
                   </div>
                 </div>

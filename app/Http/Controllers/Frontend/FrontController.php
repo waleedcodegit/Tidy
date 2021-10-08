@@ -169,9 +169,19 @@ class FrontController extends Controller
             $response = ['status' => '404' ];
             return $response = $response;
         }
-
-
     }
+
+    public function get_customer_card(Request $request){
+        $customer_card = CustomerCard::where('customer_id',$request->id)->first();
+        if($customer_card){
+            $response = ['status' => 200 , 'customer_card' => $customer_card];
+            return $response;
+        }else{
+            $response = ['status' => 404];
+            return $response;
+        }
+    }
+
     public function validate_gift_card_details(Request $request){
         if($request->amount < 0 || $request->amount > 500){
             return response()->json([
@@ -225,7 +235,7 @@ class FrontController extends Controller
             ]);
         }
         try{
-        $customer = Customer::where('id',$request->customer_id)->first();
+        $customer = Customer::where('id',$request->id)->first();
         
         $stripe = new \Stripe\StripeClient(
             env("STRIPE_SK")
@@ -239,8 +249,8 @@ class FrontController extends Controller
             ],
           ]);
           $stripe_customer = $stripe->customers->create([
-            "email" => $customer->email,
-            "source" =>  $token->id
+            'email' => $customer->email,
+            'source' =>  $token->id
         ]);
         // return $customer;e
         $customer->stripe_id = $stripe_customer->id;
@@ -438,16 +448,7 @@ class FrontController extends Controller
        return $response;
     }
 
-    public function get_customer_card(Request $request){
-        $customer_card = CustomerCard::where('customer_id',$request->id)->first();
-        if($customer_card){
-            $response = ['status' => 200 , 'customer_card' => $customer_card];
-            return $response;
-        }else{
-            $response = ['status' => 404];
-            return $response;
-        }
-    }
+    
     public function image_upload(Request $request){
         try{
             if ($request->hasFile('file')) {

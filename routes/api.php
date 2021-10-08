@@ -60,6 +60,10 @@ Route::post('/disapproved-vendor','Vendor\VendorController@disapproved_vendor');
 Route::post('/vendor-forget-password' , 'Vendor\VendorController@vendor_forget_password');
 Route::post('/vendor-reset-password' , 'Vendor\VendorController@vendor_reset_password');
 
+//Employee Route
+Route::post('delete-employee' , 'Vendor\EmployeeController@delete_employee');
+Route::post('employee-login' , 'Vendor\EmployeeController@employee_login');
+
 Route::middleware(['admin-login'])->group(function () {
 
     //employee

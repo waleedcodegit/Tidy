@@ -16,6 +16,8 @@ class Login extends Component {
     set_auth_type(val){
         if(val == 2){
             window.open("/vendor-login" , "_blank")
+        }if(val == 3){
+            window.open("/employee-login" , "_blank")
         }
         this.setState({
             auth_type:val
@@ -101,6 +103,15 @@ class Login extends Component {
                                           name="auth_type" value="Vendor">
                                     </input>
                                         <p className="radio_label">Vendor</p>
+                                    </div>
+                                    <div className="col-md-6 row">
+                                    <input onChange={this.set_auth_type.bind(this,3)} 
+                                        checked={this.state.auth_type == 3 }
+                                        value={this.state.auth_type || " "}
+                                         type="radio" className="mt-2 "
+                                          name="auth_type" value="Vendor">
+                                    </input>
+                                        <p className="radio_label">Employee</p>
                                     </div>
                                 </div>  
                             </div>

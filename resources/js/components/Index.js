@@ -10,6 +10,7 @@ import {Provider} from 'react-redux';
 import reducer from './Redux/reducer';
 import DefaultPage from './Front/Pages/Default/DefaultPage';
 import { Toaster } from 'react-hot-toast';
+import EmployeeIndex from './Employee/index';
 
 const store = createStore(reducer);
 class Index extends Component{ 
@@ -19,7 +20,7 @@ class Index extends Component{
         this.state = {
             paths:['/book-service','/signup','/login','/vendor-signup','/vendor-login','/gift-card','/profile','/service/:slug'
             ,'/message-admin','/forgot-password','/reset-password','/vendor-forget-password','/vendor-reset-password','/booking-details/:id',
-            '/bookings-feed'
+            '/bookings-feed','/employee-login'
         ]
         };
         
@@ -46,6 +47,7 @@ class Index extends Component{
                     <Route exact path="/admin-login" component={Admin_Login} />
                     <Route path="/admin"  component={AdminIndex}/>
                     <Route path="/vendor"  component={VendorIndex}/>
+                    <Route path="/employee" component={EmployeeIndex}></Route>
                     <Route   component={DefaultPage}/>
                     </Switch>
             <Toaster></Toaster>

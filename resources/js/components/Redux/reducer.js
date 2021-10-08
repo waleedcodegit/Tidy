@@ -25,6 +25,11 @@ const reducer = (state = current_state,action) =>{
             ...state,
             vendor:action.payload
         }
+    }else if(action.type == 'CHANGE_EMPLOYEE'){
+        return {
+            ...state,
+            employee:action.payload
+        }
     }else if(action.type == 'CHANGE_BOOKING_STEP'){
         window.scrollTo(0,0);
         return {

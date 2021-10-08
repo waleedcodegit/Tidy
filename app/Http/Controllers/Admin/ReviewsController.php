@@ -27,8 +27,6 @@ class ReviewsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create_review(Request $request){
-
-            return $request->all();
         
             $review = new Review();
             $review->name = $request->get_name;

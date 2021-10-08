@@ -13,6 +13,7 @@ class ReviewMod extends Component {
         get_comment : '',
         get_rating : '',
         get_image : '',
+        status:'',
         }
     }
 
@@ -37,6 +38,12 @@ class ReviewMod extends Component {
     get_rating(e){
         this.setState({
             get_rating : e.target.value
+        })
+    }
+
+    status(e){
+        this.setState({
+            status : e.target.value
         })
     }
 
@@ -86,6 +93,7 @@ class ReviewMod extends Component {
             get_comment : this.state.get_comment,
             get_rating : this.state.get_rating,
             get_image : this.state.get_image,
+            status : this.state.status
         }
         console.log(UserReview);
         Axios.post('/api/create-review', UserReview).then(res=>{
@@ -140,6 +148,17 @@ class ReviewMod extends Component {
                                     <label htmlFor="price">Rating</label>
                                     <input onChange={this.get_rating.bind(this)} type="text" className="form-control" />
                                    
+                                </div>
+                            </div>
+
+                            <div className="col-sm-12">
+                                <div className="form-group">
+                                <label htmlFor="type">Status:</label>
+                                    <select className="form-control" name="type" onChange={this.status.bind(this)}>
+                                        <option value="">Select</option>
+                                        <option value={1}>Publish</option>
+                                        <option value={0}>Discard</option>
+                                    </select>
                                 </div>
                             </div>
 

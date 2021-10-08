@@ -2,12 +2,13 @@ import Axios from 'axios';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import toast, { Toaster } from 'react-hot-toast';
+import Swal from 'sweetalert2';
 
 class PaymentCards extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            card_details:{},
+            card_details:[],
             no_card_details:false,
             credit_card_number: '',
             cvc: '',
@@ -22,8 +23,15 @@ class PaymentCards extends Component {
     componentDidMount(){
         Axios.post('/api/get_customer_card',{id:this.props.user.data.id}).then(res=>{
             if(res.data.status == 200){
-
+                this.setState({
+                    card_details: res.data.customer_card
+                })
+            }else{
+                this.setState({
+                    no_card_details:true
+                })
             }
+            console.log(this.state.card_details);
         })
     }
       defineProp  ( obj, key, value ) {
@@ -55,6 +63,39 @@ class PaymentCards extends Component {
             }
         })
     }
+
+    update_customer_card(){
+
+        let cardData = {
+            card_holder_name: this.state.card_holder_name,
+            credit_card_number: this.state.credit_card_number,
+            cvc: this.state.cvc,
+            expiry_month: this.state.expiry_month,
+            expiry_year: this.state.expiry_year,
+            id:this.props.user.data.id
+        }
+
+        Axios.post('/api/update_customer_card',cardData).then(res=>{
+            console.log(cardData);
+            if(res.data.status == true){
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Card updated Successfully',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }else{
+                Swal.fire({
+                    icon: 'error',
+                    title: res.data.msg,
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        })
+
+    }
+
     update_card(){
         this.setState({
             update_card:true
@@ -110,7 +151,7 @@ class PaymentCards extends Component {
                                                         </div>
                                                         <div className="col-md-4">
                                                         <strong><h6>Card Number</h6></strong><br></br>
-                                                        <h6>xxxx xxxx xxxx {this.state.card_details.credit_card_number}</h6>
+                                                        <h6>{this.state.card_details.credit_card_number}</h6>
                                                         </div>    
                                                         <div className="col-md-2">
                                                         <strong><h6>CVC</h6></strong><br></br>
@@ -173,7 +214,7 @@ class PaymentCards extends Component {
                                                                                             :null
                                                                                         }
                                                                                         <div className="col-sm-12  text-right p-3">
-                                                                                           <button onClick={this.validate_card.bind(this)} className="btn btn-success ">Save</button>
+                                                                                           <button onClick={this.update_customer_card.bind(this)} className="btn btn-success ">Save</button>
                                                                                         </div>
                                                                                         </div>
                                                     :null

@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import Axios from 'axios';
 import Swal from 'sweetalert2';
 import {Link} from 'react-router-dom';
+import { img_baseurl } from '../../../Configs/Api';
+
 class Index extends React.Component{
     constructor(props){
         super(props);
@@ -21,6 +23,22 @@ class Index extends React.Component{
           } 
       })
   }
+
+  deleteEmployee(id) {
+    let data = {
+        id: id
+    }
+    Axios.post('/api/delete-employee',data).then(res=>{
+        Swal.fire({
+            icon: 'success',
+            title: 'Successfully Deleted',
+            showConfirmButton: false,
+            timer: 1500
+        })
+        this.componentDidMount();
+    })
+}
+
 
     render(){
       return (
@@ -44,7 +62,8 @@ class Index extends React.Component{
                               <th>Username</th>
                               <th>Image</th>
                               <th>Vendor</th>
-                              <th>Action</th>
+                              <th>Edit</th>
+                              <th>Delete</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -55,12 +74,10 @@ class Index extends React.Component{
                                             <td>{index+1}</td>
                                             <td>{data.name}</td>
                                             <td>{data.username}</td>
-                                            <td>{data.image}</td>
+                                            <td><img src={img_baseurl+data.image} style={{width:'100px'}}></img></td>
                                             <td>{data.vendor_id}</td>
-                                            <td>
-                                                <Link to={`/vendor/edit-employee/${data.id}`}><button className="btn btn-outline-primary"> <i  className="fa fa-edit"> </i></button></Link>   
-                                            </td>
-                                                              
+                                            <td><Link to={`/vendor/edit-employee/${data.id}`}><button className="btn btn-outline-primary"> <i  className="fa fa-edit"> </i></button></Link></td>
+                                            <td><button onClick={this.deleteEmployee.bind(this,data.id)} className="btn btn-outline-primary"> <i  className="fa fa-trash"> </i></button></td>                 
                                           </tr>
                                         )
                                       })

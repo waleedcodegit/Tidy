@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import { Link } from 'react-router-dom';
+import Axios from 'axios';
 
 class Sidebar extends Component {
     constructor(props) {
