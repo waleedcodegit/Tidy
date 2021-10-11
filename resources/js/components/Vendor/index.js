@@ -11,7 +11,6 @@ import { STRIPE_PK } from '../Configs/Api';
 import {Elements} from 'react-stripe-elements';
 import '../Vendor/admin.css';
 import VendorSignup from './Auth/VendorSignup';
-import EmpLogin from './Employee/EmpLogin';
 
 class Index extends Component {
     constructor(props) {
@@ -25,7 +24,6 @@ class Index extends Component {
                     {/* <Route exact path="/vendor" component={MainIndex}></Route> */}
                     <Route path="/vendor-signup/:step?/:vendor_id?" component={VendorSignup}></Route>
                     <Route path="/vendor-login" component={Login}></Route>
-                    <Route path="/employee-login" component={EmpLogin}></Route>
                     <Route exact path="/request-submitted" component={SignUpRequest}></Route>
                 </BrowserRouter>
             </div>

@@ -7,7 +7,9 @@ const current_state = {
     select_service_state:{},
     add_information:{},
     auth_type:'login',
-    customer_location:{}
+    customer_location:{},
+    employee:{is_login:false,data:{}}
+
 }
 const reducer = (state = current_state,action) =>{
     if(action.type == 'CHANGE_USER'){

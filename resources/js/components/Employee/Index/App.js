@@ -102,13 +102,13 @@ class EmployeeIndex extends Component {
                     <div className="main-sidebar sidebar-style-2">
                     <aside id="sidebar-wrapper">
                         <div className="sidebar-brand">
-                        <a href="index.html"> <img alt="image" src="/images/site-logo.png" className="header-logo" /> <span className="logo-name">Tidy Vendor Dashboard</span>
+                        <a href="index.html"> <img alt="image" src="/images/site-logo.png" className="header-logo" /> <span className="logo-name">Employee</span>
                         </a>
                         </div>
                         <ul className="sidebar-menu">
                         <li className="menu-header">Main</li>
                         <li className="dropdown active">
-                            <a href="index.html" className="nav-link"><i data-feather="monitor" /><span>Dashboard</span></a>
+                            <a href="index.html" className="nav-link"><i data-feather="monitor" /><span>Employee-Dashboard</span></a>
                         </li>
                         <li className="dropdown">
                             <a href="#" className="menu-toggle nav-link has-dropdown"><i data-feather="briefcase" /><span>Manage Bookings</span></a>
@@ -132,18 +132,12 @@ class EmployeeIndex extends Component {
                                 <li><a className="nav-link" >Customer Messages</a></li>
                             </ul>
                         </li>
-                        <li className="dropdown">
-                            <a href="#" className="menu-toggle nav-link has-dropdown"><i data-feather="mail" /><span>Manage Employees</span></a>
-                            <ul className="dropdown-menu">
-                                <li><a className="nav-link" href="/vendor/employee-list">Employees</a></li>
-                                <li><a className="nav-link" href="/vendor/create-employee">Add Employee</a></li>
-                            </ul>
-                        </li>
+                        
                         {/* <li className="menu-header">UI Elements</li> */}
                         <li className="dropdown">
                             <a href="#" className="menu-toggle nav-link has-dropdown"><i data-feather="copy" /><span>Settings</span></a>
                             <ul className="dropdown-menu">
-                            <li><Link to={'/vendor/profile'} className="nav-link"> Profile</Link></li>
+                            <li><Link to={'/vendor-employee/Empprofile'} className="nav-link"> Profile</Link></li>
                             {/* <li><a className="nav-link" href="/vendor">Accounts</a></li> */}
                             </ul>
                         </li>

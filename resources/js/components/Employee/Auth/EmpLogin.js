@@ -13,6 +13,7 @@ class EmpLogin extends Component {
             username:'',
             password:'',
             error_string:'',
+            employee:''
 
         };
     }
@@ -29,13 +30,13 @@ class EmpLogin extends Component {
     login(e){
         e.preventDefault();
         Axios.post('/api/employee-login',this.state).then(res=>{
-            this.props.vendorObject({
+            this.props.employeeObject({
                 is_login: true,
                 data: res.data.data
             })
             if(res.data.status == 200){
                 window.localStorage.setItem('et',res.data.data.token)
-                window.open('/Empdashboard','_self')
+                window.open('/vendor-employee/Empdashboard','_self')
             }else{
                 this.setState({
                     error_string:res.data.message
@@ -71,7 +72,7 @@ class EmpLogin extends Component {
                                             </div>
                                         </div>
                                         <div className="text-right ">
-                                            <span ><a href="/vendor-forget-password">Forgot Password ?</a></span>
+                                            <span><a>Forgot Password</a></span>
                                         </div>
                                         {
                                             this.state.error_string != '' ?
@@ -112,7 +113,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        vendorObject: (employee) => {
+        employeeObject: (employee) => {
             dispatch({
                 type: "CHANGE_EMPLOYEE",
                 payload: employee

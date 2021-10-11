@@ -7,16 +7,16 @@ class EmployeeMain extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            display:false
+            display:false,
         };
     }
     componentDidMount(){
         let payload = {
             token:window.localStorage.getItem('et')
         }
-        Axios.post('/api/employee_check_auth',payload).then(res=>{
+        Axios.post('/api/employee-check-auth',payload).then(res=>{
             if(res.data.status == 200){
-                this.props.changeVendor({is_login:true,data:res.data.employee});
+                this.props.changeEmployee({is_login:true,data:res.data.employee});
                 this.setState({
                     display:true
                 })
@@ -38,7 +38,7 @@ class EmployeeMain extends Component {
 }
 const mapDispatchToProps = (dispatch) =>{
     return{
-        changeVendor:(employee)=>{dispatch({type:'CHANGE_EMPLOYEE',payload:employee})}
+        changeEmployee:(employee)=>{dispatch({type:'CHANGE_EMPLOYEE',payload:employee})}
     }
 }
-export default connect(null,mapDispatchToProps)( EmployeeMain);
+export default connect(null,mapDispatchToProps)(EmployeeMain);

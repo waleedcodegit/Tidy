@@ -63,6 +63,7 @@ Route::post('/vendor-reset-password' , 'Vendor\VendorController@vendor_reset_pas
 //Employee Route
 Route::post('delete-employee' , 'Vendor\EmployeeController@delete_employee');
 Route::post('employee-login' , 'Vendor\EmployeeController@employee_login');
+Route::post('/employee-check-auth' , 'Vendor\EmployeeController@employee_check_auth');
 
 Route::middleware(['admin-login'])->group(function () {
 

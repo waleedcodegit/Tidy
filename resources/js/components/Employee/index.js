@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 // import MainIndex from '../Vendor/Admin_Sidebar';
 import {Route , BrowserRouter , Switch} from 'react-router-dom';
 import '../Vendor/admin.css';
+import EmpProfile from '../Employee/Components/Settings/Profile';
 import EmpLogin from './Auth/EmpLogin';
 
 class Index extends Component {
@@ -14,8 +15,8 @@ class Index extends Component {
         return (
             <div >
                 <BrowserRouter>
-                    {/* <Route exact path="/vendor" component={MainIndex}></Route> */}
-                    <Route path="/employee-login" component={EmpLogin}></Route>
+                    <Route path="/employee/employee-login" component={EmpLogin}></Route>
+                    <Route path="/vendor-employee/Empprofile" component={EmpProfile}></Route>
                 </BrowserRouter>
             </div>
         );
