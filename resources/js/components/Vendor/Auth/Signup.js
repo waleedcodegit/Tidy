@@ -697,11 +697,11 @@ class SignUp extends Component {
                                         <i class="fas fa-certificate"></i>
                                         <h6>Documents</h6>
                                     </li>
-                                    <li className={this.state.step >= 4 ? "progress_active" : 'progress_icon'}>
+                                    <li className={this.state.step >= 5 ? "progress_active" : 'progress_icon'}>
                                         <i class="far fa-calendar-check"></i>
                                         <h6>Review</h6>
                                     </li>
-                                    <li className={this.state.step >= 5 ? "progress_active" : 'progress_icon'}>
+                                    <li className={this.state.step >= 6 ? "progress_active" : 'progress_icon'}>
                                         <i class="fas fa-check"></i>
                                         <h6>Finish</h6>
                                     </li>

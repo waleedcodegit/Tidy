@@ -27,6 +27,23 @@ class EmployeeController extends Controller
         return $response;
     }
 
+    public function show(Request $request){
+        $employee = Employee::where('id',$request->id)->first();
+        if($employee){
+        $response=[
+            'status' => 200,
+            'message' => 'Success',
+            'data' => $employee,
+        ];
+        }else{
+        $response=[
+            'status' => 401,
+            'message' => 'No data found',
+        ];
+        }
+        return $response;
+    }
+
     public function employee_check_auth(Request $request){
         $employee_auth = EmployeeAuthMeta::where('token',$request->token)
             ->where('ip',$request->ip())
@@ -38,6 +55,20 @@ class EmployeeController extends Controller
         $response = ['status' => 401 , 'msg' => 'Sorry, Incorrect Token'];
             return $response;
         }
+    }
+
+    public function update_employee_profile(Request $request){
+        $u_employee = Employee::where('id' , $request->id) -> update([
+            'name' => $request->f_name,
+            'username' => $request->e_username
+        ]);
+
+        $response = [
+            'status' => 200,
+            'message' => "Employee Profile Updated",
+            'data' => $u_employee,
+        ];
+        return $response;
     }
 
     /**
@@ -159,23 +190,6 @@ class EmployeeController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $employee = Employee::find($id);

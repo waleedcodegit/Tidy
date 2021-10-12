@@ -53,6 +53,10 @@ Route::view('/admin/create-review' , 'Admin');
 Route::view('/admin/list-reviews' , 'Admin');
 Route::view('/admin/edit-review/{id}', 'Admin');
 
+Route::view('/admin/url-meta' , 'Admin');
+Route::view('/admin/url-meta-list' , 'Admin');
+Route::view('/admin/edit-url/{id}', 'Admin');
+
 Route::view('/admin/create-holiday', 'Admin');
 Route::view('/admin/edit-holiday/{id}', 'Admin');
 Route::view('/admin/list-holidays', 'Admin');

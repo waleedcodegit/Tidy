@@ -64,6 +64,9 @@ Route::post('/vendor-reset-password' , 'Vendor\VendorController@vendor_reset_pas
 Route::post('delete-employee' , 'Vendor\EmployeeController@delete_employee');
 Route::post('employee-login' , 'Vendor\EmployeeController@employee_login');
 Route::post('/employee-check-auth' , 'Vendor\EmployeeController@employee_check_auth');
+Route::post('/get-employee-info/{id}' , 'Vendor\EmployeeController@show');
+Route::post('/update-employee-profile' , 'Vendor\EmployeeController@update_employee_profile');
+
 
 Route::middleware(['admin-login'])->group(function () {
 
@@ -194,6 +197,14 @@ Route::post('create-sms','Admin\SmsController@create_sms');
 Route::get('/api/sms','Admin\SmsController@Sms_List');
 Route::post('/delete-sms','Admin\SmsController@delete_sms');
 Route::get('/edit-sms/{id}','Admin\SmsController@edit_sms');
+
+//UrlMetas Controller
+Route::resource('urlmetas' , 'Admin\UrlMetasController');
+Route::post('create-url-meta' , 'Admin\UrlMetasController@create_url_meta');
+Route::post('/delete-url' , 'Admin\UrlMetasController@delete_url');
+Route::get('/edit-url/{id}','Admin\UrlMetasController@edit_url');
+Route::post('/update-url/{id}' , 'Admin\UrlMetasController@update_url');
+
 
 //HomeContent Controller
 

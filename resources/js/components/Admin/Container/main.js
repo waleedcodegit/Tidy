@@ -46,6 +46,10 @@ import ReviewMod from '../Reviews/reviews'
 import ListReviews from '../Reviews/listreviews';
 import EditReview from '../Reviews/editreviews';
 
+import UrlMeta from '../Settings/UrlMeta';
+import Index from '../Settings/UrlList';
+import UrlEdit from '../Settings/UrlEdit';
+
 import HolidayCreate from '../Holidays/create';
 import HolidayEdit from '../Holidays/edit';
 import HolidayList from '../Holidays/index';
@@ -79,6 +83,9 @@ import ManagePages from '../ManagePages/ManagePagesContent';
 import CreateSms from '../Sms/create';
 import EditSms from '../Sms/edit';
 import SmsList from '../Sms/list';
+
+
+
 
 
 
@@ -142,6 +149,10 @@ class Main extends Component {
                         <Route path="/admin/create-review" component={ReviewMod}></Route>
                         <Route path="/admin/list-reviews" component={ListReviews}></Route>
                         <Route path="/admin/edit-review/:id" component={EditReview}></Route>
+                        
+                        <Route path="/admin/url-meta" component={UrlMeta}></Route>
+                        <Route path="/admin/url-meta-list" component={Index}></Route>
+                        <Route path="/admin/url-edit/:id" component={UrlEdit}></Route>
 
 
                         <Route path="/admin/add-faq" component={AddFaq}></Route>

@@ -1,7 +1,18 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <title>Booking App</title>
+  <?php
+    use App\UrlMeta;
+    $title = 'Booking App' ;
+    $description = 'Booking App' ;
+        $url = UrlMeta::where('path',Request::path())->first();
+        if($url){
+            $title = $url->title;
+            $description = $url->description;
+        }
+    ?>
+    <title>{{$title}}</title>
+    <meta name="description" content="{{$description}}">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

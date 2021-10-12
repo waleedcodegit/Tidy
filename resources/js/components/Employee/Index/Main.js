@@ -9,7 +9,7 @@ class Main extends Component {
         return (
             <div>
                 <Route path='/vendor-employee/Empdashboard' component={EmpDashBoard}></Route>
-                <Route path='/vendor-profile/Empprofile' component={EmpProfile}></Route>
+                <Route path='/vendor-employee/Empprofile' component={EmpProfile}></Route>
             </div>
         );
     }
