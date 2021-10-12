@@ -390,6 +390,7 @@ class FrontController extends Controller
             ]);
         }
     }
+    
     public function validate_select_service(Request $request){
         $validator = Validator::make($request->all(), [
             'service_id' => 'required',
