@@ -20,6 +20,7 @@ class Index extends Component {
                 this.setState({
                     url: res.data.url
                 })
+                
             } 
         })
     }
@@ -48,8 +49,12 @@ class Index extends Component {
                         <div className="panel-heading">
                             <h3 className="panel-title">URL META LIST</h3>
                         </div>
+                        
                         <div className="panel-body">
-                            <table id="demo-dt-basic" className="table table-striped table-bordered" cellSpacing="0" width="100%">
+                        <div className="mb-2">
+                            <Link to={`/admin/url-meta`}><button className="btn btn-primary btn-outline-success">Add New URL</button></Link>
+                        </div>
+                            <table id="demo-dt-basic" style={{marginTop:6}} className="table table-striped table-bordered mt-2" cellSpacing="0" width="100%">
                                 <thead>
                                     <tr>
                                         <th>Sr</th>

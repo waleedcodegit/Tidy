@@ -37,8 +37,8 @@ class UrlMeta extends Component {
     save(e){
         e.preventDefault();
         Axios.post('/api/create-url-meta',this.state).then(res=>{
-            
             if(res.data.status == 200){
+                this.props.history.push('/admin/url-meta-list');
                 Swal.fire({
                     icon: 'success',
                     title: 'URL Added Successfully',

@@ -62,6 +62,14 @@ class PagesController extends Controller
 
     }
 
+    public function get_content(Request $request){
+        
+        $content = Page::where('slug',$request->slug)->first();
+        if($content){
+            return $content;
+        }
+    }
+
     public function get_page_by_id(Request $request){
         $page = Page::where('id',$request->id)->first();
         return $page;

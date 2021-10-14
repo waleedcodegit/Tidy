@@ -20,7 +20,7 @@ class Index extends Component{
         this.state = {
             paths:['/book-service','/signup','/login','/vendor-signup','/vendor-login','/gift-card','/profile','/service/:slug'
             ,'/message-admin','/forgot-password','/reset-password','/vendor-forget-password','/vendor-reset-password','/booking-details/:id',
-            '/bookings-feed','/employee-login','/Empprofile'
+            '/bookings-feed','/employee-login','/Empprofile','/:slug'
         ]
         };
         
@@ -32,22 +32,19 @@ class Index extends Component{
 
                 <div id="main-div">
 
-
-
                 <Switch>
-                    {
-                        this.state.paths.map((data,index)=>{
-                            return(
-                                <Route key={index} path={data}  component={FrontIndex}/>
-                            )
-                        })
-                    } 
                     <Route exact path="/"  component={FrontIndex}/>
-                    
                     <Route exact path="/admin-login" component={Admin_Login} />
                     <Route path="/admin"  component={AdminIndex}/>
                     <Route path="/vendor"  component={VendorIndex}/>
                     <Route path="/vendor-employee" component={EmployeeIndex}></Route>
+                    {
+                        this.state.paths.map((data,index)=>{
+                            return(
+                            <Route exact key={index} path={data}  component={FrontIndex}/>
+                            )
+                        })
+                    }
                     <Route   component={DefaultPage}/>
                     </Switch>
             <Toaster></Toaster>

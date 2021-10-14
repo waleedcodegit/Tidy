@@ -11,6 +11,7 @@ import VendorLogin from '../../Vendor/Auth/login';
 import BookService from '../Pages/BookService/BookService';
 
 import '../index.css'
+import DynamicPages from '../DynamicPages/DyanamicPages';
 import GiftCard from '../Pages/GiftCard.js/GiftCard';
 import Axios from 'axios';
 import { connect } from 'react-redux';
@@ -23,6 +24,7 @@ import VendorForgotPassword from '../../Vendor/Auth/VendorForgotPassword';
 import VendorResetPassword from '../../Vendor/Auth/VendorResetPassword';
 import BookingDetails from '../Pages/UserProfile/Bookings/BookingDetails';
 import EmpLogin from '../../Employee/Auth/EmpLogin';
+
 
 class Index extends Component {
     constructor(props) {
@@ -47,6 +49,7 @@ class Index extends Component {
                 
                 {/* <Route path="/" component={TopHeader}></Route> */}
                 <Navbar  {...this.props}></Navbar>
+                <Route exact path="/:slug" component={DynamicPages}></Route>
                 <Route exact path="/" component={Landing}></Route>
                 <Route exact path="/login" component={Login}></Route>
                 <Route exact path="/signup" component={Signup}></Route>
