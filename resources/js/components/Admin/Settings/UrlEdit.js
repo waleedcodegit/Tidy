@@ -62,10 +62,9 @@ class UrlEdit extends Component {
                 loading: false
             })
             if(res.data.status == 200){
-                // this.props.history.push('/admin/sms');
                 Swal.fire({
                     icon: 'success',
-                    title: 'URL update Successfully',
+                    title: 'URL Updated Successfully',
                     showConfirmButton: false,
                     timer: 1500
                 })
@@ -77,6 +76,7 @@ class UrlEdit extends Component {
                     timer: 1500
                 })
             }
+            this.props.history.push('/admin/url-meta-list');
         })
     }
     

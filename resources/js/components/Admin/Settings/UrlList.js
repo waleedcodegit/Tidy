@@ -20,7 +20,7 @@ class Index extends Component {
                 this.setState({
                     url: res.data.url
                 })
-                
+               this.props.history.push('/admin/url-meta-list'); 
             } 
         })
     }
