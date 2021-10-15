@@ -548,8 +548,6 @@ class Profile extends Component {
                                                                    </td>
                                                                   <td>
                                                                   <select value={data.start_time || ""} onChange={(e)=>{this.change_start_time(e.target.value,index)}} name="gender"   className="col-md-12  form-control">
-
-                                                                    
                                                                     <option>7:00am</option>
                                                                     <option>8:00am</option>
                                                                     <option>9:00am</option>
@@ -568,7 +566,6 @@ class Profile extends Component {
                                                                   </td>
                                                                   <td>
                                                                   <select  value={data.end_time || ""} onChange={(e)=>{this.change_end_time(e.target.value,index)}} name="gender"   className="col-md-12 form-control">
-                                                                   
                                                                     <option>7:00am</option>
                                                                     <option>8:00am</option>
                                                                     <option>9:00am</option>
@@ -583,10 +580,8 @@ class Profile extends Component {
                                                                     <option>06:00pm</option>
                                                                     <option>07:00pm</option>
                                                                     <option>08:00pm</option>
-                                                                    {/* <option>09:00pm</option> */}
                                                                 </select>
-                                                                  </td>
-                                                                   
+                                                                  </td> 
                                                                </tr>
                                                               )
                                                           })
@@ -595,10 +590,6 @@ class Profile extends Component {
                                                       </table>
                                                    </div>
                                                 </div>
-                                                    
-                                                    
-                                               
-                                                
                                             </form>
                                             <div className="card-footer text-right">
                                                     <button onClick={this.update_timings.bind(this)} className="btn btn-primary">Save Changes</button>
@@ -622,11 +613,7 @@ class Profile extends Component {
                                                           })
                                                       }
                                                    </div>
-                                                </div>
-                                                    
-                                                    
-                                               
-                                                
+                                                </div>   
                                             </form>
                                         </div>
                                         <div className="tab-pane show  fade_" id="services_areas" role="tabpanel" aria-labelledby="profile-tab5">

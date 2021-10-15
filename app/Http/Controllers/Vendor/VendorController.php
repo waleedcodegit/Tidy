@@ -107,7 +107,6 @@ class VendorController extends Controller
         $emp = Employee::where('vendor_id', $request->id)->get();
         $bookings = Booking::where('vendor_id',$request->id)->with('service','sub_service' , 'information')->get();
 
-
         $services = Category::get();
         $not_used = [];
 
