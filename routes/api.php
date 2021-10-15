@@ -158,6 +158,8 @@ Route::post('/add_vendor_address','Vendor\VendorController@add_vendor_address');
 Route::post('/delete_vendor_address','Vendor\VendorController@delete_vendor_address');
 Route::post('/get-vendor-bookings' , 'Vendor\VendorController@get_vendor_bookings');
 // Route::post('/accept-booking' , 'Vendor\VendorController@accept_booking');
+Route::post('/get_vendor_service_timings' , 'Vendor\VendorController@get_vendor_service_timings');
+Route::post('/update_vendor_timings' , 'Vendor\VendorController@update_vendor_timings');
 
 
 

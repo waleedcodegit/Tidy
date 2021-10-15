@@ -27,6 +27,7 @@ use App\VendorResetPassword;
 use App\Mail\VendorResetPass;
 use App\Mail\SignupRequestEmail;
 use App\Booking;
+use App\VendorTimmings;
 
 class VendorController extends Controller
 {
@@ -456,6 +457,10 @@ class VendorController extends Controller
         }
         $vendor->save();
 
+        $vendorTimings = new VendorTimmings();
+        $vendorTimings->vendor_id = $vendor->id;
+        $vendorTimings->save();
+
         // Sending SignUp Request Email
 
         $emails = Email::where('id', 26)->first();
@@ -519,6 +524,23 @@ class VendorController extends Controller
                     'vendor' => $new_vendor,     
                 ]);
         }
+    }
+    public function update_vendor_timings(Request $request){
+        $vendot_timing = VendorTimmings::where('vendor_id',$request->vendor_id)->first();
+        $vendot_timing->timings = json_encode($request->vendor_timings);
+        $vendot_timing->save();
+        
+    }
+    public function get_vendor_service_timings(Request $request){
+        $timing = VendorTimmings::where('vendor_id',$request->vendor_id)->first();
+        // $days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+        // $timings = [];
+        // foreach($days as $d){
+        //     array_push($timings,['day'=>$d , 'start_time' => '6:00am' , 'end_time' => '8:00pm' , 'status' => 'On']);
+        // }
+        // $timing->timings = json_encode($timings);
+        // $timing->save();
+        return $timing;
     }
     public function update_vendor_profile(Request $request)
     {

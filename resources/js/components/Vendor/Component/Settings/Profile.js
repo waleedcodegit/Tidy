@@ -51,7 +51,8 @@ class Profile extends Component {
             loc_u_address:'',
             addresses:[],
             show_add_address:false,
-            last_address_updater:0
+            last_address_updater:0,
+            vendor_timings:[]
         };
     }
     
@@ -78,6 +79,14 @@ class Profile extends Component {
                 bio:res.data.data.bio,
                 vendor_id:this.props.vendor.data.vendor_id
 
+            })
+        })
+        Axios.post('/api/get_vendor_service_timings',{vendor_id:this.props.vendor.data.vendor_id}).then(res=>{
+            console.log(res)
+            this.setState({
+                vendor_timings: JSON.parse(res.data.timings)
+            },function(){
+                console.log(this.state)
             })
         })
         Axios.post('/api/get_vendor_services',{vendor_id:this.props.vendor.data.vendor_id}).then(res=>{
@@ -320,7 +329,37 @@ class Profile extends Component {
             this.componentDidMount();
         })
     }
+    change_start_time(value,index){
+        let temp = this.state.vendor_timings;
+        temp[index].start_time = value;
+        this.setState({
+            vendor_timings: temp
+        })
+    }
+    change_end_time(value,index){
+        let temp = this.state.vendor_timings;
+        temp[index].end_time = value;
+        this.setState({
+            vendor_timings: temp
+        })
+    }
+    change_status(value,index){
+        let temp = this.state.vendor_timings;
+        temp[index].status = value;
+        this.setState({
+            vendor_timings: temp
+        })
+    }
 
+    update_timings(){
+        let payload = {
+            vendor_id:this.props.vendor.data.vendor_id,
+            vendor_timings:this.state.vendor_timings
+        }
+        Axios.post('/api/update_vendor_timings',payload).then(res=>{
+            toast.success('Your service timings are updated successfully.')
+        })
+    }
     render() {
         return (
             <section className="section">
@@ -365,6 +404,9 @@ class Profile extends Component {
                                             <a className="nav-link " id="profile-tab3" data-toggle="tab" href="#services" role="tab" aria-selected="false">My Services</a>
                                         </li>
                                         <li className="nav-item">
+                                            <a className="nav-link " id="profile-tab6" data-toggle="tab" href="#service_timings" role="tab" aria-selected="false">Service Timings</a>
+                                        </li>
+                                        <li className="nav-item">
                                             <a className="nav-link " id="profile-tab5" data-toggle="tab" href="#services_areas" role="tab" aria-selected="false">My Services Areas</a>
                                         </li>
                                         <li className="nav-item">
@@ -373,7 +415,7 @@ class Profile extends Component {
                                     </ul>
                                     <div className="tab-content tab-bordered" id="myTab3Content">
                                      
-                                        <div className="tab-pane show active fade" id="settings" role="tabpanel" aria-labelledby="profile-tab2">
+                                        <div className="tab-pane show active fade_" id="settings" role="tabpanel" aria-labelledby="profile-tab2">
                                             <form >
                                                 <div className="card-header">
                                                     <h4>Edit Profile</h4>
@@ -477,7 +519,92 @@ class Profile extends Component {
                                                 </div>
                                             </form>
                                         </div>
-                                        <div className="tab-pane show  fade" id="services" role="tabpanel" aria-labelledby="profile-tab4">
+                                        <div className="tab-pane show  fade_" id="service_timings" role="tabpanel" aria-labelledby="profile-tab6">
+                                            <form >
+                                                <div className="card-header">
+                                                    <h4>Service Timings</h4>
+                                                </div>
+                                                <div className="card-body">
+                                                
+                                                   <div className="row">
+                                                   <table className="table table-hover table-bordered">
+                                                   <thead>
+                                                       <th>Day</th>
+                                                       <th>On/Off</th>
+                                                       <th>Start Time</th>
+                                                       <th>End Time</th>
+                                                   </thead>
+                                                   <tbody>
+                                                      {
+                                                          this.state.vendor_timings.map((data,index)=>{
+                                                              return(
+                                                               <tr>
+                                                                   <td>{data.day}</td>
+                                                                   <td>
+                                                                       <select className="form-control" value={data.status} onChange={(e)=>{this.change_status(e.target.value,index)}}>
+                                                                           <option>On</option>
+                                                                           <option>Off</option>
+                                                                       </select>
+                                                                   </td>
+                                                                  <td>
+                                                                  <select value={data.start_time || ""} onChange={(e)=>{this.change_start_time(e.target.value,index)}} name="gender"   className="col-md-12  form-control">
+
+                                                                    
+                                                                    <option>7:00am</option>
+                                                                    <option>8:00am</option>
+                                                                    <option>9:00am</option>
+                                                                    <option>10:00am</option>
+                                                                    <option>11:00am</option>
+                                                                    <option>12:00pm</option>
+                                                                    <option>01:00pm</option>
+                                                                    <option>02:00pm</option>
+                                                                    <option>03:00pm</option>
+                                                                    <option>04:00pm</option>
+                                                                    <option>05:00pm</option>
+                                                                    <option>06:00pm</option>
+                                                                    <option>07:00pm</option>
+                                                                    <option>08:00pm</option>
+                                                                </select>
+                                                                  </td>
+                                                                  <td>
+                                                                  <select  value={data.end_time || ""} onChange={(e)=>{this.change_end_time(e.target.value,index)}} name="gender"   className="col-md-12 form-control">
+                                                                   
+                                                                    <option>7:00am</option>
+                                                                    <option>8:00am</option>
+                                                                    <option>9:00am</option>
+                                                                    <option>10:00am</option>
+                                                                    <option>11:00am</option>
+                                                                    <option>12:00pm</option>
+                                                                    <option>01:00pm</option>
+                                                                    <option>02:00pm</option>
+                                                                    <option>03:00pm</option>
+                                                                    <option>04:00pm</option>
+                                                                    <option>05:00pm</option>
+                                                                    <option>06:00pm</option>
+                                                                    <option>07:00pm</option>
+                                                                    <option>08:00pm</option>
+                                                                    {/* <option>09:00pm</option> */}
+                                                                </select>
+                                                                  </td>
+                                                                   
+                                                               </tr>
+                                                              )
+                                                          })
+                                                      }
+                                                      </tbody>
+                                                      </table>
+                                                   </div>
+                                                </div>
+                                                    
+                                                    
+                                               
+                                                
+                                            </form>
+                                            <div className="card-footer text-right">
+                                                    <button onClick={this.update_timings.bind(this)} className="btn btn-primary">Save Changes</button>
+                                                </div>
+                                        </div>
+                                        <div className="tab-pane show  fade_" id="services" role="tabpanel" aria-labelledby="profile-tab3">
                                             <form >
                                                 <div className="card-header">
                                                     <h4>My Services</h4>
@@ -502,7 +629,7 @@ class Profile extends Component {
                                                 
                                             </form>
                                         </div>
-                                        <div className="tab-pane show  fade" id="services_areas" role="tabpanel" aria-labelledby="profile-tab5">
+                                        <div className="tab-pane show  fade_" id="services_areas" role="tabpanel" aria-labelledby="profile-tab5">
                                         
                                                 <div className="card-header">
                                                     <h4>My Services Areas</h4>
@@ -586,7 +713,7 @@ class Profile extends Component {
                                                 
                                             
                                         </div>
-                                        <div className="tab-pane show  fade" id="payments" role="tabpanel" aria-labelledby="profile-tab3">
+                                        <div className="tab-pane show  fade_" id="payments" role="tabpanel" aria-labelledby="profile-tab4">
                                            
                                                 <div className="card-header">
                                                     <h4>Payment Settings</h4>

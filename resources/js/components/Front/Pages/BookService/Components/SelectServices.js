@@ -244,7 +244,8 @@ class SelectServices extends Component {
                         <div className="input--stydle-1">
                           <select  value={this.state.time || ""} onChange={this.time.bind(this)} name="gender"   className="col-md-12 input--style-1">
                             <option disabled="disabled" selected="selected">Time to</option>
-                            <option>6:00am</option>
+                            <option>
+                            </option>
                             <option>7:00am</option>
                             <option>8:00am</option>
                             <option>9:00am</option>
