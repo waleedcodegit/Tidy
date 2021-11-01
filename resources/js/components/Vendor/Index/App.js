@@ -1,3 +1,4 @@
+import Axios from 'axios';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -6,7 +7,8 @@ class VendorIndex extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            profileDropDown:false
+            profileDropDown:false,
+            notifications:[]
         };
         console.log(this.props);
     }
@@ -17,6 +19,15 @@ class VendorIndex extends Component {
         },function(){
             console.log(this.state.profileDropDown)
         })
+    }
+    componentDidMount(){
+        setTimeout(()=>{
+            Axios.post('/api/get_vendor_notifications',{vendor_id:this.props.vendor.data.vendor_id}).then(res=>{
+                this.setState({
+                    notifications:res.data
+                })
+            })
+        },5000)
     }
     render() { 
         return (
@@ -44,35 +55,28 @@ class VendorIndex extends Component {
                             </div>
                             </div>
                             <div className="dropdown-list-content dropdown-list-icons">
-                            <a href="#" className="dropdown-item dropdown-item-unread"> <span className="dropdown-item-icon bg-primary text-white"> <i className="fas
-                                                                fa-code" />
-                                </span> <span className="dropdown-item-desc"> Template update is
-                                available now! <span className="time">2 Min
-                                    Ago</span>
-                                </span>
-                            </a> <a href="#" className="dropdown-item"> <span className="dropdown-item-icon bg-info text-white"> <i className="far
-                                                                fa-user" />
-                                </span> <span className="dropdown-item-desc"> <b>You</b> and <b>Dedik
-                                    Sugiharto</b> are now friends <span className="time">10 Hours
-                                    Ago</span>
-                                </span>
-                            </a> <a href="#" className="dropdown-item"> <span className="dropdown-item-icon bg-success text-white"> <i className="fas
+                            {
+                                this.state.notifications.map((data,index)=>{
+                                    return(
+                                        <a href="#" className="dropdown-item"> <span className="dropdown-item-icon bg-success text-white"> <i className="fas
                                                                 fa-check" />
-                                </span> <span className="dropdown-item-desc"> <b>Kusnaedi</b> has
-                                moved task <b>Fix bug header</b> to <b>Done</b> <span className="time">12
-                                    Hours
-                                    Ago</span>
-                                </span>
-                            </a> <a href="#" className="dropdown-item"> <span className="dropdown-item-icon bg-danger text-white"> <i className="fas fa-exclamation-triangle" />
-                                </span> <span className="dropdown-item-desc"> Low disk space. Let's
-                                clean it! <span className="time">17 Hours Ago</span>
-                                </span>
-                            </a> <a href="#" className="dropdown-item"> <span className="dropdown-item-icon bg-info text-white"> <i className="fas
-                                                                fa-bell" />
-                                </span> <span className="dropdown-item-desc"> Welcome to Otika
-                                template! <span className="time">Yesterday</span>
-                                </span>
-                            </a>
+                                            </span> <span className="dropdown-item-desc"> <b>{data.title}</b>  <span className="time">12
+                                                Hours
+                                                Ago</span>
+                                            </span>
+                                        </a> 
+                                    )
+                                })
+                            }
+                            {
+                                this.state.notifications.length == 0 ?
+                                <a href="#" className="dropdown-item text-center">  <span className="dropdown-item-desc"> <b> You have no Notifications!</b></span>
+                                            
+                                        </a> 
+                                        :
+                                        null
+                            }
+                          
                             </div>
                             <div className="dropdown-footer text-center">
                             <a href="#">View All <i className="fas fa-chevron-right" /></a>
@@ -108,35 +112,35 @@ class VendorIndex extends Component {
                         <ul className="sidebar-menu">
                         <li className="menu-header">Main</li>
                         <li className="dropdown active">
-                            <a href="index.html" className="nav-link"><i data-feather="monitor" /><span>Dashboard</span></a>
+                            <Link href="index.html" className="nav-link"><i data-feather="monitor" /><span>Dashboard</span></Link>
                         </li>
                         <li className="dropdown">
                             <a href="#" className="menu-toggle nav-link has-dropdown"><i data-feather="briefcase" /><span>Manage Bookings</span></a>
                             <ul className="dropdown-menu">
-                            <li><a className="nav-link" href="/vendor/bookings-feed">New Bookings Feed</a></li>
-                            <li><a className="nav-link" href="/vendor/accepted-bookings">Accepted Bookings</a></li>
-                            <li><a className="nav-link" href="/vendor">Pending Bookings</a></li>
+                            <li><Link className="nav-link" to="/vendor/bookings-feed">New Bookings Feed</Link></li>
+                            <li><Link  className="nav-link" to="/vendor/accepted-bookings">Accepted Bookings</Link></li>
+                            <li><Link className="nav-link" to="/vendor">Pending Bookings</Link></li>
                             </ul>
                         </li>
                         <li className="dropdown">
                             <a href="#" className="menu-toggle nav-link has-dropdown"><i data-feather="command" /><span>Manage Accounts</span></a>
                             <ul className="dropdown-menu">
-                            <li><a className="nav-link" href="/vendor">Wallet</a></li>
-                            <li><a className="nav-link" href="/vendor">Withdraw Request</a></li>
+                            <li><Link className="nav-link" to="/vendor">Wallet</Link></li>
+                            <li><Link className="nav-link" to="/vendor">Withdraw Request</Link></li>
                             </ul>
                         </li>
                         <li className="dropdown">
                             <a href="#" className="menu-toggle nav-link has-dropdown"><i data-feather="mail" /><span>Messages</span></a>
                             <ul className="dropdown-menu">
-                                <li><a className="nav-link" href="/vendor/message-admin">Message Admin</a></li>
-                                <li><a className="nav-link" href="/vendor/customer-messages">Customer Messages</a></li>
+                                <li><Link className="nav-link" to="/vendor/message-admin">Message Admin</Link></li>
+                                <li><Link className="nav-link" to="/vendor/customer-messages">Customer Messages</Link></li>
                             </ul>
                         </li>
                         <li className="dropdown">
                             <a href="#" className="menu-toggle nav-link has-dropdown"><i data-feather="mail" /><span>Manage Employees</span></a>
                             <ul className="dropdown-menu">
-                                <li><a className="nav-link" href="/vendor/employee-list">Employees</a></li>
-                                <li><a className="nav-link" href="/vendor/create-employee">Add Employee</a></li>
+                                <li><Link className="nav-link" to="/vendor/employee-list">Employees</Link></li>
+                                <li><Link className="nav-link" to="/vendor/create-employee">Add Employee</Link></li>
                             </ul>
                         </li>
                         {/* <li className="menu-header">UI Elements</li> */}

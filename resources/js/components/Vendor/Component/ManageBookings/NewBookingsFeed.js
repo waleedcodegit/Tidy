@@ -14,16 +14,13 @@ class BookingsFeed extends Component {
     }
 
     componentDidMount(){
-        console.log(this.state.vendor_id);
-        Axios.post('/api/get-vendor-bookings',{vendor_id:this.props.vendor.data.vendor_id}).then(res=>
+        Axios.post('/api/get_vendor_booking_requests',{vendor_id:this.props.vendor.data.vendor_id}).then(res=>
             {
                 console.log(res);
-            if(res.data.status == true){
                 this.setState({
-                    serviceBookings: res.data.data,
+                    serviceBookings: res.data,
                     vendor_id:this.props.vendor.data.vendor_id
                 })
-            }
         })
     }
 

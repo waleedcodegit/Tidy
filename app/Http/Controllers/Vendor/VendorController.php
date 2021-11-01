@@ -27,6 +27,9 @@ use App\VendorResetPassword;
 use App\Mail\VendorResetPass;
 use App\Mail\SignupRequestEmail;
 use App\Booking;
+use App\SubCategory;
+use App\VendorBookingRequest;
+use App\VendorNotifications;
 use App\VendorTimmings;
 
 class VendorController extends Controller
@@ -164,7 +167,20 @@ class VendorController extends Controller
             return $response;
         }  
     }
-
+    public function get_vendor_booking_requests(Request $request){
+        $vbr = VendorBookingRequest::where('vendor_id',$request->vendor_id)->with('booking','booking_information')->get();
+        if(sizeof($vbr) > 0){
+            foreach($vbr as $v){
+                $v->service = Category::where('id',$v->booking['service_id'])->first();
+                $v->sub_service = SubCategory::where('id',$v->booking['sub_service_id'])->first();
+            }
+        }
+        return $vbr;
+    }
+    public function get_vendor_notifications(Request $request){
+        $vn = VendorNotifications::where('id',$request->vendor_id)->get();
+        return $vn;
+    }
     public function get_services(Request $request) {
         $services = Category::get();
         foreach($services as $s){

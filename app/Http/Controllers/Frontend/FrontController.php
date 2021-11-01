@@ -26,6 +26,10 @@ use Illuminate\Support\Facades\Mail;
 use Monolog\Handler\SendGridHandler;
 use App\Email;
 use App\Mail\BookingConfirmation;
+use App\VendorBookingRequest;
+use App\VendorLocation;
+use App\VendorNotifications;
+use Illuminate\Support\Facades\DB;
 
 class FrontController extends Controller
 {
@@ -75,7 +79,134 @@ class FrontController extends Controller
             return $response;
         }
     }
+    public function send_vendor_booking_requests($latitude,$longitude,$booking_id){
+        
+        $vendor_locations = VendorLocation::selectRaw("id, vendor_id, address, lat, lng,radius,
+                                    ( 6371 * acos( cos( radians(?) ) *
+                                    cos( radians( lat ) )
+                                    * cos( radians( lng ) - radians(?)
+                                    ) + sin( radians(?) ) *
+                                    sin( radians( lat ) ) )
+                                    ) AS distance ", [$latitude, $longitude , $latitude])
+                        
+                            // ->having("distance", "<=", "vendors_locations.radius")
+                            ->with('vendor')
+                            ->orderBy("distance",'asc')
+                            ->get();
+        $vls = [];
+        $five_star_ratings = [];
+        $four_star_ratings = [];
+        $three_star_ratings = [];
+        $low_star_ratings = [];
+        $new_vendors = [];
+
+        if(sizeof($vendor_locations) > 0){
+            foreach($vendor_locations as $vl){
+                if($vl->distance <= $vl->radius){
+                    array_push($vls,$vl);
+                    
+                    if($vl->vendor){
+                        if($vl->vendor['ratings'] > 4){
+                            array_push($five_star_ratings,$vl);
+                        }else if($vl->vendor->ratings > 3 && $vl->vendor->ratings <= 4 ){
+                            array_push($four_star_ratings,$vl);
+                        }else if($vl->vendor->ratings > 2 && $vl->vendor->ratings <= 3 ){
+                            array_push($three_star_ratings,$vl);
+                        }else if($vl->vendor->ratings >= 1 && $vl->vendor->ratings <= 2 ){
+                            array_push($low_star_ratings,$vl);
+                        }else{
+                            array_push($new_vendors,$vl);
+                        }
+                    }
+                   
+                }
+            }
+        }
+        $booking = Booking::where('id',$booking_id)->first();
+        if($booking->vendor_status == 0){
+            if(sizeof($five_star_ratings ) > 0){
+                foreach($five_star_ratings as $fr){
+                    $vbr = new VendorBookingRequest();
+                    $vbr->vendor_id = $fr->vendor_id;
+                    $vbr->booking_id = $booking_id;
+                    $vbr->save();
+
+                    $vn = new VendorNotifications();
+                    $vn->vendor_id = $fr->vendor_id;
+                    $vn->title = 'You got a new booking request.';
+                    $vn->message = 'Please check you new booking feed.';
+                    $vn->link = '/vendor/bookings-feed';
+                    $vn->save();
+                }
+            }else if(sizeof($four_star_ratings ) > 0){
+                foreach($four_star_ratings as $fr){
+                    $vbr = new VendorBookingRequest();
+                    $vbr->vendor_id = $fr->vendor_id;
+                    $vbr->booking_id = $booking_id;
+                    $vbr->save();
+
+                    $vn = new VendorNotifications();
+                    $vn->vendor_id = $fr->vendor_id;
+                    $vn->title = 'You got a new booking request.';
+                    $vn->message = 'Please check you new booking feed.';
+                    $vn->link = '/vendor/bookings-feed';
+                    $vn->save();
+                }
+            }else if(sizeof($three_star_ratings ) > 0){
+                foreach($three_star_ratings as $fr){
+                    $vbr = new VendorBookingRequest();
+                    $vbr->vendor_id = $fr->vendor_id;
+                    $vbr->booking_id = $booking_id;
+                    $vbr->save();
+
+                    $vn = new VendorNotifications();
+                    $vn->vendor_id = $fr->vendor_id;
+                    $vn->title = 'You got a new booking request.';
+                    $vn->message = 'Please check you new booking feed.';
+                    $vn->link = '/vendor/bookings-feed';
+                    $vn->save();
+                }
+            }else if(sizeof($low_star_ratings ) > 0){
+                foreach($low_star_ratings as $fr){
+                    $vbr = new VendorBookingRequest();
+                    $vbr->vendor_id = $fr->vendor_id;
+                    $vbr->booking_id = $booking_id;
+                    $vbr->save();
+
+                    $vn = new VendorNotifications();
+                    $vn->vendor_id = $fr->vendor_id;
+                    $vn->title = 'You got a new booking request.';
+                    $vn->message = 'Please check you new booking feed.';
+                    $vn->link = '/vendor/bookings-feed';
+                    $vn->save();
+                }
+            }
+            if(sizeof($new_vendors ) > 0){
+                foreach($new_vendors as $fr){
+                    $vbr = new VendorBookingRequest();
+                    $vbr->vendor_id = $fr->vendor_id;
+                    $vbr->booking_id = $booking_id;
+                    $vbr->save();
+
+                    $vn = new VendorNotifications();
+                    $vn->vendor_id = $fr->vendor_id;
+                    $vn->title = 'You got a new booking request.';
+                    $vn->message = 'Please check you new booking feed.';
+                    $vn->link = '/vendor/bookings-feed';
+                    $vn->save();
+                }
+            }
+           
+        }
+        $response = ['status' => 200 , 'five_star' => $five_star_ratings , 'four' => $four_star_ratings , 'three' => $three_star_ratings , 
+            'low' => $low_star_ratings, 'new' => $new_vendors , 'all' => $vls  
+    ];
+        return $response;
+    }
     public function make_booking(Request $request){
+
+        // return $this->send_vendor_booking_requests($request->customer_location['lat'],$request->customer_location['long']);
+
         //return $request;
         $booking = new Booking();
         $booking->customer_id = $request->customer['data']['id'];
@@ -235,7 +366,7 @@ class FrontController extends Controller
             ]);
         }
         try{
-        $customer = Customer::where('id',$request->id)->first();
+        $customer = Customer::where('id',$request->customer_id)->first();
         
         $stripe = new \Stripe\StripeClient(
             env("STRIPE_SK")

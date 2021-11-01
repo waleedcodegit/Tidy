@@ -15,6 +15,7 @@ class VendorMain extends Component {
             token:window.localStorage.getItem('vt')
         }
         Axios.post('/api/vendor_check_auth',payload).then(res=>{
+            console.log(res);
             if(res.data.status == 200){
                 this.props.changeVendor({is_login:true,data:res.data.vendor});
                 this.setState({
