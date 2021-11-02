@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Booking;
 use App\BookingInformation;
+use App\BookingService;
 use Illuminate\Support\Str;
 
 use App\Category;
@@ -203,11 +204,32 @@ class FrontController extends Controller
     ];
         return $response;
     }
+    public function charge_a_customer(Request $request){
+        $customer = Customer::where('id',$request->id)->first();
+        try{
+        $stripe = new \Stripe\StripeClient(
+            env("STRIPE_SK")
+          );
+        $charge = $stripe->charges->create(array(
+            "amount" => 20*100,
+            "currency" => "usd",
+            "customer" => $customer->stripe_id
+          ));
+        }catch(\Stripe\Exception\CardException $e){
+           
+        }
+          return $charge;
+
+    }
+    public function create_services_daily(){
+        
+    }
     public function make_booking(Request $request){
 
         // return $this->send_vendor_booking_requests($request->customer_location['lat'],$request->customer_location['long']);
 
         //return $request;
+        $customer = Customer::where('id',$request->customer['data']['id'])->first();
         $booking = new Booking();
         $booking->customer_id = $request->customer['data']['id'];
         $booking->service_id = $request->select_service_state['service_id'];
@@ -264,6 +286,45 @@ class FrontController extends Controller
         // $b_information->extras
         $b_information->save();
 
+        $service = Category::where('id',$request->select_service_state['service_id'])->first();
+
+        if($service->residential_type == 1){
+            try{
+                $stripe = new \Stripe\StripeClient(
+                    env("STRIPE_SK")
+                  );
+                $charge = $stripe->charges->create(array(
+                    "amount" => $booking->booking_totals,
+                    "currency" => "usd",
+                    "customer" => $customer->stripe_id
+                  ));
+                }catch(\Stripe\Exception\CardException $e){
+                   
+                }
+                $payment_id = 0; 
+                if($charge){
+                    $payment = new Payment();
+                    $payment->amount = $booking->booking_totals;
+                    $payment->name = 'Tidy Home Service Payment';
+                    $payment->customer_stripe_id = $customer->stripe_id;
+                    $payment->stripe_response = json_encode($charge) ;
+                    $payment->save();
+                    $payment_id = $payment->id;
+                }
+
+                $service = new BookingService();
+                $service->booking_id = $booking->id;
+                $service->date = $booking->date;
+                $service->time = $booking->time;
+                $service->total_price = $booking->booking_totals;
+                $service->round = 1;
+                $service->payment_id = $payment_id;
+                $service->payment_status = $payment_id != 0 ? 1 : 0;
+                $service->status = $payment_id != 0 ? 0 : 1;
+                $service->save();
+
+        }
+
         $emails = Email::where('id', 12)->first();
         $C_name = $request->customer['data']['first_name'];
         $C_email = $request->customer['data']['email'];
@@ -287,7 +348,7 @@ class FrontController extends Controller
     }
 
     public function get_booking_by_id(Request $request){
-        $booking = Booking::where('id',$request->id)->with('information' , 'sub_service' , 'service')->first();
+        $booking = Booking::where('id',$request->id)->with('information' , 'sub_service' , 'service' , 'booking_services','vendor')->first();
         return $booking;
     }
 

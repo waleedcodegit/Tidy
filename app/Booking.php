@@ -17,4 +17,10 @@ class Booking extends Model
     public function information() {
         return $this->hasOne('App\BookingInformation');
     }
+    public function booking_services() {
+        return $this->hasMany('App\BookingService');
+    }
+    public function vendor() {
+        return $this->belongsTo('App\Vendor','vendor_id');
+    }
 }

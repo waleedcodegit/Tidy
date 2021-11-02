@@ -14,7 +14,6 @@ class BookingDetails extends Component {
     componentDidMount(){
         Axios.post('/api/get_booking_by_id',{id:this.props.match.params.id}).then(res=>{
             console.log(res);
-
             this.setState({
                 booking:res.data,
                 loading:false
@@ -142,7 +141,9 @@ class BookingDetails extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="vendor-qote">
+                            {
+                                this.state.booking.service.residential_type == 0  && this.state.booking.vendor_status !=1 ?
+                                <div className="vendor-qote">
                                 <h3>Vendor Quotes</h3>
                                 <div className="divid-line" />
                                 <div className="row">
@@ -172,9 +173,15 @@ class BookingDetails extends Component {
                                     </div>
                                 </div>
                             </div>
+                            :
+                            null
+                            }
+                           
                             <div className="vendor-detail">
                                 <h3>Vendor Details</h3>
-                                <div className="detl-section">
+                                {
+                                    this.state.booking.vendor_status == 1 ?
+                                    <div className="detl-section">
                                     <div className="row">
                                         <div className="col-md-3">
                                             <span>Vendor Name</span>
@@ -190,6 +197,13 @@ class BookingDetails extends Component {
                                         </div>
                                     </div>
                                 </div>
+                                :
+                                <div className="detl-section">
+                                    <div className="text-center">
+                                    <p style={{color:'#000000a3' , fontSize:'20px'}}>Vendor selection is in process. </p>
+                                    </div>
+                                </div>
+                                }
                             </div>
                             <a href="#">
                             </a><div className="row"><a href="#">
@@ -199,99 +213,49 @@ class BookingDetails extends Component {
                             </a><div className="card "><a href="#">
                             </a><div className="card-content" id="faqhead1"><a href="#">
                                 <h3>Services</h3>
-                            </a><a href="#" className="bk-btn">View Detail</a>
+                            </a>
+                            {/* <a href="#" className="bk-btn">View Detail</a> */}
                                                     <div className="divid-line" />
-                                                    <div className="dt-table">
-                                                        <div className="row">
-                                                            <div className="col-md-2">
-                                                                <div className="srv-content">
-                                                                    <ul>
-                                                                        <li>Jan 13, 2020<br /><span>Wednesday 10:00am-11:00am</span></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div className="col-md-2">
-                                                                <div className="srv-content">
-                                                                    <ul>
-                                                                        <li>Out Cleaning<br /><span>Duration 3.5 hours</span></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div className="col-md-2">
-                                                                <div className="srv-content">
-                                                                    <ul>
-                                                                        <li>Rosseta Jhonsan<br /><span>#125678</span></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div className="col-md-2">
-                                                                <div className="srv-content">
-                                                                    <ul>
-                                                                        <li>Weakly<br /><span>Only 1</span></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div className="col-md-2">
-                                                                <div className="srv-content">
-                                                                    <ul>
-                                                                        <li>Status<br /><span className="paid-cls">Paid</span></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div className="col-md-2">
-                                                                <div className="srv-content">
-                                                                    <ul>
-                                                                        <li>Price<br /><span>$120.00</span></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="divid-line" />
-                                                        <div className="row">
-                                                            <div className="col-md-2">
-                                                                <div className="srv-content">
-                                                                    <ul>
-                                                                        <li>Jan 13, 2020<br /><span>Wednesday 10:00am-11:00am</span></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div className="col-md-2">
-                                                                <div className="srv-content">
-                                                                    <ul>
-                                                                        <li>Out Cleaning<br /><span>Duration 3.5 hours</span></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div className="col-md-2">
-                                                                <div className="srv-content">
-                                                                    <ul>
-                                                                        <li>Rosseta Jhonsan<br /><span>#125678</span></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div className="col-md-2">
-                                                                <div className="srv-content">
-                                                                    <ul>
-                                                                        <li>Weakly<br /><span>10 Recruiting</span></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div className="col-md-2">
-                                                                <div className="srv-content">
-                                                                    <ul>
-                                                                        <li>Status<br /><span className="due-cls">Due Payment</span></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div className="col-md-2">
-                                                                <div className="srv-content">
-                                                                    <ul>
-                                                                        <li>Price<br /><span>$120.00</span></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
+                                                     {
+                                                         this.state.booking.booking_services.length > 0 ? 
+                                                         <table className="table table-hover table-light table-borderless">
+                                                         <thead>
+                                                             <tr>
+                                                                 <th>Service ID</th>
+                                                                 <th>Date</th>
+                                                                 <th>Time</th>
+                                                                 <th>Round</th>
+                                                                 <th>Price</th>
+                                                                 <th>Payment Status</th>
+                                                                 <th>Action</th>
+                                                             </tr>
+                                                         </thead>
+                                                         <tbody>
+                                                         {
+                                                             this.state.booking.booking_services.map((data,index)=>{
+                                                                 return(
+                                                                    <tr>
+                                                                        <td>#{data.id}</td>
+                                                                        <td>{data.date}</td>
+                                                                        <td>{data.time}</td>
+                                                                        <td>{data.round}</td>
+                                                                        <td>${data.total_price}</td>
+                                                                        <td><span className={data.payment_status == 1 ? "paid-cls": "due-cls"}>{data.payment_status == 1 ? 'Paid' : 'Due Payment'}</span></td>
+                                                                        <td><button className="btn btn-sm btn-outline-info">Details</button></td>
+                                                                    </tr>
+                                                                 )
+                                                             })
+                                                         }
+                                                             
+                                                         </tbody>
+                                                     </table>
+                                                     :
+                                                     <div className="detl-section">
+                                                        <div className="text-center">
+                                                        <p style={{color:'#000000a3' , fontSize:'20px'}}>Services will be available here after completion of vendor process.</p>
                                                         </div>
                                                     </div>
+                                                     }
                                                 </div>
                                             </div>
                                         </div>

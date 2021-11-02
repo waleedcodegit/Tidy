@@ -16,7 +16,9 @@ class PaymentCards extends Component {
             expiry_year: '',
             expiry_month: '',
             update_card:false,
-            id:this.props.user.data.id
+            id:this.props.user.data.id,
+            customer_id:this.props.user.data.id
+
         };
     }
      
@@ -72,7 +74,9 @@ class PaymentCards extends Component {
             cvc: this.state.cvc,
             expiry_month: this.state.expiry_month,
             expiry_year: this.state.expiry_year,
-            id:this.props.user.data.id
+            id:this.props.user.data.id,
+            customer_id:this.props.user.data.id
+
         }
 
         Axios.post('/api/update_customer_card',cardData).then(res=>{
