@@ -1,23 +1,53 @@
 import Axios from 'axios';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import Swal from 'sweetalert2';
 
 class VendorBookingDetails extends Component {
     constructor(props) {
         super(props);
         this.state = {
             booking:{},
-            loading:true
+            employees:{},
+            loading:true,
+            selected_employee:''
         };
+        console.log(props);
     }
 
     componentDidMount(){
-        Axios.post('/api/get_booking_by_id',{id:this.props.match.params.id}).then(res=>{
+        Axios.post('/api/get_booking_by_id',{id:this.props.match.params.id,vendorId:this.props.vendor.data.id}).then(res=>{
             console.log(res);
 
             this.setState({
-                booking:res.data,
+                booking:res.data.data,
+                employees: res.data.employees,
                 loading:false
             })
+        })
+    }
+
+    handleSave(){
+        Axios.post('/api/assign-employee-booking',selected_employee).then(res=>{
+            if(res.data.status == 200){
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Faq Added Successfully',
+                    showConfirmButton: false,
+                    timer: 1500
+                }) 
+                this.props.history.push('/admin/faqs')
+            }else{
+                this.setState({
+                    error_string:res.data.msg
+                })
+            }
+        })
+    }
+
+    select_employee(e){
+        this.setState({
+            selected_employee:e.target.value
         })
     }
     render() {
@@ -145,17 +175,22 @@ class VendorBookingDetails extends Component {
                                 <h3>Assign To Employee</h3>
                                 <div className="detl-section">
                                     <div className="row">
-                                        <div className="col-md-3">
-                                            <span>Vendor Name</span>
-                                            <p>Jhon Smith</p>
+                                        <div className="col-md-10">
+                                            <select onChange={this.select_employee.bind(this,e)} value={this.state.selected_employee} className="form-control" name="type">
+                                            <option disabled="disabled" selected="selected">Please Select</option>
+                                                {this.state.employees.map((data,index)=>{
+                                                    return(
+                                                        <option key={index} value={data.name}></option>
+                                                        )
+                                                    }
+                                                )
+                                                }
+                                            </select>
                                         </div>
-                                        <div className="col-md-3">
-                                            <span>Job Type</span>
-                                            <p>Company</p>
-                                        </div>
-                                        <div className="col-md-6">
-                                            <span>From</span>
-                                            <p>98 Shirley Street PIMPAMA QLD 4209 AUSTRALIA</p>
+                                        <div className="col-md-2">
+                                            <div>
+                                                <button onClick={this.handleSave.bind(this)} className="bk-btn">Save</button>
+                                            </div>  
                                         </div>
                                     </div>
                                 </div>
@@ -170,4 +205,9 @@ class VendorBookingDetails extends Component {
     }
 }
 
-export default VendorBookingDetails;
+const mapStateToProps = (state) =>{
+    return{
+        vendor:state.vendor
+    }
+}
+export default connect(mapStateToProps)(VendorBookingDetails);

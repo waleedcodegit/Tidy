@@ -30,6 +30,7 @@ use App\Mail\BookingConfirmation;
 use App\VendorBookingRequest;
 use App\VendorLocation;
 use App\VendorNotifications;
+use App\Employee;
 use Illuminate\Support\Facades\DB;
 
 class FrontController extends Controller
@@ -348,8 +349,13 @@ class FrontController extends Controller
     }
 
     public function get_booking_by_id(Request $request){
-        $booking = Booking::where('id',$request->id)->with('information' , 'sub_service' , 'service' , 'booking_services','vendor')->first();
-        return $booking;
+        $bookings = Booking::where('id',$request->id)->with('information' , 'sub_service' , 'service' , 'booking_services','vendor')->first();
+        $employees = Employee::where('vendor_id',$request->vendorId)->get();
+        return response()->json([
+            'message' => "Bookings and Employees",
+            'data' => $bookings,
+            'employees' => $employees
+        ]);
     }
 
     public function get_customer_bookings(Request $request){

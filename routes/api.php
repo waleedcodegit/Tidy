@@ -63,6 +63,7 @@ Route::post('/vendor-reset-password' , 'Vendor\VendorController@vendor_reset_pas
 
 //Bookings
 Route::post('get-pending-bookings' , 'Vendor\VendorController@get_pending_bookings');
+Route::post('assign-employee-booking' , 'Vendor\VendorController@assign_employee_booking');
 
 //Employee Route
 Route::post('delete-employee' , 'Vendor\EmployeeController@delete_employee');

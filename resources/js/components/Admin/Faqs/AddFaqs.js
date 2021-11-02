@@ -1,6 +1,6 @@
 import Axios from 'axios';
 import React, { Component } from 'react';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 class AddFaqs extends Component {
     constructor(props) {
         super(props);
