@@ -117,10 +117,22 @@ Route::post('/get_gift_cards','Admin\AdminController@get_gift_cards');
 
 Route::post('/create-vendor','Vendor\VendorController@create_vendor');
 Route::post('/vendor-login','Vendor\VendorController@vendor_login');
+Route::post('/get_vendor_booking_requests','Vendor\VendorController@get_vendor_booking_requests');
+Route::post('/get_vendor_notifications','Vendor\VendorController@get_vendor_notifications');
+
+
+
 Route::post('/getcategory','Frontend\CategoryController@getcategory');
 Route::post('/getallcategory','Frontend\CategoryController@getallcategory');
+
+
+
 Route::post('/validate_gift_card_details','Frontend\FrontController@validate_gift_card_details');
 Route::post('/order_gift_card','Frontend\FrontController@order_gift_card');
+Route::post('/send_vendor_booking_requests/{latitude}/{longitude}/{booking_id}','Frontend\FrontController@send_vendor_booking_requests');
+// Route::post('/send_vendor_booking_requests','Frontend\FrontController@send_vendor_booking_requests');
+
+
 
 
 // Services Controller
@@ -185,6 +197,9 @@ Route::post('/make_booking','Frontend\FrontController@make_booking');
 Route::post('/get_customer_bookings','Frontend\FrontController@get_customer_bookings');
 
 Route::post('/get_booking_by_id','Frontend\FrontController@get_booking_by_id');
+Route::post('/charge_a_customer','Frontend\FrontController@charge_a_customer');
+
+
 
 
 //Emails Controller//
