@@ -53,7 +53,7 @@ class BookingsFeed extends Component {
             <div>
                 <section className="section">
                     <div className="section-body">
-                        <h2>New Bookings Feed </h2>
+                        <h2>Bookings Feed </h2>
                         <div className="row">
                             {
                             this.state.serviceBookings.map((data)=>{
@@ -63,21 +63,25 @@ class BookingsFeed extends Component {
                                             <div>
                                                 <div className="card-content col-sm-12">
                                                 <h3>{data.service.name}</h3>
-                                                <h4><button  className="btn btn-outline-success ml-auto">Accept</button></h4>
+                                                {
+                                                    data.booking_information.resident_type == "House" ?
+                                                    <h4><button  className="btn btn-outline-success ml-auto">Accept</button></h4>
+                                                    :null   
+                                                }
                                                 {/* onClick={this.handleAccept.bind(this,data.id)}    */}
                                                 <div className="divid-line"/>
                                                     <div className="card-detail-left">
                                                         <ul>
                                                             <li>Booking Type: </li>
-                                                            <li>Customer:</li>
+                                                            <li>Residential Type:</li>
                                                             <li>Price:</li>
                                                         </ul>
                                                     </div>
                                                     <div className="card-detail-right">
                                                         <ul>
                                                             <li>{data.booking_type == 1 ? "One Time" : "Recurring"}</li>
-                                                            <li>Zeeshan </li>
-                                                            <li>${data.booking_totals}</li>
+                                                            <li>{data.service.type}</li>
+                                                            <li>${data.booking.booking_totals}</li>
                                                         </ul>
                                                     </div>
                                             </div>

@@ -11,6 +11,7 @@ import BookingsFeed from '../Component/ManageBookings/NewBookingsFeed';
 import AcceptedBookings from '../Component/ManageBookings/AcceptedBookings';
 import EmpDashBoard from '../../Employee/Dashboard/EmpDashboard';
 import EmpProfile from '../../Employee/Components/Settings/Profile';
+import VendorBookingDetails from '../Component/ManageBookings/ManageVendorBooking';
 
 
 class Main extends Component {
@@ -28,6 +29,7 @@ class Main extends Component {
                 <Route path='/vendor/accepted-bookings' component={AcceptedBookings}></Route>
                 <Route path='/vendor-employee/Empdashboard' component={EmpDashBoard}></Route>
                 <Route path='/vendor-employee/Empprofile' component={EmpProfile}></Route>
+                <Route path='/vendor/vendor-booking-details/:id' component={VendorBookingDetails}></Route>
                 
             </div>
         );

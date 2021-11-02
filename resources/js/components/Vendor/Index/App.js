@@ -117,9 +117,8 @@ class VendorIndex extends Component {
                         <li className="dropdown">
                             <a href="#" className="menu-toggle nav-link has-dropdown"><i data-feather="briefcase" /><span>Manage Bookings</span></a>
                             <ul className="dropdown-menu">
-                            <li><Link className="nav-link" to="/vendor/bookings-feed">New Bookings Feed</Link></li>
-                            <li><Link  className="nav-link" to="/vendor/accepted-bookings">Accepted Bookings</Link></li>
-                            <li><Link className="nav-link" to="/vendor">Pending Bookings</Link></li>
+                            <li><Link className="nav-link" to="/vendor/bookings-feed">Bookings Feed</Link></li>
+                            <li><Link  className="nav-link" to="/vendor/accepted-bookings">My Bookings</Link></li>
                             </ul>
                         </li>
                         <li className="dropdown">

@@ -117,7 +117,8 @@ Route::view('/vendor/vendor-forget-password', 'vendor');
 Route::view('/vendor-reset-password/{id}' , 'Front');
 Route::view('/vendor/customer-messages' , 'vendor');
 Route::view('/vendor/bookings-feed' , 'vendor');
-Route::view('/vendor/accepted-bookings' , 'vendor');;
+Route::view('/vendor/accepted-bookings' , 'vendor');
+Route::view('/vendor/vendor-booking-details/{id}' , 'vendor');
 
 //Employee Routes
 Route::view('/employee-login' , 'Front');

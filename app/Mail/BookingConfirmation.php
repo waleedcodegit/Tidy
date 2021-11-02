@@ -31,6 +31,6 @@ class BookingConfirmation extends Mailable
      */
     public function build()
     {
-        return $this->subject("SignUp Request")->from("admin@tidyhome.com.au")->view('emails.BookingConfirm');
+        return $this->subject("Booking Confirmation")->from("admin@tidyhome.com.au")->view('emails.BookingConfirm');
     }
 }

@@ -905,16 +905,15 @@ class VendorController extends Controller
         ]);
     }
 
-    // public function accept_booking (Request $request){
-    //     $booking = Booking::where('vendor_id',$request->vendor_id)
-    //                     ->where('id',$request->bookingId)
-    //                     ->update([
-    //                         'status' => 1
-    //                     ]);
-    //     return response()->json([
-    //         'status' => true,
-    //         'message' => "Accepted Booking",
-    //         'data' => $booking
-    //     ]);
-    // }
+    public function accepted_bookings(Request $request) {
+        $bookings = Booking::where('vendor_id',$request->vendorId)
+                            ->where('vendor_status',1)
+                            ->with('service','sub_service' , 'information')
+                            ->get();
+        return response()->json([
+            'status' => true,
+            'message' => "Vendor Bookings",
+            'data' => $bookings
+        ]);
+    }
 }
