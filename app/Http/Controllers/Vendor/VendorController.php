@@ -905,6 +905,7 @@ class VendorController extends Controller
         ]);
     }
 
+<<<<<<< Updated upstream
     public function accepted_bookings(Request $request) {
         $bookings = Booking::where('vendor_id',$request->vendorId)
                             ->where('vendor_status',1)
@@ -916,4 +917,29 @@ class VendorController extends Controller
             'data' => $bookings
         ]);
     }
+=======
+    public function get_pending_bookings(Request $request) {
+        $bookings = Booking::where('vendor_status', 5)->with('service','sub_service' , 'information')->get();
+        $vendors = Vendor::where('delete_status' , 0)->get();
+        return response()->json([
+            'status' => true,
+            'message' => "Pending Bookings",
+            'data' => $bookings,
+            'vendors' => $vendors
+        ]);
+    }
+
+    // public function accept_booking (Request $request){
+    //     $booking = Booking::where('vendor_id',$request->vendor_id)
+    //                     ->where('id',$request->bookingId)
+    //                     ->update([
+    //                         'status' => 1
+    //                     ]);
+    //     return response()->json([
+    //         'status' => true,
+    //         'message' => "Accepted Booking",
+    //         'data' => $booking
+    //     ]);
+    // }
+>>>>>>> Stashed changes
 }

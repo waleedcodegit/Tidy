@@ -176,6 +176,21 @@ class Sidebar extends Component {
                                                 :null
                                             }
                                         </li>
+                                        <li onClick={this.active_item.bind(this, 26)} className={this.state.nav_item_active.main == 25 ? "active-sub" : ""}>
+                                            <a onClick={this.change_visible_item.bind(this,26)} >
+                                                <i className="demo-pli-home"></i>
+                                                <span className="menu-title" 
+                                                >Bookings</span>
+                                                <i className="arrow"></i>
+                                            </a>
+                                            {
+                                                this.state.nav_item_visible == 26 ?
+                                                <ul >
+                                                    <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/pending-bookings">Pending Bookings</Link></li>
+                                                </ul>
+                                                :null
+                                            }
+                                        </li>
                                         <li onClick={this.active_item.bind(this, 22)} className={this.state.nav_item_active.main == 22 ? "active-sub" : ""}>
                                             <a onClick={this.change_visible_item.bind(this,22)} >
                                                 <i className="demo-pli-home"></i>
@@ -400,13 +415,12 @@ class Sidebar extends Component {
                                             {
                                                 this.state.nav_item_visible == 25 ?
                                                 <ul >
-                                                    <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/create-review">UserReview</Link></li>
-                                                    <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/list-reviews">ListReviews</Link></li>
+                                                    <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/create-review">User Review</Link></li>
+                                                    <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/list-reviews">List Reviews</Link></li>
                                                 </ul>
                                                 :null
                                             }
                                         </li>
-                                       
                                     </ul>
                                 </div>
                             </div>

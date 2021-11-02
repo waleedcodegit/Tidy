@@ -47,6 +47,8 @@ Route::view('/admin/vendor-list', 'Admin');
 Route::view('/admin/vendor-info/{id}', 'Admin');
 Route::view('/admin/create-vendor', 'Admin');
 
+Route::view('/admin/pending-bookings' , 'Admin');
+
 Route::view('/admin/setting-list', 'Admin');
 Route::view('/admin/home-content' , 'Admin');
 Route::view('/admin/create-review' , 'Admin');

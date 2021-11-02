@@ -61,6 +61,9 @@ Route::post('/disapproved-vendor','Vendor\VendorController@disapproved_vendor');
 Route::post('/vendor-forget-password' , 'Vendor\VendorController@vendor_forget_password');
 Route::post('/vendor-reset-password' , 'Vendor\VendorController@vendor_reset_password');
 
+//Bookings
+Route::post('get-pending-bookings' , 'Vendor\VendorController@get_pending_bookings');
+
 //Employee Route
 Route::post('delete-employee' , 'Vendor\EmployeeController@delete_employee');
 Route::post('employee-login' , 'Vendor\EmployeeController@employee_login');
@@ -168,8 +171,13 @@ Route::post('/get_vendor_addresses','Vendor\VendorController@get_vendor_addresse
 Route::post('/update_vendor_address','Vendor\VendorController@update_vendor_address');
 Route::post('/add_vendor_address','Vendor\VendorController@add_vendor_address');
 Route::post('/delete_vendor_address','Vendor\VendorController@delete_vendor_address');
+<<<<<<< Updated upstream
 Route::post('/get-vendor-bookings' , 'Vendor\VendorController@get_vendor_bookings');
 Route::post('/accepted-bookings' , 'Vendor\VendorController@accepted_bookings');
+=======
+Route::post('/get-vendor-booking' , 'Vendor\VendorController@get_vendor_bookings');
+// Route::post('/accept-booking' , 'Vendor\VendorController@accept_booking');
+>>>>>>> Stashed changes
 Route::post('/get_vendor_service_timings' , 'Vendor\VendorController@get_vendor_service_timings');
 Route::post('/update_vendor_timings' , 'Vendor\VendorController@update_vendor_timings');
 

@@ -84,6 +84,9 @@ import CreateSms from '../Sms/create';
 import EditSms from '../Sms/edit';
 import SmsList from '../Sms/list';
 
+//Bookings
+import PendingBookings from '../Bookings/Pending_Bookings';
+
 
 
 
@@ -182,6 +185,8 @@ class Main extends Component {
                         <Route path="/admin/create-sms" component={CreateSms}></Route>
                         <Route path="/admin/edit-sms/:id" component={EditSms}></Route>
                         <Route path="/admin/sms" component={SmsList}></Route>
+
+                        <Route path="/admin/pending-bookings" component={PendingBookings} ></Route>
 
                     </div>
                     <Sidebar></Sidebar>

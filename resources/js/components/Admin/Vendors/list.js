@@ -37,8 +37,7 @@ class VendorList extends React.Component {
             this.componentDidMount();
         })
     }
-
-
+    
     render() {
         return(
             <div>
