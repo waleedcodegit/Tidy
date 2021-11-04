@@ -20,7 +20,8 @@ class Index extends Component{
         this.state = {
             paths:['/book-service','/signup','/login','/vendor-signup','/vendor-login','/gift-card','/profile','/service/:slug'
             ,'/message-admin','/forgot-password','/reset-password','/vendor-forget-password','/vendor-reset-password','/booking-details/:id',
-            '/bookings-feed','/employee-login','/Empprofile','/:slug'
+            '/bookings-feed','/employee-login','/Empprofile','/:slug','/Empbookings'
+
         ]
         };
         

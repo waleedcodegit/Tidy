@@ -14,6 +14,7 @@ class EmpProfile extends Component{
             employee:[],
             id:this.props.employee.id,
         }
+        console.log(props);
     }
 
     componentDidMount() {

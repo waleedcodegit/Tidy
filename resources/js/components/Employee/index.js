@@ -5,6 +5,7 @@ import {Route , BrowserRouter , Switch} from 'react-router-dom';
 import '../Vendor/admin.css';
 import EmpProfile from '../Employee/Components/Settings/Profile';
 import EmpLogin from './Auth/EmpLogin';
+import Empbookings from './Components/Bookings/Empbookings';
 
 class Index extends Component {
     constructor(props) {
@@ -17,6 +18,7 @@ class Index extends Component {
                 <BrowserRouter>
                     <Route path="/employee/employee-login" component={EmpLogin}></Route>
                     <Route path="/vendor-employee/Empprofile" component={EmpProfile}></Route>
+                    <Route path='/vendor-employee/Empbookings' component={Empbookings}></Route>
                 </BrowserRouter>
             </div>
         );

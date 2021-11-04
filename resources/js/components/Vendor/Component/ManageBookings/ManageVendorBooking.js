@@ -16,7 +16,7 @@ class VendorBookingDetails extends Component {
     }
 
     componentDidMount(){
-        Axios.post('/api/get_booking_by_id',{id:this.props.match.params.id,vendorId:this.props.vendor.data.id}).then(res=>{
+        Axios.post('/api/get_booking_by_id',{id:this.props.match.params.id,vendorId:this.props.vendor.data.vendor_id}).then(res=>{
             console.log(res);
 
             this.setState({
@@ -28,15 +28,20 @@ class VendorBookingDetails extends Component {
     }
 
     handleSave(){
-        Axios.post('/api/assign-employee-booking',selected_employee).then(res=>{
-            if(res.data.status == 200){
+
+        let payload = {
+            selected_employee:this.state.selected_employee,
+            booking_id: this.state.booking.id
+        }
+
+        Axios.post('/api/assign-employee-booking',payload).then(res=>{
+            if(res.data.status == true){
                 Swal.fire({
                     icon: 'success',
-                    title: 'Faq Added Successfully',
+                    title: 'Assigned to employee Successfully',
                     showConfirmButton: false,
                     timer: 1500
-                }) 
-                this.props.history.push('/admin/faqs')
+                })
             }else{
                 this.setState({
                     error_string:res.data.msg
@@ -45,7 +50,7 @@ class VendorBookingDetails extends Component {
         })
     }
 
-    select_employee(e){
+    selected_employee(e){
         this.setState({
             selected_employee:e.target.value
         })
@@ -85,7 +90,7 @@ class VendorBookingDetails extends Component {
                                                                         <li>Services Type<br /><span>{this.state.booking.booking_type == 1 ? 'Residential Service' : 'Business Service' } 
                                                                         </span></li>
                                                                         <li>How Often<br /><span> {this.state.booking.booking_type == 1 ? 'One Time' : 'Recurring'} </span></li>
-                                                                        <li>Bathrooms<br /><span> ---- </span></li>
+                                                                        <li>Bathrooms<br /><span> {this.state.booking.information.bathrooms} </span></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -93,8 +98,8 @@ class VendorBookingDetails extends Component {
                                                                 <div className="booking-content">
                                                                     <ul>
                                                                         <li>Sub Service<br /><span>{this.state.booking.sub_service.name}</span></li>
-                                                                        <li>Resident Type<br /><span>---</span></li>
-                                                                        <li>Parking Available<br /><span>----</span></li>
+                                                                        <li>Resident Type<br /><span>{this.state.booking.information.resident_type}</span></li>
+                                                                        <li>Parking Available<br /><span>{this.state.booking.information.is_parking_available}</span></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -102,8 +107,8 @@ class VendorBookingDetails extends Component {
                                                                 <div className="booking-content">
                                                                     <ul>
                                                                         <li>Coming Date<br /><span>{this.state.booking.date}</span></li>
-                                                                        <li>No of Levels<br /><span>---</span></li>
-                                                                        <li>At Home<br /><span>---</span></li>
+                                                                        <li>No of Levels<br /><span>{this.state.booking.information.levels}</span></li>
+                                                                        <li>At Home<br /><span>{this.state.booking.information.will_be_at_home}</span></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -111,7 +116,7 @@ class VendorBookingDetails extends Component {
                                                                 <div className="booking-content">
                                                                     <ul>
                                                                         <li>Coming Time<br /><span>{this.state.booking.time}</span></li>
-                                                                        <li>Bedrooms<br /><span>---</span></li>
+                                                                        <li>Bedrooms<br /><span>{this.state.booking.information.bedrooms}</span></li>
                                                                         <li>Status<br /><span>{this.state.booking.status == 0 ? "Pending" : "Acitve"}</span></li>
                                                                     </ul>
                                                                 </div>
@@ -176,11 +181,11 @@ class VendorBookingDetails extends Component {
                                 <div className="detl-section">
                                     <div className="row">
                                         <div className="col-md-10">
-                                            <select onChange={this.select_employee.bind(this,e)} value={this.state.selected_employee} className="form-control" name="type">
-                                            <option disabled="disabled" selected="selected">Please Select</option>
+                                            <select onChange={this.selected_employee.bind(this)} className="form-control" name="type">
+                                            <option defaultValue="selected">Please Select</option>
                                                 {this.state.employees.map((data,index)=>{
                                                     return(
-                                                        <option key={index} value={data.name}></option>
+                                                        <option key={index} value={data.id}>{data.name}</option>
                                                         )
                                                     }
                                                 )

@@ -15,7 +15,7 @@ class BookingDetails extends Component {
         Axios.post('/api/get_booking_by_id',{id:this.props.match.params.id}).then(res=>{
             console.log(res);
             this.setState({
-                booking:res.data,
+                booking:res.data.data,
                 loading:false
             })
         })

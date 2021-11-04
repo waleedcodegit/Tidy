@@ -71,6 +71,7 @@ Route::post('employee-login' , 'Vendor\EmployeeController@employee_login');
 Route::post('/employee-check-auth' , 'Vendor\EmployeeController@employee_check_auth');
 Route::post('/get-employee-info/{id}' , 'Vendor\EmployeeController@show');
 Route::post('/update-employee-profile' , 'Vendor\EmployeeController@update_employee_profile');
+Route::post('/employee-bookings' , 'Vendor\EmployeeController@employee_bookings');
 
 
 Route::middleware(['admin-login'])->group(function () {

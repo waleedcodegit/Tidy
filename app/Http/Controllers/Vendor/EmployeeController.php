@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\VendorAuthMeta;
 use App\EmployeeAuthMeta;
+use App\Empbooking;
+use App\Category;
+use App\SubCategory;
 
 class EmployeeController extends Controller
 {
@@ -42,6 +45,46 @@ class EmployeeController extends Controller
         ];
         }
         return $response;
+    }
+
+    // public function accepted_bookings(Request $request) {
+    //     $bookings = Booking::where('vendor_id',$request->vendorId)
+    //                         ->where('vendor_status',1)
+    //                         ->with('service','sub_service' , 'information')
+    //                         ->get();
+    //     return response()->json([
+    //         'status' => true,
+    //         'message' => "Vendor Bookings",
+    //         'data' => $bookings
+    //     ]);
+    // }
+
+    public function get_vendor_booking_requests(Request $request){
+        $vbr = VendorBookingRequest::where('vendor_id',$request->vendor_id)->with('booking','booking_information')->get();
+        if(sizeof($vbr) > 0){
+            foreach($vbr as $v){
+                $v->service = Category::where('id',$v->booking['service_id'])->first();
+                $v->sub_service = SubCategory::where('id',$v->booking['sub_service_id'])->first();
+            }
+        }
+        return $vbr;
+    }
+
+    public function employee_bookings(Request $request){
+        $e_bookings = Empbooking::where('employee_id' , $request->employeeId)
+                                ->with('booking_information','booking')
+                                ->get();
+        if(sizeof($e_bookings) > 0){
+            foreach($e_bookings as $eb){
+                $eb ->service = Category::where('id', $eb->booking['service_id'])->first();
+                $eb ->sub_service = SubCategory::where('id',$eb->booking['sub_service_id'])->first();
+            }
+        }
+        return response()->json([
+            'status' => true,
+            'message' => "Employee Bookings",
+            'data' => $e_bookings
+        ]);
     }
 
     public function employee_check_auth(Request $request){

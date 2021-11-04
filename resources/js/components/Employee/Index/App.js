@@ -113,37 +113,15 @@ class EmployeeIndex extends Component {
                         <li className="dropdown">
                             <a href="#" className="menu-toggle nav-link has-dropdown"><i data-feather="briefcase" /><span>Manage Bookings</span></a>
                             <ul className="dropdown-menu">
-                            <li><a className="nav-link" >New Bookings Feed</a></li>
-                            <li><a className="nav-link" >Accepted Bookings</a></li>
-                            <li><a className="nav-link" >Pending Bookings</a></li>
+                            <li><Link to={'/vendor-employee/Empbookings'} className="nav-link" >My Bookings</Link></li>
                             </ul>
                         </li>
-                        <li className="dropdown">
-                            <a href="#" className="menu-toggle nav-link has-dropdown"><i data-feather="command" /><span>Manage Accounts</span></a>
-                            <ul className="dropdown-menu">
-                            <li><a className="nav-link" >Wallet</a></li>
-                            <li><a className="nav-link" >Withdraw Request</a></li>
-                            </ul>
-                        </li>
-                        <li className="dropdown">
-                            <a href="#" className="menu-toggle nav-link has-dropdown"><i data-feather="mail" /><span>Messages</span></a>
-                            <ul className="dropdown-menu">
-                                <li><a className="nav-link" >Message Admin</a></li>
-                                <li><a className="nav-link" >Customer Messages</a></li>
-                            </ul>
-                        </li>
-                        
-                        {/* <li className="menu-header">UI Elements</li> */}
                         <li className="dropdown">
                             <a href="#" className="menu-toggle nav-link has-dropdown"><i data-feather="copy" /><span>Settings</span></a>
                             <ul className="dropdown-menu">
                             <li><Link to={'/vendor-employee/Empprofile'} className="nav-link"> Profile</Link></li>
-                            {/* <li><a className="nav-link" href="/vendor">Accounts</a></li> */}
                             </ul>
                         </li>
-                        
-                    
-                    
                     </ul>
                         
                     </aside>

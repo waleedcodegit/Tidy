@@ -31,6 +31,7 @@ use App\SubCategory;
 use App\VendorBookingRequest;
 use App\VendorNotifications;
 use App\VendorTimmings;
+use App\Empbooking;
 
 class VendorController extends Controller
 {
@@ -927,24 +928,27 @@ class VendorController extends Controller
         ]);
     }
     public function assign_employee_booking(Request $request) {
+        $emp_booking = new Empbooking;
+        $emp_booking -> employee_id = $request -> selected_employee;
+        $emp_booking -> booking_id = $request -> booking_id;
+        $emp_booking -> save();
+
         return response()->json([
-            'status' => true,
-            'message' => "Pending Bookings",
-            'data' => $bookings,
-            'vendors' => $vendors
+            'status' => true
         ]);
     }
 
-    // public function accept_booking (Request $request){
-    //     $booking = Booking::where('vendor_id',$request->vendor_id)
-    //                     ->where('id',$request->bookingId)
-    //                     ->update([
-    //                         'status' => 1
-    //                     ]);
-    //     return response()->json([
-    //         'status' => true,
-    //         'message' => "Accepted Booking",
-    //         'data' => $booking
-    //     ]);
-    // }
+    public function accept_booking (Request $request){
+        return $request;
+        $booking = Booking::where('vendor_id',$request->vendor_id)
+                        ->where('id',$request->bookingId)
+                        ->update([
+                            'status' => 1
+                        ]);
+        // return response()->json([
+        //     'status' => true,
+        //     'message' => "Accepted Booking",
+        //     'data' => $booking
+        // ]);
+    }
 }

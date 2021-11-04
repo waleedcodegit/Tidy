@@ -199,7 +199,7 @@ class SelectServices extends Component {
                         <div className="col-md-12">
                         
                         <select onChange={this.select_sub_category.bind(this)} value={this.state.sub_service_id} name="gender" className="input--style-1 form-control col-md-12">
-                                <option disabled="disabled" selected="selected">Please Select</option>  
+                                <option disabled="disabled" default="selected">Please Select</option>  
                                 {
                                   this.state.sub_categories.map((data,index)=>{
                                     return(

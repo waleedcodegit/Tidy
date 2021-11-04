@@ -126,6 +126,8 @@ Route::view('/vendor/vendor-booking-details/{id}' , 'vendor');
 Route::view('/employee-login' , 'Front');
 Route::view('/vendor-employee/Empdashboard' , 'vendor');
 Route::view('/vendor-employee/Empprofile' , 'vendor');
+Route::view('/vendor-employee/Empbookings' , 'vendor');
+Route::view('/vendor-employee/booking-details/{id}' , 'vendor');
 
 
 
