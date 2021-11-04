@@ -78,12 +78,10 @@ class BookingsFeed extends Component {
                                             
                                                 {
                                                     data.booking_information.resident_type == "House" ?
-<<<<<<< Updated upstream
                                                     <h4><button onClick={this.handleAccept.bind(this,data.id)} className="btn btn-outline-success ml-auto">Accept</button></h4>
                                                     :null   
                                                 }
                                                 
-=======
                                                    <>
                                                     {
                                                         
@@ -114,11 +112,10 @@ class BookingsFeed extends Component {
                                                     :null
                                                     
                                                       
-                                                }
+                                                
                                         
                                                 
                                                 {/* onClick={this.handleAccept.bind(this,data.id)}    */}
->>>>>>> Stashed changes
                                                 <div className="divid-line"/>
                                                     <div className="card-detail-left">
                                                         <ul>

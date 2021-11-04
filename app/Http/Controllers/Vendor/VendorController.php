@@ -31,12 +31,9 @@ use App\SubCategory;
 use App\VendorBookingRequest;
 use App\VendorNotifications;
 use App\VendorTimmings;
-<<<<<<< Updated upstream
-use App\Empbooking;
-=======
 use App\VendorQuote;
 use App\BookingInformation;
->>>>>>> Stashed changes
+use App\Empbooking;
 
 class VendorController extends Controller
 {
@@ -936,43 +933,26 @@ class VendorController extends Controller
         ]);
     }
     public function assign_employee_booking(Request $request) {
-        $emp_booking = new Empbooking;
-        $emp_booking -> employee_id = $request -> selected_employee;
-        $emp_booking -> booking_id = $request -> booking_id;
-        $emp_booking -> save();
-
         return response()->json([
-            'status' => true
+            'status' => true,
+            'message' => "Pending Bookings",
+            'data' => $bookings,
+            'vendors' => $vendors
         ]);
     }
-<<<<<<< Updated upstream
-
+    
     public function accept_booking (Request $request){
-        return $request;
         $booking = Booking::where('vendor_id',$request->vendor_id)
                         ->where('id',$request->bookingId)
                         ->update([
-                            'status' => 1
+                            'vendor_status' => 1
                         ]);
-        // return response()->json([
-        //     'status' => true,
-        //     'message' => "Accepted Booking",
-        //     'data' => $booking
-        // ]);
-=======
-    
-    // public function accept_booking (Request $request){
-    //     $booking = Booking::where('vendor_id',$request->vendor_id)
-    //                     ->where('id',$request->bookingId)
-    //                     ->update([
-    //                         'vendor_status' => 1
-    //                     ]);
-    //     return response()->json([
-    //         'status' => true,
-    //         'message' => "Accepted Booking",
-    //         'data' => $booking
-    //     ]);
-    // }
+        return response()->json([
+            'status' => true,
+            'message' => "Accepted Booking",
+            'data' => $booking
+        ]);
+    }
     public function create_quote(Request $request)
     {
         
@@ -1035,6 +1015,5 @@ class VendorController extends Controller
         return response()->json([
             'status' => 200
         ]);
->>>>>>> Stashed changes
     }
 }
