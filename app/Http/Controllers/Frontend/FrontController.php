@@ -31,6 +31,7 @@ use App\VendorBookingRequest;
 use App\VendorLocation;
 use App\VendorNotifications;
 use App\Employee;
+use App\ServiceRound;
 use Illuminate\Support\Facades\DB;
 
 class FrontController extends Controller
@@ -223,7 +224,23 @@ class FrontController extends Controller
 
     }
     public function create_services_daily(){
+        $day = date('w');
+        $booking = Booking::where('id',1)->first();
+        if($booking->custom_days){
+            $custom_days = json_decode($booking->custom_days);
+            foreach($custom_days as $key => $cd){
+               if($cd->check){
+                    $day_ = date('w');
+                    if($key == $day_ ){
+                        $date = date(); 
+                    }
+                    
+               }
+               
+            }
+        }
         
+        return $day;
     }
     public function make_booking(Request $request){
 
@@ -313,16 +330,93 @@ class FrontController extends Controller
                     $payment_id = $payment->id;
                 }
 
-                $service = new BookingService();
-                $service->booking_id = $booking->id;
-                $service->date = $booking->date;
-                $service->time = $booking->time;
-                $service->total_price = $booking->booking_totals;
-                $service->round = 1;
-                $service->payment_id = $payment_id;
-                $service->payment_status = $payment_id != 0 ? 1 : 0;
-                $service->status = $payment_id != 0 ? 0 : 1;
-                $service->save();
+               
+                if($booking->booking_type == 2 && $booking->recurring_type == 5){
+                    if($booking->custom_days){
+                        $custom_days = json_decode($booking->custom_days);
+                        foreach($custom_days as $key => $cd){
+                           if($cd->check){
+                                $day_ = date('w');
+                                if($key == $day_ ){
+                                    $date = $booking->date; 
+                                }else if($key > $day_){
+                                    $days = $key + $day_;
+                                    $date = date('Y-m-d', strtotime($days , $booking->date));
+
+                                }
+                                else if($key < $day_){
+                                    $days = $day_ - $key;
+                                    $date = date('Y-m-d', strtotime($days , $booking->date));
+                                }
+                                $service = new BookingService();
+                                $service->booking_id = $booking->id;
+                                $service->date = $date;
+                                $service->time = $booking->time;
+                                $service->total_price = $booking->booking_totals;
+                                $service->round = 1;
+                                $service->payment_id = $payment_id;
+                                $service->payment_status = $payment_id != 0 ? 1 : 0;
+                                $service->status = $payment_id != 0 ? 0 : 1;
+                                $service->save();
+                            }
+                                
+                           
+                           
+                        }
+                    }else{
+                        $service = new BookingService();
+                        $service->booking_id = $booking->id;
+                        $service->date = $booking->date;
+                        $service->time = $booking->time;
+                        $service->total_price = $booking->booking_totals;
+                        $service->round = 1;
+                        $service->payment_id = $payment_id;
+                        $service->payment_status = $payment_id != 0 ? 1 : 0;
+                        $service->status = $payment_id != 0 ? 0 : 1;
+                        $service->save();
+                    }
+                }
+                
+                if($booking->booking_type == 2){
+                    if($booking->recurring_type == 1){
+                        // Daily Recurring
+                        $booking->nsd = date('Y-m-d', strtotime('+1 days' , $booking->date));
+                        $booking->save();
+                    }
+                    else if($booking->recurring_type == 2){
+                        // Weekly Recurring
+                        $booking->nsd = date('Y-m-d', strtotime('+7 days' , $booking->date));
+                        $booking->save();
+                    }
+                    else if($booking->recurring_type == 3){
+                        // Fornightly Recurring
+                        $booking->nsd = date('Y-m-d', strtotime('+14 days' , $booking->date));
+                        $booking->save();
+                    }
+                    else if($booking->recurring_type == 4){
+                        // Monthly Recurring
+                        $booking->nsd = date('Y-m-d', strtotime('+1 months' , $booking->date));
+                        $booking->save();
+                    }
+                    else if($booking->recurring_type == 5){
+                        // Custom Recurring
+                        if($booking->custome_type == 1){
+                            // Weekly Recurring
+                            $booking->nsd = date('Y-m-d', strtotime('+7 days' , $booking->date));
+                            $booking->save();
+                        }
+                        else if($booking->custome_type == 2){
+                            // Fornightly Recurring
+                            $booking->nsd = date('Y-m-d', strtotime('+14 days' , $booking->date));
+                            $booking->save();
+                        }
+                        else if($booking->recurring_type == 3){
+                            // Monthly Recurring
+                            $booking->nsd = date('Y-m-d', strtotime('+1 months' , $booking->date));
+                            $booking->save();
+                        }
+                    }
+                }
 
         }
 
@@ -660,6 +754,39 @@ class FrontController extends Controller
                 $response = ['status' => 200 , 'msg' =>'File Uploaded.','url' => $url];
                 return $response;
             }
+        }catch(Exception $e){
+            $response = ['status' => 401 , 'msg' => 'File Uploaded.','error' => $e];
+            return $response;
+        }
+    }
+    
+    public function upload_service_images(Request $request){
+        $url = 'noimage.png';
+        try{
+            if ($request->hasFile('file')) {
+                $file = $request->file;
+                $filename = $file->getClientOriginalName();
+                $image = date('His') . $filename;
+                $destination_path = public_path() . '/images/';
+                $file->move($destination_path, $image);
+                $url = $image;
+                $service = BookingService::where('id',$request->service_id)->first();
+                $sr = ServiceRound::where('service_id',$request->service_id)->where('round',$service->round)->first();
+                if($request->type == 'b'){
+                    $bi = json_decode($sr->before_images);
+                    array_push($bi,$url);
+                    $sr->before_images = json_encode($bi);
+                    $sr->save();
+                }else if($request->type == 'a'){
+                    $ai = json_decode($sr->after_images);
+                    array_push($ai,$url);
+                    $sr->after_images = json_encode($ai);
+                    $sr->save(); 
+                }
+                $response = ['status' => 200 , 'msg' =>'File Uploaded.','url' => $url , 'service_round' =>  $sr];
+                return $response;
+            }
+            
         }catch(Exception $e){
             $response = ['status' => 401 , 'msg' => 'File Uploaded.','error' => $e];
             return $response;

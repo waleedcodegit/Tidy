@@ -202,6 +202,7 @@ Route::post('/get_customer_bookings','Frontend\FrontController@get_customer_book
 
 Route::post('/get_booking_by_id','Frontend\FrontController@get_booking_by_id');
 Route::post('/charge_a_customer','Frontend\FrontController@charge_a_customer');
+Route::post('/create_services_daily','Frontend\FrontController@create_services_daily');
 
 
 
