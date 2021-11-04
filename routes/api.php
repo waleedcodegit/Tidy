@@ -123,7 +123,9 @@ Route::post('/get_gift_cards','Admin\AdminController@get_gift_cards');
 Route::post('/create-vendor','Vendor\VendorController@create_vendor');
 Route::post('/vendor-login','Vendor\VendorController@vendor_login');
 Route::post('/get_vendor_booking_requests','Vendor\VendorController@get_vendor_booking_requests');
+Route::post('/get_vendor_qoutes','Vendor\VendorController@get_vendor_qoutes');
 Route::post('/get_vendor_notifications','Vendor\VendorController@get_vendor_notifications');
+Route::post('/get_vendor_quote_by_id','Vendor\VendorController@get_vendor_quote_by_id');
 
 
 
@@ -177,6 +179,8 @@ Route::post('/get-vendor-bookings' , 'Vendor\VendorController@get_vendor_booking
 Route::post('/accepted-bookings' , 'Vendor\VendorController@accepted_bookings');
 Route::post('/get_vendor_service_timings' , 'Vendor\VendorController@get_vendor_service_timings');
 Route::post('/update_vendor_timings' , 'Vendor\VendorController@update_vendor_timings');
+Route::post('/create_quote' , 'Vendor\VendorController@create_quote');
+Route::post('/update_quote' , 'Vendor\VendorController@update_quote');
 
 
 

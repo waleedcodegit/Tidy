@@ -3,12 +3,14 @@ import { data } from 'jquery';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Swal from 'sweetalert2';
+import {Link} from 'react-router-dom';
 
 class BookingsFeed extends Component {
     constructor(props) {
         super(props);
         this.state = {
             serviceBookings: [],
+            qoutes:[],
             vendor_id:this.props.vendor.data.vendor_id,
         };
     }
@@ -21,7 +23,17 @@ class BookingsFeed extends Component {
                     serviceBookings: res.data,
                     vendor_id:this.props.vendor.data.vendor_id
                 })
+                
         })
+        // Axios.post('/api/get_vendor_qoutes',{vendor_id:this.props.vendor.data.vendor_id}).then(res=>
+        //     {
+        //         // console.log(res.data);
+        //         this.setState({
+        //             qoutes : res.data.qoutes,
+        //             vendor_id:this.props.vendor.data.vendor_id
+        //         })
+        //     })
+        
     }
 
     handleAccept(bookingId) {
@@ -63,12 +75,50 @@ class BookingsFeed extends Component {
                                             <div>
                                                 <div className="card-content col-sm-12">
                                                 <h3>{data.service.name}</h3>
+                                            
                                                 {
                                                     data.booking_information.resident_type == "House" ?
+<<<<<<< Updated upstream
                                                     <h4><button onClick={this.handleAccept.bind(this,data.id)} className="btn btn-outline-success ml-auto">Accept</button></h4>
                                                     :null   
                                                 }
                                                 
+=======
+                                                   <>
+                                                    {
+                                                        
+                                                        data.service.residential_type == "1" ?
+                                                        <h4><button  className="btn btn-outline-success ml-auto">Accept</button></h4>
+                                                    :
+                                                    //  <h4><Link to={`/vendor/create-quote/${data.booking_id}`}><button  className="btn btn-outline-success ml-auto">Qoute</button></Link></h4>
+                                                    // <>
+                                                    // {
+                                                         
+                                                    //         this.state.qoutes.map((data)=>{
+                                                    //             return(
+                                                        data.vendor_qoute == null ?
+                                                        <h4><Link to={`/vendor/create-quote/${data.booking_id}`}><button  className="btn btn-outline-success ml-auto">Qoute</button></Link></h4>
+                                                        :
+                                                        data.booking_id == data.vendor_qoute.booking_id ?
+                                                        <h4><Link to={`/vendor/edit_quote/${data.vendor_qoute.booking_id}`}><button  className="btn btn-outline-success ml-auto">Edit Quote</button></Link></h4>
+                                                        : null
+                                                        // <h4><Link to={`/vendor/create-quote/${data.booking_id}`}><button  className="btn btn-outline-success ml-auto">Qoute</button></Link></h4>
+                                                    //             )}
+                                                    //             )
+                                                    //             }
+                                                    // </>
+                                                     
+                                                    } 
+                                                    
+                                                    </>
+                                                    :null
+                                                    
+                                                      
+                                                }
+                                        
+                                                
+                                                {/* onClick={this.handleAccept.bind(this,data.id)}    */}
+>>>>>>> Stashed changes
                                                 <div className="divid-line"/>
                                                     <div className="card-detail-left">
                                                         <ul>

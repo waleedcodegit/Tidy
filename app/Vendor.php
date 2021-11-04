@@ -38,4 +38,5 @@ class Vendor extends Model
         return $this->hasMany(VendorServices::class);
     }
     
+    
 }

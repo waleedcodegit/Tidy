@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CustomerAuthMeta extends Migration
+class CreateVendorQuotesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CustomerAuthMeta extends Migration
      */
     public function up()
     {
-        Schema::create('customer_auth_meta', function (Blueprint $table) {
+        Schema::create('vendor_quotes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('customer_id');
-            $table->string('token');
-            $table->string('valid');
-            $table->string('ip');
+            $table->string('vendor_id');
+            $table->string('booking_id');
+            $table->string('quote');
+            $table->string('proposal');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CustomerAuthMeta extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('customer_auth_meta');
+        Schema::dropIfExists('vendor_quotes');
     }
 }

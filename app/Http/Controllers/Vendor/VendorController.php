@@ -31,7 +31,12 @@ use App\SubCategory;
 use App\VendorBookingRequest;
 use App\VendorNotifications;
 use App\VendorTimmings;
+<<<<<<< Updated upstream
 use App\Empbooking;
+=======
+use App\VendorQuote;
+use App\BookingInformation;
+>>>>>>> Stashed changes
 
 class VendorController extends Controller
 {
@@ -169,11 +174,13 @@ class VendorController extends Controller
         }  
     }
     public function get_vendor_booking_requests(Request $request){
-        $vbr = VendorBookingRequest::where('vendor_id',$request->vendor_id)->with('booking','booking_information')->get();
+        $vbr = VendorBookingRequest::where('vendor_id',$request->vendor_id)->with('booking')->get();
         if(sizeof($vbr) > 0){
             foreach($vbr as $v){
                 $v->service = Category::where('id',$v->booking['service_id'])->first();
                 $v->sub_service = SubCategory::where('id',$v->booking['sub_service_id'])->first();
+                $v->vendor_qoute = VendorQuote::where('vendor_id',$v->vendor_id)->where('booking_id',$v->booking_id)->first();
+                $v->booking_information = BookingInformation::where('booking_id',$v->booking_id)->first();
             }
         }
         return $vbr;
@@ -911,6 +918,7 @@ class VendorController extends Controller
                             ->where('vendor_status',1)
                             ->with('service','sub_service' , 'information')
                             ->get();
+
         return response()->json([
             'status' => true,
             'message' => "Vendor Bookings",
@@ -937,6 +945,7 @@ class VendorController extends Controller
             'status' => true
         ]);
     }
+<<<<<<< Updated upstream
 
     public function accept_booking (Request $request){
         return $request;
@@ -950,5 +959,82 @@ class VendorController extends Controller
         //     'message' => "Accepted Booking",
         //     'data' => $booking
         // ]);
+=======
+    
+    // public function accept_booking (Request $request){
+    //     $booking = Booking::where('vendor_id',$request->vendor_id)
+    //                     ->where('id',$request->bookingId)
+    //                     ->update([
+    //                         'vendor_status' => 1
+    //                     ]);
+    //     return response()->json([
+    //         'status' => true,
+    //         'message' => "Accepted Booking",
+    //         'data' => $booking
+    //     ]);
+    // }
+    public function create_quote(Request $request)
+    {
+        
+            $quote = new VendorQuote();
+            $quote->vendor_id = $request->vendor_id;
+            $quote->booking_id = $request->booking_id;
+            $quote->quote = $request->price;
+            $quote->proposal = $request->proposal;
+            $quote->save();
+            $response = [
+                'status' => 200,
+                'msg' => 'City added successfully', 
+            ];
+            return $response;
+     }
+     public function get_vendor_qoutes(Request $request){
+
+        $qoutes = VendorQuote::where('vendor_id',$request->vendor_id)->with('bookingrequests')->get();
+        return response()->json([
+            'status' => true,
+            'message' => "Quotes",
+            'qoutes' => $qoutes,
+            
+        ]);
+    }
+    public function get_vendor_quote_by_id(Request $request)
+    
+    {
+        // return $request;
+        $vendorQuote = VendorQuote::where('booking_id',$request->id)->first();
+        $response = [
+            'status' => 200,
+            'vendorQuote' => $vendorQuote
+        ];
+        return $response;
+    }
+    // public function update_quote(Request $request)
+    // {
+    //     // return $id;
+    //        $quote = VendorQuote::where('booking_id', $request->id);
+    //         $quote->vendor_id = $request->vendor_id;
+    //         $quote->booking_id = $request->booking_id;
+    //         $quote->quote = $request->quote;
+    //         $quote->proposal = $request->proposal;
+    //         $quote->save();
+    //         $response = [
+    //             'status' => 200,
+    //             'msg' => 'City added successfully', 
+    //         ];
+    //         return $response;
+    //  }
+    public function update_quote(Request $request){
+        
+        $quote = VendorQuote::where('booking_id',$request->id)->first();
+           $quote->vendor_id = $request->vendor_id;
+           $quote->booking_id = $request->booking_id;
+            $quote->quote = $request->quote;
+           $quote->proposal = $request->proposal;
+          $quote->save();
+        return response()->json([
+            'status' => 200
+        ]);
+>>>>>>> Stashed changes
     }
 }

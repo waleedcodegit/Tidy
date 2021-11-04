@@ -120,6 +120,7 @@ class VendorIndex extends Component {
                             
                             <li><Link className="nav-link" to="/vendor/bookings-feed">Bookings Feed</Link></li>
                             <li><Link  className="nav-link" to="/vendor/accepted-bookings">My Bookings</Link></li>
+                           
                             </ul>
                         </li>
                         <li className="dropdown">
