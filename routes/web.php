@@ -59,6 +59,10 @@ Route::view('/admin/url-meta' , 'Admin');
 Route::view('/admin/url-meta-list' , 'Admin');
 Route::view('/admin/edit-url/{id}', 'Admin');
 
+Route::view('/admin/service_check_list' , 'Admin');
+Route::view('/admin/add_service_check' , 'Admin');
+Route::view('/admin/edit_service_check/{id}', 'Admin');
+
 Route::view('/admin/create-holiday', 'Admin');
 Route::view('/admin/edit-holiday/{id}', 'Admin');
 Route::view('/admin/list-holidays', 'Admin');

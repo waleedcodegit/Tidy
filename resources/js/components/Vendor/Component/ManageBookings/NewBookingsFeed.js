@@ -36,29 +36,29 @@ class BookingsFeed extends Component {
         
     }
 
-    handleAccept(bookingId) {
-        let data ={
-            vendor_id: this.props.vendor.data.vendor_id
-        }
-        Axios.post('/api/accept-booking', data ,bookingId).then(res=>{
-            console.log(res);
-            if(res.data.status == true){
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Booking Accepted',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: res.data.msg,
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            }
-        })
-    }
+    // handleAccept(bookingId) {
+    //     let data ={
+    //         vendor_id: this.props.vendor.data.vendor_id
+    //     }
+    //     Axios.post('/api/accept-booking', data ,bookingId).then(res=>{
+    //         console.log(res);
+    //         if(res.data.status == true){
+    //             Swal.fire({
+    //                 icon: 'success',
+    //                 title: 'Booking Accepted',
+    //                 showConfirmButton: false,
+    //                 timer: 1500
+    //             })
+    //         } else {
+    //             Swal.fire({
+    //                 icon: 'error',
+    //                 title: res.data.msg,
+    //                 showConfirmButton: false,
+    //                 timer: 1500
+    //             })
+    //         }
+    //     })
+    // }
 
     render() {
         return (
@@ -78,10 +78,6 @@ class BookingsFeed extends Component {
                                             
                                                 {
                                                     data.booking_information.resident_type == "House" ?
-                                                    <h4><button onClick={this.handleAccept.bind(this,data.id)} className="btn btn-outline-success ml-auto">Accept</button></h4>
-                                                    :null   
-                                                }
-                                                
                                                    <>
                                                     {
                                                         
@@ -112,7 +108,7 @@ class BookingsFeed extends Component {
                                                     :null
                                                     
                                                       
-                                                
+                                                }
                                         
                                                 
                                                 {/* onClick={this.handleAccept.bind(this,data.id)}    */}

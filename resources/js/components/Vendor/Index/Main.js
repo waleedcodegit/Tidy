@@ -12,12 +12,9 @@ import AcceptedBookings from '../Component/ManageBookings/AcceptedBookings';
 import EmpDashBoard from '../../Employee/Dashboard/EmpDashboard';
 import EmpProfile from '../../Employee/Components/Settings/Profile';
 import VendorBookingDetails from '../Component/ManageBookings/ManageVendorBooking';
-<<<<<<< Updated upstream
 import Empbookings from '../../Employee/Components/Bookings/Empbookings';
-=======
 import CreateQoute from '../Component/ManageBookings/CreateQoute';
 import EditQoute from '../Component/ManageBookings/EditQuote';
->>>>>>> Stashed changes
 
 
 class Main extends Component {

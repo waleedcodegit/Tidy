@@ -233,6 +233,12 @@ Route::post('/delete-url' , 'Admin\UrlMetasController@delete_url');
 Route::get('/edit-url/{id}','Admin\UrlMetasController@edit_url');
 Route::post('/update-url/{id}' , 'Admin\UrlMetasController@update_url');
 
+Route::post('/create_service_check' , 'Admin\UrlMetasController@create_service_check');
+Route::post('/service_check_list' , 'Admin\UrlMetasController@service_check_list');
+Route::get('/edit_service_check/{id}','Admin\UrlMetasController@edit_service_check');
+Route::post('/update_service_check/{id}' , 'Admin\UrlMetasController@update_service_check');
+Route::post('/delete-service_check' , 'Admin\UrlMetasController@delete_service_check');
+
 
 //HomeContent Controller
 

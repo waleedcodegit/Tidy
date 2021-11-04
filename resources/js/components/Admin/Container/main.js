@@ -50,6 +50,11 @@ import UrlMeta from '../Settings/UrlMeta';
 import Index from '../Settings/UrlList';
 import UrlEdit from '../Settings/UrlEdit';
 
+
+import Servicechecklist from '../Settings/Servicechecklist';
+import AddServiceCheck from '../Settings/Addservicecheck';
+import EditServiceCheck from '../Settings/ServiceCheckEdit';
+
 import HolidayCreate from '../Holidays/create';
 import HolidayEdit from '../Holidays/edit';
 import HolidayList from '../Holidays/index';
@@ -156,6 +161,10 @@ class Main extends Component {
                         <Route path="/admin/url-meta" component={UrlMeta}></Route>
                         <Route path="/admin/url-meta-list" component={Index}></Route>
                         <Route path="/admin/url-edit/:id" component={UrlEdit}></Route>
+
+                        <Route path="/admin/service_check_list" component={Servicechecklist}></Route>
+                        <Route path="/admin/add_service_check" component={AddServiceCheck}></Route>
+                        <Route path="/admin/edit_service_check/:id" component={EditServiceCheck}></Route>
 
 
                         <Route path="/admin/add-faq" component={AddFaq}></Route>
