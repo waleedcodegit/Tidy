@@ -94,13 +94,15 @@ class BookingsFeed extends Component {
                                                         <h4><Link to={`/vendor/create-quote/${data.booking_id}`}><button  className="btn btn-outline-success ml-auto">Qoute</button></Link></h4>
                                                         :
                                                         data.booking_id == data.vendor_qoute.booking_id ?
+                                                        <>
+                                                        
+                                                       
                                                         <h4><Link to={`/vendor/edit_quote/${data.vendor_qoute.booking_id}`}><button  className="btn btn-outline-success ml-auto">Edit Quote</button></Link></h4>
+                                                        
+                                                    
+                                                        </>
                                                         : null
-                                                        // <h4><Link to={`/vendor/create-quote/${data.booking_id}`}><button  className="btn btn-outline-success ml-auto">Qoute</button></Link></h4>
-                                                    //             )}
-                                                    //             )
-                                                    //             }
-                                                    // </>
+                                                     
                                                      
                                                     } 
                                                     
@@ -109,10 +111,71 @@ class BookingsFeed extends Component {
                                                     
                                                       
                                                 }
-                                        
+                                                {
+                                                    data.service.residential_type == "0" ?
+                                                     
+                                                         
+                                                        data.vendor_qoute == null ?
+                                                      
+                                                         <>
+                                                        
+                                                        <div className="divid-line"/>
+                                                       <div className="card-detail-left">
+                                                           <ul>
+                                                               <li>Booking Type: </li>
+                                                               <li>Residential Type:</li>
+                                                               <li>Price:</li>
+                                                           </ul>
+                                                       </div>
+                                                       <div className="card-detail-right">
+                                                           <ul>
+                                                               <li>{data.booking_type == 1 ? "One Time" : "Recurring"}</li>
+                                                               <li>{data.service.type}</li>
+                                                               <li>${data.booking.booking_totals}</li>
+                                                           </ul>
+                                                       </div>
+                                                        </>
+                                                        :
+                                                        <>
+                                                         <div className="divid-line"/>
+                                                        <div className="card-detail-left">
+                                                            <ul>
+                                                            <li>Booking Type: </li>
+                                                           <li>Residential Type:</li>
+                                                                <li>Qoute: </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div className="card-detail-right">
+                                                            <ul>
+                                                            <li>{data.booking_type == 1 ? "One Time" : "Recurring"}</li>
+                                                           <li>{data.service.type}</li>
+                                                                <li>${data.vendor_qoute.quote}</li>
+                                                            </ul>
+                                                        </div>
+                                                       </>
+                                                    : 
+                                                     <>
+                                                    <div className="divid-line"/>
+                                                   <div className="card-detail-left">
+                                                       <ul>
+                                                           <li>Booking Type: </li>
+                                                           <li>Residential Type:</li>
+                                                           <li>Price:</li>
+                                                       </ul>
+                                                   </div>
+                                                   <div className="card-detail-right">
+                                                       <ul>
+                                                           <li>{data.booking_type == 1 ? "One Time" : "Recurring"}</li>
+                                                           <li>{data.service.type}</li>
+                                                           <li>${data.booking.booking_totals}</li>
+                                                       </ul>
+                                                   </div>
+                                                    </> 
+                                                            }  
+                                               
                                                 
                                                 {/* onClick={this.handleAccept.bind(this,data.id)}    */}
-                                                <div className="divid-line"/>
+                                                {/* <div className="divid-line"/>
                                                     <div className="card-detail-left">
                                                         <ul>
                                                             <li>Booking Type: </li>
@@ -126,7 +189,7 @@ class BookingsFeed extends Component {
                                                             <li>{data.service.type}</li>
                                                             <li>${data.booking.booking_totals}</li>
                                                         </ul>
-                                                    </div>
+                                                    </div> */}
                                             </div>
                                             </div>
                                         </div>

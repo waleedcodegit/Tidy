@@ -104,6 +104,9 @@ Route::view('/admin/create-page', 'Admin');
 Route::view('/admin/manage-pages', 'Admin');
 Route::view('/admin/edit-page/{id}', 'Admin');
 
+Route::view('/admin/payments_list', 'Admin');
+Route::view('/admin/vendor_withdraw_requests_list', 'Admin');
+
 
 // Vendor Routes
 
@@ -127,6 +130,10 @@ Route::view('/vendor/accepted-bookings' , 'vendor');
 Route::view('/vendor/create-quote/{id}' , 'vendor');
 Route::view('/vendor/vendor-booking-details/{id}' , 'vendor');
 Route::view('/vendor/edit_quote/{id}' , 'vendor');
+Route::view('/vendor/vendor_wallet' , 'vendor');
+Route::view('/vendor/add_withdraw' , 'vendor');
+Route::view('/vendor/add_withdraw/{id}' , 'vendor');
+Route::view('/vendor/my_payments' , 'vendor');
 
 //Employee Routes
 Route::view('/employee-login' , 'Front');

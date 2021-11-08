@@ -159,6 +159,23 @@ class Sidebar extends Component {
                                                 :null
                                             }
                                         </li>
+                                        <li onClick={this.active_item.bind(this, 27)} className={this.state.nav_item_active.main == 27 ? "active-sub" : ""}>
+                                            <a onClick={this.change_visible_item.bind(this,27)} >
+                                                <i className="demo-pli-home"></i>
+                                                <span className="menu-title" 
+                                                >Manage Accounts</span>
+                                                <i className="arrow"></i>
+                                            </a>
+                                            {
+                                                this.state.nav_item_visible == 27 ?
+                                                <ul >
+                                                    {/* <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/create-customer">Create</Link></li> */}
+                                                    <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/payments_list">Payments</Link></li>
+                                                    <li onClick={this.active_sub_item.bind(this, 2)} className={this.state.active_sub_item == 2 ? "active-link" : ""}><Link to="/admin/vendor_withdraw_requests_list">Vendor Withdraw Requests</Link></li>
+                                                </ul>
+                                                :null
+                                            }
+                                        </li>
 
                                         <li onClick={this.active_item.bind(this, 6)} className={this.state.nav_item_active.main == 6 ? "active-sub" : ""}>
                                             <a onClick={this.change_visible_item.bind(this,6)} >
@@ -234,9 +251,9 @@ class Sidebar extends Component {
                                                 this.state.nav_item_visible == 7 ?
                                                 <ul > 
                                                     <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/setting-list">List</Link></li>
-                                                    <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/home-content">Home Content</Link></li>
-                                                    <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/url-meta-list">Url Metas List</Link></li>
-                                                    <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/service_check_list">Service Check List</Link></li>
+                                                    <li onClick={this.active_sub_item.bind(this, 2)} className={this.state.active_sub_item == 2 ? "active-link" : ""}><Link to="/admin/home-content">Home Content</Link></li>
+                                                    <li onClick={this.active_sub_item.bind(this, 3)} className={this.state.active_sub_item == 3 ? "active-link" : ""}><Link to="/admin/url-meta-list">Url Metas List</Link></li>
+                                                    <li onClick={this.active_sub_item.bind(this, 4)} className={this.state.active_sub_item == 4 ? "active-link" : ""}><Link to="/admin/service_check_list">Service Check List</Link></li>
                                                 </ul>
                                                 :null
                                             }

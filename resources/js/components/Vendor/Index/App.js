@@ -112,7 +112,7 @@ class VendorIndex extends Component {
                         <ul className="sidebar-menu">
                         <li className="menu-header">Main</li>
                         <li className="dropdown active">
-                            <Link href="index.html" className="nav-link"><i data-feather="monitor" /><span>Dashboard</span></Link>
+                           <Link href="/vendor/dashboard" className="nav-link"><i data-feather="monitor" /><span>Dashboard</span></Link>
                         </li>
                         <li className="dropdown">
                             <a href="#" className="menu-toggle nav-link has-dropdown"><i data-feather="briefcase" /><span>Manage Bookings</span></a>
@@ -126,8 +126,8 @@ class VendorIndex extends Component {
                         <li className="dropdown">
                             <a href="#" className="menu-toggle nav-link has-dropdown"><i data-feather="command" /><span>Manage Accounts</span></a>
                             <ul className="dropdown-menu">
-                            <li><Link className="nav-link" to="/vendor">Wallet</Link></li>
-                            <li><Link className="nav-link" to="/vendor">Withdraw Request</Link></li>
+                            <li><Link className="nav-link" to="/vendor/vendor_wallet">Wallet</Link></li>
+                            <li><Link className="nav-link" to="/vendor/my_payments">My Payments</Link></li>
                             </ul>
                         </li>
                         <li className="dropdown">

@@ -15,6 +15,9 @@ import VendorBookingDetails from '../Component/ManageBookings/ManageVendorBookin
 import Empbookings from '../../Employee/Components/Bookings/Empbookings';
 import CreateQoute from '../Component/ManageBookings/CreateQoute';
 import EditQoute from '../Component/ManageBookings/EditQuote';
+import VendorWallet from '../Component/ManageAccounts/wallet';
+import AddWithdraw from '../Component/ManageAccounts/Addwithdraw';
+import MyPayments from '../Component/ManageAccounts/Mypaments';
 
 
 class Main extends Component {
@@ -36,6 +39,9 @@ class Main extends Component {
                 <Route path='/vendor-employee/Empprofile' component={EmpProfile}></Route>
                 <Route path='/vendor/vendor-booking-details/:id' component={VendorBookingDetails}></Route>
                 <Route path='/vendor-employee/Empbookings' component={Empbookings}></Route>
+                <Route path='/vendor/vendor_wallet' component={VendorWallet}></Route>
+                <Route path='/vendor/add_withdraw' component={AddWithdraw}></Route>
+                <Route path='/vendor/my_payments' component={MyPayments}></Route>
                 
             </div>
         );

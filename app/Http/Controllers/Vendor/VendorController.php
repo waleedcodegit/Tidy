@@ -34,6 +34,10 @@ use App\VendorTimmings;
 use App\VendorQuote;
 use App\BookingInformation;
 use App\Empbooking;
+use App\VendorWallet;
+use App\VendorWithdrawRequest;
+use App\VendorPayment;
+
 
 class VendorController extends Controller
 {
@@ -717,7 +721,6 @@ class VendorController extends Controller
         ];
         return $response;
     }
-
     public function disapproved_vendor (Request $request){
         $data = Vendor::where('id' , $request->id)->update([
             'password' => Hash::make('tidy'.$request->id.'home'),
@@ -734,8 +737,6 @@ class VendorController extends Controller
         ];
         return $response;
     }
-
-
     public function update_vendor(Request $request) {
         $data = Vendor::where('id', $request->id)->update([
                 'first_name' => $request->first_name,
@@ -874,7 +875,6 @@ class VendorController extends Controller
             }
         }
     }
-
     public function vendor_reset_password(Request $request){
         $validator = Validator::make($request->all(), [
             'token' => 'required', 
@@ -900,7 +900,6 @@ class VendorController extends Controller
             }
         }
     }
-
     public function get_vendor_bookings(Request $request) {
         $bookings = Booking::where('vendor_id',$request->vendor_id)->with('service','sub_service' , 'information')->get();
         return response()->json([
@@ -909,7 +908,6 @@ class VendorController extends Controller
             'data' => $bookings
         ]);
     }
-
     public function accepted_bookings(Request $request) {
         $bookings = Booking::where('vendor_id',$request->vendorId)
                             ->where('vendor_status',1)
@@ -955,7 +953,6 @@ class VendorController extends Controller
     }
     public function create_quote(Request $request)
     {
-        
             $quote = new VendorQuote();
             $quote->vendor_id = $request->vendor_id;
             $quote->booking_id = $request->booking_id;
@@ -969,7 +966,6 @@ class VendorController extends Controller
             return $response;
      }
      public function get_vendor_qoutes(Request $request){
-
         $qoutes = VendorQuote::where('vendor_id',$request->vendor_id)->with('bookingrequests')->get();
         return response()->json([
             'status' => true,
@@ -979,9 +975,7 @@ class VendorController extends Controller
         ]);
     }
     public function get_vendor_quote_by_id(Request $request)
-    
     {
-        // return $request;
         $vendorQuote = VendorQuote::where('booking_id',$request->id)->first();
         $response = [
             'status' => 200,
@@ -989,21 +983,6 @@ class VendorController extends Controller
         ];
         return $response;
     }
-    // public function update_quote(Request $request)
-    // {
-    //     // return $id;
-    //        $quote = VendorQuote::where('booking_id', $request->id);
-    //         $quote->vendor_id = $request->vendor_id;
-    //         $quote->booking_id = $request->booking_id;
-    //         $quote->quote = $request->quote;
-    //         $quote->proposal = $request->proposal;
-    //         $quote->save();
-    //         $response = [
-    //             'status' => 200,
-    //             'msg' => 'City added successfully', 
-    //         ];
-    //         return $response;
-    //  }
     public function update_quote(Request $request){
         
         $quote = VendorQuote::where('booking_id',$request->id)->first();
@@ -1015,5 +994,48 @@ class VendorController extends Controller
         return response()->json([
             'status' => 200
         ]);
+    }
+    public function get_vendor_wallet(Request $request)
+    {
+        $vendorwallet = VendorWallet::where('vendor_id', $request->vendor_id)->first();
+        $response = [
+            'status' => 200,
+            'vendorwallet' => $vendorwallet
+        ];
+        return $response;
+    }
+    public function add_withdraw(Request $request)
+    {
+            $Vendorwithdrawrequest = new VendorWithdrawRequest();
+            $Vendorwithdrawrequest->date = date('Y-m-d');
+            // $Vendorwithdrawrequest->time = date('H-i-s');
+            $Vendorwithdrawrequest->vendor_id = $request->vendor_id;
+            $Vendorwithdrawrequest->withdraw_amount = $request->withdraw;
+            $Vendorwithdrawrequest->save();
+            $vendorwallet = VendorWallet::where('vendor_id', $request->vendor_id)->first();
+            $vendorwallet->wallet = $request->wallet - $request->withdraw;
+            $vendorwallet->save();
+            $response = [
+                'status' => 200,
+                'msg' => ' Added successfully', 
+            ];
+            return $response;
+     }
+     public function get_withdraw_amount_request(Request $request){
+        $Vendorwithdrawrequest = VendorWithdrawRequest::where('vendor_id',$request->vendor_id)->orderBy('id', 'DESC')->get();
+        return response()->json([
+            'status' => 200,
+            'message' => "Vendorwithdrawrequest",
+            'Vendorwithdrawrequest' => $Vendorwithdrawrequest,
+        ]);
+    }
+    public function get_vendor_payment(Request $request)
+    {
+        $vendorpayment = VendorPayment::where('vendor_id', $request->vendor_id)->get();
+        $response = [
+            'status' => 200,
+            'vendorpayment' => $vendorpayment
+        ];
+        return $response;
     }
 }

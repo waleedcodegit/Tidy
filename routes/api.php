@@ -61,6 +61,14 @@ Route::post('/disapproved-vendor','Vendor\VendorController@disapproved_vendor');
 Route::post('/vendor-forget-password' , 'Vendor\VendorController@vendor_forget_password');
 Route::post('/vendor-reset-password' , 'Vendor\VendorController@vendor_reset_password');
 
+
+
+Route::post('get_vendor_wallet','Vendor\VendorController@get_vendor_wallet');
+Route::post('add_withdraw','Vendor\VendorController@add_withdraw');
+Route::post('get_withdraw_amount_request','Vendor\VendorController@get_withdraw_amount_request');
+
+
+
 //Bookings
 Route::post('get-pending-bookings' , 'Vendor\VendorController@get_pending_bookings');
 Route::post('assign-employee-booking' , 'Vendor\VendorController@assign_employee_booking');
@@ -118,6 +126,11 @@ Route::post('/login-admin','Admin\AdminController@login_admin');
 Route::post('/check-auth-admin','Admin\AdminController@admin_check_auth');
 Route::post('/get_gift_cards','Admin\AdminController@get_gift_cards');
 
+//ManageAcounts Controller
+Route::post('/payments_list','Admin\ManageAcountsController@payments_list');
+Route::post('/get_vendor_withdraw_requests','Admin\ManageAcountsController@get_vendor_withdraw_requests');
+Route::post('/get_vendor_payment','Vendor\VendorController@get_vendor_payment');
+
 
 
 Route::post('/create-vendor','Vendor\VendorController@create_vendor');
@@ -126,6 +139,8 @@ Route::post('/get_vendor_booking_requests','Vendor\VendorController@get_vendor_b
 Route::post('/get_vendor_qoutes','Vendor\VendorController@get_vendor_qoutes');
 Route::post('/get_vendor_notifications','Vendor\VendorController@get_vendor_notifications');
 Route::post('/get_vendor_quote_by_id','Vendor\VendorController@get_vendor_quote_by_id');
+
+Route::post('/get_vendor_payment','Vendor\VendorController@get_vendor_payment');
 
 
 

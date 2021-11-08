@@ -92,6 +92,9 @@ import SmsList from '../Sms/list';
 //Bookings
 import PendingBookings from '../Bookings/Pending_Bookings';
 
+import PaymentsList from '../ManageAccounts/Payments';
+import VendorWithdrawRequestsList from '../ManageAccounts/VendorwithdrawRequests';
+
 
 
 
@@ -196,6 +199,9 @@ class Main extends Component {
                         <Route path="/admin/sms" component={SmsList}></Route>
 
                         <Route path="/admin/pending-bookings" component={PendingBookings} ></Route>
+
+                        <Route path="/admin/payments_list" component={PaymentsList} ></Route>
+                        <Route path="/admin/vendor_withdraw_requests_list" component={VendorWithdrawRequestsList} ></Route>
 
                     </div>
                     <Sidebar></Sidebar>
