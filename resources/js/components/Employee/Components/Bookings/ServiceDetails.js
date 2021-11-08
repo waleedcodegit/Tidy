@@ -175,7 +175,6 @@ class ServiceDetails extends Component {
                                                                     <div className="booking-content">
                                                                         <ul>
                                                                             <li>Before Images</li>
-                                                                            <br/>
                                                                             <input type="file" style={{cursor:'pointer' ,width:'210px'}} 
                                                                             className="btn btn-outline-primary ml-auto" 
                                                                             onChange={this.getImage.bind(this,'b')}>
@@ -203,7 +202,6 @@ class ServiceDetails extends Component {
                                                                     <div className="booking-content">
                                                                         <ul>
                                                                             <li>After Images</li>
-                                                                            <br/>
                                                                             <input type="file" style={{cursor:'pointer' ,width:'210px'}} 
                                                                             className="btn btn-outline-primary ml-auto" 
                                                                             onChange={this.getImage.bind(this,'a')}>
@@ -212,7 +210,7 @@ class ServiceDetails extends Component {
                                                                     </div>
                                                                 </div>
                                                                 <div className="col-md-9">
-                                                                    <div className="booking-content after-image">
+                                                                    <div className="booking-content before-image">
                                                                         <ul>
                                                                             {
                                                                                 this.state.afterImages.map((data,index)=>{
