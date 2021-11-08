@@ -207,6 +207,7 @@ class FrontController extends Controller
         return $response;
     }
     public function charge_a_customer(Request $request){
+
         $customer = Customer::where('id',$request->id)->first();
         try{
         $stripe = new \Stripe\StripeClient(
@@ -223,24 +224,152 @@ class FrontController extends Controller
           return $charge;
 
     }
-    public function create_services_daily(){
-        $day = date('w');
-        $booking = Booking::where('id',1)->first();
-        if($booking->custom_days){
-            $custom_days = json_decode($booking->custom_days);
-            foreach($custom_days as $key => $cd){
-               if($cd->check){
-                    $day_ = date('w');
-                    if($key == $day_ ){
-                        $date = date(); 
-                    }
-                    
-               }
+    public function create_service($booking){
+        $service = Category::where('id',$booking->service_id)->first();
+        $customer = Customer::where('id',$booking->customer_id)->first();
+
+        try{
+            $stripe = new \Stripe\StripeClient(
+                env("STRIPE_SK")
+              );
+            $charge = $stripe->charges->create(array(
+                "amount" => $booking->booking_totals * 100,
+                "currency" => "usd",
+                "customer" => $customer->stripe_id
+              ));
+            }catch(\Stripe\Exception\CardException $e){
                
             }
-        }
+            $payment_id = 0; 
+            if($charge){
+                $payment = new Payment();
+                $payment->amount = $booking->booking_totals;
+                $payment->name = 'Tidy Home Service Payment';
+                $payment->customer_stripe_id = $customer->stripe_id;
+                $payment->stripe_response = json_encode($charge) ;
+                $payment->save();
+                $payment_id = $payment->id;
+            }
+
+           
+            if($booking->recurring_type == 5){
+                if($booking->custom_days){
+                    $custom_days = json_decode($booking->custom_days);
+                    foreach($custom_days as $key => $cd){
+                       if($cd->check){
+                            $day_ = date('w');
+                            if($key == $day_ ){
+                                $date = date('Y-m-d'); 
+                                echo '/n one '.$key . '-' . $day_ . '____' . $date;
+                            }else if($key > $day_){
+                                $days = $key + $day_;
+                                $date = date('Y-m-d', strtotime("+$days days"));
+                                echo '/n two '.$key . '-' . $day_ . '____' . $date . '__dd__' . $days;
+
+                            }
+                            else if($key < $day_){
+                                $days = $day_ - $key;
+                                $date = date('Y-m-d', strtotime("+$days days"));
+                                echo '/n three '.$key . '-' . $day_ . '____' . $date. '__dd__' . $days;
+                            }
+                            echo '<br/> service date'. $date . '--s---';
+                            $service = new BookingService();
+                            $service->booking_id = $booking->id;
+                            $service->date = $date;
+                            $service->time = $booking->time;
+                            $service->total_price = $booking->booking_totals;
+                            $service->round = 1;
+                            $service->payment_id = $payment_id;
+                            $service->payment_status = $payment_id != 0 ? 1 : 0;
+                            $service->status = $payment_id != 0 ? 0 : 1;
+                            $service->save();
+                        }
+                    }
+                }
+            }else{
+                $service = new BookingService();
+                $service->booking_id = $booking->id;
+                $service->date = date('Y-m-d');
+                $service->time = $booking->time;
+                $service->total_price = $booking->booking_totals;
+                $service->round = 1;
+                $service->payment_id = $payment_id;
+                $service->payment_status = $payment_id != 0 ? 1 : 0;
+                $service->status = $payment_id != 0 ? 0 : 1;
+                $service->save();
+            }
+    }
+    public function create_services_daily(){
         
-        return $day;
+        $bookings = Booking::where('booking_type',2)->where('status',1)->get();
+        if(sizeof($bookings)){
+            foreach($bookings as $booking){
+                $booking = Booking::where('id',$booking->id)->first();
+                if($booking->booking_type == 2){
+                    if($booking->recurring_type == 1){
+                        // Daily Recurring
+                        if($booking->nsd == date('Y-m-d')){
+                            $booking->nsd = date('Y-m-d', strtotime('+1 days'));
+                            $booking->save();
+                            $this->create_service($booking);
+                        }
+                        
+                    }
+                    else if($booking->recurring_type == 2){
+                        // Weekly Recurring
+                        if($booking->nsd == date('Y-m-d')){
+                        
+                            $booking->nsd = date('Y-m-d', strtotime('+7 days'));
+                            $booking->save();
+                            $this->create_service($booking);
+                        }
+                    }
+                    else if($booking->recurring_type == 3){
+                        // Fornightly Recurring
+                        if($booking->nsd == date('Y-m-d')){
+                            $this->create_service($booking);
+                        $booking->nsd = date('Y-m-d', strtotime('+14 days'));
+                        $booking->save();
+                        }
+                    }
+                    else if($booking->recurring_type == 4){
+                        // Monthly Recurring
+                        if($booking->nsd == date('Y-m-d')){
+                            $this->create_service($booking);
+                        $booking->nsd = date('Y-m-d', strtotime('+1 months'));
+                        $booking->save();
+                        }
+                    }
+                    else if($booking->recurring_type == 5){
+                        // Custom Recurring
+                        if($booking->custome_type == 1){
+                            // Weekly Recurring
+                            if($booking->nsd == date('Y-m-d')){
+                                $this->create_service($booking);
+                            $booking->nsd = date('Y-m-d', strtotime('+7 days'));
+                            $booking->save();
+                            }
+                        }
+                        else if($booking->custome_type == 2){
+                            // Fornightly Recurring
+                            if($booking->nsd == date('Y-m-d')){
+                                $this->create_service($booking);
+                            $booking->nsd = date('Y-m-d', strtotime('+14 days'));
+                            $booking->save();
+                            }
+                        }
+                        else if($booking->recurring_type == 3){
+                            // Monthly Recurring
+                            if($booking->nsd == date('Y-m-d')){
+                                $this->create_service($booking);
+                            $booking->nsd = date('Y-m-d', strtotime('+1 months'));
+                            $booking->save();
+                            }
+                        }
+                    }
+                }
+            }
+        }   
     }
     public function make_booking(Request $request){
 
@@ -312,7 +441,7 @@ class FrontController extends Controller
                     env("STRIPE_SK")
                   );
                 $charge = $stripe->charges->create(array(
-                    "amount" => $booking->booking_totals,
+                    "amount" => $booking->booking_totals * 100,
                     "currency" => "usd",
                     "customer" => $customer->stripe_id
                   ));
@@ -341,12 +470,12 @@ class FrontController extends Controller
                                     $date = $booking->date; 
                                 }else if($key > $day_){
                                     $days = $key + $day_;
-                                    $date = date('Y-m-d', strtotime($days , $booking->date));
+                                    $date = date('Y-m-d', strtotime($days , strtotime($booking->date)));
 
                                 }
                                 else if($key < $day_){
                                     $days = $day_ - $key;
-                                    $date = date('Y-m-d', strtotime($days , $booking->date));
+                                    $date = date('Y-m-d', strtotime($days , strtotime($booking->date)));
                                 }
                                 $service = new BookingService();
                                 $service->booking_id = $booking->id;
@@ -359,60 +488,59 @@ class FrontController extends Controller
                                 $service->status = $payment_id != 0 ? 0 : 1;
                                 $service->save();
                             }
-                                
-                           
-                           
                         }
-                    }else{
-                        $service = new BookingService();
-                        $service->booking_id = $booking->id;
-                        $service->date = $booking->date;
-                        $service->time = $booking->time;
-                        $service->total_price = $booking->booking_totals;
-                        $service->round = 1;
-                        $service->payment_id = $payment_id;
-                        $service->payment_status = $payment_id != 0 ? 1 : 0;
-                        $service->status = $payment_id != 0 ? 0 : 1;
-                        $service->save();
                     }
+                   
+                } else{
+                    $service = new BookingService();
+                    $service->booking_id = $booking->id;
+                    $service->date = $booking->date;
+                    $service->time = $booking->time;
+                    $service->total_price = $booking->booking_totals;
+                    $service->round = 1;
+                    $service->payment_id = $payment_id;
+                    $service->payment_status = $payment_id != 0 ? 1 : 0;
+                    $service->status = $payment_id != 0 ? 0 : 1;
+                    $service->save();
                 }
                 
                 if($booking->booking_type == 2){
                     if($booking->recurring_type == 1){
                         // Daily Recurring
-                        $booking->nsd = date('Y-m-d', strtotime('+1 days' , $booking->date));
+                      
+                        $booking->nsd = date('Y-m-d', strtotime('+1 days' , strtotime($booking->date)));
                         $booking->save();
                     }
                     else if($booking->recurring_type == 2){
                         // Weekly Recurring
-                        $booking->nsd = date('Y-m-d', strtotime('+7 days' , $booking->date));
+                        $booking->nsd = date('Y-m-d', strtotime('+7 days' , strtotime($booking->date)));
                         $booking->save();
                     }
                     else if($booking->recurring_type == 3){
                         // Fornightly Recurring
-                        $booking->nsd = date('Y-m-d', strtotime('+14 days' , $booking->date));
+                        $booking->nsd = date('Y-m-d', strtotime('+14 days' , strtotime($booking->date)));
                         $booking->save();
                     }
                     else if($booking->recurring_type == 4){
                         // Monthly Recurring
-                        $booking->nsd = date('Y-m-d', strtotime('+1 months' , $booking->date));
+                        $booking->nsd = date('Y-m-d', strtotime('+1 months' , strtotime($booking->date)));
                         $booking->save();
                     }
                     else if($booking->recurring_type == 5){
                         // Custom Recurring
                         if($booking->custome_type == 1){
                             // Weekly Recurring
-                            $booking->nsd = date('Y-m-d', strtotime('+7 days' , $booking->date));
+                            $booking->nsd = date('Y-m-d', strtotime('+7 days' , strtotime($booking->date)));
                             $booking->save();
                         }
                         else if($booking->custome_type == 2){
                             // Fornightly Recurring
-                            $booking->nsd = date('Y-m-d', strtotime('+14 days' , $booking->date));
+                            $booking->nsd = date('Y-m-d', strtotime('+14 days' , strtotime($booking->date)));
                             $booking->save();
                         }
                         else if($booking->recurring_type == 3){
                             // Monthly Recurring
-                            $booking->nsd = date('Y-m-d', strtotime('+1 months' , $booking->date));
+                            $booking->nsd = date('Y-m-d', strtotime('+1 months' , strtotime($booking->date)));
                             $booking->save();
                         }
                     }
@@ -540,11 +668,11 @@ class FrontController extends Controller
               'cvc' => $request->cvc,
             ],
           ]);
+          
           $stripe_customer = $stripe->customers->create([
             'email' => $customer->email,
             'source' =>  $token->id
         ]);
-        // return $customer;e
         $customer->stripe_id = $stripe_customer->id;
         $customer->save();
         $customer_card = CustomerCard::where('customer_id',$customer->id)->first();
@@ -568,7 +696,8 @@ class FrontController extends Controller
         return response()->json([
             'status' => true,
             'customer' => $customer,
-            'message' => 'Customer Card Updated SuccessFully'
+            'message' => 'Customer Card Updated SuccessFully',
+            'stripe_customer' => $stripe_customer
         ]);
         }catch(Exception $e){
             return response()->json([
