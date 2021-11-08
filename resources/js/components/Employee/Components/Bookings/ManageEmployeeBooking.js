@@ -9,42 +9,27 @@ class EmployeeBookingDetails extends Component {
         this.state = {
             booking:{},
             loading:true,
+            beforeImages:'',
+            afterImages:'',
+            serviceRounds:{},
+            error_string:''
+
         };
         console.log(props);
     }
 
     componentDidMount(){
+
         Axios.post('/api/get_booking_by_id',{id:this.props.match.params.id}).then(res=>{
             console.log(res);
 
             this.setState({
                 booking:res.data.data,
+                serviceRounds:res.data.serviceRounds,
                 loading:false
             })
         })
     }
-
-    // handleSave(){
-
-    //     let payload = {
-    //         booking_id: this.state.booking.id
-    //     }
-
-    //     Axios.post('/api/assign-employee-booking',payload).then(res=>{
-    //         if(res.data.status == 200){
-    //             Swal.fire({
-    //                 icon: 'success',
-    //                 title: 'Assigned to employee Successfully',
-    //                 showConfirmButton: false,
-    //                 timer: 1500
-    //             })
-    //         }else{
-    //             this.setState({
-    //                 error_string:res.data.msg
-    //             })
-    //         }
-    //     })
-    // }
 
     render() {
         return (<div>
@@ -161,35 +146,61 @@ class EmployeeBookingDetails extends Component {
                                                         </div>
                                                     </div>
                                                 </div> }
+                                                <div className="card-content" id="faqhead1">
+                                                    <h3>Service Details</h3>
+                                                    <div className="divid-line" />
+                                                    <div className="dt-table">
+                                                        <div className="row">
+                                                        {
+                                                         this.state.booking.booking_services.length > 0 ? 
+                                                         <table className="table table-hover table-light table-borderless">
+                                                         <thead>
+                                                             <tr>
+                                                                 <th>Service ID</th>
+                                                                 <th>Date</th>
+                                                                 <th>Time</th>
+                                                                 <th>Round</th>
+                                                                 <th>Price</th>
+                                                                 <th>Payment Status</th>
+                                                                 <th>Action</th>
+                                                             </tr>
+                                                         </thead>
+                                                         <tbody>
+                                                         {
+                                                             this.state.booking.booking_services.map((data,index)=>{
+                                                                 return(
+                                                                    <tr>
+                                                                        <td>#{data.id}</td>
+                                                                        <td>{data.date}</td>
+                                                                        <td>{data.time}</td>
+                                                                        <td>{data.round}</td>
+                                                                        <td>${data.total_price}</td>
+                                                                        <td><span className={data.payment_status == 1 ? "paid-cls": "due-cls"}>{data.payment_status == 1 ? 'Paid' : 'Due Payment'}</span></td>
+                                                                        <td><button onClick={()=>{window.open('/vendor-employee/service-details/'+data.id,'_blank')}} className="btn btn-sm btn-outline-info">Details</button></td>
+                                                                    </tr>
+                                                                 )
+                                                             })
+                                                         }
+                                                             
+                                                         </tbody>
+                                                     </table>
+                                                     :
+                                                     <div className="detl-section  col-sm-12">
+                                                        <div className="text-center">
+                                                        <p style={{color:'#000000a3' , fontSize:'20px'}}>Services will be available here after completion of vendor process.</p>
+                                                        </div>
+                                                    </div>
+                                                     }
+                                                        </div>
+                                                        {/* <div className="row">
+                                                        <div className="col-md-12">
+                                                            <h4><button style={{cursor:'pointer'}} className="btn btn-outline-success">Start Service</button></h4>
+                                                        </div>
+                                                        </div> */}
+                                                    </div>
+                                                </div>
                                                 
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="vendor-detail">
-                                <h3>Job Description</h3>
-                                <div className="detl-section">
-                                    <div className="row">
-                                        <div className="col-md-12">
-
-                                        </div>
-                                        {/* <div className="col-md-10">
-                                            <select onChange={this.selected_employee.bind(this)} className="form-control" name="type">
-                                            <option defaultValue="selected">Please Select</option>
-                                                {this.state.employees.map((data,index)=>{
-                                                    return(
-                                                        <option key={index} value={data.id}>{data.name}</option>
-                                                        )
-                                                    }
-                                                )
-                                                }
-                                            </select>
-                                        </div> */}
-                                        <div className="col-md-12">
-                                            <div>
-                                                <button className="col-md-10" className="bk-btn">Start</button>
-                                            </div>  
                                         </div>
                                     </div>
                                 </div>
@@ -210,3 +221,16 @@ const mapStateToProps = (state) =>{
     }
 }
 export default connect(mapStateToProps)(EmployeeBookingDetails);
+
+{/* <div className="col-md-10">
+    <select onChange={this.selected_employee.bind(this)} className="form-control" name="type">
+    <option defaultValue="selected">Please Select</option>
+        {this.state.employees.map((data,index)=>{
+            return(
+                <option key={index} value={data.id}>{data.name}</option>
+                )
+            }
+        )
+        }
+    </select>
+</div> */}

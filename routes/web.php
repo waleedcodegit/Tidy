@@ -141,6 +141,7 @@ Route::view('/vendor-employee/Empdashboard' , 'vendor');
 Route::view('/vendor-employee/Empprofile' , 'vendor');
 Route::view('/vendor-employee/Empbookings' , 'vendor');
 Route::view('/vendor-employee/booking-details/{id}' , 'vendor');
+Route::view('/vendor-employee/service-details/{id}' , 'vendor');
 
 
 

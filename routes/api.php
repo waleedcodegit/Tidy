@@ -70,16 +70,18 @@ Route::post('get_withdraw_amount_request','Vendor\VendorController@get_withdraw_
 
 
 //Bookings
-Route::post('get-pending-bookings' , 'Vendor\VendorController@get_pending_bookings');
-Route::post('assign-employee-booking' , 'Vendor\VendorController@assign_employee_booking');
+Route::post('/get-pending-bookings' , 'Vendor\VendorController@get_pending_bookings');
+Route::post('/assign-employee-booking' , 'Vendor\VendorController@assign_employee_booking');
 
 //Employee Route
-Route::post('delete-employee' , 'Vendor\EmployeeController@delete_employee');
-Route::post('employee-login' , 'Vendor\EmployeeController@employee_login');
+Route::post('/delete-employee' , 'Vendor\EmployeeController@delete_employee');
+Route::post('/employee-login' , 'Vendor\EmployeeController@employee_login');
 Route::post('/employee-check-auth' , 'Vendor\EmployeeController@employee_check_auth');
 Route::post('/get-employee-info/{id}' , 'Vendor\EmployeeController@show');
 Route::post('/update-employee-profile' , 'Vendor\EmployeeController@update_employee_profile');
 Route::post('/employee-bookings' , 'Vendor\EmployeeController@employee_bookings');
+
+
 
 
 Route::middleware(['admin-login'])->group(function () {
@@ -196,20 +198,20 @@ Route::post('/get_vendor_service_timings' , 'Vendor\VendorController@get_vendor_
 Route::post('/update_vendor_timings' , 'Vendor\VendorController@update_vendor_timings');
 Route::post('/create_quote' , 'Vendor\VendorController@create_quote');
 Route::post('/update_quote' , 'Vendor\VendorController@update_quote');
+Route::post('/get_ven_booking_by_id','Vendor\VendorController@get_ven_booking_by_id');
 
 
 
 // Faq Controller
 
-Route::post('add_faq', 'Admin\FaqController@add_faq');
-Route::post('get_all_faqs', 'Admin\FaqController@get_all_faqs');
-Route::get('faq-detail/{id}', 'Admin\FaqController@edit_faq');
-Route::post('faq-update', 'Admin\FaqController@update_faq');
-Route::post('delete-faq', 'Admin\FaqController@delete_faq');
-Route::post('get_faqs_by_type', 'Admin\FaqController@get_faqs_by_type');
+Route::post('/add_faq', 'Admin\FaqController@add_faq');
+Route::post('/get_all_faqs', 'Admin\FaqController@get_all_faqs');
+Route::get('/faq-detail/{id}', 'Admin\FaqController@edit_faq');
+Route::post('/faq-update', 'Admin\FaqController@update_faq');
+Route::post('/delete-faq', 'Admin\FaqController@delete_faq');
+Route::post('/get_faqs_by_type', 'Admin\FaqController@get_faqs_by_type');
 
 // Front Controller Routes
-
 Route::post('/get_information_content','Frontend\FrontController@get_information_content');
 Route::post('/validate_select_service','Frontend\FrontController@validate_select_service');
 Route::post('/get_service_totals','Frontend\FrontController@get_service_totals');
@@ -219,12 +221,13 @@ Route::post('/image_upload','Frontend\FrontController@image_upload');
 Route::post('/get_service_content_by_slug','Frontend\FrontController@get_service_content_by_slug');
 Route::post('/make_booking','Frontend\FrontController@make_booking');
 Route::post('/get_customer_bookings','Frontend\FrontController@get_customer_bookings');
-
-Route::post('/get_booking_by_id','Frontend\FrontController@get_booking_by_id');
+Route::post('/get_booking_by_id' , 'Frontend\FrontController@get_booking_by_id');
 Route::post('/charge_a_customer','Frontend\FrontController@charge_a_customer');
 Route::post('/create_services_daily','Frontend\FrontController@create_services_daily');
-
-
+Route::post('/upload_service_images','Frontend\FrontController@upload_service_images');
+Route::post('/start_service' , 'Frontend\FrontController@start_service');
+Route::post('/end_service' , 'Frontend\FrontController@end_service');
+Route::post('/service_details' , 'Frontend\FrontController@service_details');
 
 
 //Emails Controller//

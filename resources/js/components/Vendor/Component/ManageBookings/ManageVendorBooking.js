@@ -16,7 +16,7 @@ class VendorBookingDetails extends Component {
     }
 
     componentDidMount(){
-        Axios.post('/api/get_booking_by_id',{id:this.props.match.params.id,vendorId:this.props.vendor.data.vendor_id}).then(res=>{
+        Axios.post('/api/get_ven_booking_by_id',{id:this.props.match.params.id,vendorId:this.props.vendor.data.vendor_id}).then(res=>{
             console.log(res);
 
             this.setState({
@@ -35,6 +35,7 @@ class VendorBookingDetails extends Component {
         }
 
         Axios.post('/api/assign-employee-booking',payload).then(res=>{
+            console.log(payload);
             if(res.data.status == true){
                 Swal.fire({
                     icon: 'success',

@@ -570,16 +570,6 @@ class FrontController extends Controller
         return $response = $response;
     }
 
-    public function get_booking_by_id(Request $request){
-        $bookings = Booking::where('id',$request->id)->with('information' , 'sub_service' , 'service' , 'booking_services','vendor')->first();
-        $employees = Employee::where('vendor_id',$request->vendorId)->get();
-        return response()->json([
-            'message' => "Bookings and Employees",
-            'data' => $bookings,
-            'employees' => $employees
-        ]);
-    }
-
     public function get_customer_bookings(Request $request){
         $bookings = Booking::where('customer_id',$request->customer_id)->with('service','sub_service')->get();
         if($bookings){
@@ -888,6 +878,46 @@ class FrontController extends Controller
             return $response;
         }
     }
+
+    public function get_booking_by_id(Request $request){
+        $bookings = Booking::where('id',$request->id)->with('service','sub_service','information','booking_services','vendor')->first();
+        return response()->json([
+            'message' => "Bookings",
+            'data' => $bookings,
+        ]);
+    }
+
+    public function service_details(Request $request){
+        $bookings = BookingService::where('id',$request->id)->with('booking')->first();
+        $s_round = ServiceRound::where('service_id',$request->id)->first();
+        return response()->json([
+            'message' => "Bookings and ServiceRounds",
+            'data' => $bookings,
+            'serviceRounds' => $s_round
+        ]);
+    }
+
+    public function start_service(Request $request){
+        $st_service = ServiceRound::where('id',$request->id)->update([
+            'start_time' => date('H:i:s'),
+        ]);
+        $response = [
+            'status' => 200,
+            'msg' => 'Service Started Successfully'
+        ];
+        return $response;
+    }
+
+    public function end_service(Request $request){
+        $st_service = ServiceRound::where('id',$request->id)->update([
+            'end_time' => date('H:i:s'),
+        ]);
+        $response = [
+            'status' => 200,
+            'msg' => 'Service Ended Successfully'
+        ];
+        return $response;
+    }
     
     public function upload_service_images(Request $request){
         $url = 'noimage.png';
@@ -902,22 +932,28 @@ class FrontController extends Controller
                 $service = BookingService::where('id',$request->service_id)->first();
                 $sr = ServiceRound::where('service_id',$request->service_id)->where('round',$service->round)->first();
                 if($request->type == 'b'){
-                    $bi = json_decode($sr->before_images);
+                    $bi = $sr->before_images == null ? [] : json_decode($sr->before_images);
                     array_push($bi,$url);
                     $sr->before_images = json_encode($bi);
                     $sr->save();
                 }else if($request->type == 'a'){
-                    $ai = json_decode($sr->after_images);
+                    $ai = $sr->after_images == null ? [] : json_decode($sr->after_images);
                     array_push($ai,$url);
                     $sr->after_images = json_encode($ai);
                     $sr->save(); 
                 }
-                $response = ['status' => 200 , 'msg' =>'File Uploaded.','url' => $url , 'service_round' =>  $sr];
+                $response = [
+                    'status' => 200 , 
+                    'msg' =>'File Uploaded.','url' => $url , 
+                    'service_round' =>  $sr];
                 return $response;
             }
             
         }catch(Exception $e){
-            $response = ['status' => 401 , 'msg' => 'File Uploaded.','error' => $e];
+            $response = [
+                'status' => 401 , 
+                'msg' => 'Error in File Uploaded.',
+                'error' => $e];
             return $response;
         }
     }

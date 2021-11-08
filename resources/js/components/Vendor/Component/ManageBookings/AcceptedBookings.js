@@ -39,7 +39,9 @@ class AcceptedBookings extends Component{
                                     <div>
                                         <div className="card-content col-sm-12">
                                         <h3>{data.service.name}</h3>
-                                        <h4><button onClick={()=>{window.open('/vendor/vendor-booking-details/'+data.service_id,'_blank')}} key={index} style={{cursor:'pointer'}} className="btn btn-outline-success ml-auto">Manage Booking</button></h4>
+                                        <h4><button onClick={()=>{window.open('/vendor/vendor-booking-details/'+data.service_id,'_blank')}} 
+                                                    key={index} style={{cursor:'pointer'}} 
+                                                    className="btn btn-outline-success ml-auto">Manage Booking</button></h4>
                                         <div className="divid-line"/>
                                             <div className="card-detail-left">
                                                 <ul>

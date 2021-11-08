@@ -900,6 +900,17 @@ class VendorController extends Controller
             }
         }
     }
+
+    public function get_ven_booking_by_id(Request $request){
+        $bookings = Booking::where('id',$request->id)->with('service','sub_service','information','booking_services','vendor')->first();
+        $Emps = Employee::where('vendor_id',$request->vendorId)->get();
+        return response()->json([
+            'message' => "Bookings",
+            'data' => $bookings,
+            'employees' => $Emps,
+        ]);
+    }
+
     public function get_vendor_bookings(Request $request) {
         $bookings = Booking::where('vendor_id',$request->vendor_id)->with('service','sub_service' , 'information')->get();
         return response()->json([
@@ -931,11 +942,14 @@ class VendorController extends Controller
         ]);
     }
     public function assign_employee_booking(Request $request) {
+        $ass_employee = new Empbooking();
+        $ass_employee -> employee_id = $request -> selected_employee;
+        $ass_employee -> booking_id = $request -> booking_id;
+        $ass_employee -> save();
+
         return response()->json([
             'status' => true,
-            'message' => "Pending Bookings",
-            'data' => $bookings,
-            'vendors' => $vendors
+            'message' => "Assinged To Employee Successfull",
         ]);
     }
     
