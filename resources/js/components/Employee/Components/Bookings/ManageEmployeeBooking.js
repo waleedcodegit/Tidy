@@ -9,8 +9,6 @@ class EmployeeBookingDetails extends Component {
         this.state = {
             booking:{},
             loading:true,
-            beforeImages:'',
-            afterImages:'',
             serviceRounds:{},
             error_string:''
 
