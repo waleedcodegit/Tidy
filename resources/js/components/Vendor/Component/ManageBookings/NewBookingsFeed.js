@@ -122,15 +122,30 @@ class BookingsFeed extends Component {
                                                         <div className="divid-line"/>
                                                        <div className="card-detail-left">
                                                            <ul>
+                                                               <li>Name:</li>
+                                                              <li>Email:</li>
+                                                              <li>Phone:</li>
                                                                <li>Booking Type: </li>
                                                                <li>Residential Type:</li>
-                                                               <li>Price:</li>
+                                                               <li>Address:</li>
+                                                               <li>Date:</li>
+                                                               <li>Time:</li>
+                                                               <li>Service Name:</li>
+                                                               <li>Qoute: </li>
                                                            </ul>
                                                        </div>
                                                        <div className="card-detail-right">
                                                            <ul>
+                                                           <li>{data.customer.customer.first_name+ ' '+data.customer.customer.last_name}</li>
+                                                           <li>{data.customer.customer.email}</li>
+                                                           <li>{data.customer.customer.phone}</li>
                                                                <li>{data.booking_type == 1 ? "One Time" : "Recurring"}</li>
-                                                               <li>{data.service.type}</li>
+                                                               <li>{data.booking_information.resident_type}</li>
+                                                               <li>{data.booking_information.location_address}</li>
+                                                               <li>{data.booking.date}</li>
+                                                               <li>{data.booking.time}</li>
+                                                               {/* <li>${data.booking.time}</li> */}
+                                                               <li>{data.service.name}</li>
                                                                <li>${data.booking.booking_totals}</li>
                                                            </ul>
                                                        </div>
@@ -140,15 +155,29 @@ class BookingsFeed extends Component {
                                                          <div className="divid-line"/>
                                                         <div className="card-detail-left">
                                                             <ul>
+                                                            <li>Name:</li>
+                                                              <li>Email:</li>
+                                                              <li>Phone:</li>
                                                             <li>Booking Type: </li>
-                                                           <li>Residential Type:</li>
+                                                               <li>Residential Type:</li>
+                                                               <li>Address:</li>
+                                                               <li>Date:</li>
+                                                               <li>Time:</li>
+                                                               <li>Service Name:</li>
                                                                 <li>Qoute: </li>
                                                             </ul>
                                                         </div>
                                                         <div className="card-detail-right">
                                                             <ul>
+                                                            <li>{data.customer.customer.first_name+ ' '+data.customer.customer.last_name}</li>
+                                                           <li>{data.customer.customer.email}</li>
+                                                           <li>{data.customer.customer.phone}</li>
                                                             <li>{data.booking_type == 1 ? "One Time" : "Recurring"}</li>
-                                                           <li>{data.service.type}</li>
+                                                            <li>{data.booking_information.resident_type}</li>
+                                                               <li>{data.booking_information.location_address}</li>
+                                                               <li>{data.booking.date}</li>
+                                                               <li>{data.booking.time}</li>
+                                                               <li>{data.service.name}</li>
                                                                 <li>${data.vendor_qoute.quote}</li>
                                                             </ul>
                                                         </div>
@@ -158,15 +187,30 @@ class BookingsFeed extends Component {
                                                     <div className="divid-line"/>
                                                    <div className="card-detail-left">
                                                        <ul>
-                                                           <li>Booking Type: </li>
-                                                           <li>Residential Type:</li>
+                                                               <li>Name:</li>
+                                                              <li>Email:</li>
+                                                              <li>Phone:</li>
+                                                             <li>Booking Type: </li>
+                                                               <li>Residential Type:</li>
+                                                               <li>Address:</li>
+                                                               <li>Date:</li>
+                                                               <li>Time:</li>
+                                                               <li>Service Name:</li>
                                                            <li>Price:</li>
                                                        </ul>
                                                    </div>
                                                    <div className="card-detail-right">
                                                        <ul>
-                                                           <li>{data.booking_type == 1 ? "One Time" : "Recurring"}</li>
-                                                           <li>{data.service.type}</li>
+                                                           <li>{data.customer.customer.first_name+ ' '+data.customer.customer.last_name}</li>
+                                                             <li>{data.customer.customer.email}</li>
+                                                           <li>{data.customer.customer.phone}</li>
+                                                            <li>{data.booking_type == 1 ? "One Time" : "Recurring"}</li>
+                                                               <li>{data.booking_information.resident_type}</li>
+                                                               <li>{data.booking_information.location_address}</li>
+                                                               <li>{data.booking.date}</li>
+                                                               <li>{data.booking.time}</li>
+                                                               <li>${data.booking.time}</li>
+                                                               <li>{data.service.name}</li>
                                                            <li>${data.booking.booking_totals}</li>
                                                        </ul>
                                                    </div>

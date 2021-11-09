@@ -9,7 +9,15 @@ class Index extends React.Component{
             name: '',
             username: '',
             password: '',
-            image: ''
+            image: '',
+            policeidimg: '',
+            email: '',
+            phone: '',
+            address: '',
+            service: '',
+            serviceprice:'',
+            work:'',
+            dob:'',
         }
     }
 
@@ -28,6 +36,41 @@ class Index extends React.Component{
     getPassword(event){
         this.setState({
             password: event.target.value
+        })
+    }
+    getEmail(event){
+        this.setState({
+            email: event.target.value
+        })
+    }
+    getPhone(event){
+        this.setState({
+            phone: event.target.value
+        })
+    }
+    getAddress(event){
+        this.setState({
+            address: event.target.value
+        })
+    }
+    getService(event){
+        this.setState({
+            service: event.target.value
+        })
+    }
+    getServicePrice(event){
+        this.setState({
+            serviceprice: event.target.value
+        })
+    }
+    getWork(event){
+        this.setState({
+            work: event.target.value
+        })
+    }
+    getDateofbirth(event){
+        this.setState({
+            dob: event.target.value
         })
     }
 
@@ -51,6 +94,26 @@ class Index extends React.Component{
             }, error => { console.error(error); });
         }
     }
+    getPoliceid(event) {
+        if (event.target.files) {
+            const files = Array.from(event.target.files);
+            const promises = files.map(file => {
+                return (new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.addEventListener('load', (ev) => {
+                        resolve(ev.target.result);
+                    });
+                    reader.addEventListener('error', reject);
+                    reader.readAsDataURL(file);
+                }))
+            });
+            Promise.all(promises).then(images => {
+                this.setState({
+                    policeidimg: images[0]
+                })
+            }, error => { console.error(error); });
+        }
+    }
 
     createEmployee(event) {
         event.preventDefault();
@@ -58,8 +121,16 @@ class Index extends React.Component{
             name: this.state.name,
             username: this.state.username,
             password: this.state.password,
+            email: this.state.email,
+            phone: this.state.phone,
+            address: this.state.address,
+            service: this.state.service,
+            serviceprice: this.state.serviceprice,
             token: window.localStorage.getItem('vt'),
             image: this.state.image,
+            policeidimg: this.state.policeidimg,
+            work:this.state.work,
+            dob:this.state.dob,
         }
         let Configs = {
             headers: {
@@ -121,8 +192,56 @@ class Index extends React.Component{
                             </div>
                             <div classNameName="col-6">
                                 <div className="form-group">
+                                    <label>Email</label>
+                                    <input type="text" className="form-control" onChange={this.getEmail.bind(this)} />
+                                </div>
+                            </div>
+                            <div classNameName="col-6">
+                                <div className="form-group">
+                                    <label>Phone#</label>
+                                    <input type="text" className="form-control" onChange={this.getPhone.bind(this)} />
+                                </div>
+                            </div>
+                            <div classNameName="col-6">
+                                <div className="form-group">
+                                    <label>Address</label>
+                                    <input type="text" className="form-control" onChange={this.getAddress.bind(this)} />
+                                </div>
+                            </div>
+                            <div classNameName="col-6">
+                                <div className="form-group">
+                                    <label>Date of Birth</label>
+                                    <input type="text" className="form-control" onChange={this.getDateofbirth.bind(this)} />
+                                </div>
+                            </div>
+                            <div classNameName="col-6">
+                                <div className="form-group">
+                                    <label>Service</label>
+                                    <input type="text" className="form-control" onChange={this.getService.bind(this)} />
+                                </div>
+                            </div>
+                            <div classNameName="col-6">
+                                <div className="form-group">
+                                    <label>Work</label>
+                                    <input type="text" className="form-control" onChange={this.getWork.bind(this)} />
+                                </div>
+                            </div>
+                            <div classNameName="col-6">
+                                <div className="form-group">
+                                    <label>Service Price</label>
+                                    <input type="text" className="form-control" onChange={this.getServicePrice.bind(this)} />
+                                </div>
+                            </div>
+                            <div classNameName="col-6">
+                                <div className="form-group">
                                     <label>Image</label>
                                     <input type="file" className="form-control" onChange={this.getImage.bind(this)} />
+                                </div>
+                            </div>
+                            <div classNameName="col-6">
+                                <div className="form-group">
+                                    <label>Police Id</label>
+                                    <input type="file" className="form-control" onChange={this.getPoliceid.bind(this)} />
                                 </div>
                             </div>
                         </div>

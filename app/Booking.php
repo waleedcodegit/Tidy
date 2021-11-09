@@ -23,4 +23,7 @@ class Booking extends Model
     public function vendor() {
         return $this->belongsTo('App\Vendor','vendor_id');
     }
+    public function customer() {
+        return $this->belongsTo('App\Customer','customer_id');
+    }
 }

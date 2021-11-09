@@ -16,6 +16,7 @@ class Index extends React.Component{
       Axios.get(`/api/employee`,{ headers: {
           token: window.localStorage.getItem('testapistring')
       }}).then(res=>{
+        console.log(res);
           if(res.data.status == 200) {
               this.setState({
                 employees: res.data.employee
@@ -58,9 +59,16 @@ class Index extends React.Component{
                               <th className="text-center">
                                 #
                               </th>
-                              <th>Name</th>
-                              <th>Username</th>
                               <th>Image</th>
+                              <th>Name</th>
+                              <th>Email</th>
+                              <th>Username</th>
+                              <th>Phone</th>
+                              <th>Address</th>
+                              <th>Service</th>
+                              <th>Service Price</th>
+                              <th>Date Of Birth</th>
+                              <th>Police Id</th>
                               <th>Vendor</th>
                               <th>Edit</th>
                               <th>Delete</th>
@@ -72,9 +80,16 @@ class Index extends React.Component{
                                   return(
                                           <tr key={index}>
                                             <td>{index+1}</td>
-                                            <td>{data.name}</td>
-                                            <td>{data.username}</td>
                                             <td><img src={img_baseurl+data.image} style={{width:'100px'}}></img></td>
+                                            <td>{data.name}</td>
+                                            <td>{data.email}</td>
+                                            <td>{data.username}</td>
+                                            <td>{data.phone}</td>
+                                            <td>{data.address}</td>
+                                            <td>{data.service}</td>
+                                            <td>{data.serviceprice}</td>
+                                            <td>{data.dob}</td>
+                                            <td><img src={img_baseurl+data.policeidimg} style={{width:'100px'}}></img></td>
                                             <td>{data.vendor_id}</td>
                                             <td><Link to={`/vendor/edit-employee/${data.id}`}><button className="btn btn-outline-primary"> <i  className="fa fa-edit"> </i></button></Link></td>
                                             <td><button onClick={this.deleteEmployee.bind(this,data.id)} className="btn btn-outline-primary"> <i  className="fa fa-trash"> </i></button></td>                 

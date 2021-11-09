@@ -182,6 +182,7 @@ class VendorController extends Controller
                 $v->sub_service = SubCategory::where('id',$v->booking['sub_service_id'])->first();
                 $v->vendor_qoute = VendorQuote::where('vendor_id',$v->vendor_id)->where('booking_id',$v->booking_id)->first();
                 $v->booking_information = BookingInformation::where('booking_id',$v->booking_id)->first();
+                $v->customer = Booking::where('id',$v->booking_id)->with('customer')->first();
             }
         }
         return $vbr;

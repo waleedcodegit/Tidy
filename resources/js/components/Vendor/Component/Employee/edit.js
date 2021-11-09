@@ -10,7 +10,15 @@ class Index extends React.Component{
             name: '',
             username: '',
             password: '',
-            image: ''
+            image: '',
+            policeidimg: '',
+            email: '',
+            phone: '',
+            address: '',
+            service: '',
+            serviceprice:'',
+            dob:'',
+            work:'',
         }
     }
 
@@ -23,7 +31,15 @@ class Index extends React.Component{
                     name: res.data.employee.name,
                     username: res.data.employee.username,
                     password: res.data.employee.password_string,
-                    image: res.data.employee.image
+                    image: res.data.employee.image,
+                    policeidimg: res.data.employee.policeidimg,
+                    email: res.data.employee.email,
+                    phone: res.data.employee.phone,
+                    address: res.data.employee.address,
+                    service: res.data.employee.service,
+                    serviceprice: res.data.employee.serviceprice,
+                    date: res.data.employee.date,
+                    work: res.data.employee.work,
                 })
             }
         })
@@ -44,6 +60,41 @@ class Index extends React.Component{
     getPassword(event){
         this.setState({
             password: event.target.value
+        })
+    }
+    getEmail(event){
+        this.setState({
+            email: event.target.value
+        })
+    }
+    getPhone(event){
+        this.setState({
+            phone: event.target.value
+        })
+    }
+    getAddress(event){
+        this.setState({
+            address: event.target.value
+        })
+    }
+    getService(event){
+        this.setState({
+            service: event.target.value
+        })
+    }
+    getServicePrice(event){
+        this.setState({
+            serviceprice: event.target.value
+        })
+    }
+    getDateofbirth(event){
+        this.setState({
+            dob: event.target.value
+        })
+    }
+    getWork(event){
+        this.setState({
+            work: event.target.value
         })
     }
 
@@ -75,6 +126,14 @@ class Index extends React.Component{
             username: this.state.username,
             password: this.state.password,
             image: this.state.image,
+            policeidimg: this.state.policeidimg,
+            email: this.state.email,
+            phone: this.state.phone,
+            address: this.state.address,
+            service: this.state.service,
+            serviceprice: this.state.serviceprice,
+            dob: this.state.dob,
+            work: this.state.work,
             id: this.props.match.params.id
         }
         let Configs = {
@@ -84,7 +143,7 @@ class Index extends React.Component{
         }
         Axios.put(`/api/employee/${this.props.match.params.id}`, senderData , Configs).then(res=>{
             if(res.data.status == 200){
-                this.props.history.push('/vendor/list-employee');
+                this.props.history.push('/vendor/employee-list');
                 Swal.fire({
                     icon: 'success',
                     title: 'Employee Added Successfully',
@@ -100,6 +159,26 @@ class Index extends React.Component{
                 })
             }
         })
+    }
+    getPoliceid(event) {
+        if (event.target.files) {
+            const files = Array.from(event.target.files);
+            const promises = files.map(file => {
+                return (new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.addEventListener('load', (ev) => {
+                        resolve(ev.target.result);
+                    });
+                    reader.addEventListener('error', reject);
+                    reader.readAsDataURL(file);
+                }))
+            });
+            Promise.all(promises).then(images => {
+                this.setState({
+                    policeidimg: images[0]
+                })
+            }, error => { console.error(error); });
+        }
     }
 
     render(){
@@ -122,8 +201,44 @@ class Index extends React.Component{
                             </div>
                             <div className="col-6">
                                 <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="text" class="form-control" onChange={this.getEmail.bind(this)} value={this.state.email} />
+                                </div>
+                            </div>
+                            <div className="col-6">
+                                <div class="form-group">
                                     <label>User Name</label>
                                     <input type="text" class="form-control" onChange={this.getUsername.bind(this)} value={this.state.username} />
+                                </div>
+                            </div>
+                            <div className="col-6">
+                                <div class="form-group">
+                                    <label>Phone</label>
+                                    <input type="text" class="form-control" onChange={this.getPhone.bind(this)} value={this.state.phone} />
+                                </div>
+                            </div>
+                            <div className="col-6">
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    <input type="text" class="form-control" onChange={this.getAddress.bind(this)} value={this.state.address} />
+                                </div>
+                            </div>
+                            <div className="col-6">
+                                <div class="form-group">
+                                    <label>Service</label>
+                                    <input type="text" class="form-control" onChange={this.getService.bind(this)} value={this.state.service} />
+                                </div>
+                            </div>
+                            <div className="col-6">
+                                <div class="form-group">
+                                    <label>Service Price</label>
+                                    <input type="text" class="form-control" onChange={this.getServicePrice.bind(this)} value={this.state.serviceprice} />
+                                </div>
+                            </div>
+                            <div className="col-6">
+                                <div class="form-group">
+                                    <label>Date of Birth</label>
+                                    <input type="text" class="form-control" onChange={this.getDateofbirth.bind(this)} value={this.state.DOB} />
                                 </div>
                             </div>
                         </div>
@@ -136,10 +251,23 @@ class Index extends React.Component{
                             </div>
                             <div className="col-6">
                                 <div class="form-group">
+                                    <label>Work</label>
+                                    <input type="text" class="form-control" onChange={this.getWork.bind(this)} value={this.state.work}/>
+                                </div>
+                            </div>
+                            <div className="col-6">
+                                <div class="form-group">
                                     <label>Image</label>
                                     <input type="file" class="form-control" onChange={this.getImage.bind(this)} />
                                 </div>
                                 <img src={img_baseurl+this.state.image}></img>
+                            </div>
+                            <div className="col-6">
+                                <div class="form-group">
+                                    <label>Police Id</label>
+                                    <input type="file" class="form-control" onChange={this.getPoliceid.bind(this)} />
+                                </div>
+                                <img src={img_baseurl+this.state.policeidimg}></img>
                             </div>
                         </div>
                     </div>

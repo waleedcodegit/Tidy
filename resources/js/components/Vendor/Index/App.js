@@ -106,13 +106,15 @@ class VendorIndex extends Component {
                     <div className="main-sidebar sidebar-style-2">
                     <aside id="sidebar-wrapper">
                         <div className="sidebar-brand">
-                        <a href="index.html"> <img alt="image" src="/images/site-logo.png" className="header-logo" /> <span className="logo-name">Tidy Vendor Dashboard</span>
+                        <a href="/vendor/dashboard"> <img alt="image" src="/images/site-logo.png" className="header-logo" /> <span className="logo-name">Tidy Vendor Dashboard</span>
                         </a>
                         </div>
                         <ul className="sidebar-menu">
                         <li className="menu-header">Main</li>
                         <li className="dropdown active">
-                           <Link href="/vendor/dashboard" className="nav-link"><i data-feather="monitor" /><span>Dashboard</span></Link>
+                        <a href="/vendor/dashboard"> <span className="nav-link has-dropdown">Dashboard</span>
+                        </a>
+                           {/* <Link href="/vendor/dashboard" className="nav-link"><i data-feather="monitor" /><span>Dashboard</span></Link> */}
                         </li>
                         <li className="dropdown">
                             <a href="#" className="menu-toggle nav-link has-dropdown"><i data-feather="briefcase" /><span>Manage Bookings</span></a>

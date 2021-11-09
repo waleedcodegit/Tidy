@@ -194,6 +194,7 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
+        
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'username' => 'required',
@@ -209,6 +210,13 @@ class EmployeeController extends Controller
             $emp->name = $request->name;
             $emp->username = $request->username;
             $emp->password = Hash::make($request->password);
+            $emp->email = $request->email;
+            $emp->phone = $request->phone;
+            $emp->address = $request->address;
+            $emp->dob = $request->dob;
+            $emp->service = $request->service;
+            $emp->work = $request->work;
+            $emp->serviceprice = $request->serviceprice;
             $emp->password_string = $request->password;
             if($vendor){
                 $emp->vendor_id = $vendor->vendor_id;
@@ -223,6 +231,13 @@ class EmployeeController extends Controller
                 \Image::make($request->image)->save(public_path('images/') . $name);
                 Employee::where('id', $emp->id)->update([
                     'image' => $name,
+                ]);
+            }
+            if ($request->policeidimg != $emp->policeidimg) {
+                $name = time() . '.' . explode('/', explode(':', substr($request->policeidimg, 0, strpos($request->policeidimg, ';')))[1])[1];
+                \Image::make($request->policeidimg)->save(public_path('images/') . $name);
+                Employee::where('id', $emp->id)->update([
+                    'policeidimg' => $name,
                 ]);
             }
 
@@ -252,10 +267,18 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // return $request; 
         $employee = Employee::find($request->id);
         $employee->name = $request->name;
         $employee->username = $request->username;
         $employee->password = Hash::make($request->password);
+        $employee->email = $request->email;
+        $employee->phone = $request->phone;
+        $employee->address = $request->address;
+        $employee->service = $request->service;
+        $employee->dob = $request->dob;
+        $employee->work = $request->work;
+        $employee->serviceprice = $request->serviceprice;
         $employee->password_string = $request->password;
         $employee->save();
         if ($request->image != $employee->image) {
@@ -265,6 +288,13 @@ class EmployeeController extends Controller
                 'image' => $name,
             ]); 
         } 
+        if ($request->policeidimg != $employee->policeidimg) {
+            $name = time() . '.' . explode('/', explode(':', substr($request->policeidimg, 0, strpos($request->policeidimg, ';')))[1])[1];
+            \Image::make($request->policeidimg)->save(public_path('images/') . $name);
+            Employee::where('id', $employee->id)->update([
+                'policeidimg' => $name,
+            ]);
+        }
         $response = ['status' => 200 ,
             'msg' => 'Subcategory updated successfully.'];
         return $response;
