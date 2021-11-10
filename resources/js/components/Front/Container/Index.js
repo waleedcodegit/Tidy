@@ -24,6 +24,7 @@ import VendorForgotPassword from '../../Vendor/Auth/VendorForgotPassword';
 import VendorResetPassword from '../../Vendor/Auth/VendorResetPassword';
 import BookingDetails from '../Pages/UserProfile/Bookings/BookingDetails';
 import EmpLogin from '../../Employee/Auth/EmpLogin';
+import CustomerServiceDetails from '../Pages/UserProfile/Bookings/CustomerServiceDetails';
 
 
 class Index extends Component {
@@ -64,7 +65,7 @@ class Index extends Component {
                 <Route  path="/forgot-password" component={ForgotPassword}></Route>
 
                 <Route  path="/booking-details/:id" component={BookingDetails}></Route>
-
+                <Route path="/service-details/:id" component={CustomerServiceDetails}></Route>
                 <Route  path="/reset-password/:id" component={ResetPassword}></Route>
                 <Route path="/vendor-forget-password" component={VendorForgotPassword}></Route>
                 <Route path="/vendor-reset-password/:id" component={VendorResetPassword}></Route>

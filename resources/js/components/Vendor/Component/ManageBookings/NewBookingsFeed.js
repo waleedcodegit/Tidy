@@ -41,7 +41,7 @@ class BookingsFeed extends Component {
         let data ={
             vendor_id: this.props.vendor.data.vendor_id
         }
-        Axios.post('/api/accept-booking', data ,bookingId).then(res=>{
+        Axios.post('/api/accept_booking', data ,bookingId).then(res=>{
             console.log(res);
             if(res.data.status == true){
                 Swal.fire({
@@ -136,15 +136,14 @@ class BookingsFeed extends Component {
                                                        </div>
                                                        <div className="card-detail-right">
                                                            <ul>
-                                                           <li>{data.customer.customer.first_name+ ' '+data.customer.customer.last_name}</li>
-                                                           <li>{data.customer.customer.email}</li>
-                                                           <li>{data.customer.customer.phone}</li>
+                                                            <li>{data.customer.customer.first_name+ ' '+data.customer.customer.last_name}</li>
+                                                            <li>{data.customer.customer.email}</li>
+                                                            <li>{data.customer.customer.phone}</li>
                                                                <li>{data.booking_type == 1 ? "One Time" : "Recurring"}</li>
                                                                <li>{data.booking_information.resident_type}</li>
                                                                <li>{data.booking_information.location_address}</li>
                                                                <li>{data.booking.date}</li>
                                                                <li>{data.booking.time}</li>
-                                                               {/* <li>${data.booking.time}</li> */}
                                                                <li>{data.service.name}</li>
                                                                <li>${data.booking.booking_totals}</li>
                                                            </ul>
@@ -209,7 +208,6 @@ class BookingsFeed extends Component {
                                                                <li>{data.booking_information.location_address}</li>
                                                                <li>{data.booking.date}</li>
                                                                <li>{data.booking.time}</li>
-                                                               <li>${data.booking.time}</li>
                                                                <li>{data.service.name}</li>
                                                            <li>${data.booking.booking_totals}</li>
                                                        </ul>

@@ -11,4 +11,8 @@ class BookingService extends Model
     public function booking(){
         return $this->belongsto(Booking::class,'booking_id');
     }
+
+    public function bookingInformation(){
+        return $this->belongsto(BookingInformation::class,'booking_id');
+    }
 }

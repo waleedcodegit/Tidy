@@ -7,6 +7,7 @@ class BookingDetails extends Component {
         super(props);
         this.state = {
             booking:{},
+            quotes:[],
             loading:true
         };
     }
@@ -17,6 +18,12 @@ class BookingDetails extends Component {
             this.setState({
                 booking:res.data.data,
                 loading:false
+            })
+        })
+        Axios.post('/api/get_vendor_quotes',{id:this.props.match.params.id}).then(res=>{
+            console.log(res);
+            this.setState({
+                quotes:res.data.data,
             })
         })
     }
@@ -141,69 +148,92 @@ class BookingDetails extends Component {
                                     </div>
                                 </div>
                             </div>
-                            {
-                                this.state.booking.service.residential_type == 0  && this.state.booking.vendor_status !=1 ?
-                                <div className="vendor-qote">
-                                <h3>Vendor Quotes</h3>
-                                <div className="divid-line" />
+                                
+                        <div className="blog-wrap row">
+                            <div className="col-lg-12 sm-padding">
                                 <div className="row">
-                                    <div className="col-md-2">
-                                        <div className="qote-img">
-                                            <img src="img/Worker-1.jpg" className="qote-thumb" />
-                                        </div>
-                                    </div>
-                                    <div className="col-md-7">
-                                        <div className="qote-section">
-                                            <h2>Jhon Smith</h2>
-                                            <p>Australia Cleaning Services Company</p>
-                                            <p>98 Shirley Street PIMPAMA QLD 4209 AUSTRALIA</p>
-                                            <span className="fa fa-star checked-star" />
-                                            <span className="fa fa-star checked-star" />
-                                            <span className="fa fa-star checked-star" />
-                                            <span className="fa fa-star" />
-                                            <span className="fa fa-star" />
-                                            <span>4.9</span>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-3">
-                                        <div className="qote-price">
-                                            <span>$150.00</span>
-                                            <a href="#" className="bk-btn">Accept</a>
+                                    <div className="col-sm-12 padding-15">
+                                        <div className="blog-item profile-shadow">
+                                            <div id="main" className="blog-item profile-shadow"></div>
+                                                {
+                                                    this.state.booking.service.residential_type == 0  && this.state.booking.vendor_status != 1 ?
+                                                    <div className="vendor-qote">
+                                                    <h3>Vendor Quotes</h3>
+                                                    <div className="divid-line" />
+                                                    
+                                                    {
+                                                        this.state.quotes.map((data,index)=>{
+                                                            return(
+                                                                <div className="row col-md-12">
+                                                                    
+                                                                    <div className="col-md-2">
+                                                                        <div className="qote-img">
+                                                                            <img src="img/Worker-1.jpg" className="qote-thumb" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="col-md-7">
+                                                                        <div className="qote-section">
+                                                                            <h2> {data.vendor.first_name} </h2>
+                                                                            <p> {data.vendor.company_name} </p>
+                                                                            <p> {data.vendor.address} </p>
+                                                                            <span className="fa fa-star checked-star" />
+                                                                            <span className="fa fa-star checked-star" />
+                                                                            <span className="fa fa-star checked-star" />
+                                                                            <span className="fa fa-star checked-star" />
+                                                                            <span className="fa fa-star" />
+                                                                            <span>{data.vendor.ratings}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="col-md-3">
+                                                                    <div className="qote-price">
+                                                                        <span> ${data.quote} </span>
+                                                                        <a href="#" className="bk-btn">Accept</a>
+                                                                    </div>
+                                                                    </div>
+                                                                </div>
+                                                            )
+                                                        })
+                                                    }
+                                                    
+                                                </div>
+                                                :
+                                                null
+                                                }
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            :
-                            null
-                            }
                            
                             <div className="vendor-detail">
                                 <h3>Vendor Details</h3>
                                 {
-                                    this.state.booking.vendor_status == 1 ?
-                                    <div className="detl-section">
-                                    <div className="row">
-                                        <div className="col-md-3">
-                                            <span>Vendor Name</span>
-                                            <p>Jhon Smith</p>
+                                    this.state.booking.vendor_status == 1 
+                                    ?
+                                        <div className="detl-section">
+                                            <div className="row">
+                                                <div className="col-md-3">
+                                                    <span>Vendor Name</span>
+                                                    <p>{this.state.booking.vendor.first_name}</p>
+                                                </div>
+                                                <div className="col-md-3">
+                                                    <span>Business Type</span>
+                                                    <p>{this.state.booking.vendor.company_name}</p>
+                                                </div>
+                                                <div className="col-md-6">
+                                                    <span>From</span>
+                                                    <p>{this.state.booking.vendor.address}</p>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div className="col-md-3">
-                                            <span>Job Type</span>
-                                            <p>Company</p>
+                                    :
+                                        <div className="detl-section">
+                                            <div className="text-center">
+                                            <p style={{color:'#000000a3' , fontSize:'20px'}}>Vendors has not quoted yet. </p>
+                                            </div>
                                         </div>
-                                        <div className="col-md-6">
-                                            <span>From</span>
-                                            <p>98 Shirley Street PIMPAMA QLD 4209 AUSTRALIA</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                :
-                                <div className="detl-section">
-                                    <div className="text-center">
-                                    <p style={{color:'#000000a3' , fontSize:'20px'}}>Vendor selection is in process. </p>
-                                    </div>
-                                </div>
                                 }
+                                
                             </div>
                             <a href="#">
                             </a><div className="row"><a href="#">
@@ -241,7 +271,7 @@ class BookingDetails extends Component {
                                                                         <td>{data.round}</td>
                                                                         <td>${data.total_price}</td>
                                                                         <td><span className={data.payment_status == 1 ? "paid-cls": "due-cls"}>{data.payment_status == 1 ? 'Paid' : 'Due Payment'}</span></td>
-                                                                        <td><button className="btn btn-sm btn-outline-info">Details</button></td>
+                                                                        <td><button onClick={()=>{window.open('/service-details/'+data.id,'_blank')}} className="btn btn-sm btn-outline-info">Details</button></td>
                                                                     </tr>
                                                                  )
                                                              })

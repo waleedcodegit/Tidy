@@ -33,6 +33,8 @@ use App\VendorNotifications;
 use App\Employee;
 use App\ServiceCheck;
 use App\ServiceRound;
+use App\VendorQuote;
+use App\ServiceCheck;
 use Illuminate\Support\Facades\DB;
 
 class FrontController extends Controller
@@ -910,6 +912,7 @@ class FrontController extends Controller
 
     public function get_booking_by_id(Request $request){
         $bookings = Booking::where('id',$request->id)->with('service','sub_service','information','booking_services','vendor')->first();
+        //$bookings->vendor_qoutes = VendorQuote::where('booking_id',$bookings->id)->with('vendor')->orderby('quote','desc')->limit(3)->get();
         return response()->json([
             'message' => "Bookings",
             'data' => $bookings,
@@ -917,12 +920,20 @@ class FrontController extends Controller
     }
 
     public function service_details(Request $request){
-        $bookings = BookingService::where('id',$request->id)->with('booking')->first();
+        $bookings = BookingService::where('id',$request->id)->with('booking','bookingInformation')->first();
         $s_round = ServiceRound::where('service_id',$request->id)->first();
         return response()->json([
             'message' => "Bookings and ServiceRounds",
             'data' => $bookings,
             'serviceRounds' => $s_round
+        ]);
+    }
+
+    public function get_checklists(){
+        $checklists = ServiceCheck::where('delete_status',0)->get();
+        return response()->json([
+            'message' => "Checklists",
+            'data' => $checklists,
         ]);
     }
 
@@ -946,6 +957,14 @@ class FrontController extends Controller
             'msg' => 'Service Ended Successfully'
         ];
         return $response;
+    }
+
+    public function get_vendor_quotes(Request $request){
+        $quotes = VendorQuote::where('booking_id',$request->id)->with('vendor')->orderby('quote','desc')->limit(3)->get();
+        return response()->json([
+            'message' => "Vendor Quotes",
+            'data' => $quotes,
+        ]);
     }
     
     public function upload_service_images(Request $request){

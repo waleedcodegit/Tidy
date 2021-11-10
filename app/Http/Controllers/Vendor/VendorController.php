@@ -955,6 +955,7 @@ class VendorController extends Controller
     }
     
     public function accept_booking (Request $request){
+        return $request;
         $booking = Booking::where('vendor_id',$request->vendor_id)
                         ->where('id',$request->bookingId)
                         ->update([
