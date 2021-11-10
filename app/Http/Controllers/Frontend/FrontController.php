@@ -31,6 +31,7 @@ use App\VendorBookingRequest;
 use App\VendorLocation;
 use App\VendorNotifications;
 use App\Employee;
+use App\ServiceCheck;
 use App\ServiceRound;
 use Illuminate\Support\Facades\DB;
 
@@ -251,7 +252,6 @@ class FrontController extends Controller
                 $payment_id = $payment->id;
             }
 
-           
             if($booking->recurring_type == 5){
                 if($booking->custom_days){
                     $custom_days = json_decode($booking->custom_days);
@@ -260,19 +260,15 @@ class FrontController extends Controller
                             $day_ = date('w');
                             if($key == $day_ ){
                                 $date = date('Y-m-d'); 
-                                echo '/n one '.$key . '-' . $day_ . '____' . $date;
+                              
                             }else if($key > $day_){
                                 $days = $key + $day_;
                                 $date = date('Y-m-d', strtotime("+$days days"));
-                                echo '/n two '.$key . '-' . $day_ . '____' . $date . '__dd__' . $days;
-
                             }
                             else if($key < $day_){
                                 $days = $day_ - $key;
                                 $date = date('Y-m-d', strtotime("+$days days"));
-                                echo '/n three '.$key . '-' . $day_ . '____' . $date. '__dd__' . $days;
                             }
-                            echo '<br/> service date'. $date . '--s---';
                             $service = new BookingService();
                             $service->booking_id = $booking->id;
                             $service->date = $date;
@@ -283,6 +279,8 @@ class FrontController extends Controller
                             $service->payment_status = $payment_id != 0 ? 1 : 0;
                             $service->status = $payment_id != 0 ? 0 : 1;
                             $service->save();
+                            $this->create_service_rounds($service);
+
                         }
                     }
                 }
@@ -297,6 +295,8 @@ class FrontController extends Controller
                 $service->payment_status = $payment_id != 0 ? 1 : 0;
                 $service->status = $payment_id != 0 ? 0 : 1;
                 $service->save();
+                $this->create_service_rounds($service);
+
             }
     }
     public function create_services_daily(){
@@ -308,7 +308,7 @@ class FrontController extends Controller
                 if($booking->booking_type == 2){
                     if($booking->recurring_type == 1){
                         // Daily Recurring
-                        if($booking->nsd == date('Y-m-d')){
+                        if($booking->nsd == date('Y-m-d' , strtotime('+7 days'))){
                             $booking->nsd = date('Y-m-d', strtotime('+1 days'));
                             $booking->save();
                             $this->create_service($booking);
@@ -317,7 +317,7 @@ class FrontController extends Controller
                     }
                     else if($booking->recurring_type == 2){
                         // Weekly Recurring
-                        if($booking->nsd == date('Y-m-d')){
+                        if($booking->nsd == date('Y-m-d' , strtotime('+7 days'))){
                         
                             $booking->nsd = date('Y-m-d', strtotime('+7 days'));
                             $booking->save();
@@ -326,7 +326,7 @@ class FrontController extends Controller
                     }
                     else if($booking->recurring_type == 3){
                         // Fornightly Recurring
-                        if($booking->nsd == date('Y-m-d')){
+                        if($booking->nsd == date('Y-m-d' , strtotime('+7 days'))){
                             $this->create_service($booking);
                         $booking->nsd = date('Y-m-d', strtotime('+14 days'));
                         $booking->save();
@@ -334,7 +334,7 @@ class FrontController extends Controller
                     }
                     else if($booking->recurring_type == 4){
                         // Monthly Recurring
-                        if($booking->nsd == date('Y-m-d')){
+                        if($booking->nsd == date('Y-m-d' , strtotime('+7 days'))){
                             $this->create_service($booking);
                         $booking->nsd = date('Y-m-d', strtotime('+1 months'));
                         $booking->save();
@@ -344,7 +344,7 @@ class FrontController extends Controller
                         // Custom Recurring
                         if($booking->custome_type == 1){
                             // Weekly Recurring
-                            if($booking->nsd == date('Y-m-d')){
+                            if($booking->nsd == date('Y-m-d' , strtotime('+7 days'))){
                                 $this->create_service($booking);
                             $booking->nsd = date('Y-m-d', strtotime('+7 days'));
                             $booking->save();
@@ -352,7 +352,7 @@ class FrontController extends Controller
                         }
                         else if($booking->custome_type == 2){
                             // Fornightly Recurring
-                            if($booking->nsd == date('Y-m-d')){
+                            if($booking->nsd == date('Y-m-d' , strtotime('+7 days'))){
                                 $this->create_service($booking);
                             $booking->nsd = date('Y-m-d', strtotime('+14 days'));
                             $booking->save();
@@ -360,7 +360,7 @@ class FrontController extends Controller
                         }
                         else if($booking->recurring_type == 3){
                             // Monthly Recurring
-                            if($booking->nsd == date('Y-m-d')){
+                            if($booking->nsd == date('Y-m-d' , strtotime('+7 days'))){
                                 $this->create_service($booking);
                             $booking->nsd = date('Y-m-d', strtotime('+1 months'));
                             $booking->save();
@@ -370,6 +370,12 @@ class FrontController extends Controller
                 }
             }
         }   
+    }
+    public function create_service_rounds($service){
+        $service_round = new ServiceRound();
+        $service_round->service_id = $service->id;
+        $service_round->check_list = json_encode(ServiceCheck::all());
+        $service_round->save();
     }
     public function make_booking(Request $request){
 
@@ -487,11 +493,32 @@ class FrontController extends Controller
                                 $service->payment_status = $payment_id != 0 ? 1 : 0;
                                 $service->status = $payment_id != 0 ? 0 : 1;
                                 $service->save();
+                                $this->create_service_rounds($service);
                             }
                         }
                     }
                    
-                } else{
+                } 
+                // else
+                //  if($booking->booking_type == 2 && $booking->recurring_type == 1){
+                //     $i = 1;
+                //     while($i < 8){
+                //         $service = new BookingService();
+                //         $service->booking_id = $booking->id;
+                //         $service->date = date('Y-m-d', strtotime($i, strtotime($booking->date)));
+                //         $service->time = $booking->time;
+                //         $service->total_price = $booking->booking_totals;
+                //         $service->round = 1;
+                //         $service->payment_id = $payment_id;
+                //         $service->payment_status = $payment_id != 0 ? 1 : 0;
+                //         $service->status = $payment_id != 0 ? 0 : 1;
+                //         $service->save();
+                //         $this->create_service_rounds($service);
+
+                //         $i++;
+                //     }
+                // }
+                 else {
                     $service = new BookingService();
                     $service->booking_id = $booking->id;
                     $service->date = $booking->date;
@@ -502,6 +529,8 @@ class FrontController extends Controller
                     $service->payment_status = $payment_id != 0 ? 1 : 0;
                     $service->status = $payment_id != 0 ? 0 : 1;
                     $service->save();
+                    $this->create_service_rounds($service);
+
                 }
                 
                 if($booking->booking_type == 2){
