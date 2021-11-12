@@ -254,6 +254,7 @@ Route::post('/get_checklists' , 'Frontend\FrontController@get_checklists');
 Route::post('/service_details_by_id' , 'Frontend\FrontController@service_details_by_id');
 Route::post('/accept_vednor_request' , 'Frontend\FrontController@accept_vednor_request');
 Route::post('/update_checklist' , 'Frontend\FrontController@update_checklist');
+Route::post('/submit_complain' , 'Frontend\FrontController@submit_complain');
 
 
 //Emails Controller//

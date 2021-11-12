@@ -1,6 +1,7 @@
 import Axios from 'axios';
 import React, { Component } from 'react';
 import { img_baseurl } from '../../../../Configs/Api';
+import Swal from 'sweetalert2';
 
 class CustomerServiceDetails extends Component {
     constructor(props) {
@@ -13,7 +14,9 @@ class CustomerServiceDetails extends Component {
             serviceRounds: {},
             checklists: [],
             vendor:'',
-            error_string: ''
+            error_string: '',
+            div: 0,
+            complain:'',
 
         };
         console.log(this.state.booking);
@@ -34,8 +37,47 @@ class CustomerServiceDetails extends Component {
                 loading: false
             })
         })
+    }
 
-        
+    make_complain(val){
+        this.setState({
+            div:val
+        })
+    }
+
+    cancel_complain(val){
+        this.setState({
+            div:val
+        })
+    }
+
+    get_complain(e){
+        this.setState({
+            complain:e.target.value
+        })
+    }
+
+    submit_complain(e){
+        e.preventDefault();
+        let data = {
+            id: this.props.match.params.id,
+            complain:this.state.complain,
+        }
+        Axios.post('/api/submit_complain', data).then(res=>{
+            console.log(res);
+            if(res.data.status == 200){
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Your Complaint is Submitted',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                }else{
+                    this.setState({
+                        error_string:res.data.msg
+                    })
+                }
+        })
     }
 
     render() {
@@ -238,17 +280,39 @@ class CustomerServiceDetails extends Component {
                                                                     null
                                                                 }
                                                             </div>
-                                                            <div className="divid-line" />
-
-                                                            <div className="row">
+                                                            
+                                                            {
+                                                                this.state.div == 0 
+                                                                ?
+                                                                <div className="row">
+                                                                <div className="divid-line" />
                                                                 <div className="col-md-12">
                                                                     <span>If You are Satisfied with the Job,Click AGREE</span><button style={{ cursor: 'pointer' , marginLeft:'10px'}} className="btn btn-outline-success">AGREE</button>
                                                                     
                                                                 </div>
                                                                 <div className="col-md-12">
-                                                                    <span>If You have any complains for the Service,Click here</span><button style={{ cursor: 'pointer' , marginLeft:'10px' }} className="btn btn-outline-danger">Make A Complain</button>
+                                                                    <span >If You have any complains for the Service,Click here</span><button onClick={this.make_complain.bind(this,1)} style={{ cursor: 'pointer' , marginLeft:'10px' ,marginTop:'5px' }} className="btn btn-outline-danger">Make A Complain</button>
                                                                 </div>
-                                                            </div>
+                                                                </div>
+                                                                :
+                                                                null
+                                                            }
+                                                            
+                                                            <div className="divid-line" />
+                                                            {
+                                                                this.state.div == 1 
+                                                                ?
+                                                                <div className="row col-md-12">
+                                                                    <textarea onChange={this.get_complain.bind(this)} className="col-md-12"></textarea>
+                                                                    <div className="col-sm-12">
+                                                                    <div className="divid-line" />
+                                                                    <h4><button style={{ cursor: 'pointer' , marginLeft:'10px'}} onClick={this.cancel_complain.bind(this,0)} className="btn btn-outline-danger">Cancel</button></h4>
+                                                                    <h4><button style={{ cursor: 'pointer' , marginLeft:'10px'}} onClick={this.submit_complain.bind(this)} className="btn btn-outline-primary">Submit</button></h4>
+                                                                    </div>
+                                                                </div>
+                                                                :
+                                                                null
+                                                            }
                                                         </div>
                                                         
                                                     </div>

@@ -35,6 +35,7 @@ use App\ServiceCheck;
 use App\ServiceRound;
 use App\VendorQuote;
 use App\Vendor;
+use App\Complaint;
 
 use Illuminate\Support\Facades\DB;
 
@@ -1113,6 +1114,18 @@ class FrontController extends Controller
             'msg' => 'Service Ended Successfully'
         ];
         return $response;
+    }
+
+    public function submit_complain(Request $request){
+        $complain = new Complaint();
+        $complain->service_id = $request->id;
+        $complain->complaints = $request->complain;
+        $complain->save();
+        return response()->json([
+            'status' => 200,
+            'message' => "Complaint Submitted Successfully",
+            'data' => $complain,
+        ]);
     }
     
     public function upload_service_images(Request $request){
