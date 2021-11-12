@@ -605,7 +605,131 @@ class FrontController extends Controller
     }
 
     public function accept_vednor_request(Request $request){
-        
+        $quote = VendorQuote::where('id',$request->quote_id)->first();
+        $booking = Booking::where('id',$quote->booking_id)->first();
+        $customer = Customer::where('id',$booking->customer_id)->first();
+
+        $booking->booking_totals = $quote->quote;
+        $booking->vendor_id = $quote->vendor_id;
+        $booking->vendor_status = 1;
+        $booking->status = 1;
+        $booking->save();
+
+        $charge = false;
+            
+        try{
+            $stripe = new \Stripe\StripeClient(
+                env("STRIPE_SK")
+              );
+            $charge = $stripe->charges->create(array(
+                "amount" => $booking->booking_totals * 100,
+                "currency" => "usd",
+                "customer" => $customer->stripe_id
+              ));
+            }catch(\Stripe\Exception\CardException $e){
+                // $response = ['status' => '401' , 'message' => 'Unable to charge','exception' => $e];
+                // return $response = $response;
+            }
+            $payment_id = 0; 
+            if($charge){
+                $payment = new Payment();
+                $payment->amount = $booking->booking_totals;
+                $payment->name = 'Tidy Home Service Payment';
+                $payment->customer_stripe_id = $customer->stripe_id;
+                $payment->stripe_response = json_encode($charge) ;
+                $payment->save();
+                $payment_id = $payment->id;
+            }
+            if($booking->booking_type == 2 && $booking->recurring_type == 5){
+                if($booking->custom_days){
+                    $custom_days = json_decode($booking->custom_days);
+                    foreach($custom_days as $key => $cd){
+                       if($cd->check){
+                            $day_ = date('w');
+                            if($key == $day_ ){
+                                $date = $booking->date; 
+                            }else if($key > $day_){
+                                $days = $key + $day_;
+                                $date = date('Y-m-d', strtotime($days , strtotime($booking->date)));
+
+                            }
+                            else if($key < $day_){
+                                $days = $day_ - $key;
+                                $date = date('Y-m-d', strtotime($days , strtotime($booking->date)));
+                            }
+                            $service = new BookingService();
+                            $service->booking_id = $booking->id;
+                            $service->date = $date;
+                            $service->time = $booking->time;
+                            $service->total_price = $booking->booking_totals;
+                            $service->round = 1;
+                            $service->payment_id = $payment_id;
+                            $service->payment_status = $payment_id != 0 ? 1 : 0;
+                            $service->status = $payment_id != 0 ? 0 : 1;
+                            $service->save();
+                            $this->create_service_rounds($service);
+                        }
+                    }
+                }
+               
+            } 
+            
+             else {
+                $service = new BookingService();
+                $service->booking_id = $booking->id;
+                $service->date = $booking->date;
+                $service->time = $booking->time;
+                $service->total_price = $booking->booking_totals;
+                $service->round = 1;
+                $service->payment_id = $payment_id;
+                $service->payment_status = $payment_id != 0 ? 1 : 0;
+                $service->status = $payment_id != 0 ? 0 : 1;
+                $service->save();
+                $this->create_service_rounds($service);
+
+            }
+            
+            if($booking->booking_type == 2){
+                if($booking->recurring_type == 1){
+                    // Daily Recurring
+                  
+                    $booking->nsd = date('Y-m-d', strtotime('+1 days' , strtotime($booking->date)));
+                    $booking->save();
+                }
+                else if($booking->recurring_type == 2){
+                    // Weekly Recurring
+                    $booking->nsd = date('Y-m-d', strtotime('+7 days' , strtotime($booking->date)));
+                    $booking->save();
+                }
+                else if($booking->recurring_type == 3){
+                    // Fornightly Recurring
+                    $booking->nsd = date('Y-m-d', strtotime('+14 days' , strtotime($booking->date)));
+                    $booking->save();
+                }
+                else if($booking->recurring_type == 4){
+                    // Monthly Recurring
+                    $booking->nsd = date('Y-m-d', strtotime('+1 months' , strtotime($booking->date)));
+                    $booking->save();
+                }
+                else if($booking->recurring_type == 5){
+                    // Custom Recurring
+                    if($booking->custome_type == 1){
+                        // Weekly Recurring
+                        $booking->nsd = date('Y-m-d', strtotime('+7 days' , strtotime($booking->date)));
+                        $booking->save();
+                    }
+                    else if($booking->custome_type == 2){
+                        // Fornightly Recurring
+                        $booking->nsd = date('Y-m-d', strtotime('+14 days' , strtotime($booking->date)));
+                        $booking->save();
+                    }
+                    else if($booking->recurring_type == 3){
+                        // Monthly Recurring
+                        $booking->nsd = date('Y-m-d', strtotime('+1 months' , strtotime($booking->date)));
+                        $booking->save();
+                    }
+                }
+            }
     }
     public function get_customer_bookings(Request $request){
         $bookings = Booking::where('customer_id',$request->customer_id)->with('service','sub_service')->get();

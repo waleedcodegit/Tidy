@@ -1,5 +1,6 @@
 import Axios from 'axios';
 import React, { Component } from 'react';
+import toast from 'react-hot-toast';
 import CustomerVendorChat from './CustomerVendorChat';
 
 class BookingDetails extends Component {
@@ -25,6 +26,12 @@ class BookingDetails extends Component {
             this.setState({
                 quotes:res.data.data,
             })
+        })
+    }
+    accept_vendor_quote(id){
+        Axios.post('/api/accept_vednor_request',{quote_id:id}).then(res=>{
+            toast.success('Vendor Quote is Accepted');
+            window.location.reload();
         })
     }
     render() {
@@ -182,7 +189,7 @@ class BookingDetails extends Component {
                                                         <div className="col-md-3">
                                                         <div className="qote-price">
                                                             <span> ${data.quote} </span>
-                                                            <a href="#" className="bk-btn">Accept</a>
+                                                            <a onClick={this.accept_vendor_quote.bind(this,data.id)} className="bk-btn">Accept</a>
                                                         </div>
                                                         </div>
                                                     </div>
@@ -199,7 +206,7 @@ class BookingDetails extends Component {
                                     </div>
                                     }
                                 </div>
-{/* vendor quote section end                           */}
+                            {/* vendor quote section end                           */}
                             <div className="vendor-detail">
                                 <h3>Vendor Details</h3>
                                 {

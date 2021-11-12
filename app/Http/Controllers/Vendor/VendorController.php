@@ -1129,6 +1129,7 @@ public function customers_list_count(Request $request){
     ];
     }
     return $response;
+}
     public function employee_list(Request $request){
         $employeelist = Employee::where('vendor_id',$request->vendor_id)->get();
         if($employeelist){
@@ -1145,7 +1146,7 @@ public function customers_list_count(Request $request){
         }
         return $response;
     }
-}
+
 public function bookings_list_count(Request $request){
     $bookings = Booking::where('vendor_id',$request->vendor_id)->count();
     if($bookings){

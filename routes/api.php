@@ -244,6 +244,7 @@ Route::post('/service_details' , 'Frontend\FrontController@service_details');
 Route::post('/get_vendor_quotes' , 'Frontend\FrontController@get_vendor_quotes');
 Route::post('/get_checklists' , 'Frontend\FrontController@get_checklists');
 Route::post('/service_details_by_id' , 'Frontend\FrontController@service_details_by_id');
+Route::post('/accept_vednor_request' , 'Frontend\FrontController@accept_vednor_request');
 
 
 //Emails Controller//
