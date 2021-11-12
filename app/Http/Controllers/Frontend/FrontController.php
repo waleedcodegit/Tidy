@@ -604,6 +604,9 @@ class FrontController extends Controller
         return $response = $response;
     }
 
+    public function accept_vednor_request(Request $request){
+        
+    }
     public function get_customer_bookings(Request $request){
         $bookings = Booking::where('customer_id',$request->customer_id)->with('service','sub_service')->get();
         if($bookings){
@@ -894,7 +897,22 @@ class FrontController extends Controller
        return $response;
     }
 
-    
+    public function get_vendor_quotes(Request $request){
+        $quotes = VendorQuote::where('booking_id',$request->id)->with('vendor')->orderby('quote','desc')->limit(3)->get();
+        return response()->json([
+            'message' => "Vendor Quotes",
+            'data' => $quotes,
+        ]);
+    }
+
+
+  public function get_checklists(){
+        $checklists = ServiceCheck::where('delete_status',0)->get();
+        return response()->json([
+            'message' => "Checklists",
+            'data' => $checklists,
+        ]);
+    }
     public function image_upload(Request $request){
         try{
             if ($request->hasFile('file')) {
@@ -917,6 +935,7 @@ class FrontController extends Controller
         $bookings = Booking::where('id',$request->id)->with('service','sub_service','booking_services','vendor')->first();
         $bookings->information = BookingInformation::where('booking_id', $request->id)->first();
         //$bookings->vendor_qoutes = VendorQuote::where('booking_id',$bookings->id)->with('vendor')->orderby('quote','desc')->limit(3)->get();
+        $bookings = Booking::where('id',$request->id)->with('service','sub_service','information','booking_services','vendor')->first();
         return response()->json([
             'message' => "Bookings",
             'data' => $bookings,
@@ -931,14 +950,6 @@ class FrontController extends Controller
             'message' => "Bookings and ServiceRounds",
             'data' => $bookings,
             'serviceRounds' => $s_round
-        ]);
-    }
-
-    public function get_checklists(){
-        $checklists = ServiceCheck::where('delete_status',0)->get();
-        return response()->json([
-            'message' => "Checklists",
-            'data' => $checklists,
         ]);
     }
 
@@ -962,14 +973,6 @@ class FrontController extends Controller
             'msg' => 'Service Ended Successfully'
         ];
         return $response;
-    }
-
-    public function get_vendor_quotes(Request $request){
-        $quotes = VendorQuote::where('booking_id',$request->id)->with('vendor')->orderby('quote','desc')->limit(3)->get();
-        return response()->json([
-            'message' => "Vendor Quotes",
-            'data' => $quotes,
-        ]);
     }
     
     public function upload_service_images(Request $request){
