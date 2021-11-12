@@ -204,6 +204,7 @@ class VendorBookingDetails extends Component {
                         </div>
                     </div>
                 }
+               
                 </div>
             </section>
         </div>

@@ -108,6 +108,13 @@ Route::view('/admin/payments_list', 'Admin');
 Route::view('/admin/vendor_withdraw_requests_list', 'Admin');
 
 
+Route::view('/admin/get-all-bookings', 'Admin');
+Route::view('/admin/assign-vendor/{id}', 'Admin');
+Route::view('/admin/get-vendors', 'Admin');
+Route::view('/admin/customer-bookings-details/{id}', 'Admin');
+Route::view('/admin/service-details/{id}', 'Admin');
+
+
 // Vendor Routes
 
 
@@ -134,6 +141,7 @@ Route::view('/vendor/vendor_wallet' , 'vendor');
 Route::view('/vendor/add_withdraw' , 'vendor');
 Route::view('/vendor/add_withdraw/{id}' , 'vendor');
 Route::view('/vendor/my_payments' , 'vendor');
+Route::view('/vendor/booking-details/{id}' , 'vendor');
 
 //Employee Routes
 Route::view('/employee-login' , 'Front');

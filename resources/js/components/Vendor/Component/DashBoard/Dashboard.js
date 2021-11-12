@@ -1,6 +1,62 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
+import Axios from 'axios';
+import Swal from 'sweetalert2';
+import {Link} from 'react-router-dom';
+import { img_baseurl } from '../../../Configs/Api';
+import { connect } from 'react-redux';
+
  
 class DashBoard extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            customers: '',
+            bookings: '',
+            customers: '',
+            wallet:'',
+            payments:'',
+         vendor_id: this.props.vendor.data.vendor_id,
+        }
+    }
+    
+componentDidMount(){
+    Axios.post('/api/customers-list-count',{vendor_id:this.props.vendor.data.vendor_id}).then(res=>
+      {
+          console.log(res);
+      if(res.data.status == 200){
+          this.setState({
+            customers: res.data.data,
+          })
+      }
+  })
+  Axios.post('/api/bookings-list-count',{vendor_id:this.props.vendor.data.vendor_id}).then(res=>
+    {
+        console.log(res);
+    if(res.data.status == 200){
+        this.setState({
+            bookings: res.data.data,
+        })
+    }
+})
+Axios.post('/api/get_vendor_wallet',{vendor_id:this.props.vendor.data.vendor_id}).then(res=>
+    {
+        console.log(res);
+    if(res.data.status == 200){
+        this.setState({
+            wallet: res.data.vendorwallet.wallet,
+        })
+    }
+})
+Axios.post('/api/get_vendor_payments',{vendor_id:this.props.vendor.data.vendor_id}).then(res=>
+    {
+        console.log(res);
+    if(res.data.status == 200){
+        this.setState({
+           payments: res.data.data,
+        })
+    }
+})
+ }
     render() { 
         return (
             <section class="section">
@@ -11,11 +67,13 @@ class DashBoard extends Component {
                         <div class="align-items-center justify-content-between">
                         <div class="row ">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
-                            <div class="card-content">
-                                <h5 class="font-15">New Booking</h5>
-                                <h2 class="mb-3 font-18">258</h2>
-                                <p class="mb-0"><span class="col-green">10%</span> Increase</p>
-                            </div>
+                            <div className="col-sm-12">
+                                   <h2 style={{color: "red"}}>{this.state.bookings}</h2>
+                                   <h4 style={{color: "red"}}>Your Booking</h4>
+                                    <div className="col-sm-12">
+                                    
+                                </div>
+                                </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
                             <div class="banner-img">
@@ -33,11 +91,12 @@ class DashBoard extends Component {
                         <div class="align-items-center justify-content-between">
                         <div class="row ">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
-                            <div class="card-content">
-                                <h5 class="font-15"> Customers</h5>
-                                <h2 class="mb-3 font-18">1,287</h2>
-                                <p class="mb-0"><span class="col-orange">09%</span> Decrease</p>
-                            </div>
+                            <div className="col-sm-12">
+                                   <h2 style={{color: "red"}}>{this.state.customers}</h2>
+                                   <h4 style={{color: "red"}}>Customers</h4>
+                                    <div className="col-sm-12">
+                           </div> 
+                            </div> 
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
                             <div class="banner-img">
@@ -55,16 +114,16 @@ class DashBoard extends Component {
                         <div class="align-items-center justify-content-between">
                         <div class="row ">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
-                            <div class="card-content">
-                                <h5 class="font-15">Wallet</h5>
-                                <h2 class="mb-3 font-18">128</h2>
-                                <p class="mb-0"><span class="col-green">18%</span>
-                                Increase</p>
-                            </div>
+                            <div className="col-sm-12">
+                                   <h2 style={{color: "red"}}>${this.state.wallet}</h2>
+                                   <h4 style={{color: "red"}}>Wallet</h4>
+                                    <div className="col-sm-12">
+                           </div> 
+                            </div> 
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
                             <div class="banner-img">
-                                <img src="/vendor-assets/img/banner/3.png" alt />
+                            <img src="/vendor-assets/img/banner/3.png" alt />
                             </div>
                             </div>
                         </div>
@@ -78,15 +137,16 @@ class DashBoard extends Component {
                         <div class="align-items-center justify-content-between">
                         <div class="row ">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
-                            <div class="card-content">
-                                <h5 class="font-15">Revenue</h5>
-                                <h2 class="mb-3 font-18">$48,697</h2>
-                                <p class="mb-0"><span class="col-green">42%</span> Increase</p>
-                            </div>
+                            <div className="col-sm-12">
+                                   <h2 style={{color: "red"}}>${this.state.payments}</h2>
+                                   <h4 style={{color: "red"}}>Revenue</h4>
+                                    <div className="col-sm-12">
+                           </div> 
+                            </div> 
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
                             <div class="banner-img">
-                                <img src="/vendor-assets/img/banner/4.png" alt />
+                                <img src="/vendor-assets/img/banner/2.png" alt />
                             </div>
                             </div>
                         </div>
@@ -94,7 +154,10 @@ class DashBoard extends Component {
                     </div>
                     </div>
                 </div>
+               
                 </div>
+              
+                
                 <div class="row">
                 <div class="col-12 col-sm-12 col-lg-12">
                     <div class="card ">
@@ -123,4 +186,9 @@ class DashBoard extends Component {
     }
 }
  
-export default DashBoard;
+const mapStateToProps = (state) =>{
+    return{
+        vendor:state.vendor
+    }
+  }
+  export default connect(mapStateToProps)(DashBoard);

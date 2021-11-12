@@ -8,19 +8,19 @@ class AcceptedBookings extends Component{
         super(props);
         this.state = {
             AcceptedBookings: [],
-            vendorId: this.props.vendor.data.vendor_id,
+            vendor_id: this.props.vendor.data.vendor_id,
         };
     }
 
     componentDidMount(){
-        Axios.post('/api/accepted-bookings',{vendorId:this.props.vendor.data.vendor_id}).then(res=>
+        Axios.post('/api/accepted-bookings',{vendor_id:this.props.vendor.data.vendor_id}).then(res=>
             {
-                console.log(res);
-            if(res.data.status == true){
+                console.log(res.data.AcceptedBookings);
+            // if(res.data.status == true){
                 this.setState({
-                    AcceptedBookings: res.data.data,
+                    AcceptedBookings: res.data.AcceptedBookings,
                 })
-            }
+            // }
         })
     }
 
@@ -45,16 +45,31 @@ class AcceptedBookings extends Component{
                                         <div className="divid-line"/>
                                             <div className="card-detail-left">
                                                 <ul>
-                                                    <li>Booking Type: </li>
-                                                    <li>Residential Type:</li>
-                                                    <li>Price:</li>
+                                                <li>Name:</li>
+                                                              <li>Email:</li>
+                                                              <li>Phone:</li>
+                                                               <li>Booking Type: </li>
+                                                               <li>Residential Type:</li>
+                                                               <li>Address:</li>
+                                                               <li>Date:</li>
+                                                               <li>Time:</li>
+                                                               <li>Service Name:</li>
+                                                               <li>Price: </li>
                                                 </ul>
                                             </div>
                                             <div className="card-detail-right">
                                                 <ul>
-                                                    <li>{data.booking_type == 1 ? "One Time" : "Recurring"}</li>
-                                                    <li>{data.service.type}</li>
-                                                    <li>{data.booking_totals}</li>
+                                                       <li>{data.customer.first_name+ ' '+data.customer.last_name}</li>
+                                                           <li>{data.customer.email}</li>
+                                                            <li>{data.customer.phone}</li>
+                                                               <li>{data.booking_type == 1 ? "One Time" : "Recurring"}</li>
+                                                               <li>{data.information.resident_type}</li>
+                                                               <li>{data.information.location_address}</li>
+                                                               <li>{data.date}</li>
+                                                               <li>{data.time}</li>
+                                                               {/* <li>${data.booking.time}</li> */}
+                                                               <li>{data.service.name}</li>
+                                                               <li>${data.booking_totals}</li>
                                                 </ul>
                                             </div>
                                     </div>
@@ -64,6 +79,10 @@ class AcceptedBookings extends Component{
                                     )
                                 }
                                 )}
+                                      {
+                                            this.state.AcceptedBookings.length == 0 ? 
+                                            <h1 style={{marginTop:'250px', marginLeft:'450px'}}>No Data Founded</h1>:null
+                                        }
                             
                         </div>
                     </div>

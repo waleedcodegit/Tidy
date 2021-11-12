@@ -34,7 +34,7 @@ use App\Employee;
 use App\ServiceCheck;
 use App\ServiceRound;
 use App\VendorQuote;
-use App\ServiceCheck;
+
 use Illuminate\Support\Facades\DB;
 
 class FrontController extends Controller
@@ -1069,5 +1069,14 @@ class FrontController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function service_details_by_id(Request $request){
+        $bookings = BookingService::where('id',$request->id)->with('booking')->first();
+        $s_round = ServiceRound::where('service_id',$request->id)->first();
+        return response()->json([
+            'message' => "Service Details",
+            'data' => $bookings,
+            'serviceRounds' => $s_round
+        ]);
     }
 }

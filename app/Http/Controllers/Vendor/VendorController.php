@@ -921,19 +921,21 @@ class VendorController extends Controller
         ]);
     }
     public function accepted_bookings(Request $request) {
-        $bookings = Booking::where('vendor_id',$request->vendorId)
-                            ->where('vendor_status',1)
-                            ->with('service','sub_service' , 'information')
+        // return $request;
+        $bookings = Booking::where('vendor_id',$request->vendor_id)
+                            ->where('vendor_status', 1)
+                            ->where('status', 1)
+                            ->with('service','sub_service' , 'information','customer')
                             ->get();
 
         return response()->json([
-            'status' => true,
-            'message' => "Vendor Bookings",
-            'data' => $bookings
+            'vendor_status'=> 5,
+            'message' => "Accepted Bookings",
+            'AcceptedBookings' => $bookings
         ]);
     }
     public function get_pending_bookings(Request $request) {
-        $bookings = Booking::where('vendor_status', 5)->with('service','sub_service' , 'information')->get();
+        $bookings = Booking::where('vendor_status', 0)->with('service','sub_service' , 'information','vendor','customer')->get();
         $vendors = Vendor::where('delete_status' , 0)->get();
         return response()->json([
             'status' => true,
@@ -954,19 +956,21 @@ class VendorController extends Controller
         ]);
     }
     
-    public function accept_booking (Request $request){
-        return $request;
-        $booking = Booking::where('vendor_id',$request->vendor_id)
-                        ->where('id',$request->bookingId)
-                        ->update([
-                            'vendor_status' => 1
-                        ]);
-        return response()->json([
-            'status' => true,
-            'message' => "Accepted Booking",
-            'data' => $booking
-        ]);
-    }
+    
+        public function accept_booking(Request $request) {
+            // return $request;
+            $bookings = Booking::where('id', $request->id)->update([
+                'vendor_id' => $request->vendor_id,
+                'vendor_status'=> 1,
+                'status'=> 1,
+               
+            ]);
+            $response = [
+                'status' => 200,
+                'msg' => 'Request Accepted'
+            ];
+            return $response;
+        }
     public function create_quote(Request $request)
     {
             $quote = new VendorQuote();
@@ -1054,4 +1058,110 @@ class VendorController extends Controller
         ];
         return $response;
     }
+    public function get_all_bookings(Request $request) {
+        $bookings = Booking::where('vendor_status', 1)->with('service','sub_service' , 'information','vendor','customer')->get();
+        $AllBookings = Vendor::where('delete_status' , 0)->get();
+        return response()->json([
+            'status' => 200,
+            'message' => "All Bookings",
+            'bookings' => $bookings,
+            'AllBookings' => $AllBookings
+        ]);
+    }
+    public function get_vendors(Request $request) {
+        $bookings = Booking::where('vendor_status', 1)->with('service','sub_service' , 'information','vendor','customer')->get();
+        $vendors = Vendor::where('delete_status' , 0)->get();
+        return response()->json([
+            'status' => 200,
+            'message' => "All Bookings",
+            'bookings' => $bookings,
+            'vendors' => $vendors
+        ]);
+    }
+    public function asign_vender_tocustomer(Request $request) {
+        // return $request;
+        $bookings = Booking::where('id', $request->id)->update([
+            'vendor_id' => $request->vendor_id,
+            'vendor_status'=> 1,
+            'status' => 1,
+           
+           
+        ]);
+        //  $vendorbookingRequest = new VendorBookingRequest();
+        //     $vendorbookingRequest->vendor_id = $request->vendor_id;
+        //     $vendorbookingRequest->booking_id = $request->id;
+        //     $vendorbookingRequest->save();
+        $response = [
+            'status' => 200,
+            'msg' => 'Successfully Vender Assign'
+        ];
+        return $response;
+    }
+    public function get_vendor_booking_requests_details(Request $request){
+        // return $request;
+        $bookingdetails = Booking::where('id',$request->id)->with('service','sub_service','information','booking_services','vendor')->first();
+        return response()->json([
+            'message' => "booking details",
+            'bookingdetails' => $bookingdetails,
+
+        ]);
+    }
+    Public function search_vendors(Request $request){
+        $vendor = Vendor::where('first_name','Like', "%".$request->first_name."%")->get();
+        return response()->json([
+            'status' => 200,
+            'message' => "Search Vendor",
+            'vendor' => $vendor 
+        ]);
 }
+public function customers_list_count(Request $request){
+    $employeelist = Employee::where('vendor_id',$request->vendor_id)->count();
+    if($employeelist){
+    $response=[
+        'status' => 200,
+        'message' => 'Success',
+        'data' => $employeelist,
+    ];
+    }else{
+    $response=[
+        'status' => 401,
+        'message' => 'No data found',
+    ];
+    }
+    return $response;
+}
+public function bookings_list_count(Request $request){
+    $bookings = Booking::where('vendor_id',$request->vendor_id)->count();
+    if($bookings){
+    $response=[
+        'status' => 200,
+        'message' => 'Success',
+        'data' => $bookings,
+    ];
+    }else{
+    $response=[
+        'status' => 401,
+        'message' => 'No data found',
+    ];
+    }
+    return $response;
+}
+// VendorPayment
+public function get_vendor_payments(Request $request){
+    $vendorpayment = VendorPayment::where('vendor_id',$request->vendor_id)->sum('payment');
+    if($vendorpayment){
+    $response=[
+        'status' => 200,
+        'message' => 'Success',
+        'data' => $vendorpayment,
+    ];
+    }else{
+    $response=[
+        'status' => 401,
+        'message' => 'No data found',
+    ];
+    }
+    return $response;
+}
+}
+

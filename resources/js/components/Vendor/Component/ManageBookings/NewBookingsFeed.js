@@ -18,7 +18,7 @@ class BookingsFeed extends Component {
     componentDidMount(){
         Axios.post('/api/get_vendor_booking_requests',{vendor_id:this.props.vendor.data.vendor_id}).then(res=>
             {
-                console.log(res);
+                // console.log(res);
                 this.setState({
                     serviceBookings: res.data,
                     vendor_id:this.props.vendor.data.vendor_id
@@ -36,14 +36,14 @@ class BookingsFeed extends Component {
         
     }
 
-    handleAccept(bookingId) {
-        console.log(bookingId);
-        let data ={
-            vendor_id: this.props.vendor.data.vendor_id
+    RequestAccept(id) {
+        let data = {
+            id:id,
+            vendor_id:this.props.vendor.data.vendor_id
         }
-        Axios.post('/api/accept_booking', data ,bookingId).then(res=>{
+        Axios.post('/api/accept_booking', data).then(res=>{
             console.log(res);
-            if(res.data.status == true){
+            if(res.data.status == 200){
                 Swal.fire({
                     icon: 'success',
                     title: 'Booking Accepted',
@@ -83,8 +83,11 @@ class BookingsFeed extends Component {
                                                    <>
                                                     {
                                                         data.service.residential_type == "1" ?
-                                                        <h4><button onClick={this.handleAccept.bind(this,data.id)} className="btn btn-outline-success ml-auto">Accept</button></h4>
-                                                    :
+                                                        <>
+                                                      <h4><button onClick={this.RequestAccept.bind(this,data.booking.id)} className="btn btn-outline-success ml-auto">Accept</button></h4> 
+
+                                                      <h4><Link to={`/vendor/booking-details/${data.booking_id}`}><button  className="btn btn-outline-success ml-auto">Details</button></Link></h4>
+                                                   </> :
                                                     //  <h4><Link to={`/vendor/create-quote/${data.booking_id}`}><button  className="btn btn-outline-success ml-auto">Qoute</button></Link></h4>
                                                     // <>
                                                     // {
@@ -122,15 +125,11 @@ class BookingsFeed extends Component {
                                                         <div className="divid-line"/>
                                                        <div className="card-detail-left">
                                                            <ul>
-                                                               <li>Name:</li>
-                                                              <li>Email:</li>
-                                                              <li>Phone:</li>
+                                                               <li>Customer Name:</li>
+                                                               <li>Phone:</li>
                                                                <li>Booking Type: </li>
-                                                               <li>Residential Type:</li>
-                                                               <li>Address:</li>
+                                                                <li>Address: </li>
                                                                <li>Date:</li>
-                                                               <li>Time:</li>
-                                                               <li>Service Name:</li>
                                                                <li>Qoute: </li>
                                                            </ul>
                                                        </div>
@@ -140,7 +139,6 @@ class BookingsFeed extends Component {
                                                             <li>{data.customer.customer.email}</li>
                                                             <li>{data.customer.customer.phone}</li>
                                                                <li>{data.booking_type == 1 ? "One Time" : "Recurring"}</li>
-                                                               <li>{data.booking_information.resident_type}</li>
                                                                <li>{data.booking_information.location_address}</li>
                                                                <li>{data.booking.date}</li>
                                                                <li>{data.booking.time}</li>
@@ -151,60 +149,46 @@ class BookingsFeed extends Component {
                                                         </>
                                                         :
                                                         <>
-                                                         <div className="divid-line"/>
-                                                        <div className="card-detail-left">
-                                                            <ul>
-                                                            <li>Name:</li>
-                                                              <li>Email:</li>
-                                                              <li>Phone:</li>
-                                                            <li>Booking Type: </li>
-                                                               <li>Residential Type:</li>
-                                                               <li>Address:</li>
+                                                          <div className="divid-line"/>
+                                                       <div className="card-detail-left">
+                                                           <ul>
+                                                               <li>Customer Name:</li>
+                                                               <li>Phone:</li>
+                                                               <li>Booking Type: </li>
+                                                                <li>Address: </li>
                                                                <li>Date:</li>
-                                                               <li>Time:</li>
-                                                               <li>Service Name:</li>
-                                                                <li>Qoute: </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div className="card-detail-right">
-                                                            <ul>
-                                                            <li>{data.customer.customer.first_name+ ' '+data.customer.customer.last_name}</li>
-                                                           <li>{data.customer.customer.email}</li>
+                                                               <li>Qoute: </li>
+                                                           </ul>
+                                                       </div>
+                                                       <div className="card-detail-right">
+                                                           <ul>
+                                                           <li>{data.customer.customer.first_name+ ' '+data.customer.customer.last_name}</li>
                                                            <li>{data.customer.customer.phone}</li>
-                                                            <li>{data.booking_type == 1 ? "One Time" : "Recurring"}</li>
-                                                            <li>{data.booking_information.resident_type}</li>
+                                                               <li>{data.booking_type == 1 ? "One Time" : "Recurring"}</li>
                                                                <li>{data.booking_information.location_address}</li>
                                                                <li>{data.booking.date}</li>
-                                                               <li>{data.booking.time}</li>
-                                                               <li>{data.service.name}</li>
-                                                                <li>${data.vendor_qoute.quote}</li>
-                                                            </ul>
-                                                        </div>
+                                                               <li>${data.booking.booking_totals}</li>
+                                                           </ul>
+                                                       </div>
                                                        </>
                                                     : 
                                                      <>
-                                                    <div className="divid-line"/>
-                                                   <div className="card-detail-left">
-                                                       <ul>
-                                                               <li>Name:</li>
-                                                              <li>Email:</li>
-                                                              <li>Phone:</li>
-                                                             <li>Booking Type: </li>
-                                                               <li>Residential Type:</li>
-                                                               <li>Address:</li>
+                                                   <div className="divid-line"/>
+                                                       <div className="card-detail-left">
+                                                           <ul>
+                                                               <li>Customer Name:</li>
+                                                               <li>Phone:</li>
+                                                               <li>Booking Type: </li>
+                                                                <li>Address: </li>
                                                                <li>Date:</li>
-                                                               <li>Time:</li>
-                                                               <li>Service Name:</li>
-                                                           <li>Price:</li>
-                                                       </ul>
-                                                   </div>
-                                                   <div className="card-detail-right">
-                                                       <ul>
+                                                               <li>Qoute: </li>
+                                                           </ul>
+                                                       </div>
+                                                       <div className="card-detail-right">
+                                                           <ul>
                                                            <li>{data.customer.customer.first_name+ ' '+data.customer.customer.last_name}</li>
-                                                             <li>{data.customer.customer.email}</li>
                                                            <li>{data.customer.customer.phone}</li>
-                                                            <li>{data.booking_type == 1 ? "One Time" : "Recurring"}</li>
-                                                               <li>{data.booking_information.resident_type}</li>
+                                                               <li>{data.booking_type == 1 ? "One Time" : "Recurring"}</li>
                                                                <li>{data.booking_information.location_address}</li>
                                                                <li>{data.booking.date}</li>
                                                                <li>{data.booking.time}</li>
@@ -239,6 +223,10 @@ class BookingsFeed extends Component {
                                 )
                             })
                         }
+                        {
+                                            this.state.serviceBookings.length == 0 ? 
+                                            <h1 style={{marginTop:'250px', marginLeft:'450px'}}>No Data Founded</h1>:null
+                                        }
                         </div>
                     </div>
                 </section>

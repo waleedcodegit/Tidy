@@ -65,6 +65,7 @@ Route::post('/vendor-reset-password' , 'Vendor\VendorController@vendor_reset_pas
 
 Route::post('get_vendor_wallet','Vendor\VendorController@get_vendor_wallet');
 Route::post('add_withdraw','Vendor\VendorController@add_withdraw');
+Route::post('get_vendor_payments','Vendor\VendorController@get_vendor_payments');
 Route::post('get_withdraw_amount_request','Vendor\VendorController@get_withdraw_amount_request');
 
 
@@ -72,6 +73,12 @@ Route::post('get_withdraw_amount_request','Vendor\VendorController@get_withdraw_
 //Bookings
 Route::post('/get-pending-bookings' , 'Vendor\VendorController@get_pending_bookings');
 Route::post('/assign-employee-booking' , 'Vendor\VendorController@assign_employee_booking');
+Route::post('/get_all_bookings' , 'Vendor\VendorController@get_all_bookings');
+Route::post('/get-vendors' , 'Vendor\VendorController@get_vendors');
+Route::post('/delete-employee' , 'Vendor\EmployeeController@delete_employee');
+Route::post('/asign-vender-tocustomer' , 'Vendor\VendorController@asign_vender_tocustomer');
+Route::post('/accept-booking' , 'Vendor\VendorController@accept_booking');
+Route::post('/search_vendors' , 'Vendor\VendorController@search_vendors');
 
 //Employee Route
 Route::post('/delete-employee' , 'Vendor\EmployeeController@delete_employee');
@@ -80,6 +87,7 @@ Route::post('/employee-check-auth' , 'Vendor\EmployeeController@employee_check_a
 Route::post('/get-employee-info/{id}' , 'Vendor\EmployeeController@show');
 Route::post('/update-employee-profile' , 'Vendor\EmployeeController@update_employee_profile');
 Route::post('/employee-bookings' , 'Vendor\EmployeeController@employee_bookings');
+Route::post('/employee-list' , 'Vendor\EmployeeController@employee_list');
 
 
 
@@ -143,7 +151,10 @@ Route::post('/get_vendor_notifications','Vendor\VendorController@get_vendor_noti
 Route::post('/get_vendor_quote_by_id','Vendor\VendorController@get_vendor_quote_by_id');
 
 Route::post('/get_vendor_payment','Vendor\VendorController@get_vendor_payment');
-
+Route::post('/get_vendor_booking_requests_details','Vendor\VendorController@get_vendor_booking_requests_details');
+Route::post('/customers-list-count','Vendor\VendorController@customers_list_count');
+Route::post('/bookings-list-count','Vendor\VendorController@bookings_list_count');
+// Route::post('/vendors-list-count','Vendor\VendorController@customers_list_count');
 
 
 Route::post('/getcategory','Frontend\CategoryController@getcategory');
@@ -231,6 +242,7 @@ Route::post('/end_service' , 'Frontend\FrontController@end_service');
 Route::post('/service_details' , 'Frontend\FrontController@service_details');
 Route::post('/get_vendor_quotes' , 'Frontend\FrontController@get_vendor_quotes');
 Route::post('/get_checklists' , 'Frontend\FrontController@get_checklists');
+Route::post('/service_details_by_id' , 'Frontend\FrontController@service_details_by_id');
 
 
 //Emails Controller//

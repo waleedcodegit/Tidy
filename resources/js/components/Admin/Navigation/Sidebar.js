@@ -204,6 +204,7 @@ class Sidebar extends Component {
                                                 this.state.nav_item_visible == 26 ?
                                                 <ul >
                                                     <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/pending-bookings">Pending Bookings</Link></li>
+                                                    <li onClick={this.active_sub_item.bind(this, 2)} className={this.state.active_sub_item == 2 ? "active-link" : ""}><Link to="/admin/get-all-bookings">All Bookings</Link></li>
                                                 </ul>
                                                 :null
                                             }

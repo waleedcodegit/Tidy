@@ -31,12 +31,12 @@ class EmployeeController extends Controller
     }
 
     public function show(Request $request){
-        $employee = Employee::where('id',$request->id)->first();
-        if($employee){
+        $employeelist = Employee::where('vendor_id',$request->id)->get();
+        if($employeelist){
         $response=[
             'status' => 200,
             'message' => 'Success',
-            'data' => $employee,
+            'data' => $employeelist,
         ];
         }else{
         $response=[
@@ -321,5 +321,21 @@ class EmployeeController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function employee_list(Request $request){
+        $employeelist = Employee::where('vendor_id',$request->vendor_id)->get();
+        if($employeelist){
+        $response=[
+            'status' => 200,
+            'message' => 'Success',
+            'data' => $employeelist,
+        ];
+        }else{
+        $response=[
+            'status' => 401,
+            'message' => 'No data found',
+        ];
+        }
+        return $response;
     }
 }

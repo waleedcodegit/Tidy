@@ -95,6 +95,11 @@ import PendingBookings from '../Bookings/Pending_Bookings';
 import PaymentsList from '../ManageAccounts/Payments';
 import VendorWithdrawRequestsList from '../ManageAccounts/VendorwithdrawRequests';
 
+import AllBookings from '../Bookings/AllBookings';
+import AssignVendorBookings from '../Bookings/AssignVendorBooking';
+import BookingDetails from '../Bookings/Bookingdetails';
+import ServiceDetails from '../Bookings/ServiseDetails';
+
 
 
 
@@ -202,6 +207,11 @@ class Main extends Component {
 
                         <Route path="/admin/payments_list" component={PaymentsList} ></Route>
                         <Route path="/admin/vendor_withdraw_requests_list" component={VendorWithdrawRequestsList} ></Route>
+
+                        <Route path="/admin/get-all-bookings" component={AllBookings} ></Route>
+                        <Route path="/admin/assign-vendor/:id" component={AssignVendorBookings} ></Route>
+                        <Route path="/admin/customer-bookings-details/:id" component={BookingDetails} ></Route>
+                        <Route path="/admin/service-details/:id" component={ServiceDetails} ></Route>
 
                     </div>
                     <Sidebar></Sidebar>
