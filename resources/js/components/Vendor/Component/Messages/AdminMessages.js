@@ -12,7 +12,8 @@ class AdminMessages extends Component {
             messages:[],
             no_messages:[],
             newmessage:'',
-            chat:{id:0}
+            chat:{id:0},
+            // loading:true,
         };
     }
      componentDidMount(){
@@ -26,20 +27,25 @@ class AdminMessages extends Component {
                         ){
                         console.log('audio playing');
                         this.audioRef.play();
+                        
 
                     }
                 }
              this.setState({
                  messages:res.data.messages,
                  no_messages:false,
+                //  loader:false,
              })
             }else{
              this.setState({
-                 no_messages:true
+                 no_messages:true,
+                //  loader:false,
              })
             }
          })
-         this.set_scroll();
+         this.set_scroll({
+            // loader:false,
+         });
        },4000)
         
 
@@ -76,7 +82,8 @@ class AdminMessages extends Component {
      }
      handle_new_message(e){
         this.setState({
-            newmessage:e.target.value
+            newmessage:e.target.value,
+            // loader:false,
         })
     }
     set_scroll(){
@@ -90,7 +97,8 @@ class AdminMessages extends Component {
             chat_id: this.state.chat.id,
             message: this.state.newmessage,
             sender:this.props.vendor.data.vendor_id,
-            vendor_id:this.props.vendor.data.vendor_id
+            vendor_id:this.props.vendor.data.vendor_id,
+            // loader:false,
         }
         array.push(newmsg);
         this.setState({
@@ -98,7 +106,8 @@ class AdminMessages extends Component {
         },function(){
             this.set_scroll();
             this.setState({
-                newmessage:''
+                newmessage:'',
+                // loader:false,
             })
         })
     
@@ -121,10 +130,12 @@ class AdminMessages extends Component {
                  this.setState({
                      messages:res.data.messages,
                      no_messages:false,
+                    //  loader:false,
                  })
                 }else{
                  this.setState({
-                     no_messages:true
+                     no_messages:true,
+                    //  loader:false,
                  })
                 }
              })
@@ -133,6 +144,16 @@ class AdminMessages extends Component {
     render() {
         return (
             <div>
+                 
+            {/* {
+                this.state.loading ?
+               
+                    <div id="displayspinner text-center mt-5 " className="text-center" style={{ display: 'block', }}>
+                        <div className="spinner-border  ml-2 text-dark spinner_format" role="status">
+                            <span className="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    : */}
             <section className="section">
             <div className="section-body">
               <div className="row">
@@ -190,6 +211,7 @@ class AdminMessages extends Component {
                     </div>
                     </div>
                     </section>
+    {/* } */}
 
             </div>
         );

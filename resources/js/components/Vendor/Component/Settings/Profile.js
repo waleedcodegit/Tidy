@@ -52,7 +52,8 @@ class Profile extends Component {
             addresses:[],
             show_add_address:false,
             last_address_updater:0,
-            vendor_timings:[]
+            vendor_timings:[],
+            loading:true,
         };
     }
     
@@ -77,7 +78,8 @@ class Profile extends Component {
                 business_name:res.data.data.business_name,
                 trading:res.data.data.trading,
                 bio:res.data.data.bio,
-                vendor_id:this.props.vendor.data.vendor_id
+                vendor_id:this.props.vendor.data.vendor_id,
+                loading:false,
 
             })
         })
@@ -362,6 +364,16 @@ class Profile extends Component {
     }
     render() {
         return (
+            <div>
+            {
+                this.state.loading ?
+               
+                    <div id="displayspinner text-center mt-5 " className="text-center" style={{ display: 'block', }}>
+                        <div className="spinner-border  ml-2 text-dark spinner_format" role="status">
+                            <span className="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    :
             <section className="section">
                 <div className="section-body">
                     <div className="row mt-sm-4">
@@ -801,6 +813,8 @@ class Profile extends Component {
                     </div>
                 </div>
             </section>
+    }
+     </div>
         );
     }
 }

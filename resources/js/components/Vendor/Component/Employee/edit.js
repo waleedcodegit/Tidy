@@ -19,6 +19,7 @@ class Index extends React.Component{
             serviceprice:'',
             dob:'',
             work:'',
+            loading:true,
         }
     }
 
@@ -38,8 +39,9 @@ class Index extends React.Component{
                     address: res.data.employee.address,
                     service: res.data.employee.service,
                     serviceprice: res.data.employee.serviceprice,
-                    date: res.data.employee.date,
+                    dob: res.data.employee.dob,
                     work: res.data.employee.work,
+                    loading:false,
                 })
             }
         })
@@ -146,7 +148,7 @@ class Index extends React.Component{
                 this.props.history.push('/vendor/employee-list');
                 Swal.fire({
                     icon: 'success',
-                    title: 'Employee Added Successfully',
+                    title: 'Employee Updated Successfully',
                     showConfirmButton: false,
                     timer: 1500
                 })
@@ -183,6 +185,16 @@ class Index extends React.Component{
 
     render(){
       return (
+        <div>
+        {
+          this.state.loading ?
+         
+              <div id="displayspinner text-center mt-5 " className="text-center" style={{ display: 'block', }}>
+                  <div className="spinner-border  ml-2 text-dark spinner_format" role="status">
+                      <span className="sr-only">Loading...</span>
+                  </div>
+              </div>
+              :
           <section className="section">
             <div className="section-body">
               <div className="row">
@@ -238,7 +250,7 @@ class Index extends React.Component{
                             <div className="col-6">
                                 <div class="form-group">
                                     <label>Date of Birth</label>
-                                    <input type="text" class="form-control" onChange={this.getDateofbirth.bind(this)} value={this.state.DOB} />
+                                    <input type="text" class="form-control" onChange={this.getDateofbirth.bind(this)} value={this.state.dob} />
                                 </div>
                             </div>
                         </div>
@@ -279,6 +291,9 @@ class Index extends React.Component{
               </div>
             </div>
           </section>
+    }
+     </div>
+
         );
     }
 }

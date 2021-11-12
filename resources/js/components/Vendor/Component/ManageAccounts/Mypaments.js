@@ -14,6 +14,7 @@ class Mypaments extends Component {
             id:this.props.match.params.id,
             Vendorwithdrawrequest: [],
             vendor_id:this.props.vendor.data.vendor_id,
+            loading:true,
 
         };
     }
@@ -25,7 +26,8 @@ class Mypaments extends Component {
                 this.setState({
                     vendorpayment: res.data.vendorpayment,
                     vendor_id:this.props.vendor.data.vendor_id,
-                    booking_id:this.props.match.params.id
+                    booking_id:this.props.match.params.id,
+                    loading:false,
                 })
                 
         })
@@ -33,7 +35,8 @@ class Mypaments extends Component {
             console.log(res);
             if(res.data.status == 200) {
                 this.setState({
-                    Vendorwithdrawrequest: res.data.Vendorwithdrawrequest
+                    Vendorwithdrawrequest: res.data.Vendorwithdrawrequest,
+                    loading:false,
                 })
             //    this.props.history.push('/admin/service_check_list'); 
             } 
@@ -90,12 +93,20 @@ class Mypaments extends Component {
     render() {
         return (
             <div>
+                 {
+          this.state.loading ?
+         
+              <div id="displayspinner text-center mt-5 " className="text-center" style={{ display: 'block', }}>
+                  <div className="spinner-border  ml-2 text-dark spinner_format" role="status">
+                      <span className="sr-only">Loading...</span>
+                  </div>
+              </div>
+              :
                 <section className="section">
                     <div className="section-body">
                         <h2>My Payments </h2>
                     </div>
 
-                </section>
                 <div className="row">
                         <div className="card col-sm-12">
                                         <div className="col-sm-12">
@@ -132,6 +143,9 @@ class Mypaments extends Component {
                         </div>
                         </div>
                         </div>
+                        </section>}
+    
+    
             </div>
         );
     }

@@ -16,6 +16,7 @@ class Addwithdraw extends Component {
             id:this.props.match.params.id,
             serviceBookings: [],
             vendor_id:this.props.vendor.data.vendor_id,
+            loading:true,
 
         };
     }
@@ -26,6 +27,7 @@ class Addwithdraw extends Component {
                 console.log(res);
                 this.setState({
                     wallet: res.data.vendorwallet.wallet,
+                    loading:false,
                     })
                 
         })
@@ -35,6 +37,7 @@ class Addwithdraw extends Component {
                 this.setState({
                     serviceBookings: res.data,
                     vendor_id:this.props.vendor.data.vendor_id,
+                    loading:false,
                 })
                 
         })
@@ -106,6 +109,15 @@ class Addwithdraw extends Component {
     render() {
         return (
             <div>
+                 {
+              this.state.loading ?
+         
+              <div id="displayspinner text-center mt-5 " className="text-center" style={{ display: 'block', }}>
+                  <div className="spinner-border  ml-2 text-dark spinner_format" role="status">
+                      <span className="sr-only">Loading...</span>
+                  </div>
+              </div>
+              :
                 <section className="section">
                     <div className="section-body">
                         <h2>Request Withdraw </h2>
@@ -130,7 +142,9 @@ class Addwithdraw extends Component {
                         </div>
                     </div></div>
                 </section>
+    }
             </div>
+                      
         );
     }
 }

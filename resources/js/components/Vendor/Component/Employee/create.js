@@ -18,6 +18,7 @@ class Index extends React.Component{
             serviceprice:'',
             work:'',
             dob:'',
+            // loading:true,
         }
     }
 
@@ -160,6 +161,16 @@ class Index extends React.Component{
 
     render(){
       return (
+          <div>
+                {
+                    this.state.loading ?
+                   
+                        <div id="displayspinner text-center mt-5 " className="text-center" style={{ display: 'block', }}>
+                            <div className="spinner-border  ml-2 text-dark spinner_format" role="status">
+                                <span className="sr-only">Loading...</span>
+                            </div>
+                        </div>
+                        :
           <section classNameName="section">
             <div classNameName="section-body">
               <div classNameName="row">
@@ -254,6 +265,8 @@ class Index extends React.Component{
               </div>
             </div>
           </section>
+    }
+    </div>
       );
     }
 }

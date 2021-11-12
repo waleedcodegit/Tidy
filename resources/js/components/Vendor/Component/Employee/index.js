@@ -11,6 +11,7 @@ class Index extends React.Component{
         this.state = {
           Employees: [],
          vendor_id: this.props.vendor.data.vendor_id,
+         loading:true,
         }
     }
 
@@ -21,6 +22,7 @@ class Index extends React.Component{
         if(res.data.status == 200){
             this.setState({
                 Employees: res.data.data,
+                loading:false,
             })
         }
     })
@@ -44,6 +46,16 @@ class Index extends React.Component{
 
     render(){
       return (
+        <div>
+        {
+          this.state.loading ?
+         
+              <div id="displayspinner text-center mt-5 " className="text-center" style={{ display: 'block', }}>
+                  <div className="spinner-border  ml-2 text-dark spinner_format" role="status">
+                      <span className="sr-only">Loading...</span>
+                  </div>
+              </div>
+              :
           <section className="section">
             <div className="section-body">
               <div className="row">
@@ -111,6 +123,8 @@ class Index extends React.Component{
               </div>
             </div>
           </section>
+    }
+    </div>
       );
     }
 }

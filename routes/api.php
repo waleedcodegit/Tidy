@@ -179,7 +179,13 @@ Route::post('/get_all_service_content','Admin\ServicesController@get_all_service
 Route::post('/get_service_content_by_id','Admin\ServicesController@get_service_content_by_id');
 // Route::post('/delete_service_content','Admin\ServicesController@delete_service_content');
 
-
+Route::post('/customers-count','Admin\AdminController@customers_list');
+Route::post('/vendor-count','Admin\AdminController@vendor_list');
+Route::post('/bookings-count','Admin\AdminController@bookings_count');
+Route::post('/employees-count','Admin\AdminController@employees_count');
+Route::post('/services-count','Admin\AdminController@services_count');
+Route::post('/total-payments','Admin\AdminController@total_payments');
+Route::post('/sub-services-count','Admin\AdminController@sub_services_count');
 
 
 
@@ -235,6 +241,7 @@ Route::post('/image_upload','Frontend\FrontController@image_upload');
 Route::post('/get_service_content_by_slug','Frontend\FrontController@get_service_content_by_slug');
 Route::post('/make_booking','Frontend\FrontController@make_booking');
 Route::post('/get_customer_bookings','Frontend\FrontController@get_customer_bookings');
+Route::post('/get_service_by_id' , 'Frontend\FrontController@get_service_by_id');
 Route::post('/get_booking_by_id' , 'Frontend\FrontController@get_booking_by_id');
 Route::post('/charge_a_customer','Frontend\FrontController@charge_a_customer');
 Route::post('/create_services_daily','Frontend\FrontController@create_services_daily');

@@ -1066,6 +1066,14 @@ class FrontController extends Controller
             'data' => $bookings,
         ]);
     }
+    public function get_service_by_id(Request $request){
+        $category = Category::where('id',$request->id)->with('subcategory')->first();
+        //$bookings->vendor_qoutes = VendorQuote::where('booking_id',$bookings->id)->with('vendor')->orderby('quote','desc')->limit(3)->get();
+        return response()->json([
+            'message' => "Category",
+            'category' => $category,
+        ]);
+    }
 
     public function service_details(Request $request){
         $bookings = BookingService::where('id',$request->id)->with('booking')->first();

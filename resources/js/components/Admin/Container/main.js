@@ -99,6 +99,7 @@ import AllBookings from '../Bookings/AllBookings';
 import AssignVendorBookings from '../Bookings/AssignVendorBooking';
 import BookingDetails from '../Bookings/Bookingdetails';
 import ServiceDetails from '../Bookings/ServiseDetails';
+import Dashboard from '../Dashboard/dashboard';
 
 
 
@@ -114,6 +115,7 @@ class Main extends Component {
                 <div className="boxed">
                     <div id="content-container">
                         {/*Service Pricing*/}
+                        <Route path="/admin/dashboard" component={Dashboard}></Route>
                         <Route path="/admin/create-service" component={ServiceCreate}></Route>
                         <Route path="/admin/edit-service/:id" component={ServiceEdit}></Route>
                         <Route path="/admin/list-service" component={ServiceList}></Route>

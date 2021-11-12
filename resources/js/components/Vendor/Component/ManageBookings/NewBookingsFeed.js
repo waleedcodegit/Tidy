@@ -11,6 +11,7 @@ class BookingsFeed extends Component {
         this.state = {
             serviceBookings: [],
             qoutes:[],
+            loading:true,
             vendor_id:this.props.vendor.data.vendor_id,
         };
     }
@@ -21,7 +22,8 @@ class BookingsFeed extends Component {
                 // console.log(res);
                 this.setState({
                     serviceBookings: res.data,
-                    vendor_id:this.props.vendor.data.vendor_id
+                    vendor_id:this.props.vendor.data.vendor_id,
+                    loading:false
                 })
                 
         })
@@ -64,6 +66,15 @@ class BookingsFeed extends Component {
     render() {
         return (
             <div>
+                 {
+                    this.state.loading ?
+                   
+                        <div id="displayspinner text-center mt-5 " className="text-center" style={{ display: 'block', }}>
+                            <div className="spinner-border  ml-2 text-dark spinner_format" role="status">
+                                <span className="sr-only">Loading...</span>
+                            </div>
+                        </div>
+                        :
                 <section className="section">
                     <div className="section-body">
                         <h2>Bookings Feed </h2>
@@ -225,11 +236,12 @@ class BookingsFeed extends Component {
                         }
                         {
                                             this.state.serviceBookings.length == 0 ? 
-                                            <h1 style={{marginTop:'250px', marginLeft:'450px'}}>No Data Founded</h1>:null
+                                            <h1 style={{alignItems:"center"}}>No Data Founded</h1>:null
                                         }
                         </div>
                     </div>
                 </section>
+    }
             </div>
         );
     }

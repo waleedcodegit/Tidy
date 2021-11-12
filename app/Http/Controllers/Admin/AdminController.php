@@ -9,6 +9,13 @@ use App\GiftCard;
 use App\AdminAuthMeta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Employee;
+use App\Vendor;
+use App\Customer;
+use App\Booking;
+use App\Category;
+use App\SubCategory;
+use App\Payment;
 
 class AdminController extends Controller
 {
@@ -128,6 +135,119 @@ class AdminController extends Controller
             return $response;
         }
         
+    }
+    public function customers_list(){
+        $Customer = Customer::count();
+        if($Customer){
+        $response=[
+            'status' => 200,
+            'message' => 'Success',
+            'data' => $Customer,
+        ];
+        }else{
+        $response=[
+            'status' => 401,
+            'message' => 'No data found',
+        ];
+        }
+        return $response;
+    }
+    public function vendor_list(){
+        $vendorlist = Vendor::count();
+        if($vendorlist){
+        $response=[
+            'status' => 200,
+            'message' => 'Success',
+            'data' => $vendorlist,
+        ];
+        }else{
+        $response=[
+            'status' => 401,
+            'message' => 'No data found',
+        ];
+        }
+        return $response;
+    }
+    public function bookings_count(){
+        $Booking = Booking::count();
+        if($Booking){
+        $response=[
+            'status' => 200,
+            'message' => 'Success',
+            'data' => $Booking,
+        ];
+        }else{
+        $response=[
+            'status' => 401,
+            'message' => 'No data found',
+        ];
+        }
+        return $response;
+    }
+    public function employees_count(){
+        $Employee = Employee::count();
+        if($Employee){
+        $response=[
+            'status' => 200,
+            'message' => 'Success',
+            'data' => $Employee,
+        ];
+        }else{
+        $response=[
+            'status' => 401,
+            'message' => 'No data found',
+        ];
+        }
+        return $response;
+    }
+    public function services_count(){
+        $services = Category::count();
+        if($services){
+        $response=[
+            'status' => 200,
+            'message' => 'Success',
+            'data' => $services,
+        ];
+        }else{
+        $response=[
+            'status' => 401,
+            'message' => 'No data found',
+        ];
+        }
+        return $response;
+    }
+
+    public function sub_services_count(){
+        $sub_services = SubCategory::count();
+        if($sub_services){
+        $response=[
+            'status' => 200,
+            'message' => 'Success',
+            'data' => $sub_services,
+        ];
+        }else{
+        $response=[
+            'status' => 401,
+            'message' => 'No data found',
+        ];
+        }
+        return $response;
+    }
+    public function total_payments(){
+        $payment = Payment::sum('amount');
+        if($payment){
+        $response=[
+            'status' => 200,
+            'message' => 'Success',
+            'data' => $payment,
+        ];
+        }else{
+        $response=[
+            'status' => 401,
+            'message' => 'No data found',
+        ];
+        }
+        return $response;
     }
 
 }

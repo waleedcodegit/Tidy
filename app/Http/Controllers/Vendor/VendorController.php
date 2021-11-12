@@ -1163,7 +1163,22 @@ class VendorController extends Controller
         ];
         }
         return $response;
-    }
+    return $response;
+}
+// public function bookings_list_count(Request $request){
+//     $bookings = Booking::where('vendor_id',$request->vendor_id)->count();
+//     if($bookings){
+//     $response=[
+//         'status' => 200,
+//         'message' => 'Success',
+//         'data' => $bookings,
+//     ];
+//     }else{
+//     $response=[
+//         'status' => 401,
+//         'message' => 'No data found',
+//     ];
+//     }
 // VendorPayment
 public function get_vendor_payments(Request $request){
     $vendorpayment = VendorPayment::where('vendor_id',$request->vendor_id)->sum('payment');

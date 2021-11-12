@@ -89,6 +89,14 @@ class Sidebar extends Component {
                                                 >Dashboard</span>
                                             </a>
                                         </li> */}
+                                             <li className="dropdown active">
+                                             <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/dashboard">Dashboard</Link></li>
+                                             {/* <Link   href="/admin/dashboard"> <span className="nav-link has-dropdown">Dashboard</span> </Link> */}
+                                          
+                                       {/* <Link href="/vendor/dashboard" className="nav-link"><i data-feather="monitor" /><span>Dashboard</span></Link> */}
+                                           </li>
+                                            
+                                        
 
                                         <li onClick={this.active_item.bind(this, 2)} className={this.state.nav_item_active.main == 2 ? "active-sub" : ""}>
                                             <a onClick={this.change_visible_item.bind(this,2)}>

@@ -8,6 +8,7 @@ class AcceptedBookings extends Component{
         super(props);
         this.state = {
             AcceptedBookings: [],
+            loading: true,
             vendor_id: this.props.vendor.data.vendor_id,
         };
     }
@@ -19,6 +20,7 @@ class AcceptedBookings extends Component{
             // if(res.data.status == true){
                 this.setState({
                     AcceptedBookings: res.data.AcceptedBookings,
+                    loading:false
                 })
             // }
         })
@@ -27,6 +29,15 @@ class AcceptedBookings extends Component{
     render(){
         return(
             <div>
+                  {
+                    this.state.loading ?
+                   
+                        <div id="displayspinner text-center mt-5 " className="text-center" style={{ display: 'block', }}>
+                            <div className="spinner-border  ml-2 text-dark spinner_format" role="status">
+                                <span className="sr-only">Loading...</span>
+                            </div>
+                        </div>
+                        :
                 <section className="section">
                     <div className="section-body">
                         <h2>Accepted Bookings</h2>
@@ -87,6 +98,7 @@ class AcceptedBookings extends Component{
                         </div>
                     </div>
                 </section>
+    }
             </div>
         );
     }

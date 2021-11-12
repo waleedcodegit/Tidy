@@ -113,6 +113,7 @@ Route::view('/admin/assign-vendor/{id}', 'Admin');
 Route::view('/admin/get-vendors', 'Admin');
 Route::view('/admin/customer-bookings-details/{id}', 'Admin');
 Route::view('/admin/service-details/{id}', 'Admin');
+Route::view('/admin/dashboard', 'admin');
 
 
 // Vendor Routes

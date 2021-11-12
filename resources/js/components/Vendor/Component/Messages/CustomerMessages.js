@@ -22,6 +22,8 @@ class CustomerMessages extends Component {
             messages:[],
             no_messages:true,
             chat:{first_name:'',last_name:''},
+            
+           
 
         }
      
@@ -39,11 +41,14 @@ class CustomerMessages extends Component {
             Axios.post('/api/get_customer_vendor_chat_messages',{chat_id:res.data[0].id}).then(res=>{
                if(res.data.status == 200){
                 this.setState({
-                    messages:res.data.messages
+                    messages:res.data.messages,
+                    
+                   
                 })
                }else{
                 this.setState({
-                    no_messages:true
+                    no_messages:true,
+                    
                 })
                }
             })
@@ -80,11 +85,13 @@ class CustomerMessages extends Component {
                     this.setState({
                         messages:res.data.messages,
                         no_messages:false,
+                       
                     })
 
                    }else{
                     this.setState({
-                        no_messages:true
+                        no_messages:true,
+                        
                     })
                    }
                 })
@@ -204,10 +211,12 @@ class CustomerMessages extends Component {
                  this.setState({
                      messages:res.data.messages,
                      no_messages:false,
+                   
                  })
                 }else{
                  this.setState({
-                     no_messages:true
+                     no_messages:true,
+                     
                  })
                 }
              })
@@ -243,6 +252,8 @@ class CustomerMessages extends Component {
     }
     render() {
         return (
+            <div>
+           
             <div id="page-content">
             <div className="row">
                 <div className="col-sm-12">
@@ -337,6 +348,8 @@ class CustomerMessages extends Component {
             </div>
             </div>
             </div>
+    
+    </div>
 
         );
     }
