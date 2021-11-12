@@ -444,6 +444,8 @@ class FrontController extends Controller
         $service = Category::where('id',$request->select_service_state['service_id'])->first();
 
         if($service->residential_type == 1){
+            $charge = false;
+            
             try{
                 $stripe = new \Stripe\StripeClient(
                     env("STRIPE_SK")
@@ -454,7 +456,8 @@ class FrontController extends Controller
                     "customer" => $customer->stripe_id
                   ));
                 }catch(\Stripe\Exception\CardException $e){
-                   
+                    // $response = ['status' => '401' , 'message' => 'Unable to charge','exception' => $e];
+                    // return $response = $response;
                 }
                 $payment_id = 0; 
                 if($charge){
@@ -911,7 +914,8 @@ class FrontController extends Controller
     }
 
     public function get_booking_by_id(Request $request){
-        $bookings = Booking::where('id',$request->id)->with('service','sub_service','information','booking_services','vendor')->first();
+        $bookings = Booking::where('id',$request->id)->with('service','sub_service','booking_services','vendor')->first();
+        $bookings->information = BookingInformation::where('booking_id', $request->id)->first();
         //$bookings->vendor_qoutes = VendorQuote::where('booking_id',$bookings->id)->with('vendor')->orderby('quote','desc')->limit(3)->get();
         return response()->json([
             'message' => "Bookings",
@@ -920,7 +924,8 @@ class FrontController extends Controller
     }
 
     public function service_details(Request $request){
-        $bookings = BookingService::where('id',$request->id)->with('booking','bookingInformation')->first();
+        $bookings = BookingService::where('id',$request->id)->with('booking')->first();
+        $bookings->booking_information = BookingInformation::where('booking_id',$bookings->booking_id)->first(); 
         $s_round = ServiceRound::where('service_id',$request->id)->first();
         return response()->json([
             'message' => "Bookings and ServiceRounds",

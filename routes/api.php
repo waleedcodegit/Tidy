@@ -60,7 +60,7 @@ Route::post('/approved-vendor','Vendor\VendorController@approved_vendor');
 Route::post('/disapproved-vendor','Vendor\VendorController@disapproved_vendor');
 Route::post('/vendor-forget-password' , 'Vendor\VendorController@vendor_forget_password');
 Route::post('/vendor-reset-password' , 'Vendor\VendorController@vendor_reset_password');
-
+Route::post('/employee-list' , 'Vendor\VendorController@employee_list');
 
 
 Route::post('get_vendor_wallet','Vendor\VendorController@get_vendor_wallet');
@@ -79,6 +79,7 @@ Route::post('/delete-employee' , 'Vendor\EmployeeController@delete_employee');
 Route::post('/asign-vender-tocustomer' , 'Vendor\VendorController@asign_vender_tocustomer');
 Route::post('/accept-booking' , 'Vendor\VendorController@accept_booking');
 Route::post('/search_vendors' , 'Vendor\VendorController@search_vendors');
+Route::post('assign-employee-booking' , 'Vendor\VendorController@assign_employee_booking');
 
 //Employee Route
 Route::post('/delete-employee' , 'Vendor\EmployeeController@delete_employee');

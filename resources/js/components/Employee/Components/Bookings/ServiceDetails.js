@@ -14,6 +14,7 @@ class ServiceDetails extends Component {
             beforeImages: [],
             afterImages: [],
             serviceRounds: {},
+            checklists:[],
             error_string: ''
 
         };
@@ -31,6 +32,12 @@ class ServiceDetails extends Component {
                 beforeImages: res.data.serviceRounds.before_images ? JSON.parse(res.data.serviceRounds.before_images) : [],
                 afterImages: res.data.serviceRounds.after_images ? JSON.parse(res.data.serviceRounds.after_images) : [],
                 loading: false
+            })
+        })
+        Axios.post('/api/get_checklists').then(res=>{
+            console.log(res);
+            this.setState({
+                checklists: res.data.data,
             })
         })
     }
@@ -222,6 +229,104 @@ class ServiceDetails extends Component {
                                                                         </ul>
                                                                     </div>
                                                                 </div>
+                                                                <div className="divid-line" />
+                                                                <div className="row col-sm-12">
+                                                                {
+                                                                    this.state.booking.booking_information.resident_type == "House" 
+                                                                ?
+                                                                    <div className="col-md-12">
+                                                                        <h3>All areas of the house</h3>
+                                                                        <div className="divid-line" />
+                                                                        {
+                                                                            this.state.checklists.map((data,index)=>{
+                                                                                return(
+                                                                                    <>
+                                                                                    {
+                                                                                        data.type == 1 ?
+                                                                                        <li style={{listStyleType:'none'}}><input type="checkbox" className="col-sm-1" value={data.id} /> {data.item} </li> 
+                                                                                        :
+                                                                                        null
+                                                                                    }
+                                                                                    
+                                                                                    </>
+                                                                                )
+                                                                            })
+                                                                        }
+                                                                        <h3>Bathrooms</h3>
+                                                                        <div className="divid-line" />
+                                                                        {
+                                                                            this.state.checklists.map((data,index)=>{
+                                                                                return(
+                                                                                    <>
+                                                                                    {
+                                                                                        data.type == 2 ?
+                                                                                        <li style={{listStyleType:'none'}}><input type="checkbox" className="col-sm-1" value={data.id} /> {data.item} </li> 
+                                                                                        :
+                                                                                        null
+                                                                                    }
+                                                                                    
+                                                                                    </>
+                                                                                )
+                                                                            })
+                                                                        }
+                                                                        <h3>Kitchens</h3>
+                                                                        <div className="divid-line" />
+                                                                        {
+                                                                            this.state.checklists.map((data,index)=>{
+                                                                                return(
+                                                                                    <>
+                                                                                    {
+                                                                                        data.type == 3 ?
+                                                                                        <li style={{listStyleType:'none'}}><input type="checkbox" className="col-sm-1" value={data.id} /> {data.item} </li> 
+                                                                                        :
+                                                                                        null
+                                                                                    }
+                                                                                    
+                                                                                    </>
+                                                                                )
+                                                                            })
+                                                                        }
+                                                                        <h3>Bedrooms</h3>
+                                                                        <div className="divid-line" />
+                                                                        {
+                                                                            this.state.checklists.map((data,index)=>{
+                                                                                return(
+                                                                                    <>
+                                                                                    {
+                                                                                        data.type == 4 ?
+                                                                                        <li style={{listStyleType:'none'}}><input type="checkbox" className="col-sm-1" value={data.id} /> {data.item} </li> 
+                                                                                        :
+                                                                                        null
+                                                                                    }
+                                                                                    
+                                                                                    </>
+                                                                                )
+                                                                            })
+                                                                        }
+                                                                        <h3>Others</h3>
+                                                                        <div className="divid-line" />
+                                                                        {
+                                                                            this.state.checklists.map((data,index)=>{
+                                                                                return(
+                                                                                    <>
+                                                                                    {
+                                                                                        data.type == 5 ?
+                                                                                        <li style={{listStyleType:'none'}}><input type="checkbox" className="col-sm-1" value={data.id} /> {data.item} </li> 
+                                                                                        :
+                                                                                        null
+                                                                                    }
+                                                                                    
+                                                                                    </>
+                                                                                )
+                                                                            })
+                                                                        }
+
+                                                                    </div>
+                                                                :
+                                                                    null
+                                                                }
+                                                            </div>
+                                                            <div className="divid-line" />
                                                             </div>
                                                         </div>
                                                         <div className="row">
@@ -232,9 +337,10 @@ class ServiceDetails extends Component {
                                                                         :
                                                                         <>
                                                                             {
-                                                                                this.state.serviceRounds.end_time == '-:-:-' ?
+                                                                                this.state.serviceRounds.end_time == '-:-:-' 
+                                                                                ?
                                                                                     <h4><button onClick={this.endService.bind(this)} style={{ cursor: 'pointer' }} className="btn btn-outline-success">End Service</button></h4>
-                                                                                    :
+                                                                                :
                                                                                     null
                                                                             }
                                                                         </>

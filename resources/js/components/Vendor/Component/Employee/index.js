@@ -114,7 +114,6 @@ class Index extends React.Component{
       );
     }
 }
-
 const mapStateToProps = (state) =>{
   return{
       vendor:state.vendor

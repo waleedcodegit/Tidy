@@ -148,63 +148,58 @@ class BookingDetails extends Component {
                                     </div>
                                 </div>
                             </div>
-                                
-                        <div className="blog-wrap row">
-                            <div className="col-lg-12 sm-padding">
-                                <div className="row">
-                                    <div className="col-sm-12 padding-15">
-                                        <div className="blog-item profile-shadow">
-                                            <div id="main" className="blog-item profile-shadow"></div>
-                                                {
-                                                    this.state.booking.service.residential_type == 0  && this.state.booking.vendor_status != 1 ?
-                                                    <div className="vendor-qote">
-                                                    <h3>Vendor Quotes</h3>
-                                                    <div className="divid-line" />
-                                                    
-                                                    {
-                                                        this.state.quotes.map((data,index)=>{
-                                                            return(
-                                                                <div className="row col-md-12">
-                                                                    
-                                                                    <div className="col-md-2">
-                                                                        <div className="qote-img">
-                                                                            <img src="img/Worker-1.jpg" className="qote-thumb" />
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="col-md-7">
-                                                                        <div className="qote-section">
-                                                                            <h2> {data.vendor.first_name} </h2>
-                                                                            <p> {data.vendor.company_name} </p>
-                                                                            <p> {data.vendor.address} </p>
-                                                                            <span className="fa fa-star checked-star" />
-                                                                            <span className="fa fa-star checked-star" />
-                                                                            <span className="fa fa-star checked-star" />
-                                                                            <span className="fa fa-star checked-star" />
-                                                                            <span className="fa fa-star" />
-                                                                            <span>{data.vendor.ratings}</span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="col-md-3">
-                                                                    <div className="qote-price">
-                                                                        <span> ${data.quote} </span>
-                                                                        <a href="#" className="bk-btn">Accept</a>
-                                                                    </div>
-                                                                    </div>
-                                                                </div>
-                                                            )
-                                                        })
-                                                    }
-                                                    
-                                                </div>
-                                                :
-                                                null
-                                                }
-                                            </div>
+{/* vendor quotes section start                                */}
+                                <div className="vendor-detail">
+                                    <h3>Vendor Quotes</h3>
+                                    {
+                                        this.state.booking.service.residential_type == 0  && this.state.booking.vendor_status != 1 && this.state.quotes.length != 0 ?
+                                        <div className="vendor-qote">
+                                        <div className="divid-line" />
+                                        
+                                        {
+                                            this.state.quotes.map((data,index)=>{
+                                                return(
+                                                    <div className="row col-md-12">
+                                                        
+                                                        <div className="col-md-2">
+                                                            <div className="qote-img">
+                                                                <img src="img/Worker-1.jpg" className="qote-thumb" />
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-md-7">
+                                                            <div className="qote-section">
+                                                                <h2> {data.vendor.first_name} </h2>
+                                                                <p> {data.vendor.company_name} </p>
+                                                                <p> {data.vendor.address} </p>
+                                                                <span className="fa fa-star checked-star" />
+                                                                <span className="fa fa-star checked-star" />
+                                                                <span className="fa fa-star checked-star" />
+                                                                <span className="fa fa-star checked-star" />
+                                                                <span className="fa fa-star" />
+                                                                <span>{data.vendor.ratings}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-md-3">
+                                                        <div className="qote-price">
+                                                            <span> ${data.quote} </span>
+                                                            <a href="#" className="bk-btn">Accept</a>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                )
+                                            })
+                                        }
+                                        
+                                    </div>
+                                    :
+                                    <div className="detl-section">
+                                        <div className="text-center">
+                                        <p style={{color:'#000000a3' , fontSize:'20px'}}>No Quotes from Vendor</p>
                                         </div>
                                     </div>
+                                    }
                                 </div>
-                            </div>
-                           
+{/* vendor quote section end                           */}
                             <div className="vendor-detail">
                                 <h3>Vendor Details</h3>
                                 {
@@ -229,7 +224,7 @@ class BookingDetails extends Component {
                                     :
                                         <div className="detl-section">
                                             <div className="text-center">
-                                            <p style={{color:'#000000a3' , fontSize:'20px'}}>Vendors has not quoted yet. </p>
+                                            <p style={{color:'#000000a3' , fontSize:'20px'}}>Vendors has not quoted yet</p>
                                             </div>
                                         </div>
                                 }

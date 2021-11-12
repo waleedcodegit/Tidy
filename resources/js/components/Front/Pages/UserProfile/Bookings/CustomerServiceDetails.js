@@ -234,37 +234,111 @@ class CustomerServiceDetails extends Component {
                                                                 {
                                                                     this.state.booking.booking_information.resident_type == "House" 
                                                                 ?
-                                                                    <div className="col-md-6">
+                                                                    <div className="col-md-12">
+                                                                        <h3>All areas of the house</h3>
+                                                                        <div className="divid-line" />
                                                                         {
                                                                             this.state.checklists.map((data,index)=>{
                                                                                 return(
-                                                                                    <li type="checkbox"> {data.item} </li>
+                                                                                    <>
+                                                                                    {
+                                                                                        data.type == 1 ?
+                                                                                        <li style={{listStyleType:'none'}}><input type="checkbox" className="col-sm-1" value={data.id} /> {data.item} </li> 
+                                                                                        :
+                                                                                        null
+                                                                                    }
+                                                                                    
+                                                                                    </>
                                                                                 )
                                                                             })
                                                                         }
+                                                                        <h3>Bathrooms</h3>
+                                                                        <div className="divid-line" />
+                                                                        {
+                                                                            this.state.checklists.map((data,index)=>{
+                                                                                return(
+                                                                                    <>
+                                                                                    {
+                                                                                        data.type == 2 ?
+                                                                                        <li style={{listStyleType:'none'}}><input type="checkbox" className="col-sm-1" value={data.id} /> {data.item} </li> 
+                                                                                        :
+                                                                                        null
+                                                                                    }
+                                                                                    
+                                                                                    </>
+                                                                                )
+                                                                            })
+                                                                        }
+                                                                        <h3>Kitchens</h3>
+                                                                        <div className="divid-line" />
+                                                                        {
+                                                                            this.state.checklists.map((data,index)=>{
+                                                                                return(
+                                                                                    <>
+                                                                                    {
+                                                                                        data.type == 3 ?
+                                                                                        <li style={{listStyleType:'none'}}><input type="checkbox" className="col-sm-1" value={data.id} /> {data.item} </li> 
+                                                                                        :
+                                                                                        null
+                                                                                    }
+                                                                                    
+                                                                                    </>
+                                                                                )
+                                                                            })
+                                                                        }
+                                                                        <h3>Bedrooms</h3>
+                                                                        <div className="divid-line" />
+                                                                        {
+                                                                            this.state.checklists.map((data,index)=>{
+                                                                                return(
+                                                                                    <>
+                                                                                    {
+                                                                                        data.type == 4 ?
+                                                                                        <li style={{listStyleType:'none'}}><input type="checkbox" className="col-sm-1" value={data.id} /> {data.item} </li> 
+                                                                                        :
+                                                                                        null
+                                                                                    }
+                                                                                    
+                                                                                    </>
+                                                                                )
+                                                                            })
+                                                                        }
+                                                                        <h3>Others</h3>
+                                                                        <div className="divid-line" />
+                                                                        {
+                                                                            this.state.checklists.map((data,index)=>{
+                                                                                return(
+                                                                                    <>
+                                                                                    {
+                                                                                        data.type == 5 ?
+                                                                                        <li style={{listStyleType:'none'}}><input type="checkbox" className="col-sm-1" value={data.id} /> {data.item} </li> 
+                                                                                        :
+                                                                                        null
+                                                                                    }
+                                                                                    
+                                                                                    </>
+                                                                                )
+                                                                            })
+                                                                        }
+
                                                                     </div>
                                                                 :
                                                                     null
                                                                 }
                                                             </div>
-                                                        </div>
-                                                        {/* <div className="row">
-                                                            <div className="col-md-12">
-                                                                {
-                                                                    this.state.serviceRounds.start_time == '-:-:-' ?
-                                                                        <h4><button onClick={this.startService.bind(this)} style={{ cursor: 'pointer' }} className="btn btn-outline-success">Start Service</button></h4>
-                                                                        :
-                                                                        <>
-                                                                            {
-                                                                                this.state.serviceRounds.end_time == '-:-:-' ?
-                                                                                    <h4><button onClick={this.endService.bind(this)} style={{ cursor: 'pointer' }} className="btn btn-outline-success">End Service</button></h4>
-                                                                                    :
-                                                                                    null
-                                                                            }
-                                                                        </>
-                                                                }
+                                                            <div className="divid-line" />
+
+                                                            <div className="row">
+                                                                <div className="col-md-12">
+                                                                    <span>If You are Satisfied with the Job,Click AGREE</span><h4><button style={{ cursor: 'pointer' , marginLeft: '30px'}} className="btn btn-outline-success">AGREE</button></h4>
+                                                                    
+                                                                </div>
+                                                                <div className="col-md-12">
+                                                                    <span>If You have any feedbacks for the Services,Click on FeedBack</span><h4><button style={{ cursor: 'pointer' }} className="btn btn-outline-primary">FeedBack</button></h4>
+                                                                </div>
                                                             </div>
-                                                        </div> */}
+                                                        </div>
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
