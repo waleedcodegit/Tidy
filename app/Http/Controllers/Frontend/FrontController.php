@@ -34,6 +34,7 @@ use App\Employee;
 use App\ServiceCheck;
 use App\ServiceRound;
 use App\VendorQuote;
+use App\Vendor;
 
 use Illuminate\Support\Facades\DB;
 
@@ -1068,13 +1069,20 @@ class FrontController extends Controller
 
     public function service_details(Request $request){
         $bookings = BookingService::where('id',$request->id)->with('booking')->first();
-        $bookings->booking_information = BookingInformation::where('booking_id',$bookings->booking_id)->first(); 
+        $bookings->booking_information = BookingInformation::where('booking_id',$bookings->booking_id)->first();
+        $bookings->vendor_info = Vendor::where('id',$bookings->booking['vendor_id'])->first();
         $s_round = ServiceRound::where('service_id',$request->id)->first();
         return response()->json([
             'message' => "Bookings and ServiceRounds",
             'data' => $bookings,
             'serviceRounds' => $s_round
         ]);
+    }
+
+    public function update_checklist(Request $request){
+        $checklist = ServiceRound::where('service_id',$request->id)->first();
+        $checklist->check_list = json_encode($request->updatedChecklist);
+        $checklist->save();
     }
 
     public function start_service(Request $request){

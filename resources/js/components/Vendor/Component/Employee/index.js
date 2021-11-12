@@ -18,7 +18,7 @@ class Index extends React.Component{
       Axios.post('/api/employee-list',{vendor_id:this.props.vendor.data.vendor_id}).then(res=>
         {
             console.log(res.data.data);
-        if(res.data.status == true){
+        if(res.data.status == 200){
             this.setState({
                 Employees: res.data.data,
             })

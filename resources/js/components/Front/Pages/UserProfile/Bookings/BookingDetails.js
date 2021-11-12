@@ -214,15 +214,15 @@ class BookingDetails extends Component {
                                     ?
                                         <div className="detl-section">
                                             <div className="row">
-                                                <div className="col-md-3">
+                                                <div className="col-md-4">
                                                     <span>Vendor Name</span>
                                                     <p>{this.state.booking.vendor.first_name}</p>
                                                 </div>
-                                                <div className="col-md-3">
+                                                <div className="col-md-4">
                                                     <span>Business Type</span>
                                                     <p>{this.state.booking.vendor.company_name}</p>
                                                 </div>
-                                                <div className="col-md-6">
+                                                <div className="col-md-4">
                                                     <span>From</span>
                                                     <p>{this.state.booking.vendor.address}</p>
                                                 </div>

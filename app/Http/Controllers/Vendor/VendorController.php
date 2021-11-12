@@ -1113,23 +1113,24 @@ class VendorController extends Controller
             'message' => "Search Vendor",
             'vendor' => $vendor 
         ]);
-}
-public function customers_list_count(Request $request){
-    $employeelist = Employee::where('vendor_id',$request->vendor_id)->count();
-    if($employeelist){
-    $response=[
-        'status' => 200,
-        'message' => 'Success',
-        'data' => $employeelist,
-    ];
-    }else{
-    $response=[
-        'status' => 401,
-        'message' => 'No data found',
-    ];
     }
-    return $response;
-}
+    
+    public function customers_list_count(Request $request){
+        $employeelist = Employee::where('vendor_id',$request->vendor_id)->count();
+        if($employeelist){
+        $response=[
+            'status' => 200,
+            'message' => 'Success',
+            'data' => $employeelist,
+        ];
+        }else{
+        $response=[
+            'status' => 401,
+            'message' => 'No data found',
+        ];
+        }
+        return $response;
+    }
     public function employee_list(Request $request){
         $employeelist = Employee::where('vendor_id',$request->vendor_id)->get();
         if($employeelist){
@@ -1146,23 +1147,23 @@ public function customers_list_count(Request $request){
         }
         return $response;
     }
-
-public function bookings_list_count(Request $request){
-    $bookings = Booking::where('vendor_id',$request->vendor_id)->count();
-    if($bookings){
-    $response=[
-        'status' => 200,
-        'message' => 'Success',
-        'data' => $bookings,
-    ];
-    }else{
-    $response=[
-        'status' => 401,
-        'message' => 'No data found',
-    ];
+    
+    public function bookings_list_count(Request $request){
+        $bookings = Booking::where('vendor_id',$request->vendor_id)->count();
+        if($bookings){
+        $response=[
+            'status' => 200,
+            'message' => 'Success',
+            'data' => $bookings,
+        ];
+        }else{
+        $response=[
+            'status' => 401,
+            'message' => 'No data found',
+        ];
+        }
+        return $response;
     }
-    return $response;
-}
 // VendorPayment
 public function get_vendor_payments(Request $request){
     $vendorpayment = VendorPayment::where('vendor_id',$request->vendor_id)->sum('payment');

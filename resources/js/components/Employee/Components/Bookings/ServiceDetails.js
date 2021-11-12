@@ -15,10 +15,10 @@ class ServiceDetails extends Component {
             afterImages: [],
             serviceRounds: {},
             checklists:[],
-            error_string: ''
-
+            vendor:'',
+            error_string: '',
         };
-        console.log(this.state.booking);
+        console.log(props);
     }
 
     componentDidMount() {
@@ -28,16 +28,12 @@ class ServiceDetails extends Component {
 
             this.setState({
                 booking: res.data.data,
+                vendor: res.data.data.vendor_info,
                 serviceRounds: res.data.serviceRounds,
                 beforeImages: res.data.serviceRounds.before_images ? JSON.parse(res.data.serviceRounds.before_images) : [],
                 afterImages: res.data.serviceRounds.after_images ? JSON.parse(res.data.serviceRounds.after_images) : [],
-                loading: false
-            })
-        })
-        Axios.post('/api/get_checklists').then(res=>{
-            console.log(res);
-            this.setState({
-                checklists: res.data.data,
+                loading: false,
+                checklists: res.data.serviceRounds.check_list ? JSON.parse(res.data.serviceRounds.check_list) : []
             })
         })
     }
@@ -77,6 +73,22 @@ class ServiceDetails extends Component {
         })
     }
 
+    onchange_check(index){
+        let temp = this.state.checklists;
+        temp[index].check_ = !temp[index].check_;
+        this.setState({
+            checklists:temp
+        })
+
+        let data = {
+            id : this.props.match.params.id,
+            updatedChecklist: this.state.checklists
+        }
+
+        Axios.post('/api/update_checklist', data).then(res=>{
+            console.log(res);
+        })
+    }
     getImage(type, event) {
 
         const formData = new FormData();
@@ -151,7 +163,7 @@ class ServiceDetails extends Component {
                                                                 <div className="col-md-3">
                                                                     <div className="booking-content">
                                                                         <ul>
-                                                                            <li>Vendor<br /><span>Zeeshan</span></li>
+                                                                            <li>Vendor<br /><span>{this.state.vendor.first_name}</span></li>
                                                                         </ul>
                                                                     </div>
                                                                 </div>
@@ -243,7 +255,7 @@ class ServiceDetails extends Component {
                                                                                     <>
                                                                                     {
                                                                                         data.type == 1 ?
-                                                                                        <li style={{listStyleType:'none'}}><input type="checkbox" className="col-sm-1" value={data.id} /> {data.item} </li> 
+                                                                                        <li style={{listStyleType:'none'}}><input type="checkbox" onChange={this.onchange_check.bind(this,index)} checked={data.check_} className="col-sm-1"  /> {data.item} </li> 
                                                                                         :
                                                                                         null
                                                                                     }
@@ -260,7 +272,7 @@ class ServiceDetails extends Component {
                                                                                     <>
                                                                                     {
                                                                                         data.type == 2 ?
-                                                                                        <li style={{listStyleType:'none'}}><input type="checkbox" className="col-sm-1" value={data.id} /> {data.item} </li> 
+                                                                                        <li style={{listStyleType:'none'}}><input type="checkbox" onChange={this.onchange_check.bind(this,index)} checked={data.check_} className="col-sm-1" /> {data.item} </li> 
                                                                                         :
                                                                                         null
                                                                                     }
@@ -277,7 +289,7 @@ class ServiceDetails extends Component {
                                                                                     <>
                                                                                     {
                                                                                         data.type == 3 ?
-                                                                                        <li style={{listStyleType:'none'}}><input type="checkbox" className="col-sm-1" value={data.id} /> {data.item} </li> 
+                                                                                        <li style={{listStyleType:'none'}}><input type="checkbox" onChange={this.onchange_check.bind(this,index)} checked={data.check_} className="col-sm-1" /> {data.item} </li> 
                                                                                         :
                                                                                         null
                                                                                     }
@@ -294,7 +306,7 @@ class ServiceDetails extends Component {
                                                                                     <>
                                                                                     {
                                                                                         data.type == 4 ?
-                                                                                        <li style={{listStyleType:'none'}}><input type="checkbox" className="col-sm-1" value={data.id} /> {data.item} </li> 
+                                                                                        <li style={{listStyleType:'none'}}><input type="checkbox" onChange={this.onchange_check.bind(this,index)} checked={data.check_} className="col-sm-1"  /> {data.item} </li> 
                                                                                         :
                                                                                         null
                                                                                     }
@@ -311,7 +323,7 @@ class ServiceDetails extends Component {
                                                                                     <>
                                                                                     {
                                                                                         data.type == 5 ?
-                                                                                        <li style={{listStyleType:'none'}}><input type="checkbox" className="col-sm-1" value={data.id} /> {data.item} </li> 
+                                                                                        <li style={{listStyleType:'none'}}><input type="checkbox" className="col-sm-1" onChange={this.onchange_check.bind(this,index)} checked={data.check_} /> {data.item} </li> 
                                                                                         :
                                                                                         null
                                                                                     }

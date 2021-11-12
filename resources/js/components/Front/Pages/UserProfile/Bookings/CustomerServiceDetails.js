@@ -12,6 +12,7 @@ class CustomerServiceDetails extends Component {
             afterImages: [],
             serviceRounds: {},
             checklists: [],
+            vendor:'',
             error_string: ''
 
         };
@@ -25,98 +26,17 @@ class CustomerServiceDetails extends Component {
 
             this.setState({
                 booking: res.data.data,
+                vendor: res.data.data.vendor_info,
                 serviceRounds: res.data.serviceRounds,
                 beforeImages: res.data.serviceRounds.before_images ? JSON.parse(res.data.serviceRounds.before_images) : [],
                 afterImages: res.data.serviceRounds.after_images ? JSON.parse(res.data.serviceRounds.after_images) : [],
+                checklists: res.data.serviceRounds.check_list ? JSON.parse(res.data.serviceRounds.check_list) : [],
                 loading: false
             })
         })
 
-        Axios.post('/api/get_checklists').then(res=>{
-            console.log(res);
-            this.setState({
-                checklists: res.data.data,
-            })
-        })
+        
     }
-
-    // startService() {
-    //     Axios.post('/api/start_service', { id: this.state.serviceRounds.id }).then(res => {
-    //         if (res.data.status == 200) {
-    //             this.props.history.push('/vendor-employee/booking-details/{id}');
-    //             Swal.fire({
-    //                 icon: 'success',
-    //                 title: 'Service Started Successfully',
-    //                 showConfirmButton: false,
-    //                 timer: 1500
-    //             })
-    //         } else {
-    //             this.setState({
-    //                 error_string: res.data.msg
-    //             })
-    //         }
-    //     })
-    // }
-
-    // endService() {
-    //     Axios.post('/api/end_service', { id: this.state.serviceRounds.id }).then(res => {
-    //         if (res.data.status == 200) {
-    //             Swal.fire({
-    //                 icon: 'success',
-    //                 title: 'Service Ended Successfully',
-    //                 showConfirmButton: false,
-    //                 timer: 1500
-    //             })
-    //         } else {
-    //             this.setState({
-    //                 error_string: res.data.msg
-    //             })
-    //         }
-    //     })
-    // }
-
-    // getImage(type, event) {
-
-    //     const formData = new FormData();
-    //     formData.append('file', event.target.files[0]);
-    //     formData.append('token', window.localStorage.getItem('al'));
-    //     formData.append('service_id', this.state.serviceRounds.service_id);
-    //     formData.append('type', type);
-
-    //     let Configs = {
-    //         headers: {
-    //             token: window.localStorage.getItem('et'),
-    //             'content-type': false,
-    //             'mime-type': "multipart/form-data",
-    //         },
-    //         onUploadProgress: progressEvent => {
-    //             this.setState({
-    //                 btn2_prg: Math.round((progressEvent.loaded * 100) / progressEvent.total)
-    //             })
-    //         }
-    //     }
-    //     this.setState({
-    //         loading: true,
-    //     })
-
-    //     Axios.post('/api/upload_service_images', formData, Configs).then(res => {
-
-    //         if (res.data.status == 200) {
-    //             toast.success('Image Uploaded');
-    //             this.setState({
-    //                 beforeImages: res.data.serviceRounds.before_images ? JSON.parse(res.data.serviceRounds.before_images) : [],
-    //                 afterImages: res.data.serviceRounds.after_images ? JSON.parse(res.data.serviceRounds.after_images) : [],
-    //                 loading: false
-    //             })
-    //         } else {
-    //             toast.error(res.data.msg);
-    //             this.setState({
-    //                 loading: false
-    //             })
-    //         }
-    //     })
-
-    // }
 
     render() {
         return (<div>
@@ -150,7 +70,7 @@ class CustomerServiceDetails extends Component {
                                                                     <div className="booking-content">
                                                                         <ul>
                                                                             {/* need to show vendor ID after completing the process */}
-                                                                            <li>Vendor<br /><span>Zeeshan</span></li>
+                                                                            <li>Vendor<br /><span>{this.state.vendor.first_name}</span></li>
                                                                         </ul>
                                                                     </div>
                                                                 </div>
@@ -181,10 +101,6 @@ class CustomerServiceDetails extends Component {
                                                                     <div className="booking-content">
                                                                         <ul>
                                                                             <li>Before Images</li>
-                                                                            {/* <input type="file" style={{cursor:'pointer' ,width:'210px'}} 
-                                                                            className="btn btn-outline-primary ml-auto" 
-                                                                            onChange={this.getImage.bind(this,'b')}>
-                                                                            </input> */}
                                                                         </ul>
                                                                     </div>
                                                                 </div>
@@ -208,10 +124,6 @@ class CustomerServiceDetails extends Component {
                                                                     <div className="booking-content">
                                                                         <ul>
                                                                             <li>After Images</li>
-                                                                            {/* <input type="file" style={{cursor:'pointer' ,width:'210px'}} 
-                                                                            className="btn btn-outline-primary ml-auto" 
-                                                                            onChange={this.getImage.bind(this,'a')}>
-                                                                            </input> */}
                                                                         </ul>
                                                                     </div>
                                                                 </div>
@@ -243,7 +155,7 @@ class CustomerServiceDetails extends Component {
                                                                                     <>
                                                                                     {
                                                                                         data.type == 1 ?
-                                                                                        <li style={{listStyleType:'none'}}><input type="checkbox" className="col-sm-1" value={data.id} /> {data.item} </li> 
+                                                                                        <li style={{listStyleType:'none'}}><input type="checkbox" className="col-sm-1" checked={data.check_} /> {data.item} </li> 
                                                                                         :
                                                                                         null
                                                                                     }
@@ -260,7 +172,7 @@ class CustomerServiceDetails extends Component {
                                                                                     <>
                                                                                     {
                                                                                         data.type == 2 ?
-                                                                                        <li style={{listStyleType:'none'}}><input type="checkbox" className="col-sm-1" value={data.id} /> {data.item} </li> 
+                                                                                        <li style={{listStyleType:'none'}}><input type="checkbox" className="col-sm-1" checked={data.check_} /> {data.item} </li> 
                                                                                         :
                                                                                         null
                                                                                     }
@@ -277,7 +189,7 @@ class CustomerServiceDetails extends Component {
                                                                                     <>
                                                                                     {
                                                                                         data.type == 3 ?
-                                                                                        <li style={{listStyleType:'none'}}><input type="checkbox" className="col-sm-1" value={data.id} /> {data.item} </li> 
+                                                                                        <li style={{listStyleType:'none'}}><input type="checkbox" className="col-sm-1" checked={data.check_} /> {data.item} </li> 
                                                                                         :
                                                                                         null
                                                                                     }
@@ -294,7 +206,7 @@ class CustomerServiceDetails extends Component {
                                                                                     <>
                                                                                     {
                                                                                         data.type == 4 ?
-                                                                                        <li style={{listStyleType:'none'}}><input type="checkbox" className="col-sm-1" value={data.id} /> {data.item} </li> 
+                                                                                        <li style={{listStyleType:'none'}}><input type="checkbox" className="col-sm-1" checked={data.check_} /> {data.item} </li> 
                                                                                         :
                                                                                         null
                                                                                     }
@@ -311,7 +223,7 @@ class CustomerServiceDetails extends Component {
                                                                                     <>
                                                                                     {
                                                                                         data.type == 5 ?
-                                                                                        <li style={{listStyleType:'none'}}><input type="checkbox" className="col-sm-1" value={data.id} /> {data.item} </li> 
+                                                                                        <li style={{listStyleType:'none'}}><input type="checkbox" className="col-sm-1" checked={data.check_} /> {data.item} </li> 
                                                                                         :
                                                                                         null
                                                                                     }
@@ -330,11 +242,11 @@ class CustomerServiceDetails extends Component {
 
                                                             <div className="row">
                                                                 <div className="col-md-12">
-                                                                    <span>If You are Satisfied with the Job,Click AGREE</span><h4><button style={{ cursor: 'pointer' , marginLeft: '30px'}} className="btn btn-outline-success">AGREE</button></h4>
+                                                                    <span>If You are Satisfied with the Job,Click AGREE</span><button style={{ cursor: 'pointer' , marginLeft:'10px'}} className="btn btn-outline-success">AGREE</button>
                                                                     
                                                                 </div>
                                                                 <div className="col-md-12">
-                                                                    <span>If You have any feedbacks for the Services,Click on FeedBack</span><h4><button style={{ cursor: 'pointer' }} className="btn btn-outline-primary">FeedBack</button></h4>
+                                                                    <span>If You have any complains for the Service,Click here</span><button style={{ cursor: 'pointer' , marginLeft:'10px' }} className="btn btn-outline-danger">Make A Complain</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -355,29 +267,3 @@ class CustomerServiceDetails extends Component {
 }
 
 export default CustomerServiceDetails;
-
-// const mapStateToProps = (state) => {
-//     return {
-//         employee: state.employee
-//     }
-// }
-// export default connect(mapStateToProps)(CustomerServiceDetails);
-
-{/* <div className="col-md-10">
-    <select onChange={this.selected_employee.bind(this)} className="form-control" name="type">
-    <option defaultValue="selected">Please Select</option>
-        {this.state.employees.map((data,index)=>{
-            return(
-                <option key={index} value={data.id}>{data.name}</option>
-                )
-            }
-        )
-        }
-    </select>
-</div> */}
-// {
-//     this.state.serviceRounds.start_time.length > 0 && this.state.serviceRounds.end_time.legth > 0 ?
-//     <h4>Service Completed</h4>
-//     :
-
-// }
