@@ -985,6 +985,34 @@ class VendorController extends Controller
             ];
             return $response;
      }
+     public function accept_vendor_withdraw_request(Request $request){
+        $withdraw = VendorWithdrawRequest::where('id',$request->id)->first();
+        $vendor = Vendor::where('id',$withdraw->vendor_id)->first();
+        // return $vendor;
+        if($withdraw){
+            try{
+            $stripe = new \Stripe\StripeClient(
+                env("STRIPE_SK")
+              );
+            $res =  $stripe->transfers->create([
+                'amount' => $withdraw->withdraw_amount * 100,
+                'currency' => 'usd',
+                'destination' => $vendor->stripe_account,
+                'transfer_group' => 'vendor_withdraw_'.$withdraw->id,
+              ]);
+              $withdraw->stripe_response = json_encode($res);
+              $withdraw->status = 1;
+              $withdraw->save();
+              $response = ['status' => 200 , 'message' => 'Vendor Payment Withdrawl Successfully'];
+                return $response;
+            }
+            catch(Exception $e){
+                $response = ['status' => 404 , 'message' => 'there is been a issue with vendor account. Error - '.$e];
+                return $response;
+            }
+        }
+       
+     }
      public function get_vendor_qoutes(Request $request){
         $qoutes = VendorQuote::where('vendor_id',$request->vendor_id)->with('bookingrequests')->get();
         return response()->json([
