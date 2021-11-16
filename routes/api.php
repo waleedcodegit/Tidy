@@ -256,6 +256,7 @@ Route::post('/service_details_by_id' , 'Frontend\FrontController@service_details
 Route::post('/accept_vednor_request' , 'Frontend\FrontController@accept_vednor_request');
 Route::post('/update_checklist' , 'Frontend\FrontController@update_checklist');
 Route::post('/sendMessage/{message}/{recipient}' , 'Frontend\FrontController@sendMessage');
+Route::post('/submit_complain' , 'Frontend\FrontController@submit_complain');
 
 
 //Emails Controller//
