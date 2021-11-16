@@ -18,7 +18,7 @@ class ManageAcountsController extends Controller
     }
     public function get_vendor_withdraw_requests()
     {
-        $vendorwithdrawrequest = VendorWithdrawRequest::where('status', 0)->orderBy('id','DESC')->with('vendorname')->get();
+        $vendorwithdrawrequest = VendorWithdrawRequest::orderBy('id','DESC')->with('vendorname')->get();
         $response= ['status' => 200 ,
                 'vendorwithdrawrequest' => $vendorwithdrawrequest];
         return $response;

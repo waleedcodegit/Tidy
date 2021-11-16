@@ -43,7 +43,7 @@ class ShowVendor extends Component {
             msg:'fff'
         }
         Axios.post(`/api/vendor-info/${this.props.match.params.id}`,data, Configs).then(res => {
-            console.log(res);
+            console.log(res.data.data.status);
             if(res.data.status == 200) {
                 this.setState({
                     vendor_id: res.data.data.id,
@@ -66,6 +66,7 @@ class ShowVendor extends Component {
                     vendor_docs: res.data.data.vendor_doc,
                     employees: res.data.data.employees,
                     bookings: res.data.data.bookings,
+                    status:res.data.data.status
                 })
             }
         });
@@ -184,7 +185,26 @@ class ShowVendor extends Component {
                                 <p className="pad-ver text-main text-sm text-uppercase text-bold">About Me</p>
                                 <p><a className="btn-link"><i className="demo-pli-internet icon-lg icon-fw" /> {this.state.email}</a></p>
                                 <p><i className="demo-pli-old-telephone icon-lg icon-fw" />{this.state.phone}</p>
+                                <div className="text-center">
+                                <div className="pad-ver">
+                                    {/* <img src={img_baseurl+"1.png"} className="img-lg img-circle" alt="Profile Picture" /> */}
+                                </div>
+                                <h4 className="text-lg text-overflow mar-no"></h4>
+                               {
+                                   this.state.status == "disapproved" ?
+                                   <button className="btn btn-primary" onClick={this.vendorApproved.bind(this)}>Approve</button>
+                                   :
+                                   this.state.status == "approved" ?
+                                   <button className="btn btn-danger" onClick={this.vendorDisApproved.bind(this)}>Disapprove</button>
+                                   :
+                                   null
+
+                               }
+                                
+                                <p className="text-sm text-muted"></p>
                             </div>
+                            </div>
+                            
                             <div className="fluid">
                             <div className="tab-base">
                                 {/*Nav Tabs*/}
@@ -349,8 +369,17 @@ class ShowVendor extends Component {
                         </div>
                         <div className="panel-footer text-right">
                             <div className="panel-body demo-nifty-btn">
-                                <button className="btn btn-primary" onClick={this.vendorApproved.bind(this)}>Approve</button>
-                                <button className="btn btn-danger" onClick={this.vendorDisApproved.bind(this)}>Disapprove</button>                
+                                {
+                                    this.state.status == 'pending' ?
+                                    // this.state.status == 'pending' ?
+                                    <>
+                               <button className="btn btn-primary" onClick={this.vendorApproved.bind(this)}>Approve</button>
+                                <button className="btn btn-danger" onClick={this.vendorDisApproved.bind(this)}>Disapprove</button> 
+                               </>: null
+                            // <button className="btn btn-primary" onClick={this.vendorApproved.bind(this)}>Abc</button>
+                         }
+                                {/* <button className="btn btn-primary" onClick={this.vendorApproved.bind(this)}>Approve</button>
+                                <button className="btn btn-danger" onClick={this.vendorDisApproved.bind(this)}>Disapprove</button>                 */}
                             </div>
                         </div>
                     </div>

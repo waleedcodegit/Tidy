@@ -41,8 +41,23 @@ class VendorwithdrawRequests extends React.Component {
     }
 
 
-    accept_vendor_withraw_request(data){
-        Axios.post('/api/accept_vendor_withdraw_request',{id:data.id}).then(res=>{
+    accept_vendor_withraw_request(id){
+        let data = {
+            id: id
+        }
+        Axios.post('/api/accept_vendor_withdraw_request',data).then(res=>{
+            if(res.data.status == 200){
+                toast.success(res.data.message);
+            }else{
+                toast.error(res.data.message);
+            }
+        })
+    }
+    reject_vendor_withraw_request(id){
+        let data = {
+            id: id
+        }
+        Axios.post('/api/reject_vendor_withdraw_request',data).then(res=>{
             if(res.data.status == 200){
                 toast.success(res.data.message);
             }else{
@@ -78,18 +93,36 @@ class VendorwithdrawRequests extends React.Component {
                                                         <td>{index+1}</td>
                                                         <td>{data.vendorname.first_name +' '+ data.vendorname.last_name}</td>
                                                         <td>${data.withdraw_amount}</td>
-                                                        <td>{data.status == 0 ? "Pending": "Sucseed"}</td>
+                                                        <td>{data.status == 0 ? "Pending": data.status == 0 ? "Sucseed":"Rejected"}</td>
                                                         <td>{data.date}</td>
-                                                       
-                                                        <td>
-                                                             {/* <Link to ={`/admin/edit-customer/${data.id}`}> */}
-                                                            <button onClick={this.accept_vendor_withraw_request.bind(this,data)} className="btn btn-success"> Accept</button>
-                                                            {/* </Link> */}
+                                                        {
+                                                             data.status == 0 ?
+                                                             <td>
+                                                             <button onClick={this.accept_vendor_withraw_request.bind(this,data.id)} className="btn btn-success"> Accept</button>
+                                                             </td> : 
+                                                             
+                                                            data.status == 1 ?
+                                                            <td colspan="2">
+                                                            <button onClick={this.accept_vendor_withraw_request.bind(this,data)} className="btn btn-success"> Accepted</button>
+                                                            </td> :
+                                                           data.status == 2 ?
+                                                           <td colspan="2">
+                                                           <button onClick={this.accept_vendor_withraw_request.bind(this,data)} className="btn btn-danger"> Rejected</button>
+                                                           </td> :
+                                                           null
+                                                            }
+                                                          
+                                                            
+
+                                                           
+                                                            <td>
+                                                            {
+                                                                 data.status == 0 ?
+                                                                 <button  onClick={this.reject_vendor_withraw_request.bind(this, data.id)} className="btn btn-danger">Reject</button>
+                                                                 :
+                                                                 null
+                                                            }
                                                             </td>
-                                                        <td> <button 
-                                                        // onClick={this.deleteCustomer.bind(this, data.id)} 
-                                                        className="btn btn-danger">Reject</button> </td>
-                                                        
                                                     </tr>
                                                 )
                                             })

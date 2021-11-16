@@ -78,7 +78,7 @@ class wallet extends Component {
                                                         <td>{data.date}</td>
                                                         <td>${data.withdraw_amount}</td>
                                                         <td>{data.strip_response}</td>
-                                                        <td>{data.status == 0 ? "Pending": "Sucseed"}</td>
+                                                        <td>{data.status == 0 ? "Pending": data.status == 2 ? "Rejected" : 'Accepted'}</td>
                                                     </tr>
                                                 )
                                             })

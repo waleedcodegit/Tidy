@@ -1224,5 +1224,21 @@ public function get_vendor_payments(Request $request){
     }
     return $response;
 }
+public function reject_vendor_withdraw_request(Request $request) {
+    $VendorWithdrawRequest = VendorWithdrawRequest::where('id', $request->id)->update([ 
+        'status' => 2,
+       
+       
+    ]);
+    //  $vendorbookingRequest = new VendorBookingRequest();
+    //     $vendorbookingRequest->vendor_id = $request->vendor_id;
+    //     $vendorbookingRequest->booking_id = $request->id;
+    //     $vendorbookingRequest->save();
+    $response = [
+        'status' => 200,
+        'msg' => 'Accept'
+    ];
+    return $response;
+}
 }
 

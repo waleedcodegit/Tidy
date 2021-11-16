@@ -220,6 +220,7 @@ Route::post('/update_quote' , 'Vendor\VendorController@update_quote');
 Route::post('/get_ven_booking_by_id','Vendor\VendorController@get_ven_booking_by_id');
 Route::post('/accept_booking' , 'Vendor\VendorController@accept_booking');
 Route::post('/accept_vendor_withdraw_request' , 'Vendor\VendorController@accept_vendor_withdraw_request');
+Route::post('/reject_vendor_withdraw_request' , 'Vendor\VendorController@reject_vendor_withdraw_request');
 
 
 
