@@ -2,6 +2,8 @@ import React from 'react';
 import Axios from 'axios';
 import {Link} from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { data } from 'jquery';
+import toast from 'react-hot-toast';
 
 class VendorwithdrawRequests extends React.Component {
     constructor(props) {
@@ -39,7 +41,15 @@ class VendorwithdrawRequests extends React.Component {
     }
 
 
-
+    accept_vendor_withraw_request(data){
+        Axios.post('/api/accept_vendor_withdraw_request',{id:data.id}).then(res=>{
+            if(res.data.status == 200){
+                toast.success(res.data.message);
+            }else{
+                toast.error(res.data.message);
+            }
+        })
+    }
     render() {
         return (
             <div>
@@ -73,7 +83,7 @@ class VendorwithdrawRequests extends React.Component {
                                                        
                                                         <td>
                                                              {/* <Link to ={`/admin/edit-customer/${data.id}`}> */}
-                                                            <button className="btn btn-success"> Accept</button>
+                                                            <button onClick={this.accept_vendor_withraw_request.bind(this,data)} className="btn btn-success"> Accept</button>
                                                             {/* </Link> */}
                                                             </td>
                                                         <td> <button 

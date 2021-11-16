@@ -36,7 +36,8 @@ use App\ServiceRound;
 use App\VendorQuote;
 use App\Vendor;
 use App\Mail\ContactusEmail;
-
+use Twilio\Rest\Client;
+use App\Complaint;
 
 use Illuminate\Support\Facades\DB;
 
@@ -47,7 +48,14 @@ class FrontController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
+    public function sendMessage($message, $recipients)
+    {
+        $account_sid = getenv("TWILIO_SID");
+        $auth_token = getenv("TWILIO_AUTH_TOKEN");
+        $twilio_number = getenv("TWILIO_NUMBER");
+        $client = new Client($account_sid, $auth_token);
+        $client->messages->create($recipients, ['from' => $twilio_number, 'body' => $message]);
+    }
     public function get_service_content_by_slug(Request $request){
         $service = Category::where('slug',$request->slug)->first();
         if($service){
@@ -757,11 +765,11 @@ class FrontController extends Controller
     }
 
     public function validate_gift_card_details(Request $request){
-        if($request->amount < 0 || $request->amount > 500){
+        if($request->amount < 10 || $request->amount > 500){
             return response()->json([
                 'status' => false,
-                'message' => 'Amount Should be between R0.50 to $500.',
-               
+                'message' => 'Amount Should be between $10 to $500.',
+            
             ]);
         }
         $validator = Validator::make($request->all(), [
@@ -1115,6 +1123,18 @@ class FrontController extends Controller
             'msg' => 'Service Ended Successfully'
         ];
         return $response;
+    }
+
+    public function submit_complain(Request $request){
+        $complain = new Complaint();
+        $complain->service_id = $request->id;
+        $complain->complaints = $request->complain;
+        $complain->save();
+        return response()->json([
+            'status' => 200,
+            'message' => "Complaint Submitted Successfully",
+            'data' => $complain,
+        ]);
     }
     
     public function upload_service_images(Request $request){

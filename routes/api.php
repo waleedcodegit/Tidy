@@ -219,6 +219,7 @@ Route::post('/create_quote' , 'Vendor\VendorController@create_quote');
 Route::post('/update_quote' , 'Vendor\VendorController@update_quote');
 Route::post('/get_ven_booking_by_id','Vendor\VendorController@get_ven_booking_by_id');
 Route::post('/accept_booking' , 'Vendor\VendorController@accept_booking');
+Route::post('/accept_vendor_withdraw_request' , 'Vendor\VendorController@accept_vendor_withdraw_request');
 
 
 
@@ -254,6 +255,8 @@ Route::post('/get_checklists' , 'Frontend\FrontController@get_checklists');
 Route::post('/service_details_by_id' , 'Frontend\FrontController@service_details_by_id');
 Route::post('/accept_vednor_request' , 'Frontend\FrontController@accept_vednor_request');
 Route::post('/update_checklist' , 'Frontend\FrontController@update_checklist');
+Route::post('/sendMessage/{message}/{recipient}' , 'Frontend\FrontController@sendMessage');
+Route::post('/submit_complain' , 'Frontend\FrontController@submit_complain');
 
 
 //Emails Controller//
