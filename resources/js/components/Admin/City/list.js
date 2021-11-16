@@ -8,6 +8,7 @@ class Index extends React.Component{
         super(props);
         this.state = {
             cities: [],
+            loading:true,
         }
     }
     componentDidMount(){
@@ -17,7 +18,8 @@ class Index extends React.Component{
             console.log(res);
             if(res.data.status == 200) {
                 this.setState({
-                    cities: res.data.cities
+                    cities: res.data.cities,
+                    loading:false,
                 })
             } 
         })
@@ -40,6 +42,15 @@ class Index extends React.Component{
     render(){
         return (
             <div>
+                 {
+                    this.state.loading ?
+                   
+                        <div id="displayspinner text-center mt-5 " className="text-center" style={{ display: 'block', }}>
+                            <div className="spinner-border  ml-2 text-dark spinner_format" role="status">
+                                <span className="sr-only">Loading...</span>
+                            </div>
+                        </div>
+                        :
                 <div id="page-content">
                         <div className="panel">
                             <div className="panel-heading">
@@ -85,6 +96,7 @@ class Index extends React.Component{
                             </div>
                         </div>
                     </div>
+    }
                 </div>
         );
     }

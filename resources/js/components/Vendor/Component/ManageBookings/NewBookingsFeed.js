@@ -236,7 +236,7 @@ class BookingsFeed extends Component {
                         }
                         {
                                             this.state.serviceBookings.length == 0 ? 
-                                            <h1 style={{alignItems:"center"}}>No Data Founded</h1>:null
+                                            <h1 style={{margin:'auto', height:'70vh', display:'flex', alignItems: 'center', justifyContent: 'center'}}>No Data Founded</h1>:null
                                         }
                         </div>
                     </div>

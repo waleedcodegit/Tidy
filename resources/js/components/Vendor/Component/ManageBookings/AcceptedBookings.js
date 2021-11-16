@@ -92,7 +92,7 @@ class AcceptedBookings extends Component{
                                 )}
                                       {
                                             this.state.AcceptedBookings.length == 0 ? 
-                                            <h1 style={{marginTop:'250px', marginLeft:'450px'}}>No Data Founded</h1>:null
+                                            <h1 style={{margin:'auto', height:'70vh', display:'flex', alignItems: 'center', justifyContent: 'center'}}>No Data Founded</h1>:null
                                         }
                             
                         </div>

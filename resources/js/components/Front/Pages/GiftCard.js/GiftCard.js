@@ -171,25 +171,25 @@ class GiftCard extends Component {
                             <div className="col-md-6">
                             <label className="lbl-style"> *Amount<span>($10-$500 AUD)</span></label>
                             <div className="input-group">
-                                <input value={this.state.amount}  onChange={this.amount.bind(this)} className="input--style-1" type="number"   />
+                                <input value={this.state.amount}  onChange={this.amount.bind(this)} className="form-control auth_input_box" type="number"   />
                             </div>
                             </div>
                             <div className="col-md-6">
                             <label className="lbl-style"> *To<span>(Recipient Name)</span></label>
                             <div className="input-group">
-                                <input value={this.state.name} onChange={this.name.bind(this)} className="input--style-1" type="text" placeholder name="name" />
+                                <input value={this.state.name} onChange={this.name.bind(this)} className="form-control auth_input_box" type="text" placeholder name="name" />
                             </div>
                             </div>
                             <div className="col-md-6">
                             <label className="lbl-style"> *Recipient Email<span /></label>
                             <div className="input-group">
-                                <input value={this.state.recipient_email} onChange={this.recipient_email.bind(this)} className="input--style-1" type="text" placeholder name="name" />
+                                <input value={this.state.recipient_email} onChange={this.recipient_email.bind(this)} className="form-control auth_input_box" type="text" placeholder name="name" />
                             </div>
                             </div>
                             <div className="col-md-6">
                             <label className="lbl-style"> *Confirm Recipient Email<span /></label>
                             <div className="input-group">
-                                <input value={this.state.confirm_email} onChange={this.confirm_email.bind(this)} className="input--style-1" type="text" placeholder name="name" />
+                                <input value={this.state.confirm_email} onChange={this.confirm_email.bind(this)} className="form-control auth_input_box" type="text" placeholder name="name" />
                             </div>
                             </div>
                         </div>
@@ -197,13 +197,13 @@ class GiftCard extends Component {
                             <div className="col-md-6">
                             <label className="lbl-style"> *From<span>(Sender Name)</span></label>
                             <div className="input-group">
-                                <input value={this.state.sender_name} onChange={this.sender_name.bind(this)} className="input--style-1" type="text" placeholder name="name" />
+                                <input value={this.state.sender_name} onChange={this.sender_name.bind(this)} className="form-control auth_input_box" type="text" placeholder name="name" />
                             </div>
                             </div>
                             <div className="col-md-6">
                             <label className="lbl-style"> *From<span>(Sender Email)</span></label>
                             <div className="input-group">
-                                <input value={this.state.sender_email} onChange={this.sender_email.bind(this)} className="input--style-1" type="text" placeholder name="name" />
+                                <input value={this.state.sender_email} onChange={this.sender_email.bind(this)} className="form-control auth_input_box" type="text" placeholder name="name" />
                             </div>
                             </div>
                             <div className="col-md-12">
@@ -213,11 +213,12 @@ class GiftCard extends Component {
                             <DatePicker id="example-datepicker"
                                 dateFormat={"dd/MM/yyyy"}
                                 selected={this.state.delivery_date} 
-                                className="input--style-1 col-md-12"
+                               
                                 placeholderText="dd/mm/yyyy"
                                 minDate={new Date()}
                                 //  showDisabledMonthNavigation
-                                onChange={(date)=>{this.date(date)}} />
+                                onChange={(date)=>{this.date(date)}}
+                                className="form-control auth_input_box" />
                                 {/* <input className="input--style-1 js-datepicker" type="text" placeholder="2021-10-10" name="birthday" />
                                 <i className="zmdi zmdi-calendar-note input-icon js-btn-calendar" /> */}
                             </div>
@@ -227,7 +228,7 @@ class GiftCard extends Component {
                             <div className="col-md-12">
                             <label className="lbl-style"> *Message</label>
                             <div className="input-group">
-                                <input value={this.state.message} onChange={this.message.bind(this)} className="input--style-msg" type="text" placeholder name="name" />
+                                <input value={this.state.message} onChange={this.message.bind(this)} className="form-control auth_input_box" type="text" placeholder name="name" />
                             </div>
                             </div>
                         </div>
@@ -259,19 +260,19 @@ class GiftCard extends Component {
                                 <div className="col-md-12">
                                 <label className="lbl-style"> *Name<span>(on card)</span></label>
                                 <div className="input-group">
-                                    <input onChange={this.card_holder_name.bind(this)} className="input--style-1" type="text" placeholder name="name" />
+                                    <input onChange={this.card_holder_name.bind(this)} className="form-control auth_input_box" type="text" placeholder name="name" />
                                 </div>
                                 </div>
                                 <div className="col-md-12">
                                 <label className="lbl-style"> *Card Number</label>
                                 <div className="input-group">
-                                    <input onChange={this.credit_card_number.bind(this)} className="input--style-1" type="text" placeholder name="name" />
+                                    <input onChange={this.credit_card_number.bind(this)} className="form-control auth_input_box" type="text" placeholder name="name" />
                                 </div>
                                 </div>
                                 <div className="col-md-12">
                                 <label className="lbl-style"> *CVC</label>
                                 <div className="input-group">
-                                    <input onChange={this.cvc.bind(this)} className="input--style-1" type="text" placeholder name="name" />
+                                    <input onChange={this.cvc.bind(this)} className="form-control auth_input_box" type="text" placeholder name="name" />
                                 </div>
                                 </div>
                             </div>
@@ -279,14 +280,14 @@ class GiftCard extends Component {
                                 <div className="col-md-6">
                                 <label className="lbl-style"> *Expiry Month</label>
                                 <div className="input-group">
-                                    <input onChange={this.expiry_month.bind(this)} className="input--style-1 js-datepicker" type="text" placeholder name="birthday" />
+                                    <input onChange={this.expiry_month.bind(this)} className="form-control auth_input_box js-datepicker" type="text" placeholder name="birthday" />
                                     <i className="zmdi zmdi-calendar-note input-icon js-btn-calendar" />
                                 </div>
                                 </div>
                                 <div className="col-md-6">
                                 <label className="lbl-style"> *Expiry Year</label>
                                 <div className="input-group">
-                                    <input onChange={this.expiry_year.bind(this)} className="input--style-1 js-datepicker" type="text" placeholder name="birthday" />
+                                    <input onChange={this.expiry_year.bind(this)} className="form-control auth_input_box js-datepicker" type="text" placeholder name="birthday" />
                                     <i className="zmdi zmdi-calendar-note input-icon js-btn-calendar" />
                                 </div>
                                 </div>

@@ -13,6 +13,7 @@
 
 // Admin Routes
 Route::view('/admin-login', 'Admin');
+Route::view('/admin/dashboard', 'Admin');
 Route::view('/admin', 'Admin');
 
 Route::view('/admin/create-service', 'Admin');
@@ -155,7 +156,7 @@ Route::view('/vendor-employee/service-details/{id}' , 'vendor');
 
 
 // Front Client Routes
-
+Route::view('/contact-us' , 'Front');
 Route::view('/services/{name?}', 'Front');
 Route::view('/signup', 'Front');
 Route::view('/forgot-password' , 'Front');

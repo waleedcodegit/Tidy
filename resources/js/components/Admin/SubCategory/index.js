@@ -7,6 +7,7 @@ class Index extends React.Component{
         super(props);
         this.state = {
             subcategory: [],
+            
         }
     }
     componentDidMount(){
@@ -15,7 +16,8 @@ class Index extends React.Component{
         }}).then(res=>{
             if(res.data.status == 200) {
                 this.setState({
-                    subcategory: res.data.subcategory
+                    subcategory: res.data.subcategory,
+                   
                 })
             } 
         })
@@ -79,6 +81,7 @@ class Index extends React.Component{
                             </div>
                         </div>
                     </div>
+    
                 </div>
         );
     }

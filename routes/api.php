@@ -163,7 +163,7 @@ Route::post('/getcategory','Frontend\CategoryController@getcategory');
 Route::post('/getallcategory','Frontend\CategoryController@getallcategory');
 
 
-
+Route::post('/send-contectus-email','Frontend\FrontController@send_contectus_email');
 Route::post('/validate_gift_card_details','Frontend\FrontController@validate_gift_card_details');
 Route::post('/order_gift_card','Frontend\FrontController@order_gift_card');
 Route::post('/send_vendor_booking_requests/{latitude}/{longitude}/{booking_id}','Frontend\FrontController@send_vendor_booking_requests');

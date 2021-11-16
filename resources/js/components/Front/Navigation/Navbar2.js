@@ -88,8 +88,8 @@ class Navbar2 extends Component {
                         <p className="nav_link"> Gift Card </p></Nav.Link>
 
                     <Nav.Link target="blank" href={"/vendor-signup"}><button className="btn  vendor_btn">Became a Vendor</button></Nav.Link>
-                    
-                        
+                    {/* /contact-us */}
+                    {/* /vendor-signup */}
                         {
                                 this.props.user.is_login ? 
                                 <div>

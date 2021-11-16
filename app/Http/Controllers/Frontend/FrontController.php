@@ -35,6 +35,8 @@ use App\ServiceCheck;
 use App\ServiceRound;
 use App\VendorQuote;
 use App\Vendor;
+use App\Mail\ContactusEmail;
+
 
 use Illuminate\Support\Facades\DB;
 
@@ -1226,5 +1228,32 @@ class FrontController extends Controller
             'data' => $bookings,
             'serviceRounds' => $s_round
         ]);
+    }
+    public function send_contectus_email(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'sender_name' => 'required',
+            'sender_email' => 'required',
+            'sender_phone' => 'required',
+            'message' => 'required',
+        ]);
+        if($validator->fails()){
+            return response()->json([
+                'status' => false,
+                'message' => $validator->errors()->first(),
+                'errors' => $validator->errors()     
+            ]);
+        }
+        $details =[
+            'name' => $request->sender_name,
+            'email' => $request->sender_email,
+            'phone' => $request->sender_phone,
+            'message' => $request->message,
+        ];
+        Mail::to("info@tidyhome.com.au")->send(new ContactusEmail($details));
+        $response = [
+            'status' => 200,
+            'msg' => 'Email Send',
+        ];
+        return $response;
     }
 }

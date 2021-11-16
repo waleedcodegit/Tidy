@@ -19,7 +19,7 @@ class Login extends Component {
         }
         Axios.post('/api/check-auth-admin', senderData).then(res=>{
             if(res.data.status == 200) {
-                this.props.history.push('/admin');
+                this.props.history.push('/admin/dashboard');
             }
         })
     }
@@ -52,7 +52,7 @@ class Login extends Component {
             })
             if(res.data.status == 200){
                 window.localStorage.setItem('testapistring', res.data.admin.token);
-                this.props.history.push('/admin');
+                this.props.history.push('/admin/dashboard');
                 // Swal.fire({
                 //     icon: 'success',
                 //     title: 'Login Successfully',
