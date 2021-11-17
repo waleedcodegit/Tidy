@@ -15,7 +15,7 @@ class DashBoard extends Component {
             customers: '',
             wallet:'',
             payments:'',
-            loading:true,
+            // loading:true,
          vendor_id: this.props.vendor.data.vendor_id,
         }
     }
@@ -27,7 +27,7 @@ componentDidMount(){
       if(res.data.status == 200){
           this.setState({
             customers: res.data.data,
-            loading:false,
+            // loading:false,
           })
       }
   })
@@ -64,7 +64,7 @@ Axios.post('/api/get_vendor_payments',{vendor_id:this.props.vendor.data.vendor_i
     render() { 
         return (
             <div>
-                 {
+                 {/* {
                     this.state.loading ?
                    
                         <div id="displayspinner text-center mt-5 " className="text-center" style={{ display: 'block', }}>
@@ -72,7 +72,7 @@ Axios.post('/api/get_vendor_payments',{vendor_id:this.props.vendor.data.vendor_i
                                 <span className="sr-only">Loading...</span>
                             </div>
                         </div>
-                        :
+                        : */}
             <section class="section">
                 <div class="row ">
                 <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -196,7 +196,7 @@ Axios.post('/api/get_vendor_payments',{vendor_id:this.props.vendor.data.vendor_i
                 </div>
                 </div>
                 </section>
-    }
+    {/* } */}
     </div>
         );
     }
