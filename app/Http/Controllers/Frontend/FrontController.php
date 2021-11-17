@@ -225,21 +225,26 @@ class FrontController extends Controller
     public function complete_service(Request $request){
         $service = BookingService::where('id',$request->service_id)->first();
         $settings = Setting::where('id',1)->first();
+        $vendor = Vendor::where('id',$request->vendor_id)->first();
 
         $admin_commission = $service->total_price / 100 * $settings->admin_comission;
         $vendor_payment = $service->total_price - $admin_commission;
 
         $vendor_new_payment = new VendorPayment();
-        $vendor_new_payment->vendor_id = $service->vendor_id;
+        $vendor_new_payment->date = $service->date;
+        $vendor_new_payment->vendor_id = $vendor->id;
         $vendor_new_payment->payment_id = $service->payment_id;
         $vendor_new_payment->service_id = $service->id;
-        $vendor_new_payment->payment_id = $vendor_payment;
+        $vendor_new_payment->payment = $vendor_payment;
         $vendor_new_payment->save();
 
         $wallet = VendorWallet::where('vendor_id',$service->id)->first();
         $wallet->wallet = $wallet->wallet + $vendor_payment;
         $wallet->save();
-        $response = ['status' => 200 , 'message' => 'Service Completed Suuceessfully'];
+        $response = [
+            'status' => 200 , 
+            'message' => 'Service Completed Suucessfully'
+        ];
         return $response;
 
     }

@@ -22,7 +22,7 @@ class CustomerServiceDetails extends Component {
             checkBox: false,
 
         };
-        console.log(this.state.booking);
+        console.log(props);
     }
 
     componentDidMount() {
@@ -39,8 +39,6 @@ class CustomerServiceDetails extends Component {
                 // afterImages: res.data.serviceRounds.after_images ? JSON.parse(res.data.serviceRounds.after_images) : [],
                 // checklists: res.data.serviceRounds.check_list ? JSON.parse(res.data.serviceRounds.check_list) : [],
                 loading: false
-            },function(){
-                console.log(this.state)
             })
         })
     }
@@ -66,6 +64,28 @@ class CustomerServiceDetails extends Component {
     handleCheck(){
         this.setState({
             checkBox:!this.state.checkBox
+        })
+    }
+
+    serviceCompleted(){
+        let data = {
+            service_id: this.props.match.params.id,
+            vendor_id: this.state.vendor.id
+        }
+
+        Axios.post('/api/complete_service', data).then(res=>{
+            if(res.data.status == 200){
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Service Is Completed,Thankyou for choosing TidyHome',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                }else{
+                    this.setState({
+                        error_string:res.data.msg
+                    })
+                }
         })
     }
 
@@ -336,7 +356,7 @@ class CustomerServiceDetails extends Component {
                                                                     <div className="row">
                                                                         <div className="divid-line" />
                                                                         <div className="col-md-12">
-                                                                            <span>If You are Satisfied with the Job,Click AGREE</span><button style={{ cursor: 'pointer', marginLeft: '10px' }} className="btn btn-outline-success">AGREE</button>
+                                                                            <span>If You are Satisfied with the Job,Click AGREE</span><button style={{ cursor: 'pointer', marginLeft: '10px' }} className="btn btn-outline-success" onClick={this.serviceCompleted.bind(this)}>AGREE</button>
 
                                                                         </div>
                                                                         <div className="col-md-12">

@@ -11,6 +11,7 @@ class BookingDetails extends Component {
             quotes:[],
             loading:true
         };
+        console.log(props)
     }
 
     componentDidMount(){
