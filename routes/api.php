@@ -258,6 +258,7 @@ Route::post('/accept_vednor_request' , 'Frontend\FrontController@accept_vednor_r
 Route::post('/update_checklist' , 'Frontend\FrontController@update_checklist');
 Route::post('/sendMessage/{message}/{recipient}' , 'Frontend\FrontController@sendMessage');
 Route::post('/submit_complain' , 'Frontend\FrontController@submit_complain');
+Route::post('/complete_service' , 'Frontend\FrontController@complete_service');
 
 
 //Emails Controller//

@@ -38,6 +38,8 @@ use App\Vendor;
 use App\Mail\ContactusEmail;
 use Twilio\Rest\Client;
 use App\Complaint;
+use App\VendorPayment;
+use App\VendorWallet;
 
 use Illuminate\Support\Facades\DB;
 
@@ -219,6 +221,27 @@ class FrontController extends Controller
             'low' => $low_star_ratings, 'new' => $new_vendors , 'all' => $vls  
     ];
         return $response;
+    }
+    public function complete_service(Request $request){
+        $service = BookingService::where('id',$request->service_id)->first();
+        $settings = Setting::where('id',1)->first();
+
+        $admin_commission = $service->total_price / 100 * $settings->admin_comission;
+        $vendor_payment = $service->total_price - $admin_commission;
+
+        $vendor_new_payment = new VendorPayment();
+        $vendor_new_payment->vendor_id = $service->vendor_id;
+        $vendor_new_payment->payment_id = $service->payment_id;
+        $vendor_new_payment->service_id = $service->id;
+        $vendor_new_payment->payment_id = $vendor_payment;
+        $vendor_new_payment->save();
+
+        $wallet = VendorWallet::where('vendor_id',$service->id)->first();
+        $wallet->wallet = $wallet->wallet + $vendor_payment;
+        $wallet->save();
+        $response = ['status' => 200 , 'message' => 'Service Completed Suuceessfully'];
+        return $response;
+
     }
     public function charge_a_customer(Request $request){
 
