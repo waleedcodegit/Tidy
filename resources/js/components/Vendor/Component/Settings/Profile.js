@@ -53,6 +53,7 @@ class Profile extends Component {
             show_add_address:false,
             last_address_updater:0,
             vendor_timings:[],
+            strip_account:'',
             loading:true,
         };
     }
@@ -79,12 +80,13 @@ class Profile extends Component {
                 trading:res.data.data.trading,
                 bio:res.data.data.bio,
                 vendor_id:this.props.vendor.data.vendor_id,
+                strip_account:res.data.data.strip_account,
                 loading:false,
 
             })
         })
         Axios.post('/api/get_vendor_service_timings',{vendor_id:this.props.vendor.data.vendor_id}).then(res=>{
-            console.log(res)
+            // console.log(res)
             this.setState({
                 vendor_timings: JSON.parse(res.data.timings)
             },function(){
@@ -102,7 +104,7 @@ class Profile extends Component {
             })
         })
         Axios.post('/api/get_vendor_card_details',{vendor_id:this.props.vendor.data.vendor_id}).then(res=>{
-            console.log(res);
+            // console.log(res);
           if(res.data.status == 200){
               this.setState({
                   card_details:res.data.details
@@ -115,7 +117,7 @@ class Profile extends Component {
         })
     }
 
-    first_name(e) {
+    First_name(e) {
         this.setState({
             first_name: e.target.value
         })
@@ -171,10 +173,15 @@ class Profile extends Component {
             bio: e.target.value
         })
     }
+    StripAccount(e) {
+        this.setState({
+            strip_account: e.target.value
+        })
+    }
     update(e){
         e.preventDefault();
         Axios.post('/api/update_vendor_profile',this.state).then(res=>{
-            if(res.data.status){
+            if(res.data.status == 200){
                 Swal.fire({
                     icon: 'success',
                     title: 'Profile Updated Successfully',
@@ -436,7 +443,7 @@ class Profile extends Component {
                                                     <div className="row">
                                                         <div className="form-group col-md-6 col-12">
                                                             <label>First Name</label>
-                                                            <input onChange={this.first_name.bind(this)} value={this.state.first_name || ""} type="text" className="form-control" defaultValue="John" />
+                                                            <input onChange={this.First_name.bind(this)} value={this.state.first_name || ""} type="text" className="form-control" defaultValue="John" />
                                                             <div className="invalid-feedback">
                                                                 Please fill in the first name
                                                             </div>
@@ -510,6 +517,12 @@ class Profile extends Component {
                                                             <div className="invalid-feedback">
                                                                 Please fill in the Trading as 
                                                             </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="row">
+                                                        <div className="form-group col-12">
+                                                            <label>Strip Account</label>
+                                                            <input  onChange={this.StripAccount.bind(this)} value={this.state.strip_account || ""} type="text" className="form-control" />
                                                         </div>
                                                     </div>
                                                    

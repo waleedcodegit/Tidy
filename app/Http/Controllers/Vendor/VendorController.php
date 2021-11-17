@@ -569,6 +569,7 @@ class VendorController extends Controller
     }
     public function update_vendor_profile(Request $request)
     {
+        // return $request;
         $validator = Validator::make($request->all(), [
             'first_name' => 'required',
             'last_name' => 'required',
@@ -580,6 +581,7 @@ class VendorController extends Controller
             'australian_business_number' => 'required|min:11|max:11',
             'type_of_business' => 'required',
             'business_name' => 'required',
+            'strip_account' => 'required',
             // 'trading' => 'required',
         ]);
 
@@ -606,21 +608,38 @@ class VendorController extends Controller
                 // $new_vendor->trading = $request->trading;
                 // // $new_vendor->vendor_stripe_id = $customer->id;
                 // $new_vendor->insurance_certificate_type = $request->insurance_certificate_type;
-                $new_vendor = Vendor::find($request->data['id']);
+                $new_vendor = Vendor::where('id',$request->vendor_id)->update([
+                    'first_name' => $request->first_name,
+                    'last_name'=> $request->last_name,
+                   'address' => $request->address,
+                   'phone' => $request->phone,
+                   'dob' => $request->dob,
+                   'strip_account' => $request->strip_account,
+                   'australian_business_number' => $request->australian_business_number,
+                   'type_of_business' => $request->type_of_business,
+                   'business_name' => $request->business_name,
+                   'trading' => $request->trading,
+                   'insurance_certificate_type' => $request->insurance_certificate_type,
+                //    'bio' = $request->bio,
+                   
+                   
+                ]);
+                // return $request->first_name;
                 
-                $new_vendor->first_name = $request->data['first_name'];
-                $new_vendor->last_name  = $request->data['last_name'];
-                $new_vendor->address = $request->data['address'];
-                $new_vendor->phone = $request->data['phone'];
-                $new_vendor->dob = $request->data['dob'];
-                $new_vendor->australian_business_number = $request->data['australian_business_number'];
-                $new_vendor->type_of_business = $request->data['type_of_business'];
-                $new_vendor->business_name = $request->data['business_name'];
-                $new_vendor->trading = $request->data['trading'];
-                $new_vendor->insurance_certificate_type = $request->data['insurance_certificate_type'];
-                $new_vendor->save();
+                // $new_vendor->first_name = $request->first_name;
+                // $new_vendor->last_name  = $request->last_name;
+                // $new_vendor->address = $request->address;
+                // $new_vendor->phone = $request->phone;
+                // $new_vendor->dob = $request->dob;
+                // $new_vendor->strip_account = $request->strip_account;
+                // $new_vendor->australian_business_number = $request->australian_business_number;
+                // $new_vendor->type_of_business = $request->type_of_business;
+                // $new_vendor->business_name = $request->business_name;
+                // $new_vendor->trading = $request->trading;
+                // $new_vendor->insurance_certificate_type = $request->insurance_certificate_type;
+                // $new_vendor->save();
                 return response()->json([
-                    'status' => true,
+                    'status' => 200,
                     // 'message' => "Vendor Created Successfully",
                     'message' => "Vendor Updated Successfully",
                     'vendor' => $new_vendor,     

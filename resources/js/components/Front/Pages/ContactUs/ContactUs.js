@@ -136,7 +136,7 @@ class ContactUs extends Component {
                          <div className="row">
                             <div className="col-md-12" />
                             <div className="col-md-6">
-                            <button style={{display: 'block', width: '215%', border: 'none', backgroundColor:' #04AA6D',color:' white',padding: '14px 28px', fontSize: '16px',cursor: 'pointer',textAlign: 'center'}}
+                            <button style={{display: 'block', width: '212%', border: 'none', backgroundColor:' #04AA6D',color:' white',padding: '14px 28px', fontSize: '16px',cursor: 'pointer',textAlign: 'center'}}
                              onClick={this.SendEmail.bind(this)}  className="p-t-20 btn btn--radius btn-success" type="submit" id="#collapseTwo">Send Message</button>
                             </div>
                         </div>

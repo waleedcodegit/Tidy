@@ -41,11 +41,8 @@ class VendorwithdrawRequests extends React.Component {
     }
 
 
-    accept_vendor_withraw_request(id){
-        let data = {
-            id: id
-        }
-        Axios.post('/api/accept_vendor_withdraw_request',data).then(res=>{
+    accept_vendor_withraw_request(data){
+        Axios.post('/api/accept_vendor_withdraw_request',{id:data.id}).then(res=>{
             if(res.data.status == 200){
                 toast.success(res.data.message);
             }else{
@@ -98,16 +95,16 @@ class VendorwithdrawRequests extends React.Component {
                                                         {
                                                              data.status == 0 ?
                                                              <td>
-                                                             <button onClick={this.accept_vendor_withraw_request.bind(this,data.id)} className="btn btn-success"> Accept</button>
+                                                             <button onClick={this.accept_vendor_withraw_request.bind(this,data)} className="btn btn-success"> Accept</button>
                                                              </td> : 
                                                              
                                                             data.status == 1 ?
                                                             <td colspan="2">
-                                                            <button onClick={this.accept_vendor_withraw_request.bind(this,data)} className="btn btn-success"> Accepted</button>
+                                                            <span  className="btn btn-success">Accepted</span>
                                                             </td> :
                                                            data.status == 2 ?
                                                            <td colspan="2">
-                                                           <button onClick={this.accept_vendor_withraw_request.bind(this,data)} className="btn btn-danger"> Rejected</button>
+                                                           <span  className="btn btn-danger">Rejected</span>
                                                            </td> :
                                                            null
                                                             }

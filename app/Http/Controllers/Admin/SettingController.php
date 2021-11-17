@@ -30,6 +30,7 @@ class SettingController extends Controller
             'house_additional_charges' => $request->house_additional_charges,
             'bedroom' => $request->per_bedroom,
             'bathroom' => $request->per_bathroom,
+            'admin_comission' => $request->admin_comission,
         ]);
 
         $response = [

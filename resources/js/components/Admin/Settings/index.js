@@ -11,7 +11,8 @@ class Index extends React.Component{
             level_price:0,
             house_additional_charges:0,
             per_bathroom: 0,
-            per_bedroom: 0
+            per_bedroom: 0,
+            admin_comission :0,
 
 
         }
@@ -28,7 +29,8 @@ class Index extends React.Component{
                     level_price: res.data.settings.level_price,
                     house_additional_charges: res.data.settings.house_additional_charges,
                     per_bathroom: res.data.settings.bathroom,
-                    per_bedroom: res.data.settings.bedroom,                    
+                    per_bedroom: res.data.settings.bedroom,  
+                    admin_comission: res.data.settings.admin_comission,                  
                 })
             } 
         })
@@ -61,6 +63,11 @@ class Index extends React.Component{
     getBathroom(event) {
         this.setState({
             per_bathroom: event.target.value
+        })
+    }
+    getAdmin_comission(event) {
+        this.setState({
+            admin_comission : event.target.value
         })
     }
     uploadSettings(e){
@@ -122,6 +129,12 @@ class Index extends React.Component{
                                                 <th>Per BathRooms</th>
                                                 <td>
                                                     <input  type="number" onChange={this.getBathroom.bind(this)} className="form-control" value={this.state.per_bathroom || ""}/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Admin Comission</th>
+                                                <td>
+                                                    <input  type="number" onChange={this.getAdmin_comission.bind(this)} className="form-control" value={this.state.admin_comission || ""}/>
                                                 </td>
                                             </tr>
                                         </thead>

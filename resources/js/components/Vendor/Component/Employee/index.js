@@ -112,7 +112,7 @@ class Index extends React.Component{
                             }
                             {
                               this.state.Employees.length == 0 ? 
-                              <tr><td colSpan="6">No records founded</td></tr>:null
+                              <tr><td colSpan="14">No records founded</td></tr>:null
                             }
                           </tbody>
                         </table>

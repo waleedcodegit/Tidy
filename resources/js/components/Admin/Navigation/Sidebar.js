@@ -97,7 +97,103 @@ class Sidebar extends Component {
                                            </li>
                                             
                                         
-
+                                           <li onClick={this.active_item.bind(this, 26)} className={this.state.nav_item_active.main == 25 ? "active-sub" : ""}>
+                                            <a onClick={this.change_visible_item.bind(this,26)} >
+                                                <i className="demo-pli-home"></i>
+                                                <span className="menu-title" 
+                                                >Manage Bookings</span>
+                                                <i className="arrow"></i>
+                                            </a>
+                                            {
+                                                this.state.nav_item_visible == 26 ?
+                                                <ul >
+                                                    <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/pending-bookings">Pending Bookings</Link></li>
+                                                    <li onClick={this.active_sub_item.bind(this, 2)} className={this.state.active_sub_item == 2 ? "active-link" : ""}><Link to="/admin/get-all-bookings">All Bookings</Link></li>
+                                                </ul>
+                                                :null
+                                            }
+                                        </li>
+                                        <li onClick={this.active_item.bind(this, 5)} className={this.state.nav_item_active.main == 5 ? "active-sub" : ""}>
+                                            <a onClick={this.change_visible_item.bind(this,5)} >
+                                                <i className="demo-pli-home"></i>
+                                                <span className="menu-title" 
+                                                >Manage Customer</span>
+                                                <i className="arrow"></i>
+                                            </a>
+                                            {
+                                                this.state.nav_item_visible == 5 ?
+                                                <ul >
+                                                    {/* <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/create-customer">Create</Link></li> */}
+                                                    <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/customer-list">List</Link></li>
+                                                </ul>
+                                                :null
+                                            }
+                                        </li>
+                                        <li onClick={this.active_item.bind(this, 6)} className={this.state.nav_item_active.main == 6 ? "active-sub" : ""}>
+                                            <a onClick={this.change_visible_item.bind(this,6)} >
+                                                <i className="demo-pli-home"></i>
+                                                <span className="menu-title" 
+                                                >Manage Vendor</span>
+                                                <i className="arrow"></i>
+                                            </a>
+                                            {
+                                                this.state.nav_item_visible == 6 ?
+                                                <ul >
+                                                    {<li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/create-vendor">Create</Link></li> }
+                                                    <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/vendor-list">List</Link></li>
+                                                </ul>
+                                                :null
+                                            }
+                                        </li>
+                                        <li onClick={this.active_item.bind(this, 27)} className={this.state.nav_item_active.main == 27 ? "active-sub" : ""}>
+                                            <a onClick={this.change_visible_item.bind(this,27)} >
+                                                <i className="demo-pli-home"></i>
+                                                <span className="menu-title" 
+                                                >Manage Accounts</span>
+                                                <i className="arrow"></i>
+                                            </a>
+                                            {
+                                                this.state.nav_item_visible == 27 ?
+                                                <ul >
+                                                    {/* <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/create-customer">Create</Link></li> */}
+                                                    <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/payments_list">Payments</Link></li>
+                                                    <li onClick={this.active_sub_item.bind(this, 2)} className={this.state.active_sub_item == 2 ? "active-link" : ""}><Link to="/admin/vendor_withdraw_requests_list">Vendor Withdraw Requests</Link></li>
+                                                </ul>
+                                                :null
+                                            }
+                                        </li>
+                                        <li onClick={this.active_item.bind(this, 22)} className={this.state.nav_item_active.main == 22 ? "active-sub" : ""}>
+                                            <a onClick={this.change_visible_item.bind(this,22)} >
+                                                <i className="demo-pli-home"></i>
+                                                <span className="menu-title" 
+                                                >Messages</span>
+                                                <i className="arrow"></i>
+                                            </a>
+                                            {
+                                                this.state.nav_item_visible == 22 ?
+                                                <ul >
+                                                    <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/vendor-messages">Vendor Messages</Link></li>
+                                                    <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/customer-messages">Customer Messages</Link></li>
+                                                </ul>
+                                                :null
+                                            }
+                                        </li>
+                                        <li onClick={this.active_item.bind(this, 23)} className={this.state.nav_item_active.main == 23 ? "active-sub" : ""}>
+                                            <a onClick={this.change_visible_item.bind(this,23)} >
+                                                <i className="demo-pli-home"></i>
+                                                <span className="menu-title" 
+                                                >Manage Pages</span>
+                                                <i className="arrow"></i>
+                                            </a>
+                                            {
+                                                this.state.nav_item_visible == 23 ?
+                                                <ul >
+                                                    <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/create-page">Create Page</Link></li>
+                                                    <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/manage-pages">Pages List</Link></li>
+                                                </ul>
+                                                :null
+                                            }
+                                        </li>
                                         <li onClick={this.active_item.bind(this, 2)} className={this.state.nav_item_active.main == 2 ? "active-sub" : ""}>
                                             <a onClick={this.change_visible_item.bind(this,2)}>
                                                 <i className="demo-pli-home"></i>
@@ -151,122 +247,14 @@ class Sidebar extends Component {
                                             }
                                         </li> */}
 
-                                        <li onClick={this.active_item.bind(this, 5)} className={this.state.nav_item_active.main == 5 ? "active-sub" : ""}>
-                                            <a onClick={this.change_visible_item.bind(this,5)} >
-                                                <i className="demo-pli-home"></i>
-                                                <span className="menu-title" 
-                                                >Manage Customer</span>
-                                                <i className="arrow"></i>
-                                            </a>
-                                            {
-                                                this.state.nav_item_visible == 5 ?
-                                                <ul >
-                                                    {/* <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/create-customer">Create</Link></li> */}
-                                                    <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/customer-list">List</Link></li>
-                                                </ul>
-                                                :null
-                                            }
-                                        </li>
-                                        <li onClick={this.active_item.bind(this, 27)} className={this.state.nav_item_active.main == 27 ? "active-sub" : ""}>
-                                            <a onClick={this.change_visible_item.bind(this,27)} >
-                                                <i className="demo-pli-home"></i>
-                                                <span className="menu-title" 
-                                                >Manage Accounts</span>
-                                                <i className="arrow"></i>
-                                            </a>
-                                            {
-                                                this.state.nav_item_visible == 27 ?
-                                                <ul >
-                                                    {/* <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/create-customer">Create</Link></li> */}
-                                                    <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/payments_list">Payments</Link></li>
-                                                    <li onClick={this.active_sub_item.bind(this, 2)} className={this.state.active_sub_item == 2 ? "active-link" : ""}><Link to="/admin/vendor_withdraw_requests_list">Vendor Withdraw Requests</Link></li>
-                                                </ul>
-                                                :null
-                                            }
-                                        </li>
+                                        
+                                       
 
-                                        <li onClick={this.active_item.bind(this, 6)} className={this.state.nav_item_active.main == 6 ? "active-sub" : ""}>
-                                            <a onClick={this.change_visible_item.bind(this,6)} >
-                                                <i className="demo-pli-home"></i>
-                                                <span className="menu-title" 
-                                                >Manage Vendor</span>
-                                                <i className="arrow"></i>
-                                            </a>
-                                            {
-                                                this.state.nav_item_visible == 6 ?
-                                                <ul >
-                                                    {<li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/create-vendor">Create</Link></li> }
-                                                    <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/vendor-list">List</Link></li>
-                                                </ul>
-                                                :null
-                                            }
-                                        </li>
-                                        <li onClick={this.active_item.bind(this, 26)} className={this.state.nav_item_active.main == 25 ? "active-sub" : ""}>
-                                            <a onClick={this.change_visible_item.bind(this,26)} >
-                                                <i className="demo-pli-home"></i>
-                                                <span className="menu-title" 
-                                                >Bookings</span>
-                                                <i className="arrow"></i>
-                                            </a>
-                                            {
-                                                this.state.nav_item_visible == 26 ?
-                                                <ul >
-                                                    <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/pending-bookings">Pending Bookings</Link></li>
-                                                    <li onClick={this.active_sub_item.bind(this, 2)} className={this.state.active_sub_item == 2 ? "active-link" : ""}><Link to="/admin/get-all-bookings">All Bookings</Link></li>
-                                                </ul>
-                                                :null
-                                            }
-                                        </li>
-                                        <li onClick={this.active_item.bind(this, 22)} className={this.state.nav_item_active.main == 22 ? "active-sub" : ""}>
-                                            <a onClick={this.change_visible_item.bind(this,22)} >
-                                                <i className="demo-pli-home"></i>
-                                                <span className="menu-title" 
-                                                >Messages</span>
-                                                <i className="arrow"></i>
-                                            </a>
-                                            {
-                                                this.state.nav_item_visible == 22 ?
-                                                <ul >
-                                                    <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/vendor-messages">Vendor Messages</Link></li>
-                                                    <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/customer-messages">Customer Messages</Link></li>
-                                                </ul>
-                                                :null
-                                            }
-                                        </li>
-                                        <li onClick={this.active_item.bind(this, 23)} className={this.state.nav_item_active.main == 23 ? "active-sub" : ""}>
-                                            <a onClick={this.change_visible_item.bind(this,23)} >
-                                                <i className="demo-pli-home"></i>
-                                                <span className="menu-title" 
-                                                >Manage Pages</span>
-                                                <i className="arrow"></i>
-                                            </a>
-                                            {
-                                                this.state.nav_item_visible == 23 ?
-                                                <ul >
-                                                    <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/create-page">Create Page</Link></li>
-                                                    <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/manage-pages">Pages List</Link></li>
-                                                </ul>
-                                                :null
-                                            }
-                                        </li>
-                                        <li onClick={this.active_item.bind(this, 7)} className={this.state.nav_item_active.main == 7 ? "active-sub" : ""}>
-                                            <a onClick={this.change_visible_item.bind(this,7)} >
-                                                <i className="demo-pli-home"></i>
-                                                <span className="menu-title" 
-                                                >Setting</span>
-                                                <i className="arrow"></i>
-                                            </a>
-                                            {
-                                                this.state.nav_item_visible == 7 ?
-                                                <ul > 
-                                                    <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/setting-list">List</Link></li>
-                                                    <li onClick={this.active_sub_item.bind(this, 2)} className={this.state.active_sub_item == 2 ? "active-link" : ""}><Link to="/admin/home-content">Home Content</Link></li>
-                                                    <li onClick={this.active_sub_item.bind(this, 3)} className={this.state.active_sub_item == 3 ? "active-link" : ""}><Link to="/admin/url-meta-list">Url Metas List</Link></li>
-                                                    <li onClick={this.active_sub_item.bind(this, 4)} className={this.state.active_sub_item == 4 ? "active-link" : ""}><Link to="/admin/service_check_list">Service Check List</Link></li>
-                                                </ul>
-                                                :null
-                                            }
-                                        </li>
+                                       
+                                      
+                                       
+                                      
+                                        
 
                                         <li onClick={this.active_item.bind(this, 8)} className={this.state.nav_item_active.main == 8 ? "active-sub" : ""}>
                                             <a onClick={this.change_visible_item.bind(this,8)} >
@@ -301,22 +289,7 @@ class Sidebar extends Component {
                                                 :null
                                             }
                                         </li>
-                                        <li onClick={this.active_item.bind(this, 9)} className={this.state.nav_item_active.main == 9 ? "active-sub" : ""}>
-                                            <a onClick={this.change_visible_item.bind(this,9)} >
-                                                <i className="demo-pli-home"></i>
-                                                <span className="menu-title" 
-                                                >Questions</span>
-                                                <i className="arrow"></i>
-                                            </a>
-                                            {
-                                                this.state.nav_item_visible == 9 ?
-                                                <ul >
-                                                    <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/create-question">Create</Link></li>
-                                                    <li onClick={this.active_sub_item.bind(this, 2)} className={this.state.active_sub_item == 2 ? "active-link" : ""}><Link to="/admin/list-question">List</Link></li>
-                                                </ul>
-                                                :null
-                                            }
-                                        </li>
+                                       
 
                                         <li onClick={this.active_item.bind(this, 13)} className={this.state.nav_item_active.main == 13 ? "active-sub" : ""}>
                                             <a onClick={this.change_visible_item.bind(this,13)} >
@@ -334,7 +307,7 @@ class Sidebar extends Component {
                                                 :null
                                             }
                                         </li>
-                                        <li onClick={this.active_item.bind(this, 10)} className={this.state.nav_item_active.main == 10 ? "active-sub" : ""}>
+                                        {/* <li onClick={this.active_item.bind(this, 10)} className={this.state.nav_item_active.main == 10 ? "active-sub" : ""}>
                                             <a onClick={this.change_visible_item.bind(this,10)} >
                                                 <i className="demo-pli-home"></i>
                                                 <span className="menu-title" 
@@ -349,9 +322,9 @@ class Sidebar extends Component {
                                                 </ul>
                                                 :null
                                             }
-                                        </li>
+                                        </li> */}
 
-                                        <li onClick={this.active_item.bind(this, 11)} className={this.state.nav_item_active.main == 11 ? "active-sub" : ""}>
+                                        {/* <li onClick={this.active_item.bind(this, 11)} className={this.state.nav_item_active.main == 11 ? "active-sub" : ""}>
                                             <a onClick={this.change_visible_item.bind(this,11)} >
                                                 <i className="demo-pli-home"></i>
                                                 <span className="menu-title" 
@@ -366,7 +339,7 @@ class Sidebar extends Component {
                                                 </ul>
                                                 :null
                                             }
-                                        </li>
+                                        </li> */}
 
                                         <li onClick={this.active_item.bind(this, 12)} className={this.state.nav_item_active.main == 12 ? "active-sub" : ""}>
                                             <a onClick={this.change_visible_item.bind(this,12)} >
@@ -444,6 +417,40 @@ class Sidebar extends Component {
                                                 <ul >
                                                     <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/create-review">User Review</Link></li>
                                                     <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/list-reviews">List Reviews</Link></li>
+                                                </ul>
+                                                :null
+                                            }
+                                        </li>
+                                        <li onClick={this.active_item.bind(this, 9)} className={this.state.nav_item_active.main == 9 ? "active-sub" : ""}>
+                                            <a onClick={this.change_visible_item.bind(this,9)} >
+                                                <i className="demo-pli-home"></i>
+                                                <span className="menu-title" 
+                                                >Manage Questions</span>
+                                                <i className="arrow"></i>
+                                            </a>
+                                            {
+                                                this.state.nav_item_visible == 9 ?
+                                                <ul >
+                                                    <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/create-question">Create</Link></li>
+                                                    <li onClick={this.active_sub_item.bind(this, 2)} className={this.state.active_sub_item == 2 ? "active-link" : ""}><Link to="/admin/list-question">List</Link></li>
+                                                </ul>
+                                                :null
+                                            }
+                                        </li>
+                                        <li onClick={this.active_item.bind(this, 7)} className={this.state.nav_item_active.main == 7 ? "active-sub" : ""}>
+                                            <a onClick={this.change_visible_item.bind(this,7)} >
+                                                <i className="demo-pli-home"></i>
+                                                <span className="menu-title" 
+                                                >Website Setting</span>
+                                                <i className="arrow"></i>
+                                            </a>
+                                            {
+                                                this.state.nav_item_visible == 7 ?
+                                                <ul > 
+                                                    <li onClick={this.active_sub_item.bind(this, 1)} className={this.state.active_sub_item == 1 ? "active-link" : ""}><Link to="/admin/setting-list">List</Link></li>
+                                                    <li onClick={this.active_sub_item.bind(this, 2)} className={this.state.active_sub_item == 2 ? "active-link" : ""}><Link to="/admin/home-content">Home Content</Link></li>
+                                                    <li onClick={this.active_sub_item.bind(this, 3)} className={this.state.active_sub_item == 3 ? "active-link" : ""}><Link to="/admin/url-meta-list">Url Metas List</Link></li>
+                                                    <li onClick={this.active_sub_item.bind(this, 4)} className={this.state.active_sub_item == 4 ? "active-link" : ""}><Link to="/admin/service_check_list">Service Check List</Link></li>
                                                 </ul>
                                                 :null
                                             }

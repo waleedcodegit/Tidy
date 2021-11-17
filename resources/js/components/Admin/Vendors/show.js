@@ -187,9 +187,15 @@ class ShowVendor extends Component {
                                 <p><i className="demo-pli-old-telephone icon-lg icon-fw" />{this.state.phone}</p>
                                 <div className="text-center">
                                 <div className="pad-ver">
-                                    {/* <img src={img_baseurl+"1.png"} className="img-lg img-circle" alt="Profile Picture" /> */}
                                 </div>
-                                <h4 className="text-lg text-overflow mar-no"></h4>
+                                <div className="pad-ver">
+                                </div>
+                                <div className="pad-ver">
+                                </div>
+                                <div className="pad-ver">
+                                </div>
+                                <div className="pad-ver">
+                                </div>
                                {
                                    this.state.status == "disapproved" ?
                                    <button className="btn btn-primary" onClick={this.vendorApproved.bind(this)}>Approve</button>
@@ -198,9 +204,7 @@ class ShowVendor extends Component {
                                    <button className="btn btn-danger" onClick={this.vendorDisApproved.bind(this)}>Disapprove</button>
                                    :
                                    null
-
-                               }
-                                
+                                   }
                                 <p className="text-sm text-muted"></p>
                             </div>
                             </div>

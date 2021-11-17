@@ -44,12 +44,14 @@ class wallet extends Component {
                         <div className="row">
                         <div className="card col-sm-12" >
                                         <div className="col-sm-12">
-                                   <h2 style={{color: "red"}}>${this.state.wallet}</h2>
-                                   <h4 style={{color: "red"}}>Your Wallet</h4>
-                                    <div className="col-sm-12">
+                                        <div className="form-group">
+                                     <h2>${this.state.wallet}</h2>
+                                    <h4>Your Wallet</h4>
+                                   </div>
+                                    {/* <div className="col-sm-12"> */}
                                     <div className="form-group">
                                     <Link to={`/vendor/add_withdraw/${this.props.vendor.data.vendor_id}`}><button  className="btn btn-primary">Request Withdraw</button></Link>
-                                    </div>
+                                    {/* </div> */}
                                 </div>
                                 </div>
                         </div>
@@ -67,7 +69,7 @@ class wallet extends Component {
                                         <th>Sr</th>
                                         <th>Date</th>
                                         <th>Withdraw Amount</th>
-                                        <th>Strip Response</th>
+                                        {/* <th>Strip Response</th> */}
                                         <th>Status</th>
                                     </tr>
                                         {
@@ -77,7 +79,7 @@ class wallet extends Component {
                                                         <td>{index+1}</td>
                                                         <td>{data.date}</td>
                                                         <td>${data.withdraw_amount}</td>
-                                                        <td>{data.strip_response}</td>
+                                                        {/* <td>{data.strip_response}</td> */}
                                                         <td>{data.status == 0 ? "Pending": data.status == 2 ? "Rejected" : 'Accepted'}</td>
                                                     </tr>
                                                 )
