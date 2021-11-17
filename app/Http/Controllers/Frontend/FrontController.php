@@ -1112,11 +1112,13 @@ class FrontController extends Controller
         $bookings = BookingService::where('id',$request->id)->with('booking')->first();
         $bookings->booking_information = BookingInformation::where('booking_id',$bookings->booking_id)->first();
         $bookings->vendor_info = Vendor::where('id',$bookings->booking['vendor_id'])->first();
-        $s_round = ServiceRound::where('service_id',$request->id)->first();
+        $s_round = ServiceRound::where('service_id',$request->id)->get();
+        $complaints = Complaint::where('service_id' , $request->id)->get();
         return response()->json([
             'message' => "Bookings and ServiceRounds",
             'data' => $bookings,
-            'serviceRounds' => $s_round
+            'serviceRounds' => $s_round,
+            'complaints' => $complaints
         ]);
     }
 
@@ -1138,7 +1140,8 @@ class FrontController extends Controller
     }
 
     public function end_service(Request $request){
-        $st_service = ServiceRound::where('id',$request->id)->update([
+
+        $end_service = ServiceRound::where('id',$request->id)->update([
             'end_time' => date('H:i:s'),
         ]);
         $response = [
@@ -1148,11 +1151,33 @@ class FrontController extends Controller
         return $response;
     }
 
+    public function complaint_round($complain){
+        $service_round_two = BookingService::where('id',$complain->service_id)->first();
+        $service_round_two -> round=(int) $service_round_two->round+1;
+        $service_round_two -> save();
+
+
+        $service_round = new ServiceRound();
+        $service_round->service_id = $complain->service_id;
+        $service_round->round = $service_round_two -> round; 
+        $service_round->check_list = json_encode(ServiceCheck::all());
+        $service_round->save();
+    }
+
     public function submit_complain(Request $request){
-        $complain = new Complaint();
-        $complain->service_id = $request->id;
-        $complain->complaints = $request->complain;
-        $complain->save();
+        if($request->checkBox == true)
+        {
+            $complain = new Complaint();
+            $complain->service_id = $request->id;
+            $complain->complaints = $request->complain;
+            $complain->save();
+            $this->complaint_round($complain);
+        }else{
+            $complain = new Complaint();
+            $complain->service_id = $request->id;
+            $complain->complaints = $request->complain;
+            $complain->save();
+        }
         return response()->json([
             'status' => 200,
             'message' => "Complaint Submitted Successfully",

@@ -19,6 +19,7 @@ import VendorWallet from '../Component/ManageAccounts/wallet';
 import AddWithdraw from '../Component/ManageAccounts/Addwithdraw';
 import MyPayments from '../Component/ManageAccounts/Mypaments';
 import BookingDetails from '../Component/ManageBookings/BookingDetails';
+import VendorServiceDetails from '../Component/ManageBookings/VendorServiceDetails';
 
 
 class Main extends Component {
@@ -44,7 +45,7 @@ class Main extends Component {
                 <Route path='/vendor/add_withdraw' component={AddWithdraw}></Route>
                 <Route path='/vendor/my_payments' component={MyPayments}></Route>
                 <Route path='/vendor/booking-details/:id' component={BookingDetails}></Route>
-                {/* <Route path='/vendor/booking-details/:id' component={BookingDetails}></Route> */}
+                <Route path='/vendor/vendor-service-details/:id' component={VendorServiceDetails}></Route>
                 
             </div>
         );

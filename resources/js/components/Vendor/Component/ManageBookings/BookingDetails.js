@@ -140,6 +140,7 @@ class BookingDetails extends Component {
                                                
                                                 
                                             </div>
+                                            
                                         </div>
                                     </div>
                                 </div>

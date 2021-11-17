@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import toast from 'react-hot-toast';
 import { img_baseurl } from '../../../Configs/Api';
 
-class ServiceDetails extends Component {
+class VendorServiceDetails extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -41,7 +41,7 @@ class ServiceDetails extends Component {
     }
 
     startService(id) {
-        Axios.post('/api/start_service',{id: id}).then(res => {
+        Axios.post('/api/start_service', { id: id }).then(res => {
             if (res.data.status == 200) {
                 this.props.history.push('/vendor-employee/booking-details/{id}');
                 Swal.fire({
@@ -59,7 +59,7 @@ class ServiceDetails extends Component {
     }
 
     endService(id) {
-        Axios.post('/api/end_service',{id :id}).then(res => {
+        Axios.post('/api/end_service', { id: id }).then(res => {
             if (res.data.status == 200) {
                 Swal.fire({
                     icon: 'success',
@@ -349,41 +349,41 @@ class ServiceDetails extends Component {
                                                                                 }
                                                                             </div>
                                                                             <div className="divid-line" />
-                                                                            {
-                                                                                this.state.complaints.length > 0 
-                                                                                ?
-                                                                                    <div className="row col-md-12 card-content" style={{marginLeft:"5px"}}>
-                                                                                        <h3>Previous Complaints</h3>
-                                                                                        {
-                                                                                            this.state.complaints.map((data,index)=>{
-                                                                                                return(
-                                                                                                    <div className="row col-md-12" style={{marginLeft:"20px"}} >
-                                                                                                        <li >{data.complaints}</li>
-                                                                                                    </div>
-                                                                                                )
-                                                                                            })
-                                                                                        }
-                                                                                    </div>
-                                                                                :
-                                                                                    <div className="detl-section">
-                                                                                        <div className="text-center">
-                                                                                            <p style={{color:'#000000a3' , fontSize:'20px'}}>No Previous Complain For this Service</p>
+                                                                                {
+                                                                                    this.state.complaints.length > 0 
+                                                                                    ?
+                                                                                        <div className="row col-md-12 card-content" style={{marginLeft:"5px"}}>
+                                                                                            <h3>Previous Complaints</h3>
+                                                                                            {
+                                                                                                this.state.complaints.map((data,index)=>{
+                                                                                                    return(
+                                                                                                        <div className="row col-md-12" style={{marginLeft:"20px"}} >
+                                                                                                            <li >{data.complaints}</li>
+                                                                                                        </div>
+                                                                                                    )
+                                                                                                })
+                                                                                            }
                                                                                         </div>
-                                                                                    </div>
+                                                                                    :
+                                                                                        <div className="detl-section">
+                                                                                            <div className="text-center">
+                                                                                                <p style={{color:'#000000a3' , fontSize:'20px'}}>No Previous Complain For this Service</p>
+                                                                                            </div>
+                                                                                        </div>
 
-                                                                            }
+                                                                                }
                                                                             <div className="divid-line" />
                                                                             <div className="row">
                                                                                 <div className="col-md-12">
                                                                                     {
                                                                                         data.start_time == '-:-:-' ?
-                                                                                            <h4><button onClick={this.startService.bind(this,data.id)} style={{ cursor: 'pointer' }} className="btn btn-outline-success">Start Service</button></h4>
+                                                                                            <h4><button onClick={this.startService.bind(this , data.id)} style={{ cursor: 'pointer' }} className="btn btn-outline-success">Start Service</button></h4>
                                                                                             :
                                                                                             <>
                                                                                                 {
                                                                                                     data.end_time == '-:-:-' 
                                                                                                     ?
-                                                                                                        <h4><button onClick={this.endService.bind(this, data.id)} style={{ cursor: 'pointer' }} className="btn btn-outline-success">End Service</button></h4>
+                                                                                                        <h4><button onClick={this.endService.bind(this , data.id)} style={{ cursor: 'pointer' }} className="btn btn-outline-success">End Service</button></h4>
                                                                                                     :
                                                                                                         null
                                                                                                 }
@@ -417,23 +417,4 @@ const mapStateToProps = (state) => {
         employee: state.employee
     }
 }
-export default connect(mapStateToProps)(ServiceDetails);
-
-{/* <div className="col-md-10">
-    <select onChange={this.selected_employee.bind(this)} className="form-control" name="type">
-    <option defaultValue="selected">Please Select</option>
-        {this.state.employees.map((data,index)=>{
-            return(
-                <option key={index} value={data.id}>{data.name}</option>
-                )
-            }
-        )
-        }
-    </select>
-</div> */}
-// {
-//     this.state.serviceRounds.start_time.length > 0 && this.state.serviceRounds.end_time.legth > 0 ?
-//     <h4>Service Completed</h4>
-//     :
-
-// }
+export default connect(mapStateToProps)(VendorServiceDetails);

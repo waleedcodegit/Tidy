@@ -144,6 +144,7 @@ Route::view('/vendor/add_withdraw' , 'vendor');
 Route::view('/vendor/add_withdraw/{id}' , 'vendor');
 Route::view('/vendor/my_payments' , 'vendor');
 Route::view('/vendor/booking-details/{id}' , 'vendor');
+Route::view('/vendor/vendor-service-details/{id}' , 'vendor');
 
 //Employee Routes
 Route::view('/employee-login' , 'Front');
