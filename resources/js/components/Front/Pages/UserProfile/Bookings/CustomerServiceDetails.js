@@ -81,6 +81,8 @@ class CustomerServiceDetails extends Component {
                     showConfirmButton: false,
                     timer: 1500
                 })
+                console.log(window.location);
+                window.location.reload();
                 }else{
                     this.setState({
                         error_string:res.data.msg

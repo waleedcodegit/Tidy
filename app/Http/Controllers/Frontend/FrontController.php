@@ -238,7 +238,7 @@ class FrontController extends Controller
         $vendor_new_payment->payment = $vendor_payment;
         $vendor_new_payment->save();
 
-        $wallet = VendorWallet::where('vendor_id',$service->id)->first();
+        $wallet = VendorWallet::where('vendor_id',$vendor->id)->first();
         $wallet->wallet = $wallet->wallet + $vendor_payment;
         $wallet->save();
         $response = [
