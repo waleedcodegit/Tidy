@@ -21,14 +21,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/delete-customer','Customer\AuthController@delete_customer');
 Route::post('delete-city','Admin\CityController@delete_city');
-Route::post('delete-subcategory','Admin\SubCategoryControllerr@delete_subcategory');
+// Route::post('delete-subcategory','Admin\SubCategoryControllerr@delete_subcategory');
 Route::post('delete-holiday','Admin\PublicHolidaysController@delete_holiday');
 Route::post('delete-question', 'Admin\QuestionController@delete_question');
 Route::post('delete-vendor','Vendor\VendorController@delete_vendor');
 Route::post('delete-serviceextra','Admin\ServiceExtraController@delete_ServiceExtra');
 Route::post('delete-state','Admin\StateController@delete_State');
 Route::post('delete-giftcard','Admin\AdminController@delete_GiftCard');
-Route::post('delete-subcategory','Admin\SubCategoryController@delete_SubCategory');
+// Route::post('delete-subcategory','Admin\SubCategoryController@delete_SubCategory');
 //
 // Pages Controller
 Route::post('add_page','Admin\PagesController@add_page');
@@ -39,7 +39,7 @@ Route::post('get_pages','Admin\PagesController@get_pages');
 Route::post('get-content' , 'Admin\PagesController@get_content');
 
 
-Route::post('delete-subcategory','Admin\ServicesController@delete_SubCategory');
+Route::post('delete-subcategory','Admin\SubCategoryController@delete_SubCategory');
 
 Route::post('delete-manageservice','Admin\ServicesController@delete_ManageService');
 

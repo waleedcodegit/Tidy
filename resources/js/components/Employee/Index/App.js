@@ -108,7 +108,7 @@ class EmployeeIndex extends Component {
                         <ul className="sidebar-menu">
                         <li className="menu-header">Main</li>
                         <li className="dropdown active">
-                            <a href="index.html" className="nav-link"><i data-feather="monitor" /><span>Employee-Dashboard</span></a>
+                            <Link to={'/vendor-employee/Empdashboard'} className="nav-link"><i data-feather="monitor" /><span>Employee-Dashboard</span></Link>
                         </li>
                         <li className="dropdown">
                             <a href="#" className="menu-toggle nav-link has-dropdown"><i data-feather="briefcase" /><span>Manage Bookings</span></a>

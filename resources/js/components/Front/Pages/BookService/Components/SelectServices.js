@@ -31,7 +31,8 @@ class SelectServices extends Component {
               {check:0}
             ],
             is_custom:0,
-            custom_recurring:1
+            custom_recurring:1,
+            loading:false,
         };
     }
     service_type(val){
@@ -128,6 +129,7 @@ class SelectServices extends Component {
       })
     }
     Submit(e){
+      this.setState({ loading : true});
         e.preventDefault();
         Axios.post('/api/validate_select_service',this.state).then(res=>{
           if(res.data.status){
@@ -138,7 +140,11 @@ class SelectServices extends Component {
               error_string:res.data.message
             })
           }
+
         })
+        setTimeout(() => {
+          this.setState({ loading : false});
+        }, 2000);
     }
     date(e){
       this.setState({
@@ -164,6 +170,7 @@ class SelectServices extends Component {
       console.log(this.props)
     }
     render() {
+      const {loading} = this.state;
         return (
             <div className>
             <div id="headingOne">
@@ -244,7 +251,7 @@ class SelectServices extends Component {
                         <div className="input--stydle-1">
                           <select  value={this.state.time || ""} onChange={this.time.bind(this)} name="gender"   className="col-md-12 input--style-1">
                             <option disabled="disabled" selected="selected">Time to</option>
-                            <option>
+                            <option>Select Time
                             </option>
                             <option>7:00am</option>
                             <option>8:00am</option>
@@ -399,7 +406,15 @@ class SelectServices extends Component {
                   <div className="row">
                     <div className="col-md-9" />
                     <div className="col-md-3">
-                      <button onClick={this.Submit.bind(this)} className="p-t-20 btn btn-success btn--radius btn--green" type="submit" id="#collapseTwo">Next</button>
+                      <button onClick={this.Submit.bind(this)} disabled={loading} 
+                     
+                      className="p-t-20 btn btn-success btn--radius btn--green" type="submit" id="#collapseTwo">
+                      
+                       { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                      { loading && <span > loading</span>}
+                      { !loading && <span > Next</span>}
+      
+                      </button>
                     </div>
                   </div>
                 </form>

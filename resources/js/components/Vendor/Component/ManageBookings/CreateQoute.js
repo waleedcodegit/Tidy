@@ -44,7 +44,7 @@ class BookingsFeed extends Component {
         })
     }
     createQuote(event) {
-        
+        this.setState({ loading : true});
         event.preventDefault();
         let senderData = {
             vendor_id: this.state.vendor_id,
@@ -76,10 +76,14 @@ class BookingsFeed extends Component {
                 })
             }
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
     
 
     render() {
+        const {loading} = this.state;
         return (
             <div>
                 <section className="section">
@@ -99,8 +103,13 @@ class BookingsFeed extends Component {
                                     <div className="col-sm-12">
                                     <div className="form-group">
                                     <button 
-                            onClick={this.createQuote.bind(this)} 
-                            type="submit" className="btn btn-primary">Submit</button>
+                            onClick={this.createQuote.bind(this)} disabled={loading}
+                            type="submit" className="btn btn-primary">
+                                    { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                                   { loading && <span >Loading...</span>}
+                                                   { !loading && <span >Submit</span>}
+                               
+                                </button>
                                     </div>
                                 </div>
                                 </div>

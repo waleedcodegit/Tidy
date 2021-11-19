@@ -2,6 +2,8 @@ import Axios from 'axios';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { img_baseurl } from '../../../Configs/Api';
+import Swal from 'sweetalert2';
+import toast from 'react-hot-toast';
  
 class CustomerSignUp extends Component {
     constructor(props) {
@@ -57,9 +59,25 @@ class CustomerSignUp extends Component {
         e.preventDefault();
         Axios.post('/api/create-customer',this.state).then(res=>{
             if(res.data.status == 200){
+                if(res.data.status == 200){
+            
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Signup Successfully',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: res.data.msg,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
                 window.localStorage.setItem('cus_token',res.data.customer.token);
                 this.props.changeUser({is_login:true,data:res.data.customer});
-                // this.props.history.push('/');
+               
             }else{
                 this.setState({
                     form_error:true,
@@ -68,6 +86,7 @@ class CustomerSignUp extends Component {
                 toast.error('Error - '+res.data.message)
             }
         })
+        
     }
     render() { 
         return (
@@ -120,7 +139,7 @@ class CustomerSignUp extends Component {
                             </form>
                             <div>
                                 <hr></hr>
-                                <p className="auth_divider_text">Already have an account ? <span> <a  onClick={()=>{this.props.CHANGE_AUTH_TYPE('login')}}>Login</a></span></p>
+                                <p className="auth_divider_text">Already have an account ? <span> <a  onClick={()=>{this.props.CHANGE_AUTH_TYPE('login')}} style={{backgroundColor:'yellow'}}>Login</a></span></p>
                               
                             </div>
                         </div>

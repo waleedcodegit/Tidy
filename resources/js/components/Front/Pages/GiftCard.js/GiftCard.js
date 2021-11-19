@@ -30,8 +30,32 @@ class GiftCard extends Component {
         };
     }
     amount(e){
+        // let amount = e.target.value;
+        // if ( amount > Number(500)) {
+        //     console.log(amount);
+            // amount=amount.replace(/[^0-9.]/,"");
+        // }
         this.setState({
             amount:e.target.value
+        })
+      
+    }
+    // amount = (e) => {
+
+    //     let amount = e.target.value;
+    //     if ( amount > Number(500)) {
+    //         console.log(amount);
+    //         amount=amount.replace(/[^0-9.]/,"");
+    //     }
+// }
+    name(event) {
+        let data = {
+            first_name: event.target.value
+        }
+        Axios.post('/api/search_vendors',data).then(res=>{  
+            this.setState({
+                vendors:res.data.vendor
+            })
         })
     }
     name(e){
@@ -44,6 +68,7 @@ class GiftCard extends Component {
             recipient_email:e.target.value
         })
     }
+    
     confirm_email(e){
         this.setState({
             confirm_email:e.target.value
@@ -70,6 +95,7 @@ class GiftCard extends Component {
         })
     }
     validate_gift_card_details(e){
+        this.setState({ loading : true});
         e.preventDefault();
         Axios.post('/api/validate_gift_card_details',this.state).then(res=>{
             console.log(res);
@@ -84,12 +110,18 @@ class GiftCard extends Component {
                 })
             }
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
+    
     credit_card_number(e) {
+       
         this.setState({
-            credit_card_number: e.target.value
+            credit_card_number: e.target.value.replace(/\D/g,'')
         })
     }
+    
     cvc(e) {
         this.setState({
             cvc: e.target.value
@@ -111,6 +143,7 @@ class GiftCard extends Component {
         })
     }
     order_gift_card(e){
+        this.setState({ loading : true});
         e.preventDefault();
         // this.setState({
         //     loading:true
@@ -121,17 +154,26 @@ class GiftCard extends Component {
                     show_thankyou:true,
                     loading:false
                 })
+                setTimeout(() => {
+                    this.setState({ loading : false});
+                  }, 2000);
             }else{
                 this.setState({
                     error_string:res.data.message,
                     loading:false
                 })
+                setTimeout(() => {
+                    this.setState({ loading : false});
+                  }, 2000);
             }
         }).catch((e)=>{
             this.setState({
                 error_string:'Your card details are not correct'
             })
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
     change_step(step){
         this.setState({
@@ -140,6 +182,7 @@ class GiftCard extends Component {
         })
     }
     render() {
+        const {loading} = this.state;
         return (
           <div className="container mt-5 mb-5">
              {
@@ -171,7 +214,7 @@ class GiftCard extends Component {
                             <div className="col-md-6">
                             <label className="lbl-style"> *Amount<span>($10-$500 AUD)</span></label>
                             <div className="input-group">
-                                <input value={this.state.amount}  onChange={this.amount.bind(this)} className="form-control auth_input_box" type="number"   />
+                                <input value={this.state.amount}  onChange={this.amount.bind(this)} className="form-control auth_input_box" type="number" min='10' max="500"   />
                             </div>
                             </div>
                             <div className="col-md-6">
@@ -241,7 +284,11 @@ class GiftCard extends Component {
                         <div className="row">
                             <div className="col-md-9" />
                             <div className="col-md-3">
-                            <button onClick={this.validate_gift_card_details.bind(this)}  className="p-t-20 btn btn--radius btn-success" type="submit" id="#collapseTwo">Next</button>
+                            <button onClick={this.validate_gift_card_details.bind(this)} disabled={loading}  className="p-t-20 btn btn--radius btn-success" type="submit" id="#collapseTwo">
+                            { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                      { loading && <span > Loading...</span>}
+                      { !loading && <span > Next</span>}
+                            </button>
                             </div>
                         </div>
                         </form>
@@ -266,7 +313,7 @@ class GiftCard extends Component {
                                 <div className="col-md-12">
                                 <label className="lbl-style"> *Card Number</label>
                                 <div className="input-group">
-                                    <input onChange={this.credit_card_number.bind(this)} className="form-control auth_input_box" type="text" placeholder name="name" />
+                                    <input onChange={this.credit_card_number.bind(this)} className="form-control auth_input_box" type="number" placeholder name="name" />
                                 </div>
                                 </div>
                                 <div className="col-md-12">
@@ -287,7 +334,7 @@ class GiftCard extends Component {
                                 <div className="col-md-6">
                                 <label className="lbl-style"> *Expiry Year</label>
                                 <div className="input-group">
-                                    <input onChange={this.expiry_year.bind(this)} className="form-control auth_input_box js-datepicker" type="text" placeholder name="birthday" />
+                                    <input onChange={this.expiry_year.bind(this)} className="form-control auth_input_box js-datepicker" type="number" placeholder name="birthday" />
                                     <i className="zmdi zmdi-calendar-note input-icon js-btn-calendar" />
                                 </div>
                                 </div>
@@ -305,7 +352,11 @@ class GiftCard extends Component {
                                 </div>
                                 <div className="col-md-5" />
                                 <div className="col-md-4">
-                                <button disabled={this.state.loading} onClick={this.order_gift_card.bind(this)} style={{width:'100%'}} className="p-t-20 btn btn--radius btn-success" type="submit" id="#collapseTwo">Send Gift Card</button>
+                                <button disabled={loading} onClick={this.order_gift_card.bind(this)} style={{width:'100%'}} className="p-t-20 btn btn--radius btn-success" type="submit" id="#collapseTwo">
+                                { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                      { loading && <span > Loading...</span>}
+                               { !loading && <span > Send Gift Card</span>}
+                                    </button>
                                 </div>
                                
                             </div>

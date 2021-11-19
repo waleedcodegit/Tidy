@@ -56,7 +56,8 @@ class SignUp extends Component {
             lat:0,
             long:0,
             loc_address:'',
-            selected_address:''
+            selected_address:'',
+            loading:false,
         };
 
     }
@@ -185,6 +186,7 @@ class SignUp extends Component {
         })
     }
     validate_vendor(e) {
+        this.setState({ loading : true});
         e.preventDefault();
         console.log(this.state);
         Axios.post('/api/validate_vendor', this.state).then(res => {
@@ -201,6 +203,10 @@ class SignUp extends Component {
                 })
             }
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
+        
     }
     Create_Vendor(e) {
         e.preventDefault();
@@ -462,16 +468,23 @@ class SignUp extends Component {
 
     }
     validate_services() {
+        this.setState({ loading : true});
+        
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
         let payload = {
             services: this.state.services,
             vendor_id: this.props.match.params.vendor_id
         }
+       
         let check = false;
         this.state.services.map((data, index) => {
             if (data.check) {
                 check = true;
             }
         })
+        
         if (check) {
             this.setState({
                 step: 3,
@@ -479,11 +492,16 @@ class SignUp extends Component {
             }, function () {
                 window.scrollTo(0, 0);
             })
+            setTimeout(() => {
+                this.setState({ loading : false});
+              }, 2000);
         } else {
             this.setState({
                 error_string: 'Please Select at least One Service'
             })
+           
         }
+      
 
     }
     change_step(step) {
@@ -546,6 +564,7 @@ class SignUp extends Component {
         })
     }
     async validate_documents() {
+        this.setState({ loading : true});
         this.setState({
             error_string: ''
         })
@@ -554,17 +573,26 @@ class SignUp extends Component {
                 this.setState({
                     error_string: 'Please Upload Public Insurance Certificate'
                 })
+                setTimeout(() => {
+                    this.setState({ loading : false});
+                  }, 2000);
             }
         } else if (this.state.Npc.length == 0) {
             if (this.state.type_of_business == 'sole') {
                 this.setState({
                     error_string: 'Please Upload National Police Check'
                 })
+                setTimeout(() => {
+                    this.setState({ loading : false});
+                  }, 2000);
             }
         } else if (this.state.photo_id.length == 0) {
             this.setState({
                 error_string: 'Please Upload  Photo Id'
             })
+            setTimeout(() => {
+                this.setState({ loading : false});
+              }, 2000);
         } else {
             this.setState({
                 step: 5,
@@ -572,10 +600,16 @@ class SignUp extends Component {
             }, function () {
                 window.scrollTo(0, 0);
             })
+            setTimeout(() => {
+                this.setState({ loading : false});
+              }, 2000);
         }
         if (this.state.insurance_certificate_type == 'admin') {
             await this.validate_card();
         }
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
     submit_request() {
         Axios.post('/api/submit_vendor_request', this.state).then(res => {
@@ -660,6 +694,7 @@ class SignUp extends Component {
         })
     }
     validate_addresses(){
+        this.setState({ loading : true});
         if(this.state.addresses.length > 0){
             this.setState({
                 step:4,
@@ -670,8 +705,12 @@ class SignUp extends Component {
                 error_string:'Please enter atleast one address.'
             })
         }
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
     render() {
+        const {loading} = this.state;
         return (
                 <div className="card p-3 animate_auth_modal  px-0 pt-4 pb-0 mt-3 mb-3">
                     <h2 className="text-center" style={{ fontSize: '48px' }}><strong>Vendor Account SignUp</strong></h2>
@@ -805,7 +844,16 @@ class SignUp extends Component {
                                                                 : null
                                                         }
                                                         <div className="panel-footer text-right">
-                                                            <button onClick={this.validate_vendor.bind(this)} className="btn btn-success   " type="submit">
+                                                        <button onClick={this.validate_vendor.bind(this)}  disabled={loading} 
+                     
+                                                         className="btn btn-success" type="submit" id="#collapseTwo">
+
+                                                              { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                                            { loading && <span > loading</span>}
+                                                           { !loading && <span > Next</span>}
+
+                                      </button>
+                                                            {/* <button onClick={this.validate_vendor.bind(this)} className="btn btn-success   " type="submit">
                                                                 {
                                                                     this.state.btn_loading ?
                                                                         <div id="displayspinner" style={{ display: 'block', }}>
@@ -815,7 +863,7 @@ class SignUp extends Component {
                                                                         </div>
                                                                         : <>Next</>
                                                                 }
-                                                            </button>
+                                                            </button> */}
                                                         </div>
                                                     </form>
                                                     {/*===================================================*/}
@@ -880,7 +928,16 @@ class SignUp extends Component {
                                                             </button>
                                                         </div>
                                                         <div className="text-right ml-auto">
-                                                            <button onClick={this.validate_services.bind(this)} className="btn btn-success   " type="submit">
+                                                        <button onClick={this.validate_services.bind(this)}  disabled={loading} 
+                     
+                                                       className="btn btn-success" type="submit" id="#collapseTwo">
+
+                                                     { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                                    { loading && <span > loading</span>}
+                                                     { !loading && <span > Next</span>}
+
+                                                             </button>
+                                                            {/* <button onClick={this.validate_services.bind(this)} className="btn btn-success   " type="submit">
                                                                 {
                                                                     this.state.btn_loading ?
                                                                         <div id="displayspinner" style={{ display: 'block', }}>
@@ -890,7 +947,7 @@ class SignUp extends Component {
                                                                         </div>
                                                                         : <>Next</>
                                                                 }
-                                                            </button>
+                                                            </button> */}
                                                         </div>
 
                                                     </div>
@@ -989,7 +1046,13 @@ class SignUp extends Component {
                                                                     </button>
                                                                 </div>
                                                                 <div className="text-right ml-auto">
-                                                                    <button onClick={this.validate_addresses.bind(this)} className="btn btn-success   " type="submit">
+                                                                <button onClick={this.validate_addresses.bind(this)}  disabled={loading} 
+                                                                       className="btn btn-success" type="submit" id="#collapseTwo">
+                                                                     { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                                                       { loading && <span > loading</span>}
+                                                                      { !loading && <span > Next</span>}
+                                                                                               </button>
+                                                                    {/* <button onClick={this.validate_addresses.bind(this)} className="btn btn-success   " type="submit">
                                                                         {
                                                                             this.state.btn_loading ?
                                                                                 <div id="displayspinner" style={{ display: 'block', }}>
@@ -999,7 +1062,7 @@ class SignUp extends Component {
                                                                                 </div>
                                                                                 : <>Next</>
                                                                         }
-                                                                    </button>
+                                                                    </button> */}
                                                                 </div>
 
                                                             </div>
@@ -1147,17 +1210,21 @@ class SignUp extends Component {
                                                                     </button>
                                                                 </div>
                                                                 <div className="text-right ml-auto">
-                                                                    <button onClick={this.validate_documents.bind(this)} className="btn btn-success   " type="submit">
-                                                                        {
-                                                                            this.state.btn_loading ?
-                                                                                <div id="displayspinner" style={{ display: 'block', }}>
-                                                                                    <div className="spinner-border  ml-2 text-light spinner_format" role="status">
-                                                                                        <span className="sr-only">Loading...</span>
-                                                                                    </div>
-                                                                                </div>
-                                                                                : <>Next</>
-                                                                        }
-                                                                    </button>
+                                                                    {/* <button onClick={this.validate_documents.bind(this)} className="btn btn-success   " type="submit">
+                                                                      
+                                                                              
+                                                                                 Next
+                                                                        
+                                                                    </button> */}
+                                                                    <button onClick={this.validate_documents.bind(this)}  disabled={loading} 
+                     
+                                                              className="p-t-20 btn btn-success btn--radius btn--green" type="submit" id="#collapseTwo">
+                     
+                                                             { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                                                          { loading && <span > loading</span>}
+                                                                          { !loading && <span > Next</span>}
+     
+                                                                               </button>
                                                                 </div>
 
                                                             </div>

@@ -1,3 +1,4 @@
+
 import Axios from 'axios';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -27,11 +28,13 @@ class AddInformation extends Component {
             levels:1,
             error_string:'',
             extras:[],
-            prem_vendor_enterance:''
+            prem_vendor_enterance:'',
+            loading: false,
         };
     }
 
     Submit(val, e) {
+        this.setState({ loading : true});
         e.preventDefault();
         console.log(this.state.answers)
         if(this.state.questions.length > 0){
@@ -41,6 +44,10 @@ class AddInformation extends Component {
             })
             return ;
            }
+           setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
+
         }
         if(this.state.is_parking_available == 'Yes'){
             if(this.state.where_parking == ''){
@@ -48,13 +55,21 @@ class AddInformation extends Component {
                     error_string:'Please Enter the Where is Parking'
                 })
                 return ;
+                
             }
+            setTimeout(() => {
+                this.setState({ loading : false});
+              }, 2000);
             if(this.state.is_free_parking == ''){
                 this.setState({
                     error_string:'Please Enter Is Parking Free or Not'
                 })
                 return ;
+               
             }
+            setTimeout(() => {
+                this.setState({ loading : false});
+              }, 2000);
         }
        if(this.state.will_at_home == 'No'){
            if(this.state.prem_vendor_enterance == ''){
@@ -62,10 +77,21 @@ class AddInformation extends Component {
                 error_string:'Please Enter how the vendor can enter the premises'
             })
             return ;
-           }
+         
+           
        }
+       setTimeout(() => {
+        this.setState({ loading : false});
+      }, 2000);
+   }
        this.props.ADD_INFORMATION(this.state);
+      
         this.props.change_step(val);
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
+       
+      
     }
     componentDidMount() {
         console.log(this.props)
@@ -194,8 +220,11 @@ class AddInformation extends Component {
         this.setState({
             prem_vendor_enterance:e.target.value
         })
+        
     }
+    
     render() {
+        const {loading} = this.state;
         return (
             <div className="services-page">
                 <div id="headingTwo">
@@ -386,12 +415,20 @@ class AddInformation extends Component {
                                 <div className="divider-line" />
                                 <div className="row">
                                     <div className="col-md-3">
-                                        <button onClick={this.Submit.bind(this, 1)} className="p-t-20 btn btn-info btn--radius btn--green" type="submit" id="#collapseTwo">Back</button>
+                                        <button onClick={this.Submit.bind(this, 1)} disabled={loading} className="p-t-20 btn btn-info btn--radius btn--green" type="submit" id="#collapseTwo">
+                                        { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                           { loading && <span > loading</span>}
+                                            { !loading && <span > Back</span>}
+                                            </button>
                                     </div>
 
                                     <div className="col-md-6" />
                                     <div className="col-md-3">
-                                        <button onClick={this.Submit.bind(this, 3)} className="p-t-20 btn btn-success btn--radius btn--green" type="submit" id="#collapseTwo">Next</button>
+                                        <button disabled={loading} onClick={this.Submit.bind(this, 3)} className="p-t-20 btn btn-success btn--radius btn--green" type="submit" id="#collapseTwo">
+                                           { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                           { loading && <span > loading</span>}
+                                            { !loading && <span > Next</span>}
+                                            </button>
                                     </div>
                                 </div>
                             </div>

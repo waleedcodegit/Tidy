@@ -133,6 +133,7 @@ class CustomerSignUp extends Component {
                             <div>
                                 <hr></hr>
                                 <p className="auth_divider_text">Already have an account ? <span> <a href="/login">Login</a></span></p>
+                                {/* <Highlighted text="the quick brown fox jumps over the lazy dog" highlight="fox"/> */}
                               
                             </div>
                         </div>

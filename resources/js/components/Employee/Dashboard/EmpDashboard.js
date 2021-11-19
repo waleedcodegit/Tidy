@@ -10,12 +10,13 @@ class EmpDashBoard extends Component {
                     <div class="card-statistic-4">
                         <div class="align-items-center justify-content-between">
                         <div class="row ">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
-                            <div class="card-content">
-                                <h5 class="font-15">New Booking</h5>
-                                <h2 class="mb-3 font-18">258</h2>
-                                <p class="mb-0"><span class="col-green">10%</span> Increase</p>
-                            </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
+                            <div className="col-sm-12">
+                                   <h2>100</h2>
+                                   <h4 >New Booking</h4>
+                                    <div className="col-sm-12">
+                                </div>
+                                </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
                             <div class="banner-img">
@@ -32,12 +33,13 @@ class EmpDashBoard extends Component {
                     <div class="card-statistic-4">
                         <div class="align-items-center justify-content-between">
                         <div class="row ">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
-                            <div class="card-content">
-                                <h5 class="font-15"> Customers</h5>
-                                <h2 class="mb-3 font-18">1,287</h2>
-                                <p class="mb-0"><span class="col-orange">09%</span> Decrease</p>
-                            </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
+                            <div className="col-sm-12">
+                                   <h2 >100</h2>
+                                   <h4 >Customers</h4>
+                                    <div className="col-sm-12">
+                                </div>
+                                </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
                             <div class="banner-img">
@@ -54,13 +56,13 @@ class EmpDashBoard extends Component {
                     <div class="card-statistic-4">
                         <div class="align-items-center justify-content-between">
                         <div class="row ">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
-                            <div class="card-content">
-                                <h5 class="font-15">Wallet</h5>
-                                <h2 class="mb-3 font-18">128</h2>
-                                <p class="mb-0"><span class="col-green">18%</span>
-                                Increase</p>
-                            </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
+                            <div className="col-sm-12">
+                                   <h2>$1000</h2>
+                                   <h4>Wallet</h4>
+                                    <div className="col-sm-12">
+                                </div>
+                                </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
                             <div class="banner-img">
@@ -77,12 +79,13 @@ class EmpDashBoard extends Component {
                     <div class="card-statistic-4">
                         <div class="align-items-center justify-content-between">
                         <div class="row ">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
-                            <div class="card-content">
-                                <h5 class="font-15">Revenue</h5>
-                                <h2 class="mb-3 font-18">$48,697</h2>
-                                <p class="mb-0"><span class="col-green">42%</span> Increase</p>
-                            </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
+                            <div className="col-sm-12">
+                                   <h2>$4689</h2>
+                                   <h4>Revenue</h4>
+                                    <div className="col-sm-12">
+                                </div>
+                                </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
                             <div class="banner-img">
@@ -114,7 +117,6 @@ class EmpDashBoard extends Component {
                         <a href="#" class="btn btn-primary">View All</a>
                         </div>
                     </div>
-                   
                 </div>
                 </div>
                 </div>

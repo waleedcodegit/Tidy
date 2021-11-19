@@ -11,16 +11,23 @@ class CustomerLocation extends Component {
             lat:0,
             long:0,
             place:'',
-            loc_address:''
+            loc_address:'',
+            loading: false,
         };
     }
      
     
     submit_location(){
+        // this.setState({ loading : true});
         if(this.state.loc_address != ''){
             this.props.changeLocation(this.state);
+            // setTimeout(() => {
+            //     this.setState({ loading : false});
+            //   }, 2000);
             this.props.change_step(4);
+            
             toast.success('Success');
+           
         }else{
             toast.error('Please Enter You Location');
         }
@@ -38,8 +45,10 @@ class CustomerLocation extends Component {
             long:long,
             loc_address:place.formatted_address
         })
+       
     }
     render() {
+        const {loading} = this.state;
         return (
             <div>
                  <div className="col-sm-12">
@@ -64,7 +73,12 @@ class CustomerLocation extends Component {
 
                                     <div className="col-md-6" />
                                     <div className="col-md-3">
-                                        <button onClick={this.submit_location.bind(this, 3)} className="p-t-20 btn btn-success btn--radius btn--green" type="submit" id="#collapseTwo">Next</button>
+                                        <button onClick={this.submit_location.bind(this, 3)} 
+                                         disabled={loading} className="p-t-20 btn btn-success btn--radius btn--green" type="submit" id="#collapseTwo">
+                                        { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                       { loading && <span > loading</span>}
+                                           { !loading && <span > Next</span>}
+                                                </button>
                                     </div>
                                 </div>
                             </div>

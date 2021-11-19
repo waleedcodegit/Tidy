@@ -39,6 +39,7 @@ class BookingsFeed extends Component {
     }
 
     RequestAccept(id) {
+        this.setState({ loading : true});
         let data = {
             id:id,
             vendor_id:this.props.vendor.data.vendor_id
@@ -61,12 +62,16 @@ class BookingsFeed extends Component {
                 })
             }
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
 
     render() {
+        const {loading} = this.state;
         return (
             <div>
-                 {
+                 {/* {
                     this.state.loading ?
                    
                         <div id="displayspinner text-center mt-5 " className="text-center" style={{ display: 'block', }}>
@@ -74,7 +79,7 @@ class BookingsFeed extends Component {
                                 <span className="sr-only">Loading...</span>
                             </div>
                         </div>
-                        :
+                        : */}
                 <section className="section">
                     <div className="section-body">
                         <h2>Bookings Feed </h2>
@@ -95,7 +100,12 @@ class BookingsFeed extends Component {
                                                     {
                                                         data.service.residential_type == "1" ?
                                                         <>
-                                                      <h4><button onClick={this.RequestAccept.bind(this,data.booking.id)} className="btn btn-outline-success ml-auto">Accept</button></h4> 
+                                                      <h4><button onClick={this.RequestAccept.bind(this,data.booking.id)} disabled={loading}  className="btn btn-outline-success ml-auto">
+                                                      { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                                   { loading && <span >Loading...</span>}
+                                                   { !loading && <span >Accept</span>}
+                                                       
+                                                          </button></h4> 
 
                                                       <h4><Link to={`/vendor/booking-details/${data.booking_id}`}><button  className="btn btn-outline-success ml-auto">Details</button></Link></h4>
                                                    </> :
@@ -241,7 +251,7 @@ class BookingsFeed extends Component {
                         </div>
                     </div>
                 </section>
-    }
+    {/* } */}
             </div>
         );
     }

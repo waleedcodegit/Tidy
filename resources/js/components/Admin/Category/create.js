@@ -118,7 +118,7 @@ class Create extends Component {
                                 <div className="col-sm-12">
                                     <div className="form-group">
                                         <label htmlFor="price">Name:</label>
-                                        <input onChange={this.category.bind(this)} type="text" className="form-control" id="price" placeholder="Enter Price" name="price"/>
+                                        <input onChange={this.category.bind(this)} type="text" className="form-control" id="price" placeholder="Enter Name" name="price"/>
                                     </div>
                                 </div>
                             </div>
