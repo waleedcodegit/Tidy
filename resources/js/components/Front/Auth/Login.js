@@ -86,16 +86,16 @@ class Login extends Component {
                             <div className="text-right">
                                 <span ><a href="/forgot-password">Forgot Password ?</a></span>
                             </div>
-                            <div >
+                            {/* <div >
                                 <div className="row ml-0">   
-                                    <div className="col-md-6 row">
+                                   <div className="col-md-6 row"> 
                                     <input onChange={this.set_auth_type.bind(this,1)} 
                                         checked={this.state.auth_type == 1}
                                         value={this.state.auth_type || " "}
                                     type="radio" className="mt-2 " name="auth_type" value="Customer"></input>
                                         <p className="radio_label">Customer</p>
-                                    </div>
-                                    <div className="col-md-6 row">
+                                    </div> 
+                                      <div className="col-md-6 row"> 
                                     <input onChange={this.set_auth_type.bind(this,2)} 
                                         checked={this.state.auth_type == 2 }
                                         value={this.state.auth_type || " "}
@@ -103,7 +103,7 @@ class Login extends Component {
                                           name="auth_type" value="Vendor">
                                     </input>
                                         <p className="radio_label">Vendor</p>
-                                    </div>
+                                    </div> 
                                     <div className="col-md-6 row">
                                     <input onChange={this.set_auth_type.bind(this,3)} 
                                         checked={this.state.auth_type == 3 }
@@ -113,8 +113,8 @@ class Login extends Component {
                                     </input>
                                         <p className="radio_label">Employee</p>
                                     </div>
-                                </div>  
-                            </div>
+                               </div>  
+                             </div> */}
                             <div>
                                 {
                                     this.state.form_error ?

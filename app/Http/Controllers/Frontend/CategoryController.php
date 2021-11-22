@@ -32,7 +32,7 @@ class CategoryController extends Controller
         return $response;
     }
     public function getallcategory(Request $request){
-        $categories = Category::with('subcategory')->get();
+        $categories = Category::where('delete_status' , 0)->with('subcategory')->get();
         // $bussiness_categories = Category::where('type' , 'bussiness')->with('subcategory')->get();
      
         $response = [

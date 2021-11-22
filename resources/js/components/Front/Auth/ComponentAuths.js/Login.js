@@ -86,7 +86,7 @@ class Login extends Component {
                                     </form>
                                     <div>
                                         <hr></hr>
-                                        <p className="auth_divider_text">Are You New to TidyHome ? <span> <a  onClick={()=>{this.props.CHANGE_AUTH_TYPE('signup')}} style={{backgroundColor:'yellow'}}>Sign Up</a></span></p>
+                                        <p className="auth_divider_text">Are You New to TidyHome ?   <span> <a  onClick={()=>{this.props.CHANGE_AUTH_TYPE('signup')}} style={{color:'green'}}><strong>SignUp</strong></a></span></p>
 
                                     
                                     </div>

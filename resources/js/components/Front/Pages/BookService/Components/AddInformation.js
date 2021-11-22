@@ -5,6 +5,9 @@ import { connect } from 'react-redux';
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
+import CustomerLocation from "../Components/CustomerLocation";
+import { MAP_PLACES_API_KEY } from '../../../../Configs/Api';
+import ReactGoogleAutocomplete from 'react-google-autocomplete';
 
 class AddInformation extends Component {
     constructor(props) {
@@ -29,12 +32,16 @@ class AddInformation extends Component {
             error_string:'',
             extras:[],
             prem_vendor_enterance:'',
-            loading: false,
+            lat:0,
+            long:0,
+            place:'',
+            loc_address:'',
+            // loading: false,
         };
     }
 
-    Submit(val, e) {
-        this.setState({ loading : true});
+    Submit(val, e , place) {
+        // this.setState({ loading : true});
         e.preventDefault();
         console.log(this.state.answers)
         if(this.state.questions.length > 0){
@@ -44,9 +51,7 @@ class AddInformation extends Component {
             })
             return ;
            }
-           setTimeout(() => {
-            this.setState({ loading : false});
-          }, 2000);
+          
 
         }
         if(this.state.is_parking_available == 'Yes'){
@@ -57,9 +62,7 @@ class AddInformation extends Component {
                 return ;
                 
             }
-            setTimeout(() => {
-                this.setState({ loading : false});
-              }, 2000);
+            
             if(this.state.is_free_parking == ''){
                 this.setState({
                     error_string:'Please Enter Is Parking Free or Not'
@@ -67,9 +70,7 @@ class AddInformation extends Component {
                 return ;
                
             }
-            setTimeout(() => {
-                this.setState({ loading : false});
-              }, 2000);
+            
         }
        if(this.state.will_at_home == 'No'){
            if(this.state.prem_vendor_enterance == ''){
@@ -80,18 +81,36 @@ class AddInformation extends Component {
          
            
        }
-       setTimeout(() => {
-        this.setState({ loading : false});
-      }, 2000);
+       
+     
    }
        this.props.ADD_INFORMATION(this.state);
       
         this.props.change_step(val);
-        setTimeout(() => {
-            this.setState({ loading : false});
-          }, 2000);
+          if(this.state.loc_address != ''){
+            this.props.changeLocation(this.state);
+            // setTimeout(() => {
+            //     this.setState({ loading : false});
+            //   }, 2000);
+            this.props.change_step(4);
+            
+            toast.success('Success');
+           
+        }else{
+            toast.error('Please Enter You Location');
+        }
+    }
+    places(place){
+
+        let lat  = place.geometry.location.lat();
+        let long = place.geometry.location.lng();
+        this.setState({
+            places:place,
+            lat:lat,
+            long:long,
+            loc_address:place.formatted_address
+        })
        
-      
     }
     componentDidMount() {
         console.log(this.props)
@@ -224,7 +243,7 @@ class AddInformation extends Component {
     }
     
     render() {
-        const {loading} = this.state;
+        // const {loading} = this.state;
         return (
             <div className="services-page">
                 <div id="headingTwo">
@@ -413,21 +432,57 @@ class AddInformation extends Component {
                                     :null
                                 }
                                 <div className="divider-line" />
-                                <div className="row">
+                               
+                                    <div>
+                                        <div>
+                 <div className="col-sm-12">
+                            <div className="form-group">
+                              <label className="control-label">Enter your Address</label>
+                              <ReactGoogleAutocomplete
+                                apiKey={MAP_PLACES_API_KEY}
+                                options={{ types: 'sublocality' ,
+                                componentRestrictions: { country: "au" },
+                                }}
+                                onPlaceSelected={(place) => {
+                                    this.places(place);
+                                }}
+                                style={{ width: '100%' }}
+                                className="form-control input_box"
+                              />
+                             <div className="divider-line" />
+                                {/* <div className="row">
                                     <div className="col-md-3">
-                                        <button onClick={this.Submit.bind(this, 1)} disabled={loading} className="p-t-20 btn btn-info btn--radius btn--green" type="submit" id="#collapseTwo">
-                                        { loading && <i className= 'fa fa-refresh fa-spain'></i>}
-                                           { loading && <span > loading</span>}
-                                            { !loading && <span > Back</span>}
-                                            </button>
+                                        <button onClick={this.back.bind(this, 1)} className="p-t-20 btn btn-info btn--radius btn--green" type="submit" id="#collapseTwo">Back</button>
                                     </div>
 
                                     <div className="col-md-6" />
                                     <div className="col-md-3">
-                                        <button disabled={loading} onClick={this.Submit.bind(this, 3)} className="p-t-20 btn btn-success btn--radius btn--green" type="submit" id="#collapseTwo">
-                                           { loading && <i className= 'fa fa-refresh fa-spain'></i>}
-                                           { loading && <span > loading</span>}
-                                            { !loading && <span > Next</span>}
+                                        <button onClick={this.submit_location.bind(this, 3)} 
+                                         disabled={loading} className="p-t-20 btn btn-success btn--radius btn--green" type="submit" id="#collapseTwo">
+                                        { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                       { loading && <span > loading</span>}
+                                           { !loading && <span > Next</span>}
+                                                </button>
+                                    </div>
+                                </div> */}
+                            </div>
+                          </div>
+            </div>
+            </div>
+                                
+                                <div className="divider-line" />
+                                <div className="row">
+                                    <div className="col-md-3">
+                                        <button onClick={this.Submit.bind(this, 1)}  className="p-t-20 btn btn-info btn--radius btn--green" type="submit" id="#collapseTwo">
+                                       
+                                          Back  </button>
+                                    </div>
+
+                                    <div className="col-md-6" />
+                                    <div className="col-md-3">
+                                        <button  onClick={this.Submit.bind(this, 4)} className="p-t-20 btn btn-success btn--radius btn--green" type="submit" id="#collapseTwo">
+                                          
+                                            Next
                                             </button>
                                     </div>
                                 </div>
@@ -441,15 +496,23 @@ class AddInformation extends Component {
 }
 const mapDistpatchToProps = (dispatch) => {
     return {
+
         change_step: (step) => {
             dispatch({ type: 'CHANGE_BOOKING_STEP', payload: step })
         },
-        ADD_INFORMATION: (data) => { dispatch({ type: 'ADD_INFORMATION', payload: data }) }
+        ADD_INFORMATION: (data) => { dispatch({ type: 'ADD_INFORMATION', payload: data })
+    
+    },
+    changeLocation:(data)=>{dispatch({type:'CHANGE_CUSTOMER_LOCATION',payload:data})}
+
+        
     }
+    
 }
 const mapStateToProps = (state) => {
     return {
         select_service_state: state.select_service_state
     }
 }
+
 export default connect(mapStateToProps, mapDistpatchToProps)(AddInformation);

@@ -139,7 +139,7 @@ class CustomerSignUp extends Component {
                             </form>
                             <div>
                                 <hr></hr>
-                                <p className="auth_divider_text">Already have an account ? <span> <a  onClick={()=>{this.props.CHANGE_AUTH_TYPE('login')}} style={{backgroundColor:'yellow'}}>Login</a></span></p>
+                                <p className="auth_divider_text">Already have an account ?   <span> <a style={{marginLeft: '.5rem'}} onClick={()=>{this.props.CHANGE_AUTH_TYPE('login')}} style={{color:'green'}}><strong>{'  '}Login</strong></a></span></p>
                               
                             </div>
                         </div>

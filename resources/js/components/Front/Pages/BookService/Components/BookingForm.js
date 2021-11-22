@@ -38,14 +38,14 @@ class BookingForm extends Component {
             Add Information
           </div>
         </div>
-        <div className="step-item">
+        {/* <div className="step-item">
           <button className="step-button text-center collapsed" type="button" data-toggle="collapse" data-target="#collapseThree"  aria-expanded={this.props.booking_step >= 3 ? "true" : "false"} aria-controls="collapseThree">
             <i className="fas fa-map-marked-alt" aria-hidden="true" />
           </button>
           <div className="step-title">
             Add Location
           </div>
-        </div>  
+        </div>   */}
         <div className="step-item">
           <button className="step-button text-center collapsed" type="button" data-toggle="collapse" data-target="#collapseFour"  aria-expanded={this.props.booking_step >= 4 ? "true" : "false"} aria-controls="collapseThree">
           <i className="fas fa-money-check-alt" aria-hidden="true"></i>

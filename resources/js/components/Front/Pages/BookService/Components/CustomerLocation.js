@@ -18,16 +18,10 @@ class CustomerLocation extends Component {
      
     
     submit_location(){
-        // this.setState({ loading : true});
         if(this.state.loc_address != ''){
             this.props.changeLocation(this.state);
-            // setTimeout(() => {
-            //     this.setState({ loading : false});
-            //   }, 2000);
-            this.props.change_step(4);
-            
+            this.props.change_step(4); 
             toast.success('Success');
-           
         }else{
             toast.error('Please Enter You Location');
         }

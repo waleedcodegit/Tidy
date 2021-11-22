@@ -62,7 +62,12 @@ class PendingBookings extends React.Component {
                                                            <td>{data.customer.email}</td>
                                                            <td>{data.customer.phone}</td>
                                                                <td>{data.booking_type == 1 ? "One Time" : "Recurring"}</td>
-                                                               <td>{data.information.resident_type}</td>
+                                                               <td>{
+                                                               data.information.resident_type != null ?
+                                                               data.information.resident_type
+                                                               : 'No Resident Type'
+
+                                                               }</td>
                                                                <td>{data.information.location_address}</td>
                                                                <td>{data.date}</td>
                                                                <td>{data.time}</td>

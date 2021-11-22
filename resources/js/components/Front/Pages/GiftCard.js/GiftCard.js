@@ -1,9 +1,10 @@
 import Axios from 'axios';
 import React, { Component } from 'react';
 import DatePicker from "react-datepicker";
-
+import Swal from 'sweetalert2';
 import "react-datepicker/dist/react-datepicker.css";
 import ThankYouGiftCard from './ThankYouGiftCard';
+import toast from 'react-hot-toast';
 
 class GiftCard extends Component {
     constructor(props) {
@@ -30,14 +31,18 @@ class GiftCard extends Component {
         };
     }
     amount(e){
-        // let amount = e.target.value;
-        // if ( amount > Number(500)) {
-        //     console.log(amount);
-            // amount=amount.replace(/[^0-9.]/,"");
-        // }
-        this.setState({
-            amount:e.target.value
-        })
+        let amount = {
+            amount: e.target.value
+        }
+        if(e.target.value>=501){
+           toast.error('Amount must be Between $10 and $500');
+
+        }else{
+            this.setState({
+                amount:e.target.value
+            })
+        }
+      
       
     }
     // amount = (e) => {

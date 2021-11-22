@@ -1023,12 +1023,12 @@ class FrontController extends Controller
         $today_time = strtotime($today);
         $expire_time = strtotime($request->date);
 
-        if($expire_time < $today_time){
-            return response()->json([
-                'status' => false,
-                'message' => 'Chosen date has already passed. ',
-            ]);
-        }
+        // if($expire_time < $today_time){
+        //     return response()->json([
+        //         'status' => false,
+        //         'message' => 'Chosen date has already passed. ',
+        //     ]);
+        // }
         
         return response()->json([
             'status' => true,

@@ -49,6 +49,7 @@ class SelectServices extends Component {
           recurring:this.props.select_service_state.recurring ? this.props.select_service_state.recurring : 1
         })
         Axios.post('/api/getallcategory').then(res => {
+          console.log(res);
             this.setState({
                 service_id:window.localStorage.getItem('service'),
                 sub_service_id:window.localStorage.getItem('sub_service'),
@@ -135,11 +136,8 @@ class SelectServices extends Component {
           if(res.data.status){
             this.props.select_service(this.state);
             this.props.change_step(2);
-          }else{
-            this.setState({
-              error_string:res.data.message
-            })
           }
+         
 
         })
         setTimeout(() => {
@@ -243,16 +241,15 @@ class SelectServices extends Component {
 
                       </div>
                       <span className="d-flex">
-                      <input onChange={this.date_flexible.bind(this)} type="checkbox" className="col-sm-1 "></input>Are you flexible with a date +/- 1 day
+                      <input onChange={this.date_flexible.bind(this)} type="checkbox" className="col-sm-1 "></input>I am flexible with the date +/- 1 day 
                       </span>
                     </div>
                     <div className="col-md-6">
                       <div className="inpust-group">
                         <div className="input--stydle-1">
                           <select  value={this.state.time || ""} onChange={this.time.bind(this)} name="gender"   className="col-md-12 input--style-1">
-                            <option disabled="disabled" selected="selected">Time to</option>
-                            <option>Select Time
-                            </option>
+                            {/* <option disabled="disabled" selected="selected">Time to</option> */}
+                            <option>Select Time</option>
                             <option>7:00am</option>
                             <option>8:00am</option>
                             <option>9:00am</option>
@@ -273,7 +270,7 @@ class SelectServices extends Component {
                         </div>
                       </div>
                       <span className="d-flex mt-4">
-                      <input  onChange={this.time_flexible.bind(this)}  type="checkbox" className="col-sm-1 "></input>Are you flexible with time +/- 2 hours 
+                      <input  onChange={this.time_flexible.bind(this)}  type="checkbox" className="col-sm-1 "></input>I am flexible with the time +/- 2 hours 
                       </span>
                     </div>
                     {/* <div className="col-md-3">
