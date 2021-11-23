@@ -18,6 +18,7 @@ class Index extends React.Component{
             serviceprice:'',
             work:'',
             dob:'',
+            phonenumber:'',
             // loading:true,
         }
     }
@@ -47,6 +48,11 @@ class Index extends React.Component{
     getPhone(event){
         this.setState({
             phone: event.target.value
+        })
+    }
+    phonenumber(event){
+        this.setState({
+            phonenumber: event.target.value
         })
     }
     getAddress(event){
@@ -132,6 +138,7 @@ class Index extends React.Component{
             policeidimg: this.state.policeidimg,
             work:this.state.work,
             dob:this.state.dob,
+            phonenumber:this.state.phonenumber,
         }
         let Configs = {
             headers: {
@@ -210,7 +217,17 @@ class Index extends React.Component{
                             <div classNameName="col-6">
                                 <div className="form-group">
                                     <label>Phone#</label>
+                                    <div className="row">
+                                    <div class="col-sm-2">
+                                <select  onChange={this.phonenumber.bind(this)} type="number"  className="form-control auth_input_box">
+                               <option>+61</option>
+                               <option>+61</option>
+                               </select>
+                               </div>
+                               <div class="col-sm-10">
                                     <input type="text" className="form-control" onChange={this.getPhone.bind(this)} />
+                                    </div>
+                                    </div>
                                 </div>
                             </div>
                             <div classNameName="col-6">

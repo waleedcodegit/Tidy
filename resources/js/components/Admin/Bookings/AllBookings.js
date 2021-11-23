@@ -7,7 +7,8 @@ class AllBookings extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            bookings: []
+            bookings: [],
+            loading:false,
         }
     }
 
@@ -41,6 +42,7 @@ class AllBookings extends React.Component {
 
 
     render() {
+        const {loading} = this.state;
         return (
             <div>
                 <div id="page-content">
@@ -79,7 +81,11 @@ class AllBookings extends React.Component {
                                                        
                                              <td>
                                                               <Link to ={`/admin/customer-bookings-details/${data.id}`}> 
-                                                            <button className="btn btn-success"> Details</button>
+                                                            <button className="btn btn-success" disabled={loading}> 
+                                                            { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                                            { loading && <span > Loading...</span>}
+                                                            { !loading && <span >Details</span>}
+                                                            </button>
                                                              </Link> 
                                                             </td>
                                                         {/* <td> */}

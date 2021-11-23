@@ -45,14 +45,7 @@ class GiftCard extends Component {
       
       
     }
-    // amount = (e) => {
-
-    //     let amount = e.target.value;
-    //     if ( amount > Number(500)) {
-    //         console.log(amount);
-    //         amount=amount.replace(/[^0-9.]/,"");
-    //     }
-// }
+ 
     name(event) {
         let data = {
             first_name: event.target.value
@@ -318,7 +311,7 @@ class GiftCard extends Component {
                                 <div className="col-md-12">
                                 <label className="lbl-style"> *Card Number</label>
                                 <div className="input-group">
-                                    <input onChange={this.credit_card_number.bind(this)} className="form-control auth_input_box" type="number" placeholder name="name" />
+                                    <input onChange={this.credit_card_number.bind(this)} className="form-control auth_input_box" type="number" placeholder name="Card Number" />
                                 </div>
                                 </div>
                                 <div className="col-md-12">

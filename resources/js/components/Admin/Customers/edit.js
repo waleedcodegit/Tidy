@@ -59,6 +59,11 @@ class EditCustomer extends Component{
             }
         })
     }
+    phonenumber(e){
+        this.setState({
+            phonenumber:e.target.value
+        })
+    }
 
     updateCustomer(e){
         e.preventDefault();
@@ -125,12 +130,11 @@ class EditCustomer extends Component{
                                         <input onChange={this.getAddress.bind(this)} type="text" className="form-control" id="Customer_Name" value={this.state.address}/>
                                     </div>
                                 </div>
-                                <div className = "row">
-                                        <div className="col-sm-12">
+                                {/* <div className = "row"> */}
+                                       
                                             <label htmlFor="price">Phone</label>
                                             <input onChange={this.getPhone.bind(this)} type="text" className="form-control" id="Customer_Name" value={this.state.phone}/>
-                                        </div>
-                                    </div>
+                                      ]
                                 <div className="row">
                                 <div className="col-sm-12">
                                     <div className="form-group">

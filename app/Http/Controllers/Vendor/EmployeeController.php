@@ -194,11 +194,12 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        
+        // return $request;
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'username' => 'required',
             'password' => 'required',
+            'phone' => 'required|min:09|max:09',
         ]);
         if($validator->fails()){
             $response = ['status' => 219 , 'msg' => $validator->errors()->first() , 
@@ -211,7 +212,7 @@ class EmployeeController extends Controller
             $emp->username = $request->username;
             $emp->password = Hash::make($request->password);
             $emp->email = $request->email;
-            $emp->phone = $request->phone;
+            $emp->phone = $request->phonenumber.''.$request->phone;
             $emp->address = $request->address;
             $emp->dob = $request->dob;
             $emp->service = $request->service;

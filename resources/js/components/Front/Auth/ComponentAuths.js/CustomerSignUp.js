@@ -124,7 +124,7 @@ class CustomerSignUp extends Component {
                             </div>
                             <div class="form-group input_div ">
                                 <label className="input_label">Phone Number</label>
-                                <input onChange={this.phone.bind(this)} type="email" class="form-control auth_input_box"   />
+                                <input onChange={this.phone.bind(this)} type="number" class="form-control auth_input_box"   />
                             </div>
                             <div>
                                 {

@@ -21,6 +21,7 @@ class CreateVendor extends Component {
             password: '',
             address: '',
             phone: '',
+            phonenumber:'',
             dob: '',
             australian_business_number: '',
             type_of_business: 'sole',
@@ -52,7 +53,8 @@ class CreateVendor extends Component {
             places:'',
             lat:0,
             long:0,
-            loc_address:''
+            loc_address:'',
+            loading:false,
 
 
 
@@ -84,6 +86,11 @@ class CreateVendor extends Component {
     phone(e) {
         this.setState({
             phone: e.target.value
+        })
+    }
+    phonenumber(e){
+        this.setState({
+            phonenumber:e.target.value
         })
     }
     address(e) {
@@ -249,16 +256,24 @@ class CreateVendor extends Component {
     }
 
     validate_addresses(){
+        this.setState({ loading : true});
         if(this.state.addresses.length > 0){
             this.setState({
                 step:4,
                 error_string:''
             })
+            setTimeout(() => {
+                this.setState({ loading : false});
+              }, 2000);
         }else{
             this.setState({
                 error_string:'Please enter atleast one address.'
             })
+            setTimeout(() => {
+                this.setState({ loading : false});
+              }, 2000);
         }
+      
     }
 
     removeAddress(index) {
@@ -540,6 +555,7 @@ class CreateVendor extends Component {
     }
 
     render() {
+        const {loading} = this.state;
         return (
             <div id="page-content">
             <div className="row">
@@ -587,8 +603,18 @@ class CreateVendor extends Component {
                                                                         <div className="col-md-6">
                                                                             <div className="form-group">
                                                                                 <label className="control-label">Phone</label>
+                                                                                <div className="row">
+                                                                                <div className="col-sm-2">
+                                            
+                                                                           <select  onChange={this.phonenumber.bind(this)} type="number"  className="form-control auth_input_box">
+                                                                         <option>+61</option>
+                                                                      <option>+61</option>
+                                                                            </select>
+                                                                                    </div>
+                                                                                    <div className="col-md-10">
                                                                                 <input value={this.state.phone || ""} onChange={this.phone.bind(this)} type="phone" name="phone" className="form-control" />
                                                                             </div>
+                                                                            </div> </div>
                                                                         </div>
                                                                         <div className="col-md-6">
                                                                             <div className="form-group">
@@ -803,16 +829,10 @@ class CreateVendor extends Component {
                                                                                     </button>
                                                                                 </div>
                                                                                 <div className="text-right ml-auto">
-                                                                                    <button onClick={this.validate_addresses.bind(this)} className="btn btn-success   " type="submit">
-                                                                                        {
-                                                                                            this.state.btn_loading ?
-                                                                                                <div id="displayspinner" style={{ display: 'block', }}>
-                                                                                                    <div className="spinner-border  ml-2 text-light spinner_format" role="status">
-                                                                                                        <span className="sr-only">Loading...</span>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                                : <>Next</>
-                                                                                        }
+                                                                                    <button onClick={this.validate_addresses.bind(this)} disabled={loading}  className="btn btn-success   " type="submit">
+                                                                                            { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                                                                           { loading && <span > loading</span>}
+                                                                                          { !loading && <span > Next</span>}
                                                                                     </button>
                                                                                 </div>
 

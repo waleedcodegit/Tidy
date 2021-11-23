@@ -3,6 +3,7 @@ import Axios from 'axios';
 import {Link} from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { data } from 'jquery';
+import toast from 'react-hot-toast';
 
 class AssignVendorBooking extends React.Component {
     constructor(props) {
@@ -13,6 +14,7 @@ class AssignVendorBooking extends React.Component {
             data:[],
             vendor_id:'',
             first_name:'',
+            loading:false,
             booking_id:this.props.match.params.id,
         }
     }
@@ -29,11 +31,13 @@ class AssignVendorBooking extends React.Component {
         });
     }
     AsignVendor(id) {
+        // this.setState({ loading : true});
         let data = {
             id: this.props.match.params.id,
             vendor_id: id
         }
         Axios.post('/api/asign-vender-tocustomer',data).then(res=>{
+            // toast.success('Successfully Vendor Assign');
             Swal.fire({
                 icon: 'success',
                 title: 'Successfully Vendor Assign',
@@ -42,6 +46,7 @@ class AssignVendorBooking extends React.Component {
             })
             this.componentDidMount();
         })
+        
     }
     name(event) {
         let data = {
@@ -57,6 +62,7 @@ class AssignVendorBooking extends React.Component {
     
 
     render() {
+        const {loading} = this.state;
         return (
             <div>
                 <div id="page-content">

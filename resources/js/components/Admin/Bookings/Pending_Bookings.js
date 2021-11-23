@@ -89,7 +89,7 @@ class PendingBookings extends React.Component {
                                         }
                                         {
                                             this.state.bookings.length == 0 ? 
-                                            <tr><td colSpan="7">No records founded</td></tr>:null
+                                            <tr><td colSpan="12">No records founded</td></tr>:null
                                         }
                                     </tbody>
                                 </table>

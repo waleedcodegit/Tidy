@@ -15,7 +15,8 @@ class CustomerSignUp extends Component {
             password:'',
             address:'',
             phone:'',
-            form_error:false,
+            phonenumber:'',          
+           form_error:false,
             error_string:''
         };
     }
@@ -27,6 +28,11 @@ class CustomerSignUp extends Component {
     phone(e){
         this.setState({
             phone:e.target.value
+        })
+    }
+    phonenumber(e){
+        this.setState({
+            phonenumber:e.target.value
         })
     }
     first_name(e){
@@ -117,7 +123,17 @@ class CustomerSignUp extends Component {
                             </div>
                             <div class="form-group input_div ">
                                 <label className="input_label">Phone Number</label>
-                                <input onChange={this.phone.bind(this)} type="email" class="form-control auth_input_box"   />
+                                <div class="row">
+                                <div class="col-md-3">
+                                <select  onChange={this.phonenumber.bind(this)} type="number"  className="form-control auth_input_box">
+                               <option>+61</option>
+                               <option>+61</option>
+                               </select>
+                               </div>
+                               <div class="col-md-9">
+                                <input onChange={this.phone.bind(this)} type="number" class="form-control auth_input_box"/>
+                                </div>
+                                </div>
                             </div>
                             <div>
                                 {

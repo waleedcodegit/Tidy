@@ -31,14 +31,17 @@ class AuthController extends Controller
     }
    
     public function create_customer(Request $request)
+   
     {
+        // return $request;
         $validator = Validator::make($request->all(), [
             'first_name' => 'required|min:3',
             'last_name' => 'required|min:3',
             'password' => 'required|min:6',
             'address' => 'required|min:3',
             'email' => 'required|email|unique:customers,email|max:255',
-            'phone' => 'required|min:11',
+            'phone' => 'required|min:09|max:09',
+            'phonenumber' => 'required',
         ]);
         if($validator->fails()){
             $response = ['status' => false , 'msg' => $validator->errors()->first() , 
@@ -51,7 +54,7 @@ class AuthController extends Controller
             $new_customer->email = $request->email;
             $new_customer->password = Hash::make($request->password);
             $new_customer->address = $request->address;
-            $new_customer->phone = $request->phone;
+            $new_customer->phone = $request->phonenumber.''.$request->phone;
             $new_customer->status = 1;
             $new_customer->save();
 

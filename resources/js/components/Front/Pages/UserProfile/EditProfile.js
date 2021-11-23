@@ -12,6 +12,7 @@ class EditProfile extends Component {
             email:'',
             address:'',
             phone:'',
+            phonenumber:'',
             loading:false,
             id:this.props.user.data.id,
             profile_image:''
@@ -40,8 +41,13 @@ class EditProfile extends Component {
       };
     handleStateChange(e){
         let state = {};
-        this.defineProp( state , e.target.name , e.target.value );
+        this.defineProp( state , e.target.name , e.target.value , e.target.phonenumber);
         this.setState(state);
+    }
+    phonenumber(e){
+        this.setState({
+            phonenumber:e.target.value
+        })
     }
     Update_Profile(e){
         e.preventDefault();
@@ -131,8 +137,19 @@ class EditProfile extends Component {
                                                 <input value={this.state.email} onChange={this.handleStateChange.bind(this)} name="email" type="email" className="form-control auth_input_box" /></div>
                                             <div className="form-group input_div "><label className="input_label">Address</label>
                                                 <input value={this.state.address} onChange={this.handleStateChange.bind(this)} name="address" type="email" className="form-control auth_input_box" /></div>
-                                            <div className="form-group input_div "><label className="input_label">Phone Number</label>
-                                                <input value={this.state.phone} onChange={this.handleStateChange.bind(this)} name="phone" type="email" className="form-control auth_input_box" /></div>
+                                            <div className="form-group input_div "><label className="input_label">Phone Number</label> <div/>
+                                            {/* <div class="row"> */}
+                                               {/* <div class="col-md-3">
+                                                     <select  onChange={this.phonenumber.bind(this)} type="number"  className="form-control auth_input_box">
+                                                     <option>+61</option>
+                                                   <option>+61</option>
+                                               </select> */}
+                                                     {/* </div> */}
+                                                     {/* <div class="col-md-9"> */}
+                                                <input value={this.state.phone} onChange={this.handleStateChange.bind(this)} name="phone" type="email" className="form-control auth_input_box" />
+                                                {/* </div> */}
+                                                {/* </div> */}
+                                                </div>
                                             <div />
                                             <div className="form-group input_div "><label className="input_label">Upload Profile Image</label>
                                                 <input onChange={this.upload_Profile_img.bind(this)} type="file" className="form-control auth_input_box" /></div>

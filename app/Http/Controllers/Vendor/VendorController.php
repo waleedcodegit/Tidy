@@ -376,7 +376,7 @@ class VendorController extends Controller
             // 'password' => 'required',
             'address' => 'required',
             'email' => 'required|email|unique:vendors,email|max:255',
-            'phone' => 'required',
+            'phone' => 'required|min:09|max:09',
             'dob' => 'required',
             'australian_business_number' => 'required|min:11|max:11',
             'type_of_business' => 'required',
@@ -404,7 +404,7 @@ class VendorController extends Controller
         $new_vendor->email = $request->email;
         // $new_vendor->password = Hash::make('tidyhome123');
         $new_vendor->address = $request->address;
-        $new_vendor->phone = $request->phone;
+        $new_vendor->phone = $request->phonenumber.''.$request->phone;
         $new_vendor->dob = $request->dob;
         $new_vendor->australian_business_number = $request->australian_business_number;
         $new_vendor->type_of_business = $request->type_of_business;
