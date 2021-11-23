@@ -851,8 +851,7 @@ class SignUp extends Component {
                                                               { loading && <i className= 'fa fa-refresh fa-spain'></i>}
                                                             { loading && <span > loading</span>}
                                                            { !loading && <span > Next</span>}
-
-                                      </button>
+                                                        </button>
                                                             {/* <button onClick={this.validate_vendor.bind(this)} className="btn btn-success   " type="submit">
                                                                 {
                                                                     this.state.btn_loading ?

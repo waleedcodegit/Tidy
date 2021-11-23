@@ -480,10 +480,11 @@ class AddInformation extends Component {
 
                                     <div className="col-md-6" />
                                     <div className="col-md-3">
-                                        <button  onClick={this.Submit.bind(this, 4)} className="p-t-20 btn btn-success btn--radius btn--green" type="submit" id="#collapseTwo">
-                                          
-                                            Next
-                                            </button>
+                                        <button 
+                                         onClick={this.Submit.bind(this, 4)} 
+                                         className="p-t-20 btn btn-success btn--radius btn--green" type="submit" id="#collapseTwo">
+                                        Next
+                                        </button>
                                     </div>
                                 </div>
                             </div>

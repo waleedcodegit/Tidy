@@ -18,7 +18,7 @@ class GetPrice extends Component {
           type: 'home'
         }
       },
-      loading: true
+      loading: false,
     };
     console.log(this.props)
   }
@@ -54,6 +54,7 @@ class GetPrice extends Component {
     })
   }
   make_booking(){
+    this.setState({ loading : true});
     let payload = {
       select_service_state: this.props.select_service_state,
       screen2: this.props.add_information,
@@ -62,15 +63,22 @@ class GetPrice extends Component {
       customer:this.props.user
     }
     Axios.post('/api/make_booking',payload).then(res=>{
+      
       if(res.data.status == 200){
+        
         toast.success('Booking Created Successfully');
         this.props.history.push('/profile');
       }
     }).catch((e)=>{
       toast.error('Error - unable to create booking. please try again' + e);
+
     })
+    setTimeout(() => {
+      this.setState({ loading : false});
+    }, 4000);
   }
   render() {
+    const {loading}=this.state;
     return (
       <div className>
         <div id="headingFour">
@@ -266,7 +274,11 @@ class GetPrice extends Component {
                                         <hr></hr>
                                         
                                 
-                                <button onClick={this.make_booking.bind(this)} className="btn btn-info btn_full">Get Quotes</button>
+                                <button onClick={this.make_booking.bind(this)} disabled={loading} className="btn btn-info btn_full">
+                                { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                { loading && <span > loading</span>}
+                                { !loading && <span > Get Quotes</span>}
+                                </button>
                               
                             </div>
                           </div>

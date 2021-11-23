@@ -137,8 +137,6 @@ class SelectServices extends Component {
             this.props.select_service(this.state);
             this.props.change_step(2);
           }
-         
-
         })
         setTimeout(() => {
           this.setState({ loading : false});

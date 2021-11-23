@@ -106,6 +106,7 @@ class CustomerServiceDetails extends Component {
                     showConfirmButton: false,
                     timer: 1500
                 })
+                window.location.reload();
                 }else{
                     this.setState({
                         error_string:res.data.msg
@@ -343,12 +344,7 @@ class CustomerServiceDetails extends Component {
                                                                             })
                                                                         }
                                                                     </div>
-                                                                :
-                                                                    <div className="detl-section">
-                                                                        <div className="text-center">
-                                                                            <p style={{color:'#000000a3' , fontSize:'20px'}}>No Previous Complain For this Service</p>
-                                                                        </div>
-                                                                    </div>
+                                                                :null
 
                                                             }
                                                             {
