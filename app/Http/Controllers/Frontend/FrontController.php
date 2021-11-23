@@ -447,7 +447,8 @@ class FrontController extends Controller
         $extras = [];
         if(sizeof($request->screen2['extras'] ) > 0){
             foreach($request->screen2['extras'] as $se){
-                if($se->quantity > 0){
+                // return $se;
+                if($se['quantity'] > 0){
                     array_push($extras,$se);
                 }
             }
@@ -480,6 +481,7 @@ class FrontController extends Controller
         // $b_information->extras
         $b_information->save();
 
+        $this->send_vendor_booking_requests($b_information->lat,$b_information->lng,$booking->id);
         $service = Category::where('id',$request->select_service_state['service_id'])->first();
 
         if($service->residential_type == 1){
@@ -1128,7 +1130,7 @@ class FrontController extends Controller
     }
 
     public function update_checklist(Request $request){
-        $checklist = ServiceRound::where('service_id',$request->id)->first();
+        $checklist = ServiceRound::where('id',$request->round_id)->first();
         $checklist->check_list = json_encode($request->updatedChecklist);
         $checklist->save();
     }

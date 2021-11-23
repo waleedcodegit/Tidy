@@ -16,7 +16,7 @@ class AcceptedBookings extends Component{
     componentDidMount(){
         Axios.post('/api/accepted-bookings',{vendor_id:this.props.vendor.data.vendor_id}).then(res=>
             {
-                console.log(res.data.AcceptedBookings);
+                console.log(res);
             // if(res.data.status == true){
                 this.setState({
                     AcceptedBookings: res.data.AcceptedBookings,
@@ -50,7 +50,7 @@ class AcceptedBookings extends Component{
                                     <div>
                                         <div className="card-content col-sm-12">
                                         <h3>{data.service.name}</h3>
-                                        <h4><button onClick={()=>{window.open('/vendor/vendor-booking-details/'+data.service_id,'_blank')}} 
+                                        <h4><button onClick={()=>{window.open('/vendor/vendor-booking-details/'+data.information.booking_id,'_blank')}} 
                                                     key={index} style={{cursor:'pointer'}} 
                                                     className="btn btn-outline-success ml-auto">Manage Booking</button></h4>
                                         <div className="divid-line"/>
@@ -62,9 +62,6 @@ class AcceptedBookings extends Component{
                                                                <li>Booking Type: </li>
                                                                <li>Residential Type:</li>
                                                                <li>Address:</li>
-                                                               <li>Date:</li>
-                                                               <li>Time:</li>
-                                                               <li>Service Name:</li>
                                                                <li>Price: </li>
                                                 </ul>
                                             </div>
@@ -76,10 +73,6 @@ class AcceptedBookings extends Component{
                                                                <li>{data.booking_type == 1 ? "One Time" : "Recurring"}</li>
                                                                <li>{data.information.resident_type}</li>
                                                                <li>{data.information.location_address}</li>
-                                                               <li>{data.date}</li>
-                                                               <li>{data.time}</li>
-                                                               {/* <li>${data.booking.time}</li> */}
-                                                               <li>{data.service.name}</li>
                                                                <li>${data.booking_totals}</li>
                                                 </ul>
                                             </div>

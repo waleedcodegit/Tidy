@@ -49,7 +49,7 @@ class Empbookings extends Component{
                                     <div>
                                         <div className="card-content col-sm-12">
                                         <h3>{data.service.name}</h3>
-                                        <h4><button onClick={()=>{window.open('/vendor-employee/booking-details/'+data.service.id,'_blank')}} 
+                                        <h4><button onClick={()=>{window.open('/vendor-employee/booking-details/'+data.booking_id,'_blank')}} 
                                                     key={index} style={{cursor:'pointer'}} 
                                                     className="btn btn-outline-success ml-auto">Manage Booking</button></h4>
                                         <div className="divid-line"/>

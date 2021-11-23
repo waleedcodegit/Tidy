@@ -81,7 +81,6 @@ class CustomerServiceDetails extends Component {
                     showConfirmButton: false,
                     timer: 1500
                 })
-                console.log(window.location);
                 window.location.reload();
                 }else{
                     this.setState({
@@ -190,7 +189,7 @@ class CustomerServiceDetails extends Component {
                                                                                     <div className="booking-content before-image">
                                                                                         <ul>
                                                                                             {
-                                                                                                data.beforeImages ? JSON.parse(data.beforeImages).map((data, index) => {
+                                                                                                data.before_images ? JSON.parse(data.before_images).map((data, index) => {
                                                                                                     return (
                                                                                                         <li key={index}><img src={img_baseurl + data} className="img-up-thumb" /></li>
 
@@ -214,7 +213,7 @@ class CustomerServiceDetails extends Component {
                                                                                     <div className="booking-content before-image">
                                                                                         <ul>
                                                                                             {
-                                                                                                data.after_images ? JSON.parse(data.afterImages).map((data, index) => {
+                                                                                                data.after_images ? JSON.parse(data.after_images).map((data, index) => {
                                                                                                     return (
                                                                                                         <li key={index}><img src={img_baseurl + data} className="img-up-thumb" /></li>
                                                                                                     )

@@ -19,7 +19,7 @@ class VendorServiceDetails extends Component {
             vendor:'',
             error_string: '',
         };
-        console.log(props);
+        console.log(this.state.serviceRounds);
     }
 
     componentDidMount() {
@@ -43,13 +43,13 @@ class VendorServiceDetails extends Component {
     startService(id) {
         Axios.post('/api/start_service', { id: id }).then(res => {
             if (res.data.status == 200) {
-                this.props.history.push('/vendor-employee/booking-details/{id}');
                 Swal.fire({
                     icon: 'success',
                     title: 'Service Started Successfully',
                     showConfirmButton: false,
                     timer: 1500
                 })
+                window.location.reload();
             } else {
                 this.setState({
                     error_string: res.data.msg
@@ -67,6 +67,7 @@ class VendorServiceDetails extends Component {
                     showConfirmButton: false,
                     timer: 1500
                 })
+                window.location.reload();
             } else {
                 this.setState({
                     error_string: res.data.msg
@@ -75,28 +76,38 @@ class VendorServiceDetails extends Component {
         })
     }
 
-    onchange_check(index){
-        let temp = this.state.checklists;
+    onchange_check(SRindex,index,SRid)
+    {
+        let temp = JSON.parse(this.state.serviceRounds[SRindex].check_list);
+        console.log(temp);
+
         temp[index].check_ = !temp[index].check_;
+        let service_rounds = this.state.serviceRounds;
+        service_rounds[SRindex].check_list = JSON.stringify(temp);
+
         this.setState({
-            checklists:temp
+            serviceRounds:service_rounds
         })
+        
+      
 
         let data = {
             id : this.props.match.params.id,
-            updatedChecklist: this.state.checklists
+            updatedChecklist: temp,
+            round_id:SRid
         }
 
         Axios.post('/api/update_checklist', data).then(res=>{
             console.log(res);
         })
     }
-    getImage(type, event) {
+    getImage(type,service_id,round, event) {
 
         const formData = new FormData();
         formData.append('file', event.target.files[0]);
         formData.append('token', window.localStorage.getItem('al'));
-        formData.append('service_id', this.state.serviceRounds.service_id);
+        formData.append('service_id', service_id);
+        formData.append('round', round);
         formData.append('type', type);
 
         let Configs = {
@@ -111,18 +122,16 @@ class VendorServiceDetails extends Component {
                 })
             }
         }
-        this.setState({
-            loading: true,
-        })
-
+      
         Axios.post('/api/upload_service_images', formData, Configs).then(res => {
 
             if (res.data.status == 200) {
                 toast.success('Image Uploaded');
-                this.setState({
-                    beforeImages: res.data.serviceRounds.before_images ? JSON.parse(res.data.serviceRounds.before_images) : [],
-                    afterImages: res.data.serviceRounds.after_images ? JSON.parse(res.data.serviceRounds.after_images) : [],
-                    loading: false
+                Axios.post('/api/service_details', { id: this.props.match.params.id }).then(res => {
+                    console.log(res);
+                    this.setState({
+                        serviceRounds: res.data.serviceRounds,
+                    })
                 })
             } else {
                 toast.error(res.data.msg);
@@ -160,11 +169,11 @@ class VendorServiceDetails extends Component {
                                                         <h3>Service Details</h3>
                                                         <h6> ${this.state.booking.total_price} </h6>
                                                         {
-                                                                this.state.serviceRounds ? this.state.serviceRounds.map((data, index) => {
+                                                                this.state.serviceRounds ? this.state.serviceRounds.map((Sdata, SRindex) => {
                                                                     return (
                                                                         <div className="dt-table">
                                                                             <div className="divid-line" />
-                                                                            <h3>(Round - {data.round})</h3>
+                                                                            <h3>(Round - {Sdata.round})</h3>
                                                                             <div className="row">
                                                                                 <div className="col-md-3">
                                                                                     <div className="booking-content">
@@ -183,14 +192,14 @@ class VendorServiceDetails extends Component {
                                                                                 <div className="col-md-3">
                                                                                     <div className="booking-content">
                                                                                         <ul>
-                                                                                            <li>Start Time<br /><span> {data.start_time} </span></li>
+                                                                                            <li>Start Time<br /><span> {Sdata.start_time} </span></li>
                                                                                         </ul>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div className="col-md-3">
                                                                                     <div className="booking-content">
                                                                                         <ul>
-                                                                                            <li>End Time<br /><span> {data.end_time} </span></li>
+                                                                                            <li>End Time<br /><span> {Sdata.end_time} </span></li>
                                                                                         </ul>
                                                                                     </div>
                                                                                 </div>
@@ -202,7 +211,7 @@ class VendorServiceDetails extends Component {
                                                                                             <li>Before Images</li>
                                                                                             <input type="file" style={{cursor:'pointer' ,width:'210px'}} 
                                                                                             className="btn btn-outline-primary ml-auto" 
-                                                                                            onChange={this.getImage.bind(this,'b')}>
+                                                                                            onChange={this.getImage.bind(this,'b',Sdata.service_id,Sdata.round)}>
                                                                                             </input>
                                                                                         </ul>
                                                                                     </div>
@@ -211,7 +220,7 @@ class VendorServiceDetails extends Component {
                                                                                     <div className="booking-content before-image">
                                                                                         <ul>
                                                                                             {
-                                                                                                data.beforeImages ? JSON.parse(data.beforeImages).map((data, index) => {
+                                                                                                Sdata.before_images ? JSON.parse(Sdata.before_images).map((data, index) => {
                                                                                                     return (
                                                                                                         <li key={index}><img src={img_baseurl + data} className="img-up-thumb" /></li>
 
@@ -230,7 +239,7 @@ class VendorServiceDetails extends Component {
                                                                                             <li>After Images</li>
                                                                                             <input type="file" style={{cursor:'pointer' ,width:'210px'}} 
                                                                                             className="btn btn-outline-primary ml-auto" 
-                                                                                            onChange={this.getImage.bind(this,'a')}>
+                                                                                            onChange={this.getImage.bind(this,'a',Sdata.service_id,Sdata.round)}>
                                                                                             </input>
                                                                                         </ul>
                                                                                     </div>
@@ -239,7 +248,7 @@ class VendorServiceDetails extends Component {
                                                                                     <div className="booking-content before-image">
                                                                                         <ul>
                                                                                             {
-                                                                                                data.after_images ? JSON.parse(data.afterImages).map((data, index) => {
+                                                                                                Sdata.after_images ? JSON.parse(Sdata.after_images).map((data, index) => {
                                                                                                     return (
                                                                                                         <li key={index}><img src={img_baseurl + data} className="img-up-thumb" /></li>
                                                                                                     )
@@ -259,12 +268,18 @@ class VendorServiceDetails extends Component {
                                                                                             <h3>All areas of the house</h3>
                                                                                             <div className="divid-line" />
                                                                                             {
-                                                                                                data.check_list ? JSON.parse(data.check_list).map((data, index) => {
+                                                                                                Sdata.check_list ? JSON.parse(Sdata.check_list).map((data, index) => {
                                                                                                     return (
                                                                                                         <>
                                                                                                             {
                                                                                                                 data.type == 1 ?
-                                                                                                                <li style={{listStyleType:'none'}}><input type="checkbox" onChange={this.onchange_check.bind(this,index)} checked={data.check_} className="col-sm-1"  /> {data.item} </li>
+                                                                                                                <li style={{listStyleType:'none'}}>
+                                                                                                                    <input 
+                                                                                                                    type="checkbox" 
+                                                                                                                    onChange={this.onchange_check.bind(this,SRindex,index,Sdata.id)} 
+                                                                                                                    checked={data.check_} 
+                                                                                                                    className="col-sm-1"  /> 
+                                                                                                                    {data.item} </li>
                                                                                                                     :
                                                                                                                     null
                                                                                                             }
@@ -276,12 +291,18 @@ class VendorServiceDetails extends Component {
                                                                                             <h3>Bathrooms</h3>
                                                                                             <div className="divid-line" />
                                                                                             {
-                                                                                                data.check_list ? JSON.parse(data.check_list).map((data, index) => {
+                                                                                                Sdata.check_list ? JSON.parse(Sdata.check_list).map((data, index) => {
                                                                                                     return (
                                                                                                         <>
                                                                                                             {
                                                                                                                 data.type == 2 ?
-                                                                                                                <li style={{listStyleType:'none'}}><input type="checkbox" onChange={this.onchange_check.bind(this,index)} checked={data.check_} className="col-sm-1" /> {data.item} </li>
+                                                                                                                <li style={{listStyleType:'none'}}>
+                                                                                                                    <input 
+                                                                                                                    type="checkbox" 
+                                                                                                                    onChange={this.onchange_check.bind(this,SRindex,index,Sdata.id)} 
+                                                                                                                    checked={data.check_} 
+                                                                                                                    className="col-sm-1" /> 
+                                                                                                                    {data.item} </li>
                                                                                                                     :
                                                                                                                     null
                                                                                                             }
@@ -293,12 +314,18 @@ class VendorServiceDetails extends Component {
                                                                                             <h3>Kitchens</h3>
                                                                                             <div className="divid-line" />
                                                                                             {
-                                                                                                data.check_list ? JSON.parse(data.check_list).map((data, index) => {
+                                                                                                Sdata.check_list ? JSON.parse(Sdata.check_list).map((data, index) => {
                                                                                                     return (
                                                                                                         <>
                                                                                                             {
                                                                                                                 data.type == 3 ?
-                                                                                                                <li style={{listStyleType:'none'}}><input type="checkbox" onChange={this.onchange_check.bind(this,index)} checked={data.check_} className="col-sm-1" /> {data.item} </li>
+                                                                                                                <li style={{listStyleType:'none'}}>
+                                                                                                                    <input 
+                                                                                                                    type="checkbox" 
+                                                                                                                    onChange={this.onchange_check.bind(this,SRindex,index,Sdata.id)} 
+                                                                                                                    checked={data.check_} 
+                                                                                                                    className="col-sm-1" /> 
+                                                                                                                    {data.item} </li>
                                                                                                                     :
                                                                                                                     null
                                                                                                             }
@@ -310,12 +337,17 @@ class VendorServiceDetails extends Component {
                                                                                             <h3>Bedrooms</h3>
                                                                                             <div className="divid-line" />
                                                                                             {
-                                                                                                data.check_list ? JSON.parse(data.check_list).map((data, index) => {
+                                                                                                Sdata.check_list ? JSON.parse(Sdata.check_list).map((data, index) => {
                                                                                                     return (
                                                                                                         <>
                                                                                                             {
                                                                                                                 data.type == 4 ?
-                                                                                                                <li style={{listStyleType:'none'}}><input type="checkbox" onChange={this.onchange_check.bind(this,index)} checked={data.check_} className="col-sm-1" /> {data.item} </li>
+                                                                                                                <li style={{listStyleType:'none'}}>
+                                                                                                                    <input type="checkbox" 
+                                                                                                                    onChange={this.onchange_check.bind(this,SRindex,index,Sdata.id)} 
+                                                                                                                    checked={data.check_} 
+                                                                                                                    className="col-sm-1" /> 
+                                                                                                                    {data.item} </li>
                                                                                                                     :
                                                                                                                     null
                                                                                                             }
@@ -327,12 +359,18 @@ class VendorServiceDetails extends Component {
                                                                                             <h3>Others</h3>
                                                                                             <div className="divid-line" />
                                                                                             {
-                                                                                                data.check_list ? JSON.parse(data.check_list).map((data, index) => {
+                                                                                                Sdata.check_list ? JSON.parse(Sdata.check_list).map((data, index) => {
                                                                                                     return (
                                                                                                         <>
                                                                                                             {
                                                                                                                 data.type == 5 ?
-                                                                                                                <li style={{listStyleType:'none'}}><input type="checkbox" onChange={this.onchange_check.bind(this,index)} checked={data.check_} className="col-sm-1" /> {data.item} </li>
+                                                                                                                <li style={{listStyleType:'none'}}>
+                                                                                                                    <input 
+                                                                                                                    type="checkbox" 
+                                                                                                                    onChange={this.onchange_check.bind(this,SRindex,index,Sdata.id)} 
+                                                                                                                    checked={data.check_} 
+                                                                                                                    className="col-sm-1" /> 
+                                                                                                                    {data.item} </li>
                                                                                                                     :
                                                                                                                     null
                                                                                                             }
@@ -364,26 +402,21 @@ class VendorServiceDetails extends Component {
                                                                                                 })
                                                                                             }
                                                                                         </div>
-                                                                                    :
-                                                                                        <div className="detl-section">
-                                                                                            <div className="text-center">
-                                                                                                <p style={{color:'#000000a3' , fontSize:'20px'}}>No Previous Complain For this Service</p>
-                                                                                            </div>
-                                                                                        </div>
+                                                                                    :null
 
                                                                                 }
                                                                             <div className="divid-line" />
                                                                             <div className="row">
                                                                                 <div className="col-md-12">
                                                                                     {
-                                                                                        data.start_time == '-:-:-' ?
-                                                                                            <h4><button onClick={this.startService.bind(this , data.id)} style={{ cursor: 'pointer' }} className="btn btn-outline-success">Start Service</button></h4>
+                                                                                        Sdata.start_time == '-:-:-' ?
+                                                                                            <h4><button onClick={this.startService.bind(this , Sdata.id)} style={{ cursor: 'pointer' }} className="btn btn-outline-success">Start Service</button></h4>
                                                                                             :
                                                                                             <>
                                                                                                 {
-                                                                                                    data.end_time == '-:-:-' 
+                                                                                                    Sdata.end_time == '-:-:-' 
                                                                                                     ?
-                                                                                                        <h4><button onClick={this.endService.bind(this , data.id)} style={{ cursor: 'pointer' }} className="btn btn-outline-success">End Service</button></h4>
+                                                                                                        <h4><button onClick={this.endService.bind(this , Sdata.id)} style={{ cursor: 'pointer' }} className="btn btn-outline-success">End Service</button></h4>
                                                                                                     :
                                                                                                         null
                                                                                                 }
@@ -414,7 +447,7 @@ class VendorServiceDetails extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        employee: state.employee
+        vendor: state.vendor
     }
 }
 export default connect(mapStateToProps)(VendorServiceDetails);

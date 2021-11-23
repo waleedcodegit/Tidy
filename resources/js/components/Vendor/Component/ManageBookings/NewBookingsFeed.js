@@ -157,13 +157,10 @@ class BookingsFeed extends Component {
                                                        <div className="card-detail-right">
                                                            <ul>
                                                             <li>{data.customer.customer.first_name+ ' '+data.customer.customer.last_name}</li>
-                                                            <li>{data.customer.customer.email}</li>
                                                             <li>{data.customer.customer.phone}</li>
                                                                <li>{data.booking_type == 1 ? "One Time" : "Recurring"}</li>
                                                                <li>{data.booking_information.location_address}</li>
                                                                <li>{data.booking.date}</li>
-                                                               <li>{data.booking.time}</li>
-                                                               <li>{data.service.name}</li>
                                                                <li>${data.booking.booking_totals}</li>
                                                            </ul>
                                                        </div>
@@ -212,9 +209,7 @@ class BookingsFeed extends Component {
                                                                <li>{data.booking_type == 1 ? "One Time" : "Recurring"}</li>
                                                                <li>{data.booking_information.location_address}</li>
                                                                <li>{data.booking.date}</li>
-                                                               <li>{data.booking.time}</li>
-                                                               <li>{data.service.name}</li>
-                                                           <li>${data.booking.booking_totals}</li>
+                                                                <li>${data.booking.booking_totals}</li>
                                                        </ul>
                                                    </div>
                                                     </> 
