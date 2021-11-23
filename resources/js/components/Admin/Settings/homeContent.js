@@ -12,7 +12,8 @@ class HomeContent extends Component {
             services : '',
             get_leads : '',
             how_cleaning_works : '',
-            footer_content : ''
+            footer_content : '',
+            loading:false,
         }
     }
 
@@ -69,6 +70,7 @@ class HomeContent extends Component {
     }
 
     save(e){
+        this.setState({ loading : true});
         e.preventDefault();
         let dataBaseContents = {
             reviews : this.state.reviews,
@@ -96,11 +98,15 @@ class HomeContent extends Component {
                     timer: 1500
                     })
                 }
-            }
-        )}
+            })
+            setTimeout(() => {
+                this.setState({ loading : false});
+              }, 2000);
+    }
         
     
     render() { 
+        const {loading} = this.state;
         return (
             <div id="page-content">
                 <div className="row">
@@ -161,7 +167,11 @@ class HomeContent extends Component {
                                     ></textarea>
                             </div>
                             <div className="panel-footer text-right">
-                                <button onClick={this.save.bind(this)} type="submit" className="btn btn-primary">submit</button>
+                                <button onClick={this.save.bind(this)} type="submit" disabled={loading} className="btn btn-primary">
+                                { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                    { loading && <span > Loading...</span>}
+                                     { !loading && <span >Submit</span>}
+                                     </button>
                             </div>
                         </div>
                     </div>

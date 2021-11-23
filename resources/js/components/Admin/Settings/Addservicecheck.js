@@ -9,6 +9,7 @@ class Addservicecheck extends Component {
         this.state = { 
             type : "",
             item : "",
+            loading:false,
          }
     }
 
@@ -32,6 +33,7 @@ class Addservicecheck extends Component {
     // }
 
     save(e){
+        this.setState({ loading : true});
         e.preventDefault();
         Axios.post('/api/create_service_check',this.state).then(res=>{
             if(res.data.status == 200){
@@ -48,9 +50,13 @@ class Addservicecheck extends Component {
                 })
             }
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
     
     render() { 
+        const {loading} = this.state;
         return ( 
             <div id="page-content">
                 <div className="panel">
@@ -97,7 +103,11 @@ class Addservicecheck extends Component {
                             </div>
                         </div> */}
                         <div className="panel-footer text-right col-sm-12">
-                        <button onClick={this.save.bind(this)} type="submit" className="btn btn-primary">Save</button>
+                        <button onClick={this.save.bind(this)} type="submit" disabled={loading} className="btn btn-primary">
+                        { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                    { loading && <span > Loading...</span>}
+                                     { !loading && <span >Save</span>}
+                                     </button>
                         </div>
                     </div>
                 </div>

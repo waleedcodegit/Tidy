@@ -11,7 +11,8 @@ class Edit extends Component {
         super(props);
         this.state = {
             sms_title:'',
-            sms_content: ''
+            sms_content: '',
+            loading:false,
             
         };
         this.handleChange = this.handleChange.bind(this)
@@ -44,7 +45,7 @@ class Edit extends Component {
     }
 
     updateSms(event) {
-        
+        this.setState({ loading : true});
         event.preventDefault();
         let senderData = {
             sms_title: this.state.sms_title,
@@ -80,9 +81,13 @@ class Edit extends Component {
                 })
             }
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
 
     render() { 
+        const {loading} = this.state;
         return ( 
             <div id="page-content">
                     <div className="row">
@@ -110,7 +115,11 @@ class Edit extends Component {
                            
 
                                 <div className="panel-footer text-right">
-                                    <button onClick={this.updateSms.bind(this)} type="submit" className="btn btn-primary">Submit</button>
+                                    <button onClick={this.updateSms.bind(this)} type="submit" disabled={loading} className="btn btn-primary">
+                                    { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                    { loading && <span > Loading...</span>}
+                                     { !loading && <span >Update</span>}
+                                            </button>
                                 </div>
                                 
                             </div>

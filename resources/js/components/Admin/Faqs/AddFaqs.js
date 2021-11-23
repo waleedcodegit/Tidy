@@ -8,7 +8,8 @@ class AddFaqs extends Component {
             question:'',
             answer:'',
             error_string:'',
-            type:''
+            type:'',
+            loading:false,
         };
     }
     question(e){
@@ -27,6 +28,7 @@ class AddFaqs extends Component {
         })
     }
     save(e){
+        this.setState({ loading : true});
         e.preventDefault();
         Axios.post('/api/add_faq',this.state).then(res=>{
             
@@ -44,8 +46,12 @@ class AddFaqs extends Component {
                 })
             }
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
     render() {
+        const {loading} = this.state;
         return (
             <div id="page-content">
                 <div className="panel">
@@ -87,8 +93,10 @@ class AddFaqs extends Component {
                         <div className="panel-footer text-right">
                             <button
 
-                                onClick={this.save.bind(this)} type="submit" className="btn btn-primary">
-                                Save
+                                onClick={this.save.bind(this)} type="submit" disabled={loading} className="btn btn-primary">
+                                { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                    { loading && <span > Loading...</span>}
+                                     { !loading && <span >Save</span>}
                                             </button>
                         </div>
                     </div>

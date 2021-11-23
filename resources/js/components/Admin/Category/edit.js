@@ -63,7 +63,7 @@ class Edit extends Component {
     }
 
     updatecategory(event) {
-        
+        this.setState({ loading : true});
         event.preventDefault();
         let senderData = {
             name: this.state.name,
@@ -87,7 +87,7 @@ class Edit extends Component {
                 this.props.history.push('/admin/list-category');
                 Swal.fire({
                     icon: 'success',
-                    title: 'Category Added Successfully',
+                    title: 'Category Update Successfully',
                     showConfirmButton: false,
                     timer: 1500
                 })
@@ -100,9 +100,13 @@ class Edit extends Component {
                 })
             }
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
 
     render() {
+        const {loading} = this.state;
         return (
                 <div id="page-content">
                     <div className="row">
@@ -149,7 +153,11 @@ class Edit extends Component {
                                     </div>
                                 </div>
                                 <div className="panel-footer text-right">
-                                    <button onClick={this.updatecategory.bind(this)} type="submit" className="btn btn-primary">Submit</button>
+                                    <button onClick={this.updatecategory.bind(this)} type="submit" disabled={loading} className="btn btn-primary">
+                                    { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                    { loading && <span > Loading...</span>}
+                                     { !loading && <span >Update</span>}
+                                        </button>
                                 </div>
                                 </form>
                             </div>

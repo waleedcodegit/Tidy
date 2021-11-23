@@ -9,7 +9,8 @@ class UrlEdit extends Component {
         this.state = { 
             path : "",
             title : "",
-            description : ""
+            description : "",
+            loading:false,
          }
     }
 
@@ -48,7 +49,7 @@ class UrlEdit extends Component {
     }
 
     updateUrl(e) {
-        
+        this.setState({ loading : true});
         e.preventDefault();
         let senderData = {
             path: this.state.path,
@@ -78,9 +79,13 @@ class UrlEdit extends Component {
             }
             this.props.history.push('/admin/url-meta-list');
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
     
     render() { 
+        const {loading} = this.state;
         return ( 
             <div id="page-content">
                 <div className="panel">
@@ -111,7 +116,11 @@ class UrlEdit extends Component {
                             </div>
                         </div>
                         <div className="panel-footer text-right col-sm-12">
-                        <button onClick={this.updateUrl.bind(this)} type="submit" className="btn btn-primary">Save</button>
+                        <button onClick={this.updateUrl.bind(this)} type="submit" disabled={loading} className="btn btn-primary">
+                        { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                    { loading && <span > Loading...</span>}
+                                     { !loading && <span >Update</span>}
+                                     </button>
                         </div>
                     </div>
                 </div>

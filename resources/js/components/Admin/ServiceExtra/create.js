@@ -9,7 +9,8 @@ class Create extends Component {
             title: '',
             price: '',
             categories:[],
-            cat_id:0
+            cat_id:0,
+            loading:false,
         }
     }componentDidMount(){
         Axios.get(`/api/category`,{ headers: {
@@ -36,6 +37,7 @@ class Create extends Component {
     }
 
     createServiceExtra(event) {
+        this.setState({ loading : true});
         event.preventDefault();
         let data = {
             title: this.state.title,
@@ -60,6 +62,9 @@ class Create extends Component {
                 })
             }
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
     getCategory(event) {
         this.setState({
@@ -67,6 +72,7 @@ class Create extends Component {
         })  
     }
     render() {
+        const {loading} = this.state;
         return (
         <div id="page-content">
             <div className="row">
@@ -112,7 +118,11 @@ class Create extends Component {
                             </div>
                         </div>
                         <div className="panel-footer text-right">
-                        <button onClick={this.createServiceExtra.bind(this)} type="submit" className="btn btn-primary">Submit</button>
+                        <button onClick={this.createServiceExtra.bind(this)} type="submit" disabled={loading} className="btn btn-primary">
+                        { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                    { loading && <span > Loading...</span>}
+                                     { !loading && <span >Submit</span>}
+                                            </button>
                         </div>
                         </form>
                     </div>

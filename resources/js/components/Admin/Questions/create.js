@@ -8,7 +8,8 @@ class Create extends Component {
         this.state = {
             category_id:'',
             title: '',
-            categories: []
+            categories: [],
+            loading:false,
         };
     }
 
@@ -37,7 +38,7 @@ class Create extends Component {
     }
 
     createQuestion(event) {
-        
+        this.setState({ loading : true});
         event.preventDefault();
         let senderData = {
             category_id: this.state.category_id,
@@ -72,9 +73,13 @@ class Create extends Component {
                 })
             }
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
 
     render() {
+        const {loading} = this.state;
         return (
 
             <div id="page-content">
@@ -117,7 +122,11 @@ class Create extends Component {
                             </div>
                         </div>
                         <div className="panel-footer text-right">
-                            <button onClick={this.createQuestion.bind(this)} type="submit" className="btn btn-primary">Submit</button>
+                            <button onClick={this.createQuestion.bind(this)} type="submit" disabled={loading} className="btn btn-primary">
+                            { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                    { loading && <span > Loading...</span>}
+                                     { !loading && <span >Submit</span>}
+                                            </button>
                         </div>
                         </form>
                     </div>

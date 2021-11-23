@@ -248,7 +248,7 @@ class SelectServices extends Component {
                           <select  value={this.state.time || ""} onChange={this.time.bind(this)} name="gender"   className="col-md-12 input--style-1">
                             {/* <option disabled="disabled" selected="selected">Time to</option> */}
                             {/* <option>Select Time</option> */}
-                            <option>7:00am</option>
+                            <option value={'7:00am'}>7:00am</option>
                             <option>8:00am</option>
                             <option>9:00am</option>
                             <option>10:00am</option>

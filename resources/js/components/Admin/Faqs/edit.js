@@ -44,6 +44,9 @@ class Edit extends Component {
     }
 
     updateFaq(event) { 
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
         event.preventDefault();
         let senderData = {
             question: this.state.question,
@@ -83,6 +86,7 @@ class Edit extends Component {
     }
 
     render() {
+        const {loading} = this.state;
         return (
                 <div id="page-content">
                     <div className="row">
@@ -123,7 +127,11 @@ class Edit extends Component {
                                     </div>
                                 </div>
                                 <div className="panel-footer text-right">
-                                    <button onClick={this.updateFaq.bind(this)} type="submit" className="btn btn-primary">Submit</button>
+                                    <button onClick={this.updateFaq.bind(this)} type="submit" disabled={loading} className="btn btn-primary">
+                                    { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                    { loading && <span > Loading...</span>}
+                                     { !loading && <span >Update</span>}
+                                            </button>
                                 </div>
                                 </form>
                             </div>

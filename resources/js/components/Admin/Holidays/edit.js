@@ -40,7 +40,7 @@ class Edit extends Component {
     }
 
     updateHoliday(event) {
-        
+        this.setState({ loading : true});
         event.preventDefault();
         let senderData = {
             title: this.state.title,
@@ -76,9 +76,13 @@ class Edit extends Component {
                 })
             }
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
 
     render() {
+        const {loading} = this.state;
         return (
                 <div id="page-content">
                     <div className="row">
@@ -110,7 +114,11 @@ class Edit extends Component {
                                     
                                 </div>
                                 <div className="panel-footer text-right">
-                                    <button onClick={this.updateHoliday.bind(this)} type="submit" className="btn btn-primary">Submit</button>
+                                    <button onClick={this.updateHoliday.bind(this)} type="submit" className="btn btn-primary">
+                                    { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                    { loading && <span > Loading...</span>}
+                                     { !loading && <span >Update</span>}
+                                </button>
                                 </div>
                                 </form>
                             </div>

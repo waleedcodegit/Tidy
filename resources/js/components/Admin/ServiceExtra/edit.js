@@ -9,7 +9,8 @@ class Edit extends Component {
             title: '',
             price: '',
             categories:[],
-            cat_id:0
+            cat_id:0,
+            loading:false,
         };
     }
 
@@ -51,6 +52,7 @@ class Edit extends Component {
     }
 
     upload(event) {
+        this.setState({ loading : true});
         event.preventDefault();
         let data = {
             id: this.props.match.params.id,
@@ -76,6 +78,9 @@ class Edit extends Component {
                 })
             }
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
     getCategory(event) {
         this.setState({
@@ -83,6 +88,7 @@ class Edit extends Component {
         })  
     }
     render() {
+        const {loading} = this.state;
         return(
             <div id="page-content">
                 <div className="row">
@@ -126,7 +132,11 @@ class Edit extends Component {
                                 </div>
                             </div>
                             <div className="panel-footer text-right">
-                                <button onClick={this.upload.bind(this)} type="submit" className="btn btn-primary">Submit</button>
+                                <button onClick={this.upload.bind(this)} type="submit" disabled={loading} className="btn btn-primary">
+                                { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                    { loading && <span > Loading...</span>}
+                                     { !loading && <span >Save</span>}
+                                            </button>
                             </div>
                             </form>
                         </div>

@@ -49,7 +49,7 @@ class Create extends Component {
     }
 
     createcategory(event) {
-        
+        this.setState({ loading : true});
         event.preventDefault();
         let senderData = {
             name: this.state.name,
@@ -62,11 +62,11 @@ class Create extends Component {
             }
         }
         this.setState({
-            loading: true
+            // loading: true
         })
         Axios.post('/api/category', senderData , Configs).then(res=>{
             this.setState({
-                loading: false
+                // loading: false
             })
             if(res.data.status == 200){
                 this.props.history.push('/admin/list-category');
@@ -85,9 +85,13 @@ class Create extends Component {
                 })
             }
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
 
     render() {
+        const {loading} = this.state;
         return (
 
             <div id="page-content">
@@ -134,7 +138,11 @@ class Create extends Component {
                             </div>
                         </div>
                         <div className="panel-footer text-right">
-                            <button onClick={this.createcategory.bind(this)} type="submit" className="btn btn-primary">Submit</button>
+                            <button onClick={this.createcategory.bind(this)} type="submit" disabled={loading} className="btn btn-primary">
+                            { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                    { loading && <span > Loading...</span>}
+                                     { !loading && <span >Submit</span>}
+                                </button>
                         </div>
                         </form>
                     </div>

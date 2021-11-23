@@ -4,12 +4,14 @@ import {Link} from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { data } from 'jquery';
 import toast from 'react-hot-toast';
+import { Fastfood } from '@material-ui/icons';
 
 class VendorwithdrawRequests extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            vendorwithdrawrequest: []
+            vendorwithdrawrequest: [],
+            loading:false,
         }
     }
 
@@ -51,18 +53,23 @@ class VendorwithdrawRequests extends React.Component {
         })
     }
     reject_vendor_withraw_request(id){
+        this.setState({ loading : true});
         let data = {
             id: id
         }
         Axios.post('/api/reject_vendor_withdraw_request',data).then(res=>{
             if(res.data.status == 200){
-                toast.success(res.data.message);
+                toast.success('Reject successfully');
             }else{
                 toast.error(res.data.message);
             }
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
     render() {
+        const {loading} = this.state;
         return (
             <div>
                 <div id="page-content">
@@ -115,7 +122,11 @@ class VendorwithdrawRequests extends React.Component {
                                                             <td>
                                                             {
                                                                  data.status == 0 ?
-                                                                 <button  onClick={this.reject_vendor_withraw_request.bind(this, data.id)} className="btn btn-danger">Reject</button>
+                                                                 <button  onClick={this.reject_vendor_withraw_request.bind(this, data.id)}  className="btn btn-danger">
+                                                                      {/* { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                                                     { loading && <span > Loading...</span>}
+                                                                    { !loading && <span >Reject</span>} */}
+                                                                    Reject </button>
                                                                  :
                                                                  null
                                                             }

@@ -14,6 +14,7 @@ class ReviewMod extends Component {
         get_rating : '',
         get_image : '',
         status:'',
+        loading:false,
         }
     }
 
@@ -86,6 +87,7 @@ class ReviewMod extends Component {
 
 
     save(e){
+        this.setState({ loading : true});
         e.preventDefault();
         let UserReview = {
             get_name : this.state.get_name,
@@ -113,10 +115,14 @@ class ReviewMod extends Component {
                     timer: 1500
                     })
                 }
-            }
-        )}
+            })
+            setTimeout(() => {
+                this.setState({ loading : false});
+              }, 2000);
+    }
 
     render() { 
+        const {loading} = this.state;
         return ( 
             <div id="page-content">
                 <div className="row">
@@ -178,7 +184,11 @@ class ReviewMod extends Component {
                             </div>
 
                             <div className="panel-footer text-right">
-                                <button onClick={this.save.bind(this)} type="submit" className="btn btn-primary">submit</button>
+                                <button onClick={this.save.bind(this)} type="submit" disabled={loading}className="btn btn-primary">
+                                { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                    { loading && <span > Loading...</span>}
+                                     { !loading && <span >Save</span>}
+                                            </button>
                             </div>
                         </div>
                     </div>

@@ -12,6 +12,7 @@ class Create extends Component {
             page_title: '',
             content:'',
             error_string:'',
+            loading:false,
             id:this.props.match.params.id
         };
     }
@@ -40,7 +41,7 @@ class Create extends Component {
 
 
     UpdatePage(event) {
-        
+        this.setState({ loading : true});
         event.preventDefault();
     
         Axios.post('/api/update_page', this.state).then(res=>{
@@ -53,9 +54,13 @@ class Create extends Component {
                 toast.error('Error - '+res.data.msg)
             }
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
 
     render() {
+        const {loading} = this.state;
         return (
 
             <div id="page-content">
@@ -98,7 +103,11 @@ class Create extends Component {
                             null
                         }
                         <div className="panel-footer text-right">
-                            <button onClick={this.UpdatePage.bind(this)} type="submit" className="btn btn-primary">Update</button>
+                            <button onClick={this.UpdatePage.bind(this)} type="submit" disabled={loading} className="btn btn-primary">
+                            { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                    { loading && <span > Loading...</span>}
+                                     { !loading && <span >Update</span>}
+                                </button>
                         </div>
                         </form>
                     </div>

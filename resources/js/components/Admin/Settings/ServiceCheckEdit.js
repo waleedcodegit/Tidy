@@ -9,6 +9,7 @@ class ServiceCheckEdit extends Component {
         this.state = { 
             type : "",
             item: "",
+            loading:false,
          }
     }
 
@@ -41,7 +42,7 @@ class ServiceCheckEdit extends Component {
    
 
     updateServiceCheck(e) {
-        
+        this.setState({ loading : true});
         e.preventDefault();
         let senderData = {
             type: this.state.type,
@@ -70,9 +71,13 @@ class ServiceCheckEdit extends Component {
             }
             this.props.history.push('/admin/service_check_list');
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
     
     render() { 
+        const {loading} = this.state;
         return ( 
             <div id="page-content">
                 <div className="panel">
@@ -109,7 +114,11 @@ class ServiceCheckEdit extends Component {
                         </div>
                        
                         <div className="panel-footer text-right col-sm-12">
-                        <button onClick={this.updateServiceCheck.bind(this)} type="submit" className="btn btn-primary">Update</button>
+                        <button onClick={this.updateServiceCheck.bind(this)} type="submit" disabled={loading} className="btn btn-primary">
+                        { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                    { loading && <span > Loading...</span>}
+                                     { !loading && <span >Update</span>}
+                                     </button>
                         </div>
                     </div>
                 </div>

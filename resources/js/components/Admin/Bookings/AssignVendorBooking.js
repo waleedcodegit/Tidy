@@ -102,8 +102,8 @@ class AssignVendorBooking extends React.Component {
                                                            <td>{data.email}</td>
                                                            <td>{data.phone}</td>
                                                                <td>{data.address}</td>
-                                                               <td>${data.status}</td>
-                                                               <td>${data.ratings}</td>
+                                                               <td>{data.ratings}</td>
+                                                               <td>{data.status}</td>
                                                        
                                                         <td>
                                                               {/* <Link to ={`/admin/assign-vendor-to-customer/${data.id}`}>  */}

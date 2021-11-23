@@ -13,7 +13,8 @@ class EditReview extends Component {
         get_comment: '',
         get_rating: '',
         get_image: '',
-        status: ''
+        status: '',
+        loading:false,
         };
     }
 
@@ -67,7 +68,7 @@ class EditReview extends Component {
 
 
     updateReview(event) {
-        
+        this.setState({ loading : true});
         event.preventDefault();
         let reviewData = {
             get_name : this.state.get_name,
@@ -102,6 +103,9 @@ class EditReview extends Component {
                 })
             }
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
 
     get_image(event) {
@@ -138,11 +142,13 @@ class EditReview extends Component {
                 })
             }
         })
+        
 
     }
 
     
     render() { 
+        const {loading} = this.state;
         return ( 
             <div id="page-content">
                 <div className="row">
@@ -219,7 +225,12 @@ class EditReview extends Component {
                                 <button 
                                 onClick={this.updateReview.bind(this)} 
                                 type="submit" 
-                                className="btn btn-primary">submit</button>
+                                className="btn btn-primary"
+                                disabled={loading}>
+                                    { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                    { loading && <span > Loading...</span>}
+                                     { !loading && <span >Save</span>}
+                                            </button>
                             </div>
                         </div>
                     </div>

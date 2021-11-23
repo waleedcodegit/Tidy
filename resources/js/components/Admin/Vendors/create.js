@@ -155,6 +155,7 @@ class CreateVendor extends Component {
     }
 
     validate_vendor(e) {
+        this.setState({ loading : true});
         e.preventDefault();
         console.log(this.state);
         // let payload = this.state;
@@ -175,9 +176,13 @@ class CreateVendor extends Component {
                 })
             }
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
 
     validate_services() {
+        this.setState({ loading : true});
         let payload = {
             services: this.state.services,
             vendor_id: this.props.match.params.vendor_id
@@ -188,6 +193,9 @@ class CreateVendor extends Component {
                 check = true;
             }
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
         if (check) {
             this.setState({
                 step: 3,
@@ -200,6 +208,7 @@ class CreateVendor extends Component {
                 error_string: 'Please Select at least One Service'
             })
         }
+        
 
     }
     
@@ -483,6 +492,7 @@ class CreateVendor extends Component {
     }
 
     async validate_documents() {
+        this.setState({ loading : true});
         this.setState({
             error_string: ''
         })
@@ -513,6 +523,9 @@ class CreateVendor extends Component {
         if (this.state.insurance_certificate_type == 'admin') {
             await this.validate_card();
         }
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
 
     agree_check() {
@@ -538,6 +551,7 @@ class CreateVendor extends Component {
     }
 
     submit_request() {
+        this.setState({ loading : true});
         Axios.post('/api/submit_vendor_request', this.state).then(res => {
             if (res.data.status == 200) {
                 this.setState({
@@ -552,6 +566,9 @@ class CreateVendor extends Component {
                 })
             }
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
 
     render() {
@@ -604,14 +621,14 @@ class CreateVendor extends Component {
                                                                             <div className="form-group">
                                                                                 <label className="control-label">Phone</label>
                                                                                 <div className="row">
-                                                                                <div className="col-sm-2">
+                                                                                <div className="col-sm-3">
                                             
                                                                            <select  onChange={this.phonenumber.bind(this)} type="number"  className="form-control auth_input_box">
                                                                          <option>+61</option>
                                                                       <option>+61</option>
                                                                             </select>
                                                                                     </div>
-                                                                                    <div className="col-md-10">
+                                                                                    <div className="col-sm-9">
                                                                                 <input value={this.state.phone || ""} onChange={this.phone.bind(this)} type="phone" name="phone" className="form-control" />
                                                                             </div>
                                                                             </div> </div>
@@ -668,8 +685,8 @@ class CreateVendor extends Component {
                                                                         : null
                                                                 }
                                                                     <div className="panel-footer text-right">
-                                                                        <button onClick={this.validate_vendor.bind(this)} className="btn btn-success" type="submit">
-                                                                            {
+                                                                        <button onClick={this.validate_vendor.bind(this)}  className="btn btn-success" type="submit">
+                                                                            {/* {
                                                                                 this.state.btn_loading ?
                                                                                     <div id="displayspinner" style={{ display: 'block', }}>
                                                                                         <div className="spinner-border  ml-2 text-light spinner_format" role="status">
@@ -677,8 +694,11 @@ class CreateVendor extends Component {
                                                                                         </div>
                                                                                     </div>
                                                                                 : <>Next</>
-                                                                            }
-                                                                        </button>
+                                                                            } */}
+                                                                             {/* { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                                                             { loading && <span > Loading...</span>}
+                                                                             Next  { !loading && <span >Next</span>} */}
+                                                                             Next </button>
                                                                     </div>
                                                             </form>
                                                         </div>
@@ -742,8 +762,8 @@ class CreateVendor extends Component {
                                                                             </button>
                                                                         </div>
                                                                         <div className="text-right ml-auto">
-                                                                            <button onClick={this.validate_services.bind(this)} className="btn btn-success   " type="submit">
-                                                                                {
+                                                                            <button onClick={this.validate_services.bind(this)} className="btn btn-success " disabled={loading} type="submit">
+                                                                                {/* {
                                                                                     this.state.btn_loading ?
                                                                                         <div id="displayspinner" style={{ display: 'block', }}>
                                                                                             <div className="spinner-border  ml-2 text-light spinner_format" role="status">
@@ -751,8 +771,12 @@ class CreateVendor extends Component {
                                                                                             </div>
                                                                                         </div>
                                                                                         : <>Next</>
-                                                                                }
-                                                                            </button>
+                                                                                } */}
+                                                                                {/* { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                                                             { loading && <span > Loading...</span>}
+                                                                                 { !loading && <span >Next</span>} */}
+                                                                                 Next </button>
+                                                                           
                                                                         </div>
 
                                                                     </div>
@@ -981,8 +1005,8 @@ class CreateVendor extends Component {
                                                                                     </button>
                                                                                 </div>
                                                                                 <div className="text-right ml-auto">
-                                                                                    <button onClick={this.validate_documents.bind(this)} className="btn btn-success   " type="submit">
-                                                                                        {
+                                                                                    <button onClick={this.validate_documents.bind(this)}  className="btn btn-success   " type="submit">
+                                                                                        {/* {
                                                                                             this.state.btn_loading ?
                                                                                                 <div id="displayspinner" style={{ display: 'block', }}>
                                                                                                     <div className="spinner-border  ml-2 text-light spinner_format" role="status">
@@ -990,8 +1014,11 @@ class CreateVendor extends Component {
                                                                                                     </div>
                                                                                                 </div>
                                                                                                 : <>Next</>
-                                                                                        }
-                                                                                    </button>
+                                                                                        } */}
+                                                                                        {/* { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                                                                           { loading && <span > loading</span>}
+                                                                                          { !loading && <span > Next</span>} */}
+                                                                                          Next</button>
                                                                                 </div>
 
                                                                             </div>
@@ -1092,8 +1119,8 @@ class CreateVendor extends Component {
                                                                 </button>
                                                             </div>
                                                             <div className="text-right ml-auto">
-                                                                <button onClick={this.submit_request.bind(this)} className="btn btn-success   " type="submit">
-                                                                    {
+                                                                <button onClick={this.submit_request.bind(this)}  className="btn btn-success   " type="submit">
+                                                                    {/* {
                                                                         this.state.btn_loading ?
                                                                             <div id="displayspinner" style={{ display: 'block', }}>
                                                                                 <div className="spinner-border  ml-2 text-light spinner_format" role="status">
@@ -1101,8 +1128,11 @@ class CreateVendor extends Component {
                                                                                 </div>
                                                                             </div>
                                                                             : <>Submit</>
-                                                                    }
-                                                                </button>
+                                                                    } */}
+                                                                    {/* { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                                                   { loading && <span > Loading...</span>}
+                                                                   { !loading && <span >Submit</span>} */}
+                                                                   Submit    </button>
                                                             </div>
 
                                                         </div>

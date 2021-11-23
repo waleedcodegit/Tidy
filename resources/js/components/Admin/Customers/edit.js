@@ -11,7 +11,8 @@ class EditCustomer extends Component{
             email : '',
             address : '',
             phone : '',
-            status:''
+            status:'',
+            loading:false,
         }
     }
 
@@ -66,6 +67,7 @@ class EditCustomer extends Component{
     }
 
     updateCustomer(e){
+        this.setState({ loading : true});
         e.preventDefault();
         let sendData = {
                 first_name: this.state.first_name,
@@ -94,9 +96,13 @@ class EditCustomer extends Component{
                 })
             }
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
 
     render(){
+        const {loading} = this.state;
         return(
             <div id="page-content">
                     <div className="row">
@@ -134,7 +140,7 @@ class EditCustomer extends Component{
                                        
                                             <label htmlFor="price">Phone</label>
                                             <input onChange={this.getPhone.bind(this)} type="text" className="form-control" id="Customer_Name" value={this.state.phone}/>
-                                      ]
+                                      
                                 <div className="row">
                                 <div className="col-sm-12">
                                     <div className="form-group">
@@ -148,7 +154,11 @@ class EditCustomer extends Component{
                                     </div>
                                 </div>
                                 <div className="panel-footer text-right">
-                                    <button onClick={this.updateCustomer.bind(this)} type="submit" className="btn btn-primary">Submit</button>
+                                    <button onClick={this.updateCustomer.bind(this)} disabled={loading} type="submit" className="btn btn-primary">
+                                    { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                    { loading && <span > Loading...</span>}
+                                     { !loading && <span >Submit</span>}
+                                        </button>
                                 </div>
                             </div>
                             </div>

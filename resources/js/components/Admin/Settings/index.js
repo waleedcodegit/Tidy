@@ -13,6 +13,7 @@ class Index extends React.Component{
             per_bathroom: 0,
             per_bedroom: 0,
             admin_comission :0,
+            loading:false,
 
 
         }
@@ -71,6 +72,7 @@ class Index extends React.Component{
         })
     }
     uploadSettings(e){
+        this.setState({ loading : true});
         e.preventDefault();
         // let Configs = {
         //     headers: {
@@ -87,8 +89,12 @@ class Index extends React.Component{
                 })
             }
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
     render(){
+        const {loading} = this.state;
         return (
             <div>
                 <div id="page-content">
@@ -141,7 +147,11 @@ class Index extends React.Component{
                                     </table>
                                 </div>
                                 <div className="panel-footer text-right">
-                                    <button onClick={this.uploadSettings.bind(this)} type="submit" className="btn btn-primary">Submit</button>
+                                    <button onClick={this.uploadSettings.bind(this)} type="submit" disabled={loading}className="btn btn-primary">
+                                    { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                    { loading && <span > Loading...</span>}
+                                     { !loading && <span >Submit</span>}
+                                            </button>
                                 </div>
                         </div>
                         </form>

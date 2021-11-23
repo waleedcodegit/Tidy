@@ -20,7 +20,8 @@ class Edit extends Component {
             description:'',
             included_text:'',
             id:this.props.match.params.id,
-            whychoose:''
+            whychoose:'',
+            loading:false,
         };
     }
 
@@ -108,7 +109,7 @@ class Edit extends Component {
     }
 
     createContent(event) {
-        
+        this.setState({ loading : true});
         event.preventDefault();
         this.setState({
             loading: true
@@ -125,9 +126,13 @@ class Edit extends Component {
                 toast.error('Error - '+res.data.msg)
             }
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
 
     render() {
+        const {loading} = this.state;
         return (
 
             <div id="page-content">
@@ -219,7 +224,11 @@ class Edit extends Component {
                             </div>
                         </div>
                         <div className="panel-footer text-right">
-                            <button onClick={this.createContent.bind(this)} type="submit" className="btn btn-primary">Submit</button>
+                            <button onClick={this.createContent.bind(this)} type="submit" disabled={loading} className="btn btn-primary">
+                            { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                    { loading && <span > Loading...</span>}
+                                     { !loading && <span >Update</span>}
+                                            </button>
                         </div>
                         </form>
                     </div>

@@ -10,7 +10,8 @@ class CreateSms extends Component {
         super(props);
         this.state = { 
             sms_title : "",
-            sms_content : ""
+            sms_content : "",
+            loading:false,
          }
     }
 
@@ -29,6 +30,7 @@ class CreateSms extends Component {
     }
 
     save(e){
+        this.setState({ loading : true});
         e.preventDefault();
         Axios.post('/api/create-sms',this.state).then(res=>{
             
@@ -46,9 +48,13 @@ class CreateSms extends Component {
                 })
             }
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
     
     render() { 
+        const {loading} = this.state;
         return ( 
             <div id="page-content">
                 <div className="panel">
@@ -77,7 +83,11 @@ class CreateSms extends Component {
                 </div>
 
                 <div className="panel-footer text-right">
-                    <button onClick={this.save.bind(this)} type="submit" className="btn btn-primary">Save</button>
+                    <button onClick={this.save.bind(this)} type="submit" disabled={loading} className="btn btn-primary">
+                    { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                    { loading && <span > Loading...</span>}
+                                     { !loading && <span >Save</span>}
+                                            </button>
                 </div>
                 </div>
             </div>

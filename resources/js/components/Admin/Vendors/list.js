@@ -85,7 +85,7 @@ class VendorList extends React.Component {
 
                                         {
                                             this.state.vendors.length == 0 ? 
-                                            <tr><td colSpan="9">No records founded</td></tr>:null
+                                            <tr><td colSpan="10">No records founded</td></tr>:null
                                         }
                                         
                                     </tbody>

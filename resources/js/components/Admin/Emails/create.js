@@ -11,7 +11,7 @@ class CreateEmail extends Component {
         this.handleChange = this.handleChange.bind(this)
         this.state = {
             email_title:'',
-            
+            loading:false,
             email_content:''
             
             
@@ -33,6 +33,7 @@ class CreateEmail extends Component {
     }
     
     save(e){
+        this.setState({ loading : true});
         e.preventDefault();
         Axios.post('/api/create-emails',this.state).then(res=>{
             
@@ -50,8 +51,12 @@ class CreateEmail extends Component {
                 })
             }
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
     render() {
+        const {loading} = this.state;
         return (
             <div id="page-content">
                 <div className="panel">
@@ -89,9 +94,11 @@ class CreateEmail extends Component {
                         <div className="panel-footer text-right">
                             <button
 
-                                onClick={this.save.bind(this)} type="submit" className="btn btn-primary">
-                                Save
-                                 </button>
+                                onClick={this.save.bind(this)} type="submit" disabled={loading} className="btn btn-primary">
+                                { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                    { loading && <span > Loading...</span>}
+                                     { !loading && <span >Save</span>}
+                                            </button>
                     </div>
                 </div>
             </div>
