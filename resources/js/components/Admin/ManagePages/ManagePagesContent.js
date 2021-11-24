@@ -26,7 +26,7 @@ class ManagePagesContent extends React.Component{
         id: id
     }
     Axios.post('/api/delete_page_by_id',data).then(res=>{
-       toast.success('Page Deleted Successfully.')
+        toast.success('Page Deleted Successfully',{position: "bottom-center"});
         this.componentDidMount();
     })
 }

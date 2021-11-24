@@ -6,6 +6,7 @@ import Autocomplete from 'react-google-autocomplete';
 import '../../Vendor/admin.css';
 import Swal from 'sweetalert2';
 import SignUpRequest from '../../Vendor/Auth/SignUpRequest';
+import toast from 'react-hot-toast';
 
 
 
@@ -565,6 +566,7 @@ class CreateVendor extends Component {
                     error_string: 'Sorry. we are unable to submit your request.'
                 })
             }
+            toast.success('Vendor Added Successfully',{position: "bottom-center"});
         })
         setTimeout(() => {
             this.setState({ loading : false});

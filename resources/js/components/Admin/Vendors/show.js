@@ -98,11 +98,11 @@ class ShowVendor extends Component {
         }
         Axios.post(`/api/add-vendor-service/${id}`, data, Configs).then(res=>{
             if(res.data.status == 200){
-                toast.success('service added.');
+                toast.success('Vendor Approved Successfully',{position: "bottom-center"});
             this.componentDidMount();
 
             }else{
-                toast.error('Service Already Exists');
+                toast.error('Service Already Exists',{position: "bottom-center"});
             }
         })
     }
@@ -118,20 +118,21 @@ class ShowVendor extends Component {
         }
         Axios.post('/api/approved-vendor', data , Configs).then(res=>{
             if(res.data.status == 200){
+                toast.success('Vendor Approved Successfully',{position: "bottom-center"});
                 this.props.history.push('/admin/vendor-list');
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Vendor Approved Successfully',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: res.data.msg,
-                    showConfirmButton: false,
-                    timer: 1500
-                })
+            //     Swal.fire({
+            //         icon: 'success',
+            //         title: 'Vendor Approved Successfully',
+            //         showConfirmButton: false,
+            //         timer: 1500
+            //     })
+            // } else {
+            //     Swal.fire({
+            //         icon: 'error',
+            //         title: res.data.msg,
+            //         showConfirmButton: false,
+            //         timer: 1500
+            //     })
             }
         })
     }
@@ -148,20 +149,21 @@ class ShowVendor extends Component {
         Axios.post('/api/disapproved-vendor' , data ,Configs).then(res=>{
             console.log(res);
             if(res.data.status == 200){
+                toast.success('Vendor DisApproved Successfully',{position: "bottom-center"});
                 this.props.history.push('/admin/vendor-list');
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Vendor DisApproved Successfully',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            }else{
-                Swal.fire({
-                    icon: 'error',
-                    title: res.data.msg,
-                    showConfirmButton: false,
-                    timer: 1500
-                })
+            //     Swal.fire({
+            //         icon: 'success',
+            //         title: 'Vendor DisApproved Successfully',
+            //         showConfirmButton: false,
+            //         timer: 1500
+            //     })
+            // }else{
+            //     Swal.fire({
+            //         icon: 'error',
+            //         title: res.data.msg,
+            //         showConfirmButton: false,
+            //         timer: 1500
+            //     })
 
             }
         })

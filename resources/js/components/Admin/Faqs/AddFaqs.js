@@ -1,5 +1,6 @@
 import Axios from 'axios';
 import React, { Component } from 'react';
+import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
 class AddFaqs extends Component {
     constructor(props) {
@@ -33,17 +34,18 @@ class AddFaqs extends Component {
         Axios.post('/api/add_faq',this.state).then(res=>{
             
             if(res.data.status == 200){
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Faq Added Successfully',
-                    showConfirmButton: false,
-                    timer: 1500
-                }) 
+                toast.success('Faq Added Successfully',{position: "bottom-center"});
+                // Swal.fire({
+                //     icon: 'success',
+                //     title: 'Faq Added Successfully',
+                //     showConfirmButton: false,
+                //     timer: 1500
+                // }) 
                 this.props.history.push('/admin/faqs')
-            }else{
-                this.setState({
-                    error_string:res.data.msg
-                })
+            // }else{
+            //     this.setState({
+            //         error_string:res.data.msg
+            //     })
             }
         })
         setTimeout(() => {

@@ -30,13 +30,12 @@ class PendingBookings extends React.Component {
         return (
             <div>
                 <div id="page-content">
-                    <div className="row">
-                        <div className="col-sm-12">
-                        <div className="panel panel-bordered">
+                        <div className="panel">
                             <div className="panel-heading">
                                 <h3 className="panel-title">Pending Requests</h3>
                             </div>
                             <div className="panel-body">
+                                
                                 <table id="demo-dt-basic" className="table table-striped table-bordered" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
@@ -99,8 +98,8 @@ class PendingBookings extends React.Component {
                         </div>
                     </div>
                 </div>
-                </div>
-                </div>
+                
+                
         );
     }
 }

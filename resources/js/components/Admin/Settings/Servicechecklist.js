@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Axios from 'axios';
 import {Link} from 'react-router-dom';
 import Swal from 'sweetalert2';
+import toast from 'react-hot-toast';
 
 class Servicechecklist extends Component {
     
@@ -30,12 +31,13 @@ class Servicechecklist extends Component {
             id: id
         }
         Axios.post('/api/delete-service_check',data).then(res=>{
-            Swal.fire({
-                icon: 'success',
-                title: 'Successfully Deleted',
-                showConfirmButton: false,
-                timer: 1500
-            })
+            toast.success('ServiceCheck Delete Successfully',{position: "bottom-center"});
+            // Swal.fire({
+            //     icon: 'success',
+            //     title: 'Successfully Deleted',
+            //     showConfirmButton: false,
+            //     timer: 1500
+            // })
             this.componentDidMount();
         })
     }

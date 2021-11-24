@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Swal from 'sweetalert2'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import toast from 'react-hot-toast';
 
 
 class CreateEmail extends Component {
@@ -38,17 +39,18 @@ class CreateEmail extends Component {
         Axios.post('/api/create-emails',this.state).then(res=>{
             
             if(res.data.status == 200){
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Email Added Successfully',
-                    showConfirmButton: false,
-                    timer: 1500
-                }) 
+                toast.success('Email Added Successfully',{position: "bottom-center"});
+                // Swal.fire({
+                //     icon: 'success',
+                //     title: 'Email Added Successfully',
+                //     showConfirmButton: false,
+                //     timer: 1500
+                // }) 
                 this.props.history.push('/admin/emails')
-            }else{
-                this.setState({
-                    error_string:res.data.msg
-                })
+            // }else{
+            //     this.setState({
+            //         error_string:res.data.msg
+            //     })
             }
         })
         setTimeout(() => {

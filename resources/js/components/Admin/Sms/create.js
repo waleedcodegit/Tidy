@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import Swal from 'sweetalert2'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import toast from 'react-hot-toast';
 
 class CreateSms extends Component {
 
@@ -35,17 +36,19 @@ class CreateSms extends Component {
         Axios.post('/api/create-sms',this.state).then(res=>{
             
             if(res.data.status == 200){
-                Swal.fire({
-                    icon: 'success',
-                    title: 'SMS Added Successfully',
-                    showConfirmButton: false,
-                    timer: 1500
-                }) 
+                toast.success('SMS Added Successfully',{position: "bottom-center"});
                 this.props.history.push('/admin/sms')
-            }else{
-                this.setState({
-                    error_string:res.data.msg
-                })
+            //     Swal.fire({
+            //         icon: 'success',
+            //         title: 'SMS Added Successfully',
+            //         showConfirmButton: false,
+            //         timer: 1500
+            //     }) 
+            //     this.props.history.push('/admin/sms')
+            // }else{
+            //     this.setState({
+            //         error_string:res.data.msg
+            //     })
             }
         })
         setTimeout(() => {

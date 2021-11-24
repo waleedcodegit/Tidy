@@ -1179,7 +1179,7 @@ class VendorController extends Controller
         return $response;
     }
     public function employee_list(Request $request){
-        $employeelist = Employee::where('vendor_id',$request->vendor_id)->get();
+        $employeelist = Employee::where('vendor_id',$request->vendor_id)->where('delete_status', 0)->get();
         if($employeelist){
         $response=[
             'status' => 200,

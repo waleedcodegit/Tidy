@@ -88,19 +88,21 @@ class EditReview extends Component {
         Axios.put(`/api/review/${this.props.match.params.id}`, reviewData , Configs).then(res=>{
             
             if(res.data.status == 200){
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Review updated Successfully',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: res.data.msg,
-                    showConfirmButton: false,
-                    timer: 1500
-                })
+                toast.success('Review Updated Successfully',{position: "bottom-center"});
+                this.props.history.push('/admin/list-reviews');
+            //     Swal.fire({
+            //         icon: 'success',
+            //         title: 'Review updated Successfully',
+            //         showConfirmButton: false,
+            //         timer: 1500
+            //     })
+            // } else {
+            //     Swal.fire({
+            //         icon: 'error',
+            //         title: res.data.msg,
+            //         showConfirmButton: false,
+            //         timer: 1500
+            //     })
             }
         })
         setTimeout(() => {

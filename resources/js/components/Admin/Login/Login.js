@@ -2,6 +2,7 @@ import Axios from 'axios';
 import React , { Component } from 'react';
 import img_baseurl from '../../Configs/Api';
 import Swal from 'sweetalert2';
+import toast from 'react-hot-toast';
 
 class Login extends Component {
     constructor(props) {
@@ -51,6 +52,7 @@ class Login extends Component {
                 loading: false
             })
             if(res.data.status == 200){
+                toast.success('Login Successfully',{position: "bottom-center"});
                 window.localStorage.setItem('testapistring', res.data.admin.token);
                 this.props.history.push('/admin/dashboard');
                 // Swal.fire({

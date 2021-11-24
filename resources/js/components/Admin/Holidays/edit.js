@@ -2,6 +2,7 @@ import Axios from 'axios';
 import React , { Component } from 'react';
 import {img_baseurl} from '../../Configs/Api';
 import Swal from 'sweetalert2';
+import toast from 'react-hot-toast';
 
 class Edit extends Component {
     constructor(props) {
@@ -60,20 +61,21 @@ class Edit extends Component {
                 loading: false
             })
             if(res.data.status == 200){
+                toast.success('Holiday Update Successfully',{position: "bottom-center"});
                 this.props.history.push('/admin/list-holidays');
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Category Added Successfully',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: res.data.msg,
-                    showConfirmButton: false,
-                    timer: 1500
-                })
+            //     Swal.fire({
+            //         icon: 'success',
+            //         title: 'Category Added Successfully',
+            //         showConfirmButton: false,
+            //         timer: 1500
+            //     })
+            // } else {
+            //     Swal.fire({
+            //         icon: 'error',
+            //         title: res.data.msg,
+            //         showConfirmButton: false,
+            //         timer: 1500
+            //     })
             }
         })
         setTimeout(() => {

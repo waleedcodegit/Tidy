@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Axios from 'axios';
 import Swal from 'sweetalert2';
+import toast from 'react-hot-toast';
 
 class EditCustomer extends Component{
     constructor(props){
@@ -81,19 +82,20 @@ class EditCustomer extends Component{
         Axios.post(`/api/update-customer`, sendData).then(res=>{
             
             if(res.data.status == true){
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Customer update Successfully',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: res.data.msg,
-                    showConfirmButton: false,
-                    timer: 1500
-                })
+                toast.success('Customer Update Successfully',{position: "bottom-center"});
+            //     Swal.fire({
+            //         icon: 'success',
+            //         title: 'Customer update Successfully',
+            //         showConfirmButton: false,
+            //         timer: 1500
+            //     })
+            // } else {
+            //     Swal.fire({
+            //         icon: 'error',
+            //         title: res.data.msg,
+            //         showConfirmButton: false,
+            //         timer: 1500
+            //     })
             }
         })
         setTimeout(() => {

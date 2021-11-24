@@ -25,12 +25,13 @@ class Index extends React.Component{
             id: id
         }
         Axios.post('/api/delete-question',data).then(res=>{
-            Swal.fire({
-                icon: 'success',
-                title: 'Successfully Deleted',
-                showConfirmButton: false,
-                timer: 1500
-            })
+            toast.success('Question Delete Successfully',{position: "bottom-center"});
+            // Swal.fire({
+            //     icon: 'success',
+            //     title: 'Successfully Deleted',
+            //     showConfirmButton: false,
+            //     timer: 1500
+            // })
             this.componentDidMount();
         })
     }

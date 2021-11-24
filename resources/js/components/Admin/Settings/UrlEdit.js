@@ -1,5 +1,6 @@
 import Axios from 'axios';
 import React, { Component } from "react";
+import toast from 'react-hot-toast';
 import Swal from 'sweetalert2'
 
 class UrlEdit extends Component {
@@ -63,19 +64,20 @@ class UrlEdit extends Component {
                 loading: false
             })
             if(res.data.status == 200){
-                Swal.fire({
-                    icon: 'success',
-                    title: 'URL Updated Successfully',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: res.data.msg,
-                    showConfirmButton: false,
-                    timer: 1500
-                })
+                toast.success('URL Update Successfully',{position: "bottom-center"});
+            //     Swal.fire({
+            //         icon: 'success',
+            //         title: 'URL Updated Successfully',
+            //         showConfirmButton: false,
+            //         timer: 1500
+            //     })
+            // } else {
+            //     Swal.fire({
+            //         icon: 'error',
+            //         title: res.data.msg,
+            //         showConfirmButton: false,
+            //         timer: 1500
+            //     })
             }
             this.props.history.push('/admin/url-meta-list');
         })

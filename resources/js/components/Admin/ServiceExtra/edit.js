@@ -1,6 +1,7 @@
 import React , {Component} from 'react';
 import Axios from 'axios';
 import Swal from 'sweetalert2';
+import toast from 'react-hot-toast';
 
 class Edit extends Component {
     constructor(props) {
@@ -68,14 +69,15 @@ class Edit extends Component {
 
         Axios.put(`/api/service-extra/${this.props.match.params.id}`, data, Configs).then(res=>{
             if(res.data.status == 200) {
+                toast.success('Update ServiceExtra Successfully',{position: "bottom-center"});
                 this.props.history.push('/admin/list-service-extra');
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: res.data.msg,
-                    showConfirmButton: false,
-                    timer: 1500
-                })
+            // } else {
+            //     Swal.fire({
+            //         icon: 'error',
+            //         title: res.data.msg,
+            //         showConfirmButton: false,
+            //         timer: 1500
+            //     })
             }
         })
         setTimeout(() => {

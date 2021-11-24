@@ -119,11 +119,12 @@ class Edit extends Component {
                 loading: false
             })
             if(res.data.status == 200){
-                toast.success('Service Content Created Successfully')
+                toast.success('Service Content Update Successfully',{position: "bottom-center"});
+                
                 this.props.history.push('/admin/manage-services-content');
                
             } else {
-                toast.error('Error - '+res.data.msg)
+                toast.error('Error - '+res.data.msg,{position: "bottom-center"});
             }
         })
         setTimeout(() => {

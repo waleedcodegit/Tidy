@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Axios from 'axios';
 import {Link} from 'react-router-dom';
 import Swal from 'sweetalert2';
+import toast from 'react-hot-toast';
 class Index extends React.Component{
     constructor(props){
         super(props);
@@ -81,12 +82,13 @@ class Index extends React.Component{
         // }
         Axios.post(`/api/update-setting`, this.state).then(res=>{
             if(res.data.status == 200){
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Setting Update Successfully',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
+                toast.success('Setting Update Successfully',{position: "bottom-center"});
+                // Swal.fire({
+                //     icon: 'success',
+                //     title: 'Setting Update Successfully',
+                //     showConfirmButton: false,
+                //     timer: 1500
+                // })
             }
         })
         setTimeout(() => {

@@ -182,18 +182,12 @@ class Profile extends Component {
         e.preventDefault();
         Axios.post('/api/update_vendor_profile',this.state).then(res=>{
             if(res.data.status == 200){
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Profile Updated Successfully',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
+                
+                toast.success('Profile Updated Successfully',{position: "bottom-center"});
+              
             } else{
-                this.setState({
-                    error_string:res.data.message
-                })
-            }
-            
+                toast.error(res.data.message,{position: "bottom-center"});
+            }    
         })
     }
     delete_vendor_service(id){

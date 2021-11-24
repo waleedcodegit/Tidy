@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Axios from 'axios';
 import Swal from 'sweetalert2';
 import { img_baseurl } from '../../../Configs/Api';
+import toast from 'react-hot-toast';
 
 class Index extends React.Component{
     constructor(props){
@@ -102,6 +103,7 @@ class Index extends React.Component{
 
     getImage(event) {
         if (event.target.files) {
+            
             const files = Array.from(event.target.files);
             const promises = files.map(file => {
                 return (new Promise((resolve, reject) => {
@@ -145,20 +147,17 @@ class Index extends React.Component{
         }
         Axios.put(`/api/employee/${this.props.match.params.id}`, senderData , Configs).then(res=>{
             if(res.data.status == 200){
+                toast.success('Employee Updated Successfully',{position: "bottom-center"});
                 this.props.history.push('/vendor/employee-list');
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Employee Updated Successfully',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
+                // Swal.fire({
+                //     icon: 'success',
+                //     title: 'Employee Updated Successfully',
+                //     showConfirmButton: false,
+                //     timer: 1500
+                // })
             } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: res.data.msg,
-                    showConfirmButton: false,
-                    timer: 1500
-                })
+                toast.error('res.data.msg',{position: "bottom-center"});
+                
             }
         })
     }

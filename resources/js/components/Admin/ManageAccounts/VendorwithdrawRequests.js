@@ -32,12 +32,13 @@ class VendorwithdrawRequests extends React.Component {
             id: id
         }
         Axios.post('/api/delete-customer',data).then(res=>{
-            Swal.fire({
-                icon: 'success',
-                title: 'Successfully Deleted',
-                showConfirmButton: false,
-                timer: 1500
-            })
+            toast.success('Delete successfully',{position: "bottom-center"});
+            // Swal.fire({
+            //     icon: 'success',
+            //     title: 'Successfully Deleted',
+            //     showConfirmButton: false,
+            //     timer: 1500
+            // })
             this.componentDidMount();
         })
     }
@@ -46,9 +47,9 @@ class VendorwithdrawRequests extends React.Component {
     accept_vendor_withraw_request(data){
         Axios.post('/api/accept_vendor_withdraw_request',{id:data.id}).then(res=>{
             if(res.data.status == 200){
-                toast.success(res.data.message);
+                toast.success(res.data.message,{position: "bottom-center"});
             }else{
-                toast.error(res.data.message);
+                toast.error(res.data.message,{position: "bottom-center"});
             }
         })
     }
@@ -59,10 +60,12 @@ class VendorwithdrawRequests extends React.Component {
         }
         Axios.post('/api/reject_vendor_withdraw_request',data).then(res=>{
             if(res.data.status == 200){
-                toast.success('Reject successfully');
+               
+                toast.success('Reject successfully',{position: "bottom-center"});
             }else{
-                toast.error(res.data.message);
+                toast.error(res.data.message,{position: "bottom-center"});
             }
+            this.componentDidMount();
         })
         setTimeout(() => {
             this.setState({ loading : false});

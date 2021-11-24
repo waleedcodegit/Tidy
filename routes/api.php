@@ -75,7 +75,7 @@ Route::post('/get-pending-bookings' , 'Vendor\VendorController@get_pending_booki
 Route::post('/assign-employee-booking' , 'Vendor\VendorController@assign_employee_booking');
 Route::post('/get_all_bookings' , 'Vendor\VendorController@get_all_bookings');
 Route::post('/get-vendors' , 'Vendor\VendorController@get_vendors');
-Route::post('/delete-employee' , 'Vendor\EmployeeController@delete_employee');
+// Route::post('/delete-employee' , 'Vendor\EmployeeController@delete_employee');
 Route::post('/asign-vender-tocustomer' , 'Vendor\VendorController@asign_vender_tocustomer');
 Route::post('/accept-booking' , 'Vendor\VendorController@accept_booking');
 Route::post('/search_vendors' , 'Vendor\VendorController@search_vendors');
@@ -88,7 +88,7 @@ Route::post('/employee-check-auth' , 'Vendor\EmployeeController@employee_check_a
 Route::post('/get-employee-info/{id}' , 'Vendor\EmployeeController@show');
 Route::post('/update-employee-profile' , 'Vendor\EmployeeController@update_employee_profile');
 Route::post('/employee-bookings' , 'Vendor\EmployeeController@employee_bookings');
-Route::post('/employee-list' , 'Vendor\EmployeeController@employee_list');
+// Route::post('/employee-list' , 'Vendor\EmployeeController@employee_list');
 
 
 

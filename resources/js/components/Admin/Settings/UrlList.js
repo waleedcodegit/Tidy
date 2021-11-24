@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Axios from 'axios';
 import {Link} from 'react-router-dom';
 import Swal from 'sweetalert2';
+import toast from 'react-hot-toast';
 
 class Index extends Component {
     
@@ -30,12 +31,13 @@ class Index extends Component {
             id: id
         }
         Axios.post('/api/delete-url',data).then(res=>{
-            Swal.fire({
-                icon: 'success',
-                title: 'Successfully Deleted',
-                showConfirmButton: false,
-                timer: 1500
-            })
+            toast.success('URL Deleted Successfully',{position: "bottom-center"});
+            // Swal.fire({
+            //     icon: 'success',
+            //     title: 'Successfully Deleted',
+            //     showConfirmButton: false,
+            //     timer: 1500
+            // })
             this.componentDidMount();
         })
     }

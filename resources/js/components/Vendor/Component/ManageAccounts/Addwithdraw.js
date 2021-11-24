@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Swal from 'sweetalert2';
 import {Link} from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 class Addwithdraw extends Component {
     constructor(props) {
@@ -16,7 +17,7 @@ class Addwithdraw extends Component {
             id:this.props.match.params.id,
             serviceBookings: [],
             vendor_id:this.props.vendor.data.vendor_id,
-            loading:true,
+            loading:false,
 
         };
     }
@@ -61,7 +62,7 @@ class Addwithdraw extends Component {
     }
 
     AddWithdraw(event) {
-        
+        this.setState({ loading : true});
         event.preventDefault();
         if(this.state.wallet  >=  this.state.withdraw){
             let senderData = {
@@ -76,37 +77,44 @@ class Addwithdraw extends Component {
             }
             // console.log(senderData);
             Axios.post('/api/add_withdraw', senderData , Configs).then(res=>{
+               
                 if(res.data.status == 200){
                     this.props.history.push('/vendor/vendor_wallet');
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Done',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: res.data.msg,
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
+                    toast.success('Added WithDraw',{position: "bottom-center"});
+                    
+                //     Swal.fire({
+                //         icon: 'success',
+                //         title: 'Done',
+                //         showConfirmButton: false,
+                //         timer: 1500
+                //     })
+                // } else {
+                //     Swal.fire({
+                //         icon: 'error',
+                //         title: res.data.msg,
+                //         showConfirmButton: false,
+                //         timer: 1500
+                //     })
                 }
             })
         } else {
             this.props.history.push('/vendor/vendor_wallet');
-            Swal.fire({
-                icon: 'error',
-                title: 'Insufcient Balance in your wallet',
-                showConfirmButton: false,
-                timer: 1500
-            })
-        
+            toast.error('Insufcient Balance in your wallet',{position: "bottom-center"});
+            // Swal.fire({
+            //     icon: 'error',
+            //     title: 'Insufcient Balance in your wallet',
+            //     showConfirmButton: false,
+            //     timer: 1500
+            // })
+            setTimeout(() => {
+                this.setState({ loading : false});
+              }, 2000);
     }
 }
     
 
     render() {
+        const {loading} = this.state;
         return (
             <div>
                  {
@@ -133,7 +141,12 @@ class Addwithdraw extends Component {
                                     <div className="form-group">
                                     <Link to={`/vendor/add_withdraw`}> <button 
                             onClick={this.AddWithdraw.bind(this)} 
-                            type="submit" className="btn btn-primary">Submit</button></Link>
+                            type="submit" className="btn btn-primary"
+                            disabled={loading}>
+                                  { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                    { loading && <span > Loading...</span>}
+                                     { !loading && <span >Submit</span>}
+                               </button></Link>
                                     </div>
                                 </div>
                                 </div>

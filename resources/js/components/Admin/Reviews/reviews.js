@@ -101,19 +101,21 @@ class ReviewMod extends Component {
         Axios.post('/api/create-review', UserReview).then(res=>{
             
             if(res.data.status == 200){
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Content Added Successfully',
-                    showConfirmButton: false,
-                    timer: 1500
-                }) 
-            }else{
-                Swal.fire({
-                    icon: 'error',
-                    title: res.data.msg,
-                    showConfirmButton: false,
-                    timer: 1500
-                    })
+                toast.success('Review Added Successfully',{position: "bottom-center"});
+                this.props.history.push('/admin/list-reviews');
+            //     Swal.fire({
+            //         icon: 'success',
+            //         title: 'Content Added Successfully',
+            //         showConfirmButton: false,
+            //         timer: 1500
+            //     }) 
+            // }else{
+            //     Swal.fire({
+            //         icon: 'error',
+            //         title: res.data.msg,
+            //         showConfirmButton: false,
+            //         timer: 1500
+            //         })
                 }
             })
             setTimeout(() => {

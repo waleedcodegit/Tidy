@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Axios from 'axios';
 import {Link} from 'react-router-dom';
 import Swal from 'sweetalert2';
+import toast from 'react-hot-toast';
 class Index extends React.Component{
 
     constructor(props){
@@ -29,12 +30,13 @@ class Index extends React.Component{
             id: id
         }
         Axios.post('/api/delete-email',data).then(res=>{
-            Swal.fire({
-                icon: 'success',
-                title: 'Successfully Deleted',
-                showConfirmButton: false,
-                timer: 1500
-            })
+            toast.success('Email Delete Successfully',{position: "bottom-center"});
+            // Swal.fire({
+            //     icon: 'success',
+            //     title: 'Successfully Deleted',
+            //     showConfirmButton: false,
+            //     timer: 1500
+            // })
             this.componentDidMount();
         })
     }

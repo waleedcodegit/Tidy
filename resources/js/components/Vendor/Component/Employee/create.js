@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Axios from 'axios';
 import Swal from 'sweetalert2';
+import toast from 'react-hot-toast';
 
 class Index extends React.Component{
     constructor(props){
@@ -148,20 +149,11 @@ class Index extends React.Component{
         console.log(senderData);
         Axios.post('/api/employee', senderData , Configs).then(res=>{
             if(res.data.status == 200){
+                toast.success('Employee Added Successfully',{position: "bottom-center"});
                 this.props.history.push('/vendor/employee-list');
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Employee Added Successfully',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
+               
             } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: res.data.msg,
-                    showConfirmButton: false,
-                    timer: 1500
-                })
+                toast.error(res.data.msg,{position: "bottom-center"});
             }
         })
     }

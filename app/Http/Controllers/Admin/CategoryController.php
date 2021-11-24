@@ -61,7 +61,7 @@ class CategoryController extends Controller
             }
 
             $new_category->save();
-            $response = ['status' => 200 , 'msg' => 'category added successfully' , 
+            $response = [ 'msg' => 'category added successfully' , 
                 ];
                 return $response;
         }

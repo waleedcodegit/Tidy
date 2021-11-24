@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import {Link} from 'react-router-dom';
 import { img_baseurl } from '../../../Configs/Api';
 import { connect } from 'react-redux';
+import toast from 'react-hot-toast';
 
 class Index extends React.Component{
     constructor(props){
@@ -18,7 +19,7 @@ class Index extends React.Component{
     componentDidMount(){
       Axios.post('/api/employee-list',{vendor_id:this.props.vendor.data.vendor_id}).then(res=>
         {
-            console.log(res.data.data);
+            console.log(res);
         if(res.data.status == 200){
             this.setState({
                 Employees: res.data.data,
@@ -33,12 +34,7 @@ class Index extends React.Component{
         id: id
     }
     Axios.post('/api/delete-employee',data).then(res=>{
-        Swal.fire({
-            icon: 'success',
-            title: 'Successfully Deleted',
-            showConfirmButton: false,
-            timer: 1500
-        })
+      toast.success('Employee Delete Successfully',{position: "bottom-center"});
         this.componentDidMount();
     })
 }

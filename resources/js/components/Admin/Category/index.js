@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Axios from 'axios';
 import Swal from 'sweetalert2';
 import {Link} from 'react-router-dom';
+import toast from 'react-hot-toast';
 class Index extends React.Component{
     constructor(props){
         super(props);
@@ -26,12 +27,13 @@ class Index extends React.Component{
             id: id
         }
         Axios.post('/api/delete-category',data).then(res=>{
-            Swal.fire({
-                icon: 'success',
-                title: 'Successfully Deleted',
-                showConfirmButton: false,
-                timer: 1500
-            })
+            toast.success('Category Delete Successfully',{position: "bottom-center"});
+            // Swal.fire({
+            //     icon: 'success',
+            //     title: 'Successfully Deleted',
+            //     showConfirmButton: false,
+            //     timer: 1500
+            // })
             this.componentDidMount();
         })
     }

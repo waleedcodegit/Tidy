@@ -2,6 +2,7 @@ import Axios from 'axios';
 import React , { Component } from 'react';
 import img_baseurl from '../../Configs/Api';
 import Swal from 'sweetalert2';
+import toast from 'react-hot-toast';
 
 class Create extends Component {
     constructor(props) {
@@ -79,19 +80,20 @@ class Create extends Component {
         Axios.put(`/api/city/${this.props.match.params.id}`, senderData , Configs).then(res=>{
             if(res.data.status == 200){
                 this.props.history.push('/admin/list-city');
-                Swal.fire({
-                    icon: 'success',
-                    title: 'City Updated Successfully',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: res.data.msg,
-                    showConfirmButton: false,
-                    timer: 1500
-                })
+                toast.success('City Updated Successfully',{position: "bottom-center"});
+            //     Swal.fire({
+            //         icon: 'success',
+            //         title: 'City Updated Successfully',
+            //         showConfirmButton: false,
+            //         timer: 1500
+            //     })
+            // } else {
+            //     Swal.fire({
+            //         icon: 'error',
+            //         title: res.data.msg,
+            //         showConfirmButton: false,
+            //         timer: 1500
+            //     })
             }
         })
     }

@@ -1,5 +1,6 @@
 import Axios from 'axios';
 import React, { Component } from "react";
+import toast from 'react-hot-toast';
 import Swal from 'sweetalert2'
 
 class UrlMeta extends Component {
@@ -38,17 +39,18 @@ class UrlMeta extends Component {
         e.preventDefault();
         Axios.post('/api/create-url-meta',this.state).then(res=>{
             if(res.data.status == 200){
+                toast.success('URL Added Successfully',{position: "bottom-center"});
                 this.props.history.push('/admin/url-meta-list');
-                Swal.fire({
-                    icon: 'success',
-                    title: 'URL Added Successfully',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            }else{
-                this.setState({
-                    error_string:res.data.msg
-                })
+            //     Swal.fire({
+            //         icon: 'success',
+            //         title: 'URL Added Successfully',
+            //         showConfirmButton: false,
+            //         timer: 1500
+            //     })
+            // }else{
+            //     this.setState({
+            //         error_string:res.data.msg
+            //     })
             }
         })
     }

@@ -37,13 +37,13 @@ class AssignVendorBooking extends React.Component {
             vendor_id: id
         }
         Axios.post('/api/asign-vender-tocustomer',data).then(res=>{
-            // toast.success('Successfully Vendor Assign');
-            Swal.fire({
-                icon: 'success',
-                title: 'Successfully Vendor Assign',
-                showConfirmButton: false,
-                timer: 1500
-            })
+            toast.success('Successfully Vendor Assign',{position: "bottom-center"});
+            // Swal.fire({
+            //     icon: 'success',
+            //     title: 'Successfully Vendor Assign',
+            //     showConfirmButton: false,
+            //     timer: 1500
+            // })
             this.componentDidMount();
         })
         
@@ -98,7 +98,7 @@ class AssignVendorBooking extends React.Component {
                                                 return(
                                                         <tr key={index}>
                                                         <td>{index+1}</td>
-                                                        <td>{data.first_name+' '+data.last_name}{data.id}</td>
+                                                        <td>{data.first_name+' '+data.last_name}</td>
                                                            <td>{data.email}</td>
                                                            <td>{data.phone}</td>
                                                                <td>{data.address}</td>

@@ -1,5 +1,6 @@
 import Axios from 'axios';
 import React , { Component } from 'react';
+import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
 
 class Create extends Component {
@@ -57,20 +58,21 @@ class Create extends Component {
                 loading: false
             })
             if(res.data.status == 200){
+                toast.success('Question Added Successfully',{position: "bottom-center"});
                 this.props.history.push('/admin/list-question');
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Question Added Successfully',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: res.data.msg,
-                    showConfirmButton: false,
-                    timer: 1500
-                })
+            //     Swal.fire({
+            //         icon: 'success',
+            //         title: 'Question Added Successfully',
+            //         showConfirmButton: false,
+            //         timer: 1500
+            //     })
+            // } else {
+            //     Swal.fire({
+            //         icon: 'error',
+            //         title: res.data.msg,
+            //         showConfirmButton: false,
+            //         timer: 1500
+            //     })
             }
         })
         setTimeout(() => {

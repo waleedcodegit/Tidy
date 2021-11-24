@@ -3,6 +3,7 @@ import Axios from 'axios';
 import Swal from 'sweetalert2';
 import {Link} from 'react-router-dom';
 import { img_baseurl } from '../../Configs/Api';
+import toast from 'react-hot-toast';
 class ManageServiceContent extends React.Component{
     constructor(props){
         super(props);
@@ -25,12 +26,13 @@ class ManageServiceContent extends React.Component{
         id: id
     }
     Axios.post('/api/delete-manageservice',data).then(res=>{
-        Swal.fire({
-            icon: 'success',
-            title: 'Successfully Deleted',
-            showConfirmButton: false,
-            timer: 1500
-        })
+        toast.success('Service Content Delete Successfully',{position: "bottom-center"});
+        // Swal.fire({
+        //     icon: 'success',
+        //     title: 'Successfully Deleted',
+        //     showConfirmButton: false,
+        //     timer: 1500
+        // })
         this.componentDidMount();
     })
 }

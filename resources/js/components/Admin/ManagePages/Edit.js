@@ -47,11 +47,12 @@ class Create extends Component {
         Axios.post('/api/update_page', this.state).then(res=>{
            
             if(res.data.status == 200){
-                toast.success('Page Update Successfully')
+                toast.success('Page Update Successfully',{position: "bottom-center"});
+                
                 this.props.history.push('/admin/manage-pages');
                
             } else {
-                toast.error('Error - '+res.data.msg)
+                toast.error('Error - '+res.data.msg,{position: "bottom-center"});
             }
         })
         setTimeout(() => {

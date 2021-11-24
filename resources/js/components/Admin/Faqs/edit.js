@@ -1,6 +1,7 @@
 import Axios from 'axios';
 import React , { Component } from 'react';
 import Swal from 'sweetalert2';
+import toast from 'react-hot-toast';
 
 class Edit extends Component {
     constructor(props) {
@@ -44,9 +45,7 @@ class Edit extends Component {
     }
 
     updateFaq(event) { 
-        setTimeout(() => {
-            this.setState({ loading : false});
-          }, 2000);
+        this.setState({ loading : true});
         event.preventDefault();
         let senderData = {
             question: this.state.question,
@@ -67,22 +66,26 @@ class Edit extends Component {
                 loading: false
             })
             if(res.data.status == 200){
+                toast.success('Faq Update Successfully',{position: "bottom-center"});
                 this.props.history.push('/admin/faqs');
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Update Successfully',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: res.data.msg,
-                    showConfirmButton: false,
-                    timer: 1500
-                })
+            //     Swal.fire({
+            //         icon: 'success',
+            //         title: 'Update Successfully',
+            //         showConfirmButton: false,
+            //         timer: 1500
+            //     })
+            // } else {
+            //     Swal.fire({
+            //         icon: 'error',
+            //         title: res.data.msg,
+            //         showConfirmButton: false,
+            //         timer: 1500
+            //     })
             }
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
 
     render() {

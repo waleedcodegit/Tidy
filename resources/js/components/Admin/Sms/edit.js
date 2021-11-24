@@ -4,6 +4,7 @@ import {img_baseurl} from '../../Configs/Api';
 import Swal from 'sweetalert2';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import toast from 'react-hot-toast';
 
 class Edit extends Component {
     
@@ -65,20 +66,21 @@ class Edit extends Component {
                 loading: false
             })
             if(res.data.status == 200){
+                toast.success('Sms update Successfully',{position: "bottom-center"});
                 this.props.history.push('/admin/sms');
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Sms update Successfully',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: res.data.msg,
-                    showConfirmButton: false,
-                    timer: 1500
-                })
+            //     Swal.fire({
+            //         icon: 'success',
+            //         title: 'Sms update Successfully',
+            //         showConfirmButton: false,
+            //         timer: 1500
+            //     })
+            // } else {
+            //     Swal.fire({
+            //         icon: 'error',
+            //         title: res.data.msg,
+            //         showConfirmButton: false,
+            //         timer: 1500
+            //     })
             }
         })
         setTimeout(() => {

@@ -1,5 +1,6 @@
 import Axios from 'axios';
 import React from 'react';
+import toast from 'react-hot-toast';
 
 class CreateCustomer extends React.Component{
     constructor(props){
@@ -58,6 +59,7 @@ class CreateCustomer extends React.Component{
         }}).then(res=> {
             console.log(res);
             if(res.data.status == true) {
+                toast.success('Customer Added Successfully',{position: "bottom-center"});
                 this.props.history.push('/admin/customer-list');
             } else {
                 this.setState({

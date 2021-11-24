@@ -100,6 +100,7 @@ import AssignVendorBookings from '../Bookings/AssignVendorBooking';
 import BookingDetails from '../Bookings/Bookingdetails';
 import ServiceDetails from '../Bookings/ServiseDetails';
 import Dashboard from '../Dashboard/dashboard';
+import { Toaster } from 'react-hot-toast';
 
 
 
@@ -218,6 +219,7 @@ class Main extends Component {
                     </div>
                     <Sidebar></Sidebar>
                 </div>
+                <Toaster></Toaster>
             </div>
         );
     }

@@ -2,6 +2,7 @@ import React from 'react';
 import Axios from 'axios';
 import {Link} from 'react-router-dom';
 import Swal from 'sweetalert2';
+import toast from 'react-hot-toast';
 
 class Payments extends React.Component {
     constructor(props) {
@@ -28,12 +29,13 @@ class Payments extends React.Component {
             id: id
         }
         Axios.post('/api/delete-customer',data).then(res=>{
-            Swal.fire({
-                icon: 'success',
-                title: 'Successfully Deleted',
-                showConfirmButton: false,
-                timer: 1500
-            })
+            toast.success('Delete successfully',{position: "bottom-center"});
+            // Swal.fire({
+            //     icon: 'success',
+            //     title: 'Successfully Deleted',
+            //     showConfirmButton: false,
+            //     timer: 1500
+            // })
             this.componentDidMount();
         })
     }

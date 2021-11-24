@@ -38,11 +38,11 @@ class Create extends Component {
         Axios.post('/api/add_page', this.state).then(res=>{
            
             if(res.data.status == 200){
-                toast.success('Page Added Successfully')
+                toast.success('Page Added Successfully',{position: "bottom-center"});
                 this.props.history.push('/admin/manage-pages');
                
             } else {
-                toast.error('Error - '+res.data.msg)
+                toast.error('Error - '+res.data.msg,{position: "bottom-center"});
             }
         })
         setTimeout(() => {

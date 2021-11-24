@@ -22,17 +22,19 @@ class ServiceExtraList extends Component {
             }
         })
     }
+   
     deleteServiceExtra(id) {
         let data = {
             id: id
         }
         Axios.post('/api/delete-serviceextra',data).then(res=>{
-            Swal.fire({
-                icon: 'success',
-                title: 'Successfully Deleted',
-                showConfirmButton: false,
-                timer: 1500
-            })
+            toast.success('Delete ServiceExtra Successfully',{position: "bottom-center"});
+            // Swal.fire({
+            //     icon: 'success',
+            //     title: 'Successfully Deleted',
+            //     showConfirmButton: false,
+            //     timer: 1500
+            // })
             this.componentDidMount();
         })
     }
