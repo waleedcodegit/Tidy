@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import { data } from 'jquery';
 import React, { Component } from 'react';
 import toast from 'react-hot-toast';
 import CustomerVendorChat from './CustomerVendorChat';
@@ -9,7 +10,9 @@ class BookingDetails extends Component {
         this.state = {
             booking:{},
             quotes:[],
-            loading:true
+            loading:true,
+            bookingExtras:[],
+            Questions:[]
         };
         console.log(props)
     }
@@ -19,6 +22,8 @@ class BookingDetails extends Component {
             console.log(res);
             this.setState({
                 booking:res.data.data,
+                bookingExtras: res.data.data.booking_extras ? JSON.parse(res.data.data.booking_extras) : [],
+                Questions: res.data.data.information.questions ? JSON.parse(res.data.data.information.questions) : [],
                 loading:false
             })
         })
@@ -149,6 +154,55 @@ class BookingDetails extends Component {
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <h3>Booking Extras</h3>
+                                                    <h5>Extras Total Amount: ${this.state.booking.booking_extras_total}</h5>
+                                                    <div className="divid-line" />
+                                                        <table className="table table-hover table-light table-borderless">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style={{width:'250px'}}>Extra's Name</th>
+                                                                    <th style={{width:'250px'}}>Price</th>
+                                                                    <th style={{width:'250px'}}>Quantity</th>
+                                                                    <th style={{width:'250px'}}>Total</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            {
+                                                                this.state.bookingExtras.map((data)=>{
+                                                                    return(
+                                                                        <tr>
+                                                                            <td>{data.title}</td>
+                                                                            <td>{data.price}</td>
+                                                                            <td>{data.quantity}</td>
+                                                                            <td>{data.quantity*data.price}</td>
+                                                                        </tr>
+                                                                    )
+                                                                })
+                                                            }
+                                                            </tbody>
+                                                        </table>
+                                                    <h3>Questions</h3>
+                                                    <div className="divid-line" />
+                                                        <table className="table table-hover table-light table-borderless">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style={{width:'400px'}}>Questions</th>
+                                                                    <th>Answers</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {
+                                                                    this.state.Questions.map((data)=>{
+                                                                        return(
+                                                                            <tr>
+                                                                            <td style={{width:'400px'}}><li>{data.question}</li></td>
+                                                                            <td><li>{data.answer}</li></td>
+                                                                            </tr>
+                                                                        )
+                                                                    })
+                                                                }
+                                                            </tbody>
+                                                        </table>
                                                 </div> }
                                                 
                                             </div>
@@ -158,12 +212,11 @@ class BookingDetails extends Component {
                             </div>
 {/* vendor quotes section start                                */}
                                 <div className="vendor-detail">
-                                    <h3>Vendor Quotes</h3>
                                     {
                                         this.state.booking.service.residential_type == 0  && this.state.booking.vendor_status != 1 && this.state.quotes.length != 0 ?
                                         <div className="vendor-qote">
+                                        <h3>Vendor Quotes</h3>
                                         <div className="divid-line" />
-                                        
                                         {
                                             this.state.quotes.map((data,index)=>{
                                                 return(
@@ -189,8 +242,8 @@ class BookingDetails extends Component {
                                                         </div>
                                                         <div className="col-md-3">
                                                         <div className="qote-price">
-                                                            <span> ${data.quote} </span>
-                                                            <a onClick={this.accept_vendor_quote.bind(this,data.id)} className="bk-btn">Accept</a>
+                                                            <span>${data.quote} </span>
+                                                            <a onClick={this.accept_vendor_quote.bind(this,data.id)} className="btn bk-btn btn-success">Accept</a>
                                                         </div>
                                                         </div>
                                                     </div>
@@ -199,28 +252,30 @@ class BookingDetails extends Component {
                                         }
                                         
                                     </div>
-                                    :
-                                    <div className="detl-section">
-                                        <div className="text-center">
-                                        <p style={{color:'#000000a3' , fontSize:'20px'}}>No Quotes from Vendor</p>
-                                        </div>
-                                    </div>
+                                    :null
+                                    // <div className="detl-section">
+                                    //     <div className="text-center">
+                                    //     <p style={{color:'#000000a3' , fontSize:'20px'}}>No Quotes from Vendor</p>
+                                    //     </div>
+                                    // </div>
                                     }
                                 </div>
                             {/* vendor quote section end                           */}
                             <div className="vendor-detail">
-                                <h3>Vendor Details</h3>
+                                
                                 {
                                     this.state.booking.vendor_status == 1 
                                     ?
+                                    
                                         <div className="detl-section">
+                                            <h3>Vendor Details</h3>
                                             <div className="row">
                                                 <div className="col-md-4">
                                                     <span>Vendor Name</span>
                                                     <p>{this.state.booking.vendor.first_name}</p>
                                                 </div>
                                                 <div className="col-md-4">
-                                                    <span>Business Type</span>
+                                                    <span>Business Name</span>
                                                     <p>{this.state.booking.vendor.company_name}</p>
                                                 </div>
                                                 <div className="col-md-4">
@@ -229,12 +284,8 @@ class BookingDetails extends Component {
                                                 </div>
                                             </div>
                                         </div>
-                                    :
-                                        <div className="detl-section">
-                                            <div className="text-center">
-                                            <p style={{color:'#000000a3' , fontSize:'20px'}}>Vendors has not quoted yet</p>
-                                            </div>
-                                        </div>
+                                    :null
+
                                 }
                                 
                             </div>

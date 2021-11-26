@@ -10,7 +10,9 @@ class VendorBookingDetails extends Component {
             booking:{},
             employees:{},
             loading:true,
-            selected_employee:''
+            selected_employee:'',
+            bookingExtras:[],
+            Questions:[],
         };
         console.log(props);
     }
@@ -21,6 +23,8 @@ class VendorBookingDetails extends Component {
 
             this.setState({
                 booking:res.data.data,
+                bookingExtras: res.data.data.booking_extras ? JSON.parse(res.data.data.booking_extras) : [],
+                Questions: res.data.data.information.questions ? JSON.parse(res.data.data.information.questions) : [],
                 employees: res.data.employees,
                 loading:false
             })
@@ -170,6 +174,55 @@ class VendorBookingDetails extends Component {
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <h3>Booking Extras</h3>
+                                                    <h5>Extras Total Amount: ${this.state.booking.booking_extras_total}</h5>
+                                                    <div className="divid-line" />
+                                                        <table className="table table-hover table-light table-borderless">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style={{width:'250px'}}>Extra's Name</th>
+                                                                    <th style={{width:'250px'}}>Price</th>
+                                                                    <th style={{width:'250px'}}>Quantity</th>
+                                                                    <th style={{width:'250px'}}>Total</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            {
+                                                                this.state.bookingExtras.map((data)=>{
+                                                                    return(
+                                                                        <tr>
+                                                                            <td>{data.title}</td>
+                                                                            <td>{data.price}</td>
+                                                                            <td>{data.quantity}</td>
+                                                                            <td>{data.quantity*data.price}</td>
+                                                                        </tr>
+                                                                    )
+                                                                })
+                                                            }
+                                                            </tbody>
+                                                        </table>
+                                                    <h3>Questions</h3>
+                                                    <div className="divid-line" />
+                                                        <table className="table table-hover table-light table-borderless">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style={{width:'400px'}}>Questions</th>
+                                                                    <th>Answers</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {
+                                                                    this.state.Questions.map((data)=>{
+                                                                        return(
+                                                                            <tr>
+                                                                            <td style={{width:'400px'}}><li>{data.question}</li></td>
+                                                                            <td><li>{data.answer}</li></td>
+                                                                            </tr>
+                                                                        )
+                                                                    })
+                                                                }
+                                                            </tbody>
+                                                        </table>
                                                 </div> }
                                                 
                                             </div>

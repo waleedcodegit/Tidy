@@ -10,7 +10,9 @@ class EmployeeBookingDetails extends Component {
             booking:{},
             loading:true,
             serviceRounds:{},
-            error_string:''
+            error_string:'',
+            bookingExtras:[],
+            Questions:[]
 
         };
         console.log(props);
@@ -24,6 +26,8 @@ class EmployeeBookingDetails extends Component {
             this.setState({
                 booking:res.data.data,
                 serviceRounds:res.data.serviceRounds,
+                bookingExtras: res.data.data.booking_extras ? JSON.parse(res.data.data.booking_extras) : [],
+                Questions: res.data.data.information.questions ? JSON.parse(res.data.data.information.questions) : [],
                 loading:false
             })
         })
@@ -53,8 +57,8 @@ class EmployeeBookingDetails extends Component {
                                         <div id="main" className="blog-item profile-shadow">
                                             <div className="card ">
                                                 {this.state.booking.service.residential_type == 1 ? <div className="card-content" id="faqhead1">
-                                                    <h3>Booking Details</h3>
-                                                    <h5> {this.state.booking.date}</h5>
+                                                    <h3 style={{marginBottom:'1px'}}>Booking Details</h3>
+                                                    <h5 style={{marginBottom:'1px'}}> {this.state.booking.date}</h5>
                                                     <div className="divid-line" />
                                                     <div className="dt-table">
                                                         <div className="row">
@@ -99,8 +103,8 @@ class EmployeeBookingDetails extends Component {
                                                     </div>
                                                 </div> 
                                                 :   <div className="card-content" id="faqhead1">
-                                                    <h3>Booking Details</h3>
-                                                    <h5> {this.state.booking.date}</h5>
+                                                    <h3 style={{marginBottom:'1px'}}>Booking Details</h3>
+                                                    <h5 style={{marginBottom:'1px'}}> {this.state.booking.date}</h5>
                                                     <div className="divid-line" />
                                                     <div className="dt-table">
                                                         <div className="row">
@@ -143,9 +147,58 @@ class EmployeeBookingDetails extends Component {
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <h3 style={{marginBottom:'1px'}}>Booking Extras</h3>
+                                                    <h5 style={{marginBottom:'1px'}}>Extras Total Amount: ${this.state.booking.booking_extras_total}</h5>
+                                                    <div className="divid-line" />
+                                                        <table className="table table-hover table-light table-borderless">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style={{width:'250px'}}>Extra's Name</th>
+                                                                    <th style={{width:'250px'}}>Price</th>
+                                                                    <th style={{width:'250px'}}>Quantity</th>
+                                                                    <th style={{width:'250px'}}>Total</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            {
+                                                                this.state.bookingExtras.map((data)=>{
+                                                                    return(
+                                                                        <tr>
+                                                                            <td>{data.title}</td>
+                                                                            <td>{data.price}</td>
+                                                                            <td>{data.quantity}</td>
+                                                                            <td>{data.quantity*data.price}</td>
+                                                                        </tr>
+                                                                    )
+                                                                })
+                                                            }
+                                                            </tbody>
+                                                        </table>
+                                                    <h3 style={{marginBottom:'1px'}}>Questions</h3>
+                                                    <div className="divid-line" />
+                                                        <table className="table table-hover table-light table-borderless">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style={{width:'400px'}}>Questions</th>
+                                                                    <th>Answers</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {
+                                                                    this.state.Questions.map((data)=>{
+                                                                        return(
+                                                                            <tr>
+                                                                            <td style={{width:'400px'}}><li>{data.question}</li></td>
+                                                                            <td><li>{data.answer}</li></td>
+                                                                            </tr>
+                                                                        )
+                                                                    })
+                                                                }
+                                                            </tbody>
+                                                        </table>
                                                 </div> }
                                                 <div className="card-content" id="faqhead1">
-                                                    <h3>Service Details</h3>
+                                                    <h3 style={{marginBottom:'1px'}}>Service Details</h3>
                                                     <div className="divid-line" />
                                                     <div className="dt-table">
                                                         <div className="row">

@@ -475,8 +475,8 @@ class FrontController extends Controller
         $b_information->location_address = $request->customer_location['loc_address'];
         $b_information->lat = $request->customer_location['lat'];
         $b_information->lng = $request->customer_location['long'];
-        if( sizeof($request->screen2['questions'] ) > 0){
-            $b_information->questions = json_encode( $request->screen2['questions']);
+        if( sizeof($request->screen2['answers'] ) > 0){
+            $b_information->questions = json_encode( $request->screen2['answers']);
         }
         // $b_information->extras
         $b_information->save();

@@ -162,17 +162,17 @@ class AddInformation extends Component {
             })
         }
     }
-    onChangeTextAnswer(val,question_id){
+    onChangeTextAnswer(val,question){
         let ans = this.state.answers;
         let check = 0;
         ans.map(data_=>{
-            if(data_.id == question_id){
+            if(data_.id == question.id){
                 data_.answer = val
                 check = 1;
             }
         })
         if(check == 0){
-            let obj = {id:question_id,answer:val};
+            let obj = {id:question.id,question:question.title,answer:val};
             ans.push(obj);
         }
         this.setState({
@@ -313,7 +313,7 @@ class AddInformation extends Component {
                                                         <div className="col-md-12">
                                                             <h3>Q{index+1}:  {data.title}</h3>
                                                             <div className="input-group">
-                                                                <input onChange={(e)=>{this.onChangeTextAnswer(e.target.value,data.id)}} className="input--style-1 col-md-12" type="text" placeholder="Answer here" name="name" />
+                                                                <input onChange={(e)=>{this.onChangeTextAnswer(e.target.value,data)}} className="input--style-1 col-md-12" type="text" placeholder="Answer here" name="name" />
                                                             </div>
                                                         </div>
                                                  
