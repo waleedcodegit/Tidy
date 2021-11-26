@@ -20,7 +20,7 @@ class Index extends React.Component{
             work:'',
             dob:'',
             phonenumber:'',
-            // loading:true,
+            loading:false,
         }
     }
 
@@ -124,6 +124,7 @@ class Index extends React.Component{
     }
 
     createEmployee(event) {
+        this.setState({ loading : true});
         event.preventDefault();
         let senderData = {
             name: this.state.name,
@@ -156,12 +157,16 @@ class Index extends React.Component{
                 toast.error(res.data.msg,{position: "bottom-center"});
             }
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
 
     render(){
+        const {loading} = this.state;
       return (
           <div>
-                {
+                {/* {
                     this.state.loading ?
                    
                         <div id="displayspinner text-center mt-5 " className="text-center" style={{ display: 'block', }}>
@@ -169,7 +174,7 @@ class Index extends React.Component{
                                 <span className="sr-only">Loading...</span>
                             </div>
                         </div>
-                        :
+                        : */}
           <section classNameName="section">
             <div classNameName="section-body">
               <div classNameName="row">
@@ -267,14 +272,19 @@ class Index extends React.Component{
                         </div>
                     </div>
                     <div className="card-footer text-right">
-                        <button onClick={this.createEmployee.bind(this)} className="btn btn-primary mr-1" type="submit">Submit</button>
+                        <button onClick={this.createEmployee.bind(this)} disabled={loading} className="btn btn-primary mr-1" type="submit">
+                        { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                    { loading && <span > Loading...</span>}
+                                     { !loading && <span >Submit</span>}
+                                            </button>
+                            {/* </button> */}
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </section>
-    }
+    {/* } */}
     </div>
       );
     }

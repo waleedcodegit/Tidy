@@ -20,7 +20,7 @@ class Index extends React.Component{
             serviceprice:'',
             dob:'',
             work:'',
-            loading:true,
+            loading:false,
         }
     }
 
@@ -42,7 +42,7 @@ class Index extends React.Component{
                     serviceprice: res.data.employee.serviceprice,
                     dob: res.data.employee.dob,
                     work: res.data.employee.work,
-                    loading:false,
+                    // loading:false,
                 })
             }
         })
@@ -124,6 +124,7 @@ class Index extends React.Component{
     }
 
     createEmployee(event) {
+        this.setState({ loading : true});
         event.preventDefault();
         let senderData = {
             name: this.state.name,
@@ -160,6 +161,9 @@ class Index extends React.Component{
                 
             }
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
     getPoliceid(event) {
         if (event.target.files) {
@@ -183,9 +187,10 @@ class Index extends React.Component{
     }
 
     render(){
+        const {loading} = this.state;
       return (
         <div>
-        {
+        {/* {
           this.state.loading ?
          
               <div id="displayspinner text-center mt-5 " className="text-center" style={{ display: 'block', }}>
@@ -193,7 +198,7 @@ class Index extends React.Component{
                       <span className="sr-only">Loading...</span>
                   </div>
               </div>
-              :
+              : */}
           <section className="section">
             <div className="section-body">
               <div className="row">
@@ -283,14 +288,19 @@ class Index extends React.Component{
                         </div>
                     </div>
                     <div class="card-footer text-right">
-                        <button onClick={this.createEmployee.bind(this)} class="btn btn-primary mr-1" type="submit">Submit</button>
+                        <button onClick={this.createEmployee.bind(this)} disabled={loading} class="btn btn-primary mr-1" type="submit">
+                        { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                    { loading && <span > Loading...</span>}
+                                     { !loading && <span >Submit</span>}
+                                            </button>
+                            {/* Submit</button> */}
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </section>
-    }
+    {/* } */}
      </div>
 
         );
