@@ -1005,6 +1005,7 @@ class FrontController extends Controller
     }
     
     public function validate_select_service(Request $request){
+        // return $time;
         $validator = Validator::make($request->all(), [
             'service_id' => 'required',
             'date' => 'required',

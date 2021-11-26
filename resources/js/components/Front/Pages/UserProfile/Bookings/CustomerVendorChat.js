@@ -10,7 +10,8 @@ class CustomerVendorChat extends Component {
             messages:[],
             no_messages:[],
             newmessage:'',
-            chat:{id:0}
+            chat:{id:0},
+            loading:false,
         };
     }
      componentDidMount(){
@@ -51,6 +52,7 @@ class CustomerVendorChat extends Component {
         d.scrollTop(d.prop("scrollHeight"));
     }
     send_message(e){
+        this.setState({ loading : true});
         e.preventDefault();
         let array = this.state.messages;
         let newmsg = {
@@ -87,8 +89,12 @@ class CustomerVendorChat extends Component {
                 }
              })
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
     render() {
+        const {loading} = this.state;
         return (
             <div >
             <div className="row">
@@ -153,7 +159,11 @@ class CustomerVendorChat extends Component {
                                                     </div>
                                                 </div>
                                                 <div   className="col-md-2">
-                                                    <button  onClick={this.send_message.bind(this)} href="#" className="bk-btn2">Send </button>
+                                                    <button  onClick={this.send_message.bind(this)} disabled={loading} href="#" className="bk-btn2">
+                                                    { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                                   { loading && <span >Sending</span>}
+                                                   { !loading && <span >Send</span>}
+                                                         </button>
                                                 </div>
                                             </div>
                                         </form>

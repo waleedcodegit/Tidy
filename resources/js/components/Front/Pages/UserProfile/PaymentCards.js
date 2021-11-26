@@ -17,7 +17,8 @@ class PaymentCards extends Component {
             expiry_month: '',
             update_card:false,
             id:this.props.user.data.id,
-            customer_id:this.props.user.data.id
+            customer_id:this.props.user.data.id,
+            loading:false,
 
         };
     }
@@ -67,7 +68,7 @@ class PaymentCards extends Component {
     }
 
     update_customer_card(){
-
+        this.setState({ loading : true});
         let cardData = {
             card_holder_name: this.state.card_holder_name,
             credit_card_number: this.state.credit_card_number,
@@ -82,21 +83,16 @@ class PaymentCards extends Component {
         Axios.post('/api/update_customer_card',cardData).then(res=>{
             console.log(cardData);
             if(res.data.status == true){
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Card updated Successfully',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
+                toast.success('Card updated Successfully');
+            
             }else{
-                Swal.fire({
-                    icon: 'error',
-                    title: res.data.msg,
-                    showConfirmButton: false,
-                    timer: 1500
-                })
+                toast.error(res.data.message);
+      
             }
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
 
     }
 
@@ -131,6 +127,7 @@ class PaymentCards extends Component {
         })
     }
     render() {
+        const {loading} = this.state;
         return (
             <div className="tab-pane fade" id="payment" role="tabpanel" aria-labelledby="profile-tab">
             <div className="row">
@@ -168,9 +165,14 @@ class PaymentCards extends Component {
                                                     </div>
                                                    }
                                                    <div className="row">
-                                                    <button onClick={this.update_card.bind(this)} className="btn btn-info"> 
+                                                    <button onClick={this.update_card.bind(this)}  className="btn btn-info"> 
+                                                    {/* { loading && <i className= 'fa fa-refresh fa-spain'></i>} */}
+                                                   {/* { loading && <span >Loading...</span>} */}
+                                                   {/* { !loading && <span >Loading...</span>} */}
                                                         {
-                                                            this.state.no_card_details ? <>Add New Card</> : <>Change Card</>
+                                                            this.state.no_card_details ?
+                                                             <> Add New Card</> :
+                                                             <> Change Card</>
                                                         }
                                                     </button>
                                                    </div>
@@ -218,7 +220,11 @@ class PaymentCards extends Component {
                                                                                             :null
                                                                                         }
                                                                                         <div className="col-sm-12  text-right p-3">
-                                                                                           <button onClick={this.update_customer_card.bind(this)} className="btn btn-success ">Save</button>
+                                                                                           <button onClick={this.update_customer_card.bind(this)} disabled={loading} className="btn btn-success ">
+                                                                                           { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                                                                            { loading && <span >Loading...</span>}
+                                                                                            { !loading && <span >Save</span>} 
+                                                                                               </button>
                                                                                         </div>
                                                                                         </div>
                                                     :null

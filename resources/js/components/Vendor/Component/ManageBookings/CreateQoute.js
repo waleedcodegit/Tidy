@@ -1,6 +1,7 @@
 import Axios from 'axios';
 import { data } from 'jquery';
 import React, { Component } from 'react';
+import toast from 'react-hot-toast';
 import { connect } from 'react-redux';
 import Swal from 'sweetalert2';
 
@@ -60,20 +61,12 @@ class BookingsFeed extends Component {
         // console.log(senderData);
         Axios.post('/api/create_quote', senderData , Configs).then(res=>{
             if(res.data.status == 200){
+                toast.success('Create Quote Successfully',{position: "bottom-center"});
                 this.props.history.push('/vendor/bookings-feed');
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Create Quote Successfully',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
+              
             } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: res.data.msg,
-                    showConfirmButton: false,
-                    timer: 1500
-                })
+                toast.error(res.data.msg,{position: "bottom-center"});
+             
             }
         })
         setTimeout(() => {

@@ -16,8 +16,10 @@ class CustomerSignUp extends Component {
             password:'',
             address:'',
             phone:'',
+            phonenumber:'+61',
             form_error:false,
-            error_string:''
+            error_string:'',
+            loading:false,
         };
     }
     set_auth_type(val){
@@ -28,6 +30,11 @@ class CustomerSignUp extends Component {
     phone(e){
         this.setState({
             phone:e.target.value
+        })
+    }
+    phonenumber(e){
+        this.setState({
+            phonenumber:e.target.value
         })
     }
     first_name(e){
@@ -56,39 +63,46 @@ class CustomerSignUp extends Component {
         })
     }
     signup(e){
+        this.setState({ loading : true});
         e.preventDefault();
         Axios.post('/api/create-customer',this.state).then(res=>{
             if(res.data.status == 200){
                 if(res.data.status == 200){
-            
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Signup Successfully',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
+                    toast.success('Signup Successfully',{position: "bottom-center"});
+                    // Swal.fire({
+                    //     icon: 'success',
+                    //     title: 'Signup Successfully',
+                    //     showConfirmButton: false,
+                    //     timer: 1500
+                    // })
                 } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: res.data.msg,
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
+                    toast.error(res.data.msg,{position: "bottom-center"});
+                    // Swal.fire({
+                    //     icon: 'error',
+                    //     title: res.data.msg,
+                    //     showConfirmButton: false,
+                    //     timer: 1500
+                    // })
                 }
                 window.localStorage.setItem('cus_token',res.data.customer.token);
                 this.props.changeUser({is_login:true,data:res.data.customer});
                
             }else{
+              
                 this.setState({
                     form_error:true,
                     error_string:res.data.message
                 })
-                toast.error('Error - '+res.data.message)
+                toast.error(res.data.message,{position: "bottom-center"});
             }
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
         
     }
     render() { 
+        const {loading} = this.state;
         return (
         <React.Fragment>
             {/* <div className="back_image"></div> */}
@@ -124,9 +138,17 @@ class CustomerSignUp extends Component {
                             </div>
                             <div class="form-group input_div ">
                                 <label className="input_label">Phone Number</label>
+                                <div class="row">
+                                <div class="col-md-3">
+                                <select  onChange={this.phonenumber.bind(this)} value={this.state.phonenumber || ""} type="number"  className="form-control auth_input_box">
+                               <option value={'+61'}>+61</option>
+                               </select>
+                               </div>
+                               <div class="col-md-9">
                                 <input onChange={this.phone.bind(this)} type="number" class="form-control auth_input_box"   />
-                            </div>
-                            <div>
+                            </div> </div>
+                            {/* <div> */}
+                            {/* <div> */}
                                 {
                                     this.state.form_error ?
                                     <p className="text-danger">{this.state.error_string}</p>
@@ -134,7 +156,12 @@ class CustomerSignUp extends Component {
                                 }
                             </div>
                                 <div className="input_div">
-                                    <button onClick={this.signup.bind(this)} className="btn submit_button btn-info">SignUp</button>
+                                    <button onClick={this.signup.bind(this)} disabled={loading} className="btn submit_button btn-info">
+                                    { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                    { loading && <span > Loading...</span>}
+                                     { !loading && <span >SignUp</span>}
+                                            </button>
+                                        {/* SignUp</button> */}
                                 </div>
                             </form>
                             <div>

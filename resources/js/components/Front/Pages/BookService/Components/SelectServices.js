@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
+import toast from 'react-hot-toast';
 
 class SelectServices extends Component {
     constructor(props) {
@@ -17,7 +18,7 @@ class SelectServices extends Component {
             sub_service_id:0,
             recurring:1,
             date:'',
-            time:'',
+            time:'7:00am',
             error_string:'',
             date_flexible:0,
             time_flexible:0,
@@ -130,12 +131,16 @@ class SelectServices extends Component {
       })
     }
     Submit(e){
+      // console.log(e);
       this.setState({ loading : true});
         e.preventDefault();
         Axios.post('/api/validate_select_service',this.state).then(res=>{
           if(res.data.status){
             this.props.select_service(this.state);
             this.props.change_step(2);
+          }else{
+              
+            toast.error(res.data.message,{position: "bottom-center"});
           }
         })
         setTimeout(() => {
@@ -406,7 +411,7 @@ class SelectServices extends Component {
                       className="p-t-20 btn btn-success btn--radius btn--green" type="submit" id="#collapseTwo">
                       
                        { loading && <i className= 'fa fa-refresh fa-spain'></i>}
-                      { loading && <span > loading</span>}
+                      { loading && <span >Loading...</span>}
                       { !loading && <span > Next</span>}
       
                       </button>

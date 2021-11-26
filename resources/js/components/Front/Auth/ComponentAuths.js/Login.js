@@ -34,6 +34,7 @@ class Login extends Component {
         })
     }
     login(e){
+        this.setState({ loading : true});
         e.preventDefault();
         Axios.post('/api/customer-login',this.state).then(res=>{
             if(res.data.status == 200){
@@ -41,16 +42,22 @@ class Login extends Component {
                 window.localStorage.setItem('cus_token',res.data.customer.token);
                 this.props.changeUser({is_login:true,data:res.data.customer});
             }else{
-                this.setState({
-                    form_error:true,
-                    error_string:res.data.message,
+                toast.error(res.data.message,{position: "bottom-center"});
 
-                })
+                // this.setState({
+                //     form_error:true,
+                //     error_string:res.data.message,
+
+                // })
                 // toast.error('Error - '+res.data.message)
             }
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
     render() { 
+        const {loading} = this.state;
         return (
             <React.Fragment>
                 <div className="container">
@@ -81,7 +88,12 @@ class Login extends Component {
                                         }
                                     </div>
                                         <div className="input_div">
-                                            <button  onClick={this.login.bind(this)} className="btn submit_button btn-info">Login</button>
+                                            <button  onClick={this.login.bind(this)} disabled={loading} className="btn submit_button btn-info">
+                                            { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                    { loading && <span > Loading...</span>}
+                                     { !loading && <span >Login</span>}
+                                            </button>
+                                                {/* Login</button> */}
                                         </div>
                                     </form>
                                     <div>

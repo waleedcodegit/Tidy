@@ -17,7 +17,7 @@ class AddInformation extends Component {
             questions: [],
             bathrooms: 1,
             bedrooms: 1,
-            loading: true,
+            loading: false,
             category:{},
             setting:{},
             answers:[],
@@ -41,65 +41,72 @@ class AddInformation extends Component {
     }
 
     Submit(val, e , place) {
-        // this.setState({ loading : true});
+        this.setState({ loading : true});
         e.preventDefault();
-        console.log(this.state.answers)
         if(this.state.questions.length > 0){
            if(this.state.answers.length != this.state.questions.length){
             this.setState({
                 error_string:'Please Enter all the answers of above questions'
             })
+            setTimeout(() => {
+                this.setState({ loading : false});
+              }, 2000);
             return ;
            }
-          
-
         }
         if(this.state.is_parking_available == 'Yes'){
             if(this.state.where_parking == ''){
                 this.setState({
                     error_string:'Please Enter the Where is Parking'
                 })
-                return ;
-                
+                setTimeout(() => {
+                    this.setState({ loading : false});
+                  }, 2000);
+                return ; 
             }
             
             if(this.state.is_free_parking == ''){
                 this.setState({
                     error_string:'Please Enter Is Parking Free or Not'
                 })
+                setTimeout(() => {
+                    this.setState({ loading : false});
+                  }, 2000);
                 return ;
-               
             }
-            
         }
        if(this.state.will_at_home == 'No'){
            if(this.state.prem_vendor_enterance == ''){
             this.setState({
                 error_string:'Please Enter how the vendor can enter the premises'
             })
-            return ;
-         
-           
+            setTimeout(() => {
+                this.setState({ loading : false});
+              }, 2000);
+            return ;  
        }
-       
-     
-   }
+       setTimeout(() => {
+        this.setState({ loading : false});
+      }, 2000);
+    }
+
+   
        this.props.ADD_INFORMATION(this.state);
-      
         this.props.change_step(val);
           if(this.state.loc_address != ''){
             this.props.changeLocation(this.state);
-            // setTimeout(() => {
-            //     this.setState({ loading : false});
-            //   }, 2000);
             this.props.change_step(4);
-            
             toast.success('Success');
            
-        }else{
+        }else
+        {
             toast.error('Please Enter You Location');
         }
+       
     }
+   
+
+
     places(place){
 
         let lat  = place.geometry.location.lat();
@@ -239,23 +246,23 @@ class AddInformation extends Component {
         this.setState({
             prem_vendor_enterance:e.target.value
         })
-        
+       
     }
     
     render() {
-        // const {loading} = this.state;
+        const {loading} = this.state;
         return (
             <div className="services-page">
                 <div id="headingTwo">
                 </div>
-                {
+                {/* {
                     this.state.loading ?
                         <div id="displayspinner text-center mt-5" style={{ display: 'block', }}>
                             <div className="spinner-border  ml-2 text-dark spinner_format" role="status">
                                 <span className="sr-only">Loading...</span>
                             </div>
                         </div>
-                        :
+                        : */}
                         <div id="collapseTwo" aria-labelledby="headingTwo" data-parent="#accordionExample">
                             <div className>
                                 {
@@ -482,14 +489,17 @@ class AddInformation extends Component {
                                     <div className="col-md-3">
                                         <button 
                                          onClick={this.Submit.bind(this, 4)} 
-                                         className="p-t-20 btn btn-success btn--radius btn--green" type="submit" id="#collapseTwo">
-                                        Next
-                                        </button>
+                                         className="p-t-20 btn btn-success btn--radius btn--green" disabled={loading} type="submit" id="#collapseTwo">
+                                         { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                                   { loading && <span >Loading...</span>}
+                                                   { !loading && <span >Next</span>}
+                               
+                                </button>
                                     </div>
                                 </div>
                             </div>
                        
-                }
+                {/* } */}
 
             </div>
         );

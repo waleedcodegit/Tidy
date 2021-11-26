@@ -990,7 +990,17 @@ class VendorController extends Controller
             ];
             return $response;
         }
-    public function create_quote(Request $request)
+    public function create_quote(Request $request){
+    $validator = Validator::make($request->all(), [
+        'price' => 'required',
+        'proposal' => 'required',
+        
+    ]);
+    if($validator->fails()){
+        $response = ['status' => 219 , 'msg' => $validator->errors()->first() , 
+        'errors' => $validator->errors()];
+        return $response;
+    }else
     {
             $quote = new VendorQuote();
             $quote->vendor_id = $request->vendor_id;
@@ -1000,10 +1010,11 @@ class VendorController extends Controller
             $quote->save();
             $response = [
                 'status' => 200,
-                'msg' => 'City added successfully', 
+                'msg' => 'Quate added successfully', 
             ];
             return $response;
      }
+    }
      public function accept_vendor_withdraw_request(Request $request){
         $withdraw = VendorWithdrawRequest::where('id',$request->id)->first();
         $vendor = Vendor::where('id',$withdraw->vendor_id)->first();

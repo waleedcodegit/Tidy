@@ -35,7 +35,7 @@ class GiftCard extends Component {
             amount: e.target.value
         }
         if(e.target.value>=501){
-           toast.error('Amount must be Between $10 and $500');
+           toast.error('Amount must be Between $10 and $500',{position: "bottom-center"});
 
         }else{
             this.setState({
@@ -103,9 +103,12 @@ class GiftCard extends Component {
                     loading:false
                 })
             }else{
-                this.setState({
-                    error_string:res.data.message
-                })
+                toast.error(res.data.message,{position: "bottom-center"});
+
+                // this.setState({
+
+                //     error_string:res.data.message
+                // })
             }
         })
         setTimeout(() => {

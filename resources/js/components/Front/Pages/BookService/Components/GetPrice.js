@@ -24,6 +24,7 @@ class GetPrice extends Component {
   }
 
   Submit(val, e) {
+    this.setState({ loading : true});
     e.preventDefault();
     this.props.select_service(this.state);
     this.props.change_step(val);
@@ -82,17 +83,17 @@ class GetPrice extends Component {
     return (
       <div className>
         <div id="headingFour">
-          {
+          {/* {
             this.state.loading ?
 
-              <div id="displayspinner text-center mt-5" style={{ display: 'block', }}>
+              <div id="displayspinner text-center mt-5" style={{ display: 'block', position:'center' }}>
                 <div className="spinner-border  ml-2 text-dark spinner_format" role="status">
                   <span className="sr-only">Loading...</span>
                 </div>
               </div>
               :
 
-              <>
+              <> */}
 
                 {
                   this.props.user.is_login ?
@@ -276,7 +277,7 @@ class GetPrice extends Component {
                                 
                                 <button onClick={this.make_booking.bind(this)} disabled={loading} className="btn btn-info btn_full">
                                 { loading && <i className= 'fa fa-refresh fa-spain'></i>}
-                                { loading && <span > loading</span>}
+                                { loading && <span >Loading...</span>}
                                 { !loading && <span > Get Quotes</span>}
                                 </button>
                               
@@ -301,10 +302,10 @@ class GetPrice extends Component {
                       }
                     </div>
                 }
-              </>
-          }
-        </div>
-      </div>
+               {/* </> */}
+          {/* } */}
+         </div>
+      // </div>
     );
   }
 }

@@ -50,6 +50,7 @@ class EditProfile extends Component {
         })
     }
     Update_Profile(e){
+        this.setState({ loading : true});
         e.preventDefault();
         this.setState({
             loading:true
@@ -63,6 +64,9 @@ class EditProfile extends Component {
                 this.props.changeUser({is_login:true,is_apicall:true,data:res.data.customer})
             }
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
     upload_Profile_img(event) {
         const formData = new FormData();
@@ -101,6 +105,7 @@ class EditProfile extends Component {
 
     }
     render() {
+        const {loading} = this.state;
         return (
             <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             <div className="row">
@@ -160,7 +165,11 @@ class EditProfile extends Component {
                                                 :
                                                 null
                                             }
-                                            <div onClick={this.Update_Profile.bind(this)} className="input_div"><button disabled={this.state.loading} className="btn submit_button rounded btn-info">Update</button></div>
+                                            <div onClick={this.Update_Profile.bind(this)} className="input_div"><button disabled={this.state.loading} className="btn submit_button rounded btn-info">
+                                            { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                                   { loading && <span >Updating...</span>}
+                                                   { !loading && <span >Update</span>}
+                                                </button></div>
                                         </form>
                                         <div>
                                         </div>
