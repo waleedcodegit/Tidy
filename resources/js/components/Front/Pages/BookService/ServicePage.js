@@ -20,6 +20,7 @@ class ServicePage extends Component {
          })
      }
     render() {
+        const {loading} = this.state;
         return (
 
             <div>
@@ -38,7 +39,11 @@ class ServicePage extends Component {
                                         <a onClick={()=>{
                                         window.localStorage.setItem('service',this.state.category.id);
                                         window.open('/book-service/','_self')
-                                        }} className="bk-book">Book Now</a>
+                                        }}  disabled={loading} className="bk-book">
+                                                { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                                { loading && <span > Loading...</span>}
+                                                 { !loading && <span > Book Now</span>}
+                                           </a>
                                     </div>
                                 </div>
                                 <div className="col-lg-4 col-sm-12">

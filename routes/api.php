@@ -72,7 +72,7 @@ Route::post('get_withdraw_amount_request','Vendor\VendorController@get_withdraw_
 
 //Bookings
 Route::post('/get-pending-bookings' , 'Vendor\VendorController@get_pending_bookings');
-Route::post('/assign-employee-booking' , 'Vendor\VendorController@assign_employee_booking');
+// Route::post('/assign-employee-booking' , 'Vendor\VendorController@assign_employee_booking');
 Route::post('/get_all_bookings' , 'Vendor\VendorController@get_all_bookings');
 Route::post('/get-vendors' , 'Vendor\VendorController@get_vendors');
 // Route::post('/delete-employee' , 'Vendor\EmployeeController@delete_employee');

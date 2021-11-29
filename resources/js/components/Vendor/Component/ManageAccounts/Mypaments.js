@@ -96,7 +96,7 @@ class Mypaments extends Component {
                  {
           this.state.loading ?
          
-              <div id="displayspinner text-center mt-5 " className="text-center" style={{ display: 'block', }}>
+              <div id="displayspinner text-center mt-5 " className="text-center" style={{ display: 'block', position:'center' }}>
                   <div className="spinner-border  ml-2 text-dark spinner_format" role="status">
                       <span className="sr-only">Loading...</span>
                   </div>

@@ -12,7 +12,8 @@ class CustomerCardIntegration extends Component {
             expiry_year: '',
             expiry_month: '',
             error_string:'',
-            customer_id:this.props.user.data.id
+            customer_id:this.props.user.data.id,
+            loading:false,
         };
     }
     credit_card_number(e) {
@@ -41,6 +42,7 @@ class CustomerCardIntegration extends Component {
         })
     }
     validate_card() {
+        this.setState({ loading : true});
         Axios.post('/api/update_customer_card', this.state).then(res => {
             console.log(res);
             if (res.data.status) {
@@ -56,8 +58,12 @@ class CustomerCardIntegration extends Component {
                 error_string:'Your Payment method is declined please try another.'
             })
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
     render() {
+        const {loading} = this.state;
         return (
             <div className="card p-3 col-sm-12 mt-5">
             <div className="col-sm-12  p-3">
@@ -101,7 +107,12 @@ class CustomerCardIntegration extends Component {
                 :null
             }
             <div className="col-sm-12  text-right p-3">
-               <button onClick={this.validate_card.bind(this)} className="btn btn-success ">Save</button>
+               <button onClick={this.validate_card.bind(this)}disabled={loading} className="btn btn-success ">
+               { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                            { loading && <span > Loading...</span>}
+                                            { !loading && <span >Save</span>}
+                                                    </button>
+                   {/* </button> */}
             </div>
             </div>
         );

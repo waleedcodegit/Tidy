@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Swal from 'sweetalert2';
 import {Link} from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 class BookingsFeed extends Component {
     constructor(props) {
@@ -47,19 +48,21 @@ class BookingsFeed extends Component {
         Axios.post('/api/accept_booking', data).then(res=>{
             console.log(res);
             if(res.data.status == 200){
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Booking Accepted',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
+                toast.success('Booking Accepted',{position:'bottom-center'});
+                // Swal.fire({
+                //     icon: 'success',
+                //     title: 'Booking Accepted',
+                //     showConfirmButton: false,
+                //     timer: 1500
+                // })
             } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: res.data.msg,
-                    showConfirmButton: false,
-                    timer: 1500
-                })
+                toast.error(res.data.msg);
+                // Swal.fire({
+                //     icon: 'error',
+                //     title: res.data.msg,
+                //     showConfirmButton: false,
+                //     timer: 1500
+                // })
             }
         })
         setTimeout(() => {

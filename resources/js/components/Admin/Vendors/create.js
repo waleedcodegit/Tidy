@@ -22,7 +22,7 @@ class CreateVendor extends Component {
             password: '',
             address: '',
             phone: '',
-            phonenumber:'',
+            phonenumber:'+61',
             dob: '',
             australian_business_number: '',
             type_of_business: 'sole',
@@ -194,9 +194,7 @@ class CreateVendor extends Component {
                 check = true;
             }
         })
-        setTimeout(() => {
-            this.setState({ loading : false});
-          }, 2000);
+        
         if (check) {
             this.setState({
                 step: 3,
@@ -210,7 +208,9 @@ class CreateVendor extends Component {
             })
         }
         
-
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
     
     submit_services() {
@@ -625,9 +625,9 @@ class CreateVendor extends Component {
                                                                                 <div className="row">
                                                                                 <div className="col-sm-3">
                                             
-                                                                           <select  onChange={this.phonenumber.bind(this)} type="number"  className="form-control auth_input_box">
+                                                                           <select value={this.state.phonenumber || ""}  onChange={this.phonenumber.bind(this)} type="number"  className="form-control auth_input_box">
                                                                          <option>+61</option>
-                                                                      <option>+61</option>
+                                                                      {/* <option>+61</option> */}
                                                                             </select>
                                                                                     </div>
                                                                                     <div className="col-sm-9">
@@ -687,7 +687,7 @@ class CreateVendor extends Component {
                                                                         : null
                                                                 }
                                                                     <div className="panel-footer text-right">
-                                                                        <button onClick={this.validate_vendor.bind(this)}  className="btn btn-success" type="submit">
+                                                                        <button onClick={this.validate_vendor.bind(this)} disabled={loading} className="btn btn-success" type="submit">
                                                                             {/* {
                                                                                 this.state.btn_loading ?
                                                                                     <div id="displayspinner" style={{ display: 'block', }}>
@@ -697,10 +697,10 @@ class CreateVendor extends Component {
                                                                                     </div>
                                                                                 : <>Next</>
                                                                             } */}
-                                                                             {/* { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                                                             { loading && <i className= 'fa fa-refresh fa-spain'></i>}
                                                                              { loading && <span > Loading...</span>}
-                                                                             Next  { !loading && <span >Next</span>} */}
-                                                                             Next </button>
+                                                                              { !loading && <span >Next</span>}
+                                                                             </button>
                                                                     </div>
                                                             </form>
                                                         </div>
@@ -774,10 +774,10 @@ class CreateVendor extends Component {
                                                                                         </div>
                                                                                         : <>Next</>
                                                                                 } */}
-                                                                                {/* { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                                                                { loading && <i className= 'fa fa-refresh fa-spain'></i>}
                                                                              { loading && <span > Loading...</span>}
-                                                                                 { !loading && <span >Next</span>} */}
-                                                                                 Next </button>
+                                                                                 { !loading && <span >Next</span>}
+                                                                                  </button>
                                                                            
                                                                         </div>
 

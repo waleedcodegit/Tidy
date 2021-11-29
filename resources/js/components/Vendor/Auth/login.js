@@ -15,7 +15,8 @@ class Login extends Component {
             error_string:'',
             services:[],
             error_string:'',
-            vendorsss: ''
+            vendorsss: '',
+            loading:false,
 
         };
     }
@@ -30,6 +31,7 @@ class Login extends Component {
         })
     }
     login(e){
+        this.setState({ loading : true});
         e.preventDefault();
         Axios.post('/api/vendor-login',this.state).then(res=>{
             this.props.vendorObject({
@@ -46,8 +48,12 @@ class Login extends Component {
                 })
             }
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
     render() {
+        const {loading} = this.state;
         return (
             <div >
                         <div className="panel">
@@ -83,7 +89,12 @@ class Login extends Component {
                                             :null
                                         }
                                         <div className="col-sm-12">
-                                        <button onClick={this.login.bind(this)} className="btn btn-info text-center sub_btn col-sm-12" type="submit">Login</button>
+                                        <button onClick={this.login.bind(this)} disabled={loading} className="btn btn-info text-center sub_btn col-sm-12" type="submit">
+                                        { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                            { loading && <span > Loading...</span>}
+                                            { !loading && <span >Login</span>}
+                                                    </button>
+                                           
                                         </div>
                                         
                                        <div className="col-sm-12">

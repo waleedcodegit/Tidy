@@ -305,7 +305,7 @@ class GetPrice extends Component {
                {/* </> */}
           {/* } */}
          </div>
-      // </div>
+       </div>
     );
   }
 }

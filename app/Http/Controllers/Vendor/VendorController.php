@@ -377,6 +377,7 @@ class VendorController extends Controller
             'address' => 'required',
             'email' => 'required|email|unique:vendors,email|max:255',
             'phone' => 'required|min:09|max:09',
+            'phonenumber'=>'required',
             'dob' => 'required',
             'australian_business_number' => 'required|min:11|max:11',
             'type_of_business' => 'required',
@@ -964,6 +965,16 @@ class VendorController extends Controller
         ]);
     }
     public function assign_employee_booking(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'selected_employee' => 'required',
+            // 'proposal' => 'required',
+            
+        ]);
+        if($validator->fails()){
+            $response = ['status' => 219 , 'msg' => $validator->errors()->first() , 
+            'errors' => $validator->errors()];
+            return $response;
+        }else{
         $ass_employee = new Empbooking();
         $ass_employee -> employee_id = $request -> selected_employee;
         $ass_employee -> booking_id = $request -> booking_id;
@@ -974,6 +985,7 @@ class VendorController extends Controller
             'message' => "Assinged To Employee Successfull",
         ]);
     }
+}
     
     
         public function accept_booking(Request $request) {

@@ -106,10 +106,11 @@ class Addwithdraw extends Component {
             //     showConfirmButton: false,
             //     timer: 1500
             // })
-            setTimeout(() => {
-                this.setState({ loading : false});
-              }, 2000);
+            
     }
+    setTimeout(() => {
+        this.setState({ loading : false});
+      }, 2000);
 }
     
 
@@ -117,7 +118,7 @@ class Addwithdraw extends Component {
         const {loading} = this.state;
         return (
             <div>
-                 {
+                 {/* {
               this.state.loading ?
          
               <div id="displayspinner text-center mt-5 " className="text-center" style={{ display: 'block', }}>
@@ -125,7 +126,7 @@ class Addwithdraw extends Component {
                       <span className="sr-only">Loading...</span>
                   </div>
               </div>
-              :
+              : */}
                 <section className="section">
                     <div className="section-body">
                         <h2>Request Withdraw </h2>
@@ -134,7 +135,7 @@ class Addwithdraw extends Component {
                                         <div className="col-sm-12">
                                     <div className="form-group">
                                         <label htmlFor="name">Enter Amount</label>
-                                        <input value={this.state.withdraw} onChange={this.getWithdraw.bind(this)} className="form-control"  type="text"></input>
+                                        <input value={this.state.withdraw} onChange={this.getWithdraw.bind(this)} className="form-control"  type="number"></input>
                                     </div>
                                     
                                     <div className="col-sm-12">
@@ -155,7 +156,7 @@ class Addwithdraw extends Component {
                         </div>
                     </div></div>
                 </section>
-    }
+    
             </div>
                       
         );

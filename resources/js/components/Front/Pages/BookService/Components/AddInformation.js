@@ -17,7 +17,6 @@ class AddInformation extends Component {
             questions: [],
             bathrooms: 1,
             bedrooms: 1,
-            loading: false,
             category:{},
             setting:{},
             answers:[],
@@ -36,7 +35,7 @@ class AddInformation extends Component {
             long:0,
             place:'',
             loc_address:'',
-            // loading: false,
+            loading: false,
         };
     }
 
@@ -85,12 +84,8 @@ class AddInformation extends Component {
               }, 2000);
             return ;  
        }
-       setTimeout(() => {
-        this.setState({ loading : false});
-      }, 2000);
+ 
     }
-
-   
        this.props.ADD_INFORMATION(this.state);
         this.props.change_step(val);
           if(this.state.loc_address != ''){
@@ -102,7 +97,9 @@ class AddInformation extends Component {
         {
             toast.error('Please Enter You Location');
         }
-       
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
    
 
@@ -477,7 +474,7 @@ class AddInformation extends Component {
             </div>
             </div>
                                 
-                                <div className="divider-line" />
+                                {/* <div className="divider-line" /> */}
                                 <div className="row">
                                     <div className="col-md-3">
                                         <button onClick={this.Submit.bind(this, 1)}  className="p-t-20 btn btn-info btn--radius btn--green" type="submit" id="#collapseTwo">

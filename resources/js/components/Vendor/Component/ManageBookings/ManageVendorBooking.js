@@ -2,6 +2,7 @@ import Axios from 'axios';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Swal from 'sweetalert2';
+import toast from 'react-hot-toast';
 
 class VendorBookingDetails extends Component {
     constructor(props) {
@@ -41,16 +42,16 @@ class VendorBookingDetails extends Component {
         Axios.post('/api/assign-employee-booking',payload).then(res=>{
             console.log(payload);
             if(res.data.status == true){
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Assigned to employee Successfully',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
+                toast.success('Assigned to employee Successfully',{position: "bottom-center"});
+                // Swal.fire({
+                //     icon: 'success',
+                //     title: 'Assigned to employee Successfully',
+                //     showConfirmButton: false,
+                //     timer: 1500
+                // })
             }else{
-                this.setState({
-                    error_string:res.data.msg
-                })
+                toast.error(res.data.msg,{position: "bottom-center"});
+               
             }
         })
     }

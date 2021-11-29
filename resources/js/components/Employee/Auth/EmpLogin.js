@@ -28,6 +28,7 @@ class EmpLogin extends Component {
         })
     }
     login(e){
+        this.setState({ loading : true});
         e.preventDefault();
         Axios.post('/api/employee-login',this.state).then(res=>{
             this.props.employeeObject({
@@ -43,8 +44,12 @@ class EmpLogin extends Component {
                 })
             }
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
     render() {
+        const {loading} = this.state;
         return (
             
                     <form>
@@ -69,10 +74,14 @@ class EmpLogin extends Component {
                                 {
                                     this.state.error_string != '' ?
                                     <p className="text-danger text-center">{this.state.error_string}</p>
-                                    :null
+                                    :null 
                                 }
                                 <div className="col-sm-12">
-                                <button onClick={this.login.bind(this)} className="btn btn-info text-center sub_btn col-sm-12" type="submit">Login</button>
+                                <button onClick={this.login.bind(this)}  disabled={loading} className="btn btn-info text-center sub_btn col-sm-12" type="submit">
+                                { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                            { loading && <span > Loading...</span>}
+                                            { !loading && <span >Login</span>}
+                                                    </button>
                                 </div>
                             </div>
                         </div>

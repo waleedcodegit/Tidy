@@ -54,7 +54,7 @@ class Profile extends Component {
             last_address_updater:0,
             vendor_timings:[],
             strip_account:'',
-            loading:true,
+            loading:false,
         };
     }
     
@@ -179,6 +179,7 @@ class Profile extends Component {
         })
     }
     update(e){
+        this.setState({ loading : true});
         e.preventDefault();
         Axios.post('/api/update_vendor_profile',this.state).then(res=>{
             if(res.data.status == 200){
@@ -189,6 +190,9 @@ class Profile extends Component {
                 toast.error(res.data.message,{position: "bottom-center"});
             }    
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
     delete_vendor_service(id){
         Axios.post('/api/delete_vendor_service',{id:id}).then(res=>{
@@ -236,6 +240,7 @@ class Profile extends Component {
         })
     }
     validate_card() {
+        this.setState({ loading : true});
         Axios.post('/api/update_vendor_card', this.state).then(res => {
             console.log(res);
             if (res.data.status) {
@@ -252,8 +257,12 @@ class Profile extends Component {
             }
 
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
     AddAddress(){
+        this.setState({ loading : true});
         let payload = {address:this.state.loc_address,lat:this.state.lat,long:this.state.long,radius:this.state.radius,vendor_id:this.props.match.params.id};
         Axios.post('/api/add_vendor_address',this.state).then(res=>{
             if(res.data.status){
@@ -263,6 +272,9 @@ class Profile extends Component {
                 toast.error(res.data.message);
             }
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
 
     }
     places(place){
@@ -355,6 +367,7 @@ class Profile extends Component {
     }
 
     update_timings(){
+        this.setState({ loading : true});
         let payload = {
             vendor_id:this.props.vendor.data.vendor_id,
             vendor_timings:this.state.vendor_timings
@@ -362,11 +375,15 @@ class Profile extends Component {
         Axios.post('/api/update_vendor_timings',payload).then(res=>{
             toast.success('Your service timings are updated successfully.')
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
     render() {
+        const {loading} = this.state;
         return (
             <div>
-            {
+            {/* {
                 this.state.loading ?
                
                     <div id="displayspinner text-center mt-5 " className="text-center" style={{ display: 'block', }}>
@@ -374,7 +391,7 @@ class Profile extends Component {
                             <span className="sr-only">Loading...</span>
                         </div>
                     </div>
-                    :
+                    : */}
             <section className="section">
                 <div className="section-body">
                     <div className="row mt-sm-4">
@@ -534,7 +551,12 @@ class Profile extends Component {
                                                     :null
                                                 }
                                                 <div className="card-footer text-right">
-                                                    <button onClick={this.update.bind(this)} className="btn btn-primary">Save Changes</button>
+                                                     <button onClick={this.update.bind(this)}  disabled={loading} className="btn btn-primary">
+                                                      { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                                           { loading && <span > Loading...</span>}
+                                                         { !loading && <span > Save Changes</span>}
+                                                 </button>
+                                                      
                                                 </div>
                                             </form>
                                         </div>
@@ -611,7 +633,12 @@ class Profile extends Component {
                                                 </div>
                                             </form>
                                             <div className="card-footer text-right">
-                                                    <button onClick={this.update_timings.bind(this)} className="btn btn-primary">Save Changes</button>
+                                                    <button onClick={this.update_timings.bind(this)} disabled={loading} className="btn btn-primary">
+                                                    { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                                           { loading && <span > Loading...</span>}
+                                                         { !loading && <span > Save Changes</span>}
+                                                 </button>
+                                                        {/* Save Changes</button> */}
                                                 </div>
                                         </div>
                                         <div className="tab-pane show  fade_" id="services" role="tabpanel" aria-labelledby="profile-tab3">
@@ -670,7 +697,12 @@ class Profile extends Component {
                                                                 <input value={this.state.radius || ""} onChange={this.radius.bind(this)} type="number" placeholder="Enter Radius" className="form-control" />
                                                             </div>
                                                         <div>
-                                                            <button onClick={this.AddAddress.bind(this)} className="btn btn-info" style={{width:'100%',borderRadius:'0px'}}>Add Address</button>
+                                                            <button onClick={this.AddAddress.bind(this)} disabled={loading} className="btn btn-info" style={{width:'100%',borderRadius:'0px'}}>
+                                                            { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                                           { loading && <span > Loading...</span>}
+                                                           { !loading && <span > Add Address</span>}
+                                                           </button>
+                                                                {/* Add Address</button> */}
                                                                 
                                                             
                                                         </div>
@@ -801,7 +833,12 @@ class Profile extends Component {
                                                                                             :null
                                                                                         }
                                                                                         <div className="col-sm-12  text-right p-3">
-                                                                                           <button onClick={this.validate_card.bind(this)} className="btn btn-success ">Save</button>
+                                                                                           <button onClick={this.validate_card.bind(this)}  disabled={loading} className="btn btn-success ">
+                                                                                        { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                                                                        { loading && <span > Loading...</span>}
+                                                                                        { !loading && <span >Save</span>}
+                                                                                                </button>
+                                                                                              
                                                                                         </div>
                                                                                         </div>
                                                     :null
@@ -820,7 +857,7 @@ class Profile extends Component {
                     </div>
                 </div>
             </section>
-    }
+    {/* } */}
      </div>
         );
     }

@@ -10,6 +10,7 @@ import '../../Vendor/admin.css';
 import { MAP_PLACES_API_KEY } from '../../Configs/Api';
 
 import Autocomplete from "react-google-autocomplete";
+import toast from 'react-hot-toast';
 
 class SignUp extends Component {
     constructor(props) {
@@ -24,6 +25,7 @@ class SignUp extends Component {
             password: '',
             address: '',
             phone: '',
+            phonenumber:'+61',
             dob: '',
             australian_business_number: '',
             type_of_business: 'sole',
@@ -105,6 +107,11 @@ class SignUp extends Component {
     phone(e) {
         this.setState({
             phone: e.target.value
+        })
+    }
+    phonenumber(e) {
+        this.setState({
+            phonenumber: e.target.value
         })
     }
     dob(e) {
@@ -359,19 +366,21 @@ class SignUp extends Component {
                     btn1_prg: false,
                     ic: temp
                 })
-                Swal.fire({
-                    icon: 'success',
-                    title: 'File Uploaded Successfully',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
+                toast.success('File Uploaded Successfully',{position:'bottom-center'});
+                // Swal.fire({
+                //     icon: 'success',
+                //     title: 'File Uploaded Successfully',
+                //     showConfirmButton: false,
+                //     timer: 1500
+                // })
             } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: res.data.msg,
-                    showConfirmButton: false,
-                    timer: 1500
-                })
+                toast.error(res.data.msg,{position:'bottom-center'});
+                // Swal.fire({
+                //     icon: 'error',
+                //     title: res.data.msg,
+                //     showConfirmButton: false,
+                //     timer: 1500
+                // })
             }
         })
 
@@ -405,19 +414,21 @@ class SignUp extends Component {
                     btn2_prg: false,
                     Npc: temp
                 })
-                Swal.fire({
-                    icon: 'success',
-                    title: 'File Uploaded Successfully',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
+                toast.success('File Uploaded Successfully',{position:'bottom-center'});
+                // Swal.fire({
+                //     icon: 'success',
+                //     title: 'File Uploaded Successfully',
+                //     showConfirmButton: false,
+                //     timer: 1500
+                // })
             } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: res.data.msg,
-                    showConfirmButton: false,
-                    timer: 1500
-                })
+                toast.error(res.data.msg,{position:'bottom-center'});
+                // Swal.fire({
+                //     icon: 'error',
+                //     title: res.data.msg,
+                //     showConfirmButton: false,
+                //     timer: 1500
+                // })
             }
         })
 
@@ -450,19 +461,21 @@ class SignUp extends Component {
                     btn2_prg: false,
                     photo_id: temp
                 })
-                Swal.fire({
-                    icon: 'success',
-                    title: 'File Uploaded Successfully',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
+                toast.success('File Uploaded Successfully',{position:'bottom-center'});
+                // Swal.fire({
+                //     icon: 'success',
+                //     title: 'File Uploaded Successfully',
+                //     showConfirmButton: false,
+                //     timer: 1500
+                // })
             } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: res.data.msg,
-                    showConfirmButton: false,
-                    timer: 1500
-                })
+                toast.error(res.data.msg,{position:'bottom-center'});
+                // Swal.fire({
+                //     icon: 'error',
+                //     title: res.data.msg,
+                //     showConfirmButton: false,
+                //     timer: 1500
+                // })
             }
         })
 
@@ -470,9 +483,7 @@ class SignUp extends Component {
     validate_services() {
         this.setState({ loading : true});
         
-        setTimeout(() => {
-            this.setState({ loading : false});
-          }, 2000);
+      
         let payload = {
             services: this.state.services,
             vendor_id: this.props.match.params.vendor_id
@@ -492,16 +503,16 @@ class SignUp extends Component {
             }, function () {
                 window.scrollTo(0, 0);
             })
-            setTimeout(() => {
-                this.setState({ loading : false});
-              }, 2000);
+          
         } else {
             this.setState({
                 error_string: 'Please Select at least One Service'
             })
            
         }
-      
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
 
     }
     change_step(step) {
@@ -564,7 +575,7 @@ class SignUp extends Component {
         })
     }
     async validate_documents() {
-        this.setState({ loading : true});
+        // this.setState({ loading : true});
         this.setState({
             error_string: ''
         })
@@ -573,26 +584,26 @@ class SignUp extends Component {
                 this.setState({
                     error_string: 'Please Upload Public Insurance Certificate'
                 })
-                setTimeout(() => {
-                    this.setState({ loading : false});
-                  }, 2000);
+                // setTimeout(() => {
+                //     this.setState({ loading : false});
+                //   }, 2000);
             }
         } else if (this.state.Npc.length == 0) {
             if (this.state.type_of_business == 'sole') {
                 this.setState({
                     error_string: 'Please Upload National Police Check'
                 })
-                setTimeout(() => {
-                    this.setState({ loading : false});
-                  }, 2000);
+                // setTimeout(() => {
+                //     this.setState({ loading : false});
+                //   }, 2000);
             }
         } else if (this.state.photo_id.length == 0) {
             this.setState({
                 error_string: 'Please Upload  Photo Id'
             })
-            setTimeout(() => {
-                this.setState({ loading : false});
-              }, 2000);
+            // setTimeout(() => {
+            //     this.setState({ loading : false});
+            //   }, 2000);
         } else {
             this.setState({
                 step: 5,
@@ -600,16 +611,16 @@ class SignUp extends Component {
             }, function () {
                 window.scrollTo(0, 0);
             })
-            setTimeout(() => {
-                this.setState({ loading : false});
-              }, 2000);
+            // setTimeout(() => {
+            //     this.setState({ loading : false});
+            //   }, 2000);
         }
         if (this.state.insurance_certificate_type == 'admin') {
             await this.validate_card();
         }
-        setTimeout(() => {
-            this.setState({ loading : false});
-          }, 2000);
+        // setTimeout(() => {
+        //     this.setState({ loading : false});
+        //   }, 2000);
     }
     submit_request() {
         Axios.post('/api/submit_vendor_request', this.state).then(res => {
@@ -782,12 +793,19 @@ class SignUp extends Component {
                                                                         <input onChange={this.password.bind(this)} type="password" className="form-control" />
                                                                     </div>
                                                                 </div> */}
-                                                                <div className="col-sm-12">
-                                                                    <div className="form-group">
-                                                                        <label className="control-label">Phone</label>
-                                                                        <input value={this.state.phone || ""} onChange={this.phone.bind(this)} type="phone" name="phone" className="form-control" />
-                                                                    </div>
+                                                           <div className="col-sm-12">
+                                                              <label className="input_label">Phone Number</label>
+                                                                          <div class="row">
+                                                                <div class="col-sm-2">
+                                                                <select  onChange={this.phonenumber.bind(this)} value={this.state.phonenumber || ""} type="number"  className="form-control auth_input_box">
+                                                                <option value={'+61'}>+61</option>
+                                                                </select>
                                                                 </div>
+                                                                <div class="col-sm-10">
+                                                                <input onChange={this.phone.bind(this)} type="number" class="form-control auth_input_box"/>
+                                                                </div>
+                                                                </div>
+                                                            </div>
                                                                 <div className="col-sm-12">
                                                                     <div className="form-group">
                                                                         <label className="control-label">Date of Birth</label>
@@ -849,7 +867,7 @@ class SignUp extends Component {
                                                          className="btn btn-success" type="submit" id="#collapseTwo">
 
                                                               { loading && <i className= 'fa fa-refresh fa-spain'></i>}
-                                                            { loading && <span > loading</span>}
+                                                            { loading && <span > Loading</span>}
                                                            { !loading && <span > Next</span>}
                                                         </button>
                                                             {/* <button onClick={this.validate_vendor.bind(this)} className="btn btn-success   " type="submit">
@@ -1215,15 +1233,15 @@ class SignUp extends Component {
                                                                                  Next
                                                                         
                                                                     </button> */}
-                                                                    <button onClick={this.validate_documents.bind(this)}  disabled={loading} 
+                                                                    <button onClick={this.validate_documents.bind(this)} 
                      
                                                               className="p-t-20 btn btn-success btn--radius btn--green" type="submit" id="#collapseTwo">
                      
-                                                             { loading && <i className= 'fa fa-refresh fa-spain'></i>}
-                                                                          { loading && <span > loading</span>}
-                                                                          { !loading && <span > Next</span>}
+                                                             {/* { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                                                          { loading && <span > Loading</span>}
+                                                                          { !loading && <span > Next</span>} */}
      
-                                                                               </button>
+                                                                          Next </button>
                                                                 </div>
 
                                                             </div>

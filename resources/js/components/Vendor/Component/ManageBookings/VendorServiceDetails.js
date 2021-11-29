@@ -145,11 +145,8 @@ class VendorServiceDetails extends Component {
 
     render() {
         return (<div>
-            <section className="blog-section padding pr-sec">
-                <div className="container">
-                    <div>
-                        {/* <h1 className="text-center ">Booking Details</h1> */}
-                    </div>
+        
+                
                     {
                         this.state.loading ?
 
@@ -159,6 +156,8 @@ class VendorServiceDetails extends Component {
                                 </div>
                             </div>
                             :
+                            <section className="blog-section padding pr-sec">
+                            <div className="container">
                             <div className="container">
                                 <div className="blog-wrap row">
                                     <div className="col-lg-12 sm-padding">
@@ -437,10 +436,12 @@ class VendorServiceDetails extends Component {
                                     </div>
                                 </div>
                             </div>
+                            </div>
+                            </section>
+       
                     }
                 </div>
-            </section>
-        </div>
+      
         );
     }
 }
