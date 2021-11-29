@@ -31,7 +31,7 @@ class EmployeeController extends Controller
     }
 
     public function show(Request $request){
-        $employeelist = Employee::where('vendor_id',$request->id)->get();
+        $employeelist = Employee::where('vendor_id',$request->id)->first();
         if($employeelist){
         $response=[
             'status' => 200,

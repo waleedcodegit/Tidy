@@ -19,6 +19,7 @@ class EmpProfile extends Component{
 
     componentDidMount() {
         Axios.post('/api/get-employee-info/'+this.props.employee.data.employee_id).then(res=>{
+            console.log(res);
             if(res.data.status == 200){
                 this.setState({
                     employee: res.data.data,
@@ -90,7 +91,7 @@ class EmpProfile extends Component{
                             <div className="card author-box">
                                 <div className="card-body">
                                     <div className="author-box-center">
-                                        <img alt="image" src={img_baseurl + this.state.employee.image} className="rounded-circle author-box-picture" />
+                                        <img alt="image" src={img_baseurl + this.state.employee.image} style={{width:'200px'}} className="rounded-circle author-box-picture" />
                                         <div className="clearfix" />
                                         <div className="author-box-name">
                                             <a href="#">{this.state.employee.name}</a>

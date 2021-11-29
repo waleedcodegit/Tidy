@@ -3,6 +3,7 @@ import { data } from 'jquery';
 import React, { Component } from 'react';
 import toast from 'react-hot-toast';
 import CustomerVendorChat from './CustomerVendorChat';
+import {img_baseurl, MAP_PLACES_API_KEY} from '../../../../Configs/Api';
 
 class BookingDetails extends Component {
     constructor(props) {
@@ -214,6 +215,9 @@ class BookingDetails extends Component {
                                 <div className="vendor-detail">
                                     {
                                         this.state.booking.service.residential_type == 0  && this.state.booking.vendor_status != 1 && this.state.quotes.length != 0 ?
+                                        <div className="card">
+                                        <div className="detl-section">
+                                            
                                         <div className="vendor-qote">
                                         <h3>Vendor Quotes</h3>
                                         <div className="divid-line" />
@@ -224,14 +228,15 @@ class BookingDetails extends Component {
                                                         
                                                         <div className="col-md-2">
                                                             <div className="qote-img">
-                                                                <img src="img/Worker-1.jpg" className="qote-thumb" />
+                                                            <img alt="image" src={img_baseurl + data.vendor.image} style={{width:'200px'}} className="rounded-circle author-box-picture" />
+                                                                {/* <img src="img/Worker-1.jpg" className="qote-thumb" /> */}
                                                             </div>
                                                         </div>
                                                         <div className="col-md-7">
                                                             <div className="qote-section">
-                                                                <h2> {data.vendor.first_name} </h2>
-                                                                <p> {data.vendor.company_name} </p>
-                                                                <p> {data.vendor.address} </p>
+                                                                <h2>Vendor Name: {data.vendor.first_name} </h2>
+                                                                <h2> Company Name: {data.vendor.company_name} </h2>
+                                                                <h2> Address: {data.vendor.address} </h2>
                                                                 <span className="fa fa-star checked-star" />
                                                                 <span className="fa fa-star checked-star" />
                                                                 <span className="fa fa-star checked-star" />
@@ -242,7 +247,7 @@ class BookingDetails extends Component {
                                                         </div>
                                                         <div className="col-md-3">
                                                         <div className="qote-price">
-                                                            <span>${data.quote} </span>
+                                                            <span style={{margin:"0px",fontSize:"40px" , color:"#28a745"}}>${data.quote} </span>
                                                             <a onClick={this.accept_vendor_quote.bind(this,data.id)} className="btn bk-btn btn-success">Accept</a>
                                                         </div>
                                                         </div>
@@ -251,6 +256,8 @@ class BookingDetails extends Component {
                                             })
                                         }
                                         
+                                    </div>
+                                    </div>
                                     </div>
                                     :null
                                     // <div className="detl-section">
