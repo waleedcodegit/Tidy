@@ -80,7 +80,10 @@ class Bookingdetails extends Component {
                                     <tbody>
                                        
                                                         <td>{this.state.booking.booking_type == 1 ? 'Residential Service' : 'Business Service' }</td>
-                                                        <td>{this.state.booking.sub_service.name}</td>
+                                                        <td>{this.state.booking.sub_service != null ?
+                                                        this.state.booking.sub_service.name
+                                                        : 'No Sub Service'
+                                                    }</td>
                                                            <td>{this.state.booking.date}</td>
                                                            <td>{this.state.booking.booking_type == 1 ? 'One Time' : 'Recurring'}</td>
                                                                <td>{this.state.booking.information.resident_type}</td>

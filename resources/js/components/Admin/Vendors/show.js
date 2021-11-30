@@ -43,7 +43,7 @@ class ShowVendor extends Component {
             msg:'fff'
         }
         Axios.post(`/api/vendor-info/${this.props.match.params.id}`,data, Configs).then(res => {
-            console.log(res.data.data.status);
+            console.log(res.data.data);
             if(res.data.status == 200) {
                 this.setState({
                     vendor_id: res.data.data.id,
@@ -309,7 +309,8 @@ class ShowVendor extends Component {
                                                         </div>
                                                     )
                                                 })
-                                            }                                            
+                                            }  
+                                                                                    
                                         </div>
                                         <div id="demo-lft-tab-5" className="tab-pane fade">
                                             <p className="text-main text-semibold">Employees</p>

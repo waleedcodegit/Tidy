@@ -36,12 +36,17 @@ class BookingDetails extends Component {
         })
     }
     accept_vendor_quote(id){
+        this.setState({ loading : true});
         Axios.post('/api/accept_vednor_request',{quote_id:id}).then(res=>{
             toast.success('Vendor Quote is Accepted');
             window.location.reload();
         })
+        setTimeout(() => {
+            this.setState({ loading : false});
+          }, 2000);
     }
     render() {
+        const {loading} = this.state;
         return (<div>
             <section className="blog-section padding pr-sec">
                 <div className="container">
@@ -248,7 +253,11 @@ class BookingDetails extends Component {
                                                         <div className="col-md-3">
                                                         <div className="qote-price">
                                                             <span style={{margin:"0px",fontSize:"40px" , color:"#28a745"}}>${data.quote} </span>
-                                                            <a onClick={this.accept_vendor_quote.bind(this,data.id)} className="btn bk-btn btn-success">Accept</a>
+                                                            <a onClick={this.accept_vendor_quote.bind(this,data.id)} disabled={loading} className="btn bk-btn btn-success"> 
+                                                            { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                                      { loading && <span > Loading...</span>}
+                                                       { !loading && <span >Accept</span>}
+                                                            </a>
                                                         </div>
                                                         </div>
                                                     </div>
