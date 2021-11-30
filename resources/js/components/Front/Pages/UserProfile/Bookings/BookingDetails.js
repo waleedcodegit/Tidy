@@ -252,14 +252,15 @@ class BookingDetails extends Component {
                                                         </div>
                                                         <div className="col-md-3">
                                                         <div className="qote-price">
-                                                            <span style={{margin:"0px",fontSize:"40px" , color:"#28a745"}}>${data.quote} </span>
+                                                            <span style={{margin:"0px",fontSize:"35px" , color:"#28a745"}}>${data.quote} </span>
                                                             <a onClick={this.accept_vendor_quote.bind(this,data.id)} disabled={loading} className="btn bk-btn btn-success"> 
                                                             { loading && <i className= 'fa fa-refresh fa-spain'></i>}
                                                       { loading && <span > Loading...</span>}
-                                                       { !loading && <span >Accept</span>}
+                                                       { !loading && <span>Accept</span>}
                                                             </a>
                                                         </div>
                                                         </div>
+                                                        <div className="divid-line" />
                                                     </div>
                                                 )
                                             })
