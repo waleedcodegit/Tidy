@@ -4,12 +4,13 @@ import {img_baseurl, img_insurance} from '../../Configs/Api';
 import Swal from 'sweetalert2';
 import { isNull } from 'lodash';
 import toast from 'react-hot-toast';
+import {Link} from 'react-router-dom';
 
-class ShowVendor extends Component {
+class CustomersBookings extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            vendor_id: '',
+            image: '',
             address: '',
             australian_business_number: '',
             business_name: '',
@@ -27,50 +28,39 @@ class ShowVendor extends Component {
             vendor_selected_services: [],
             services: [],
             vendor_docs: [],
-            customer:[],
             status: '',
-            employees: [],
-            bookings: []
+            Customer_bookings_info: [],
+            bookings: [],
+            id:this.props.match.params.id
+            
         }
     }
 
     componentDidMount() {
-        let Configs = {
-            headers: {
-                token: window.localStorage.getItem('testapistring')
-            }
-        }
-        let data ={
-            msg:'fff'
-        }
-        Axios.post(`/api/vendor-info/${this.props.match.params.id}`,data, Configs).then(res => {
-            console.log(res.data.data);
+        Axios.post(`/api/customer-info/${this.props.match.params.id}`).then(res=>{
+            console.log(res);
             if(res.data.status == 200) {
                 this.setState({
-                    vendor_id: res.data.data.id,
-                    address: res.data.data.address,
-                    australian_business_number: res.data.data.australian_business_number,
-                    business_name: res.data.data.business_name,
-                    dob: res.data.data.dob,
-                    email: res.data.data.email,
+                    id:res.data.data.id,
                     first_name: res.data.data.first_name,
-                    last_name: res.data.data.last_name,
-                    insurance_certificate: res.data.data.insurance_certificate,
-                    insurance_certificate_type: res.data.data.insurance_certificate_type,
-                    phone: res.data.data.phone,
-                    trading: res.data.data.trading,
-                    type_of_business: res.data.data.type_of_business,
-                    company_name: res.data.data.company_name,
-                    expiry_date_ins: res.data.data.expiry_date_ins,
-                    vendor_selected_services: res.data.data.vendor_selected_services,
-                    services: res.data.data.services,
-                    vendor_docs: res.data.data.vendor_doc,
-                    employees: res.data.data.employees,
-                    bookings: res.data.data.bookings,
-                    status:res.data.data.status
+                    last_name:res.data.data.last_name,
+                    email:res.data.data.email,
+                    address:res.data.data.address,
+                    image:res.data.data.image,
+                    phone: res.data.data.phone
                 })
             }
-        });
+        })
+        Axios.post(`/api/customer-bookings-info/${this.props.match.params.id}`).then(res=>{
+            console.log(res);
+            if(res.data.status == 200) {
+                this.setState({
+                    Customer_bookings_info: res.data.data,
+                })
+            }
+        })
+        
+       
     }
 
     deleteVendorSelectedServices(id) {
@@ -179,7 +169,7 @@ class ShowVendor extends Component {
                             <div className="fixed-md-250 pull-sm-left fixed-right-border">
                             <div className="text-center">
                                 <div className="pad-ver">
-                                    <img src={img_baseurl+"1.png"} className="img-lg img-circle" alt="Profile Picture" />
+                                    <img src={img_baseurl+this.state.image} className="img-lg img-circle" alt="Profile Picture" />
                                 </div>
                                 <h4 className="text-lg text-overflow mar-no">{this.state.first_name} {this.state.last_name}</h4>
                                 <p className="text-sm text-muted">{this.state.business_name}</p>
@@ -199,15 +189,8 @@ class ShowVendor extends Component {
                                 </div>
                                 <div className="pad-ver">
                                 </div>
-                               {
-                                   this.state.status == "disapproved" ?
-                                   <button className="btn btn-primary" onClick={this.vendorApproved.bind(this)}>Approve</button>
-                                   :
-                                   this.state.status == "approved" ?
-                                   <button className="btn btn-danger" onClick={this.vendorDisApproved.bind(this)}>Disapprove</button>
-                                   :
-                                   null
-                                   }
+                                <Link to ={`/admin/edit-customer/${this.state.id}`}><button className="btn btn-primary" onClick={this.vendorApproved.bind(this)}>Edit Customer</button></Link>
+                                   
                                 <p className="text-sm text-muted"></p>
                             </div>
                             </div>
@@ -219,10 +202,10 @@ class ShowVendor extends Component {
                                     <li className="active">
                                         <a data-toggle="tab" href="#demo-lft-tab-1">About Me</a>
                                     </li>
-                                    <li>
+                                    {/* <li>
                                         <a data-toggle="tab" href="#demo-lft-tab-2">Bussiness Info</a>
-                                    </li>
-                                    <li>
+                                    </li> */}
+                                    {/* <li>
                                         <a data-toggle="tab" href="#demo-lft-tab-3">Selected Services</a>
                                     </li>
                                     <li>
@@ -230,9 +213,9 @@ class ShowVendor extends Component {
                                     </li>
                                     <li>
                                         <a data-toggle="tab" href="#demo-lft-tab-5">Employees</a>
-                                    </li>
+                                    </li> */}
                                     <li>
-                                        <a data-toggle="tab" href="#demo-lft-tab-6">Vendor Bookings</a>
+                                        <a data-toggle="tab" href="#demo-lft-tab-6">Customer Bookings</a>
                                     </li>
                                 </ul>
                                     {/*Tabs Content*/}
@@ -246,10 +229,10 @@ class ShowVendor extends Component {
                                             <p>{this.state.phone}</p>
                                             <p className="text-main text-semibold">Address</p>
                                             <p>{this.state.address}</p>
-                                            <p className="text-main text-semibold">Date Of Birth</p>
-                                            <p>{this.state.dob}</p>
+                                            {/* <p className="text-main text-semibold">Date Of Birth</p>
+                                            <p>{this.state.dob}</p> */}
                                         </div>
-                                        <div id="demo-lft-tab-2" className="tab-pane fade">
+                                        {/* <div id="demo-lft-tab-2" className="tab-pane fade">
                                             <p className="text-main text-semibold">Type Of Business</p>
                                             <p>{this.state.type_of_business}</p>
                                             <p className="text-main text-semibold">Business Name</p>
@@ -265,8 +248,8 @@ class ShowVendor extends Component {
                                                 : 
                                                 <div></div>
                                             }  
-                                        </div>
-                                        <div id="demo-lft-tab-3" className="tab-pane fade">
+                                        </div> */}
+                                        {/* <div id="demo-lft-tab-3" className="tab-pane fade">
                                             <p className="text-main text-semibold">Services</p>
                                             <table id="demo-dt-basic" className="table table-striped table-bordered" cellSpacing="0" width="100%">
                                                 <thead>
@@ -299,21 +282,21 @@ class ShowVendor extends Component {
                                                     })
                                                 }
                                             </div>
-                                        </div>
-                                        <div id="demo-lft-tab-4" className="tab-pane fade">
+                                        </div> */}
+                                        {/* <div id="demo-lft-tab-4" className="tab-pane fade">
                                             {
                                                 this.state.vendor_docs.map((data,index) =>{
                                                     return(
                                                         <div key={index}>
                                                             <p className="text-main text-semibold">{data.title}</p> 
-                                                            <img src={img_insurance+data.document} style={{width:'30%'}} />
+                                                            <img src={img_insurance+data.document} />
                                                         </div>
                                                     )
                                                 })
                                             }  
                                                                                     
-                                        </div>
-                                        <div id="demo-lft-tab-5" className="tab-pane fade">
+                                        </div> */}
+                                        {/* <div id="demo-lft-tab-5" className="tab-pane fade">
                                             <p className="text-main text-semibold">Employees</p>
                                                 <table id="demo-dt-basic" className="table table-striped table-bordered" cellSpacing="0" width="100%">
                                                     <thead>
@@ -337,31 +320,33 @@ class ShowVendor extends Component {
                                                     }
                                                     </tbody>
                                                 </table>
-                                        </div>
+                                        </div> */}
                                         <div id="demo-lft-tab-6" className="tab-pane fade">
-                                            <p className="text-main text-semibold">Bookings</p>
+                                            <p className="text-main text-semibold">Customer Bookings</p>
                                             <table id="demo-dt-basic" className="table table-striped table-bordered" cellSpacing="0" width="100%">
                                                     <thead>
                                                         <tr>
                                                             <th>Sr</th>
                                                             <th>Bookings Type</th>
                                                             <th>Service Name</th>
-                                                            <th>Customer Name</th>
+                                                            <th>Vendor Name</th>
                                                             <th>Price</th>
-                                                            <th>Details</th>
+                                                            <th>Booking Details</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                     {
-                                                    this.state.bookings.map((data,index) =>{
+                                                    this.state.Customer_bookings_info.map((data,index) =>{
                                                         return(
                                                             <tr key={index}>
                                                                 <td>{index + 1}</td>
                                                                 <td>{data.booking_type == 1 ? "One Time" : "Recurring"}</td>
                                                                 <td>{data.service.name}</td>
-                                                                <td>{data.customer.first_name+' '+data.customer.last_name}</td>
-                                                                <td>{data.booking_totals}</td>
-                                                                <td><button className="btn btn-outline-success"> <i  className="fa fa-eye"> </i></button></td>
+                                                                <td>{data.vendor.first_name+' '+data.vendor.last_name}</td>
+                                                                <td>${data.booking_totals}</td>
+                                                                <td><Link to ={`/admin/customer-bookings-details/${data.id}`}>
+                                                                    <button className="btn btn-outline-success"> <i  className="fa fa-eye"> </i></button></Link>
+                                                                    </td>
                                                             </tr>
                                                         )
                                                     })
@@ -371,25 +356,9 @@ class ShowVendor extends Component {
                                         </div>
                                     </div>
                                 </div>
-
-
                             </div>
                         </div>
-                        <div className="panel-footer text-right">
-                            <div className="panel-body demo-nifty-btn">
-                                {
-                                    this.state.status == 'pending' ?
-                                    // this.state.status == 'pending' ?
-                                    <>
-                               <button className="btn btn-primary" onClick={this.vendorApproved.bind(this)}>Approve</button>
-                                <button className="btn btn-danger" onClick={this.vendorDisApproved.bind(this)}>Disapprove</button> 
-                               </>: null
-                            // <button className="btn btn-primary" onClick={this.vendorApproved.bind(this)}>Abc</button>
-                         }
-                                {/* <button className="btn btn-primary" onClick={this.vendorApproved.bind(this)}>Approve</button>
-                                <button className="btn btn-danger" onClick={this.vendorDisApproved.bind(this)}>Disapprove</button>                 */}
-                            </div>
-                        </div>
+                    
                     </div>
                 </div>
             </div>
@@ -398,4 +367,4 @@ class ShowVendor extends Component {
     }
 }
 
-export default ShowVendor;
+export default CustomersBookings;

@@ -222,6 +222,7 @@ class AuthController extends Controller
     }
 
     public function update_customer(Request $request) {
+        // return $request;
         $validator = Validator::make($request->all(), [
             'first_name' => 'required|min:3',
             'last_name' => 'required|min:3',
@@ -240,8 +241,8 @@ class AuthController extends Controller
         $user->email = $request->email;
         $user->address = $request->address;
         $user->phone = $request->phone;
-        // $user->status = $request->status;
-        $user->image = $request->profile_image;
+        $user->status = $request->status;
+        $user->image = $request->image;
         $user->save();
 
         return response()->json([

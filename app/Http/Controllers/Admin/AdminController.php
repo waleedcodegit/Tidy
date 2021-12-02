@@ -249,5 +249,32 @@ class AdminController extends Controller
         }
         return $response;
     }
+    public function customer_info(Request $request , $id) {
+    // return $id;
+        $customer = Customer::where('id', $request->id)->first();
+        // $bookings = Booking::where('customer_id',$id)->with('service','sub_service' , 'information','customer')->get();
+        $response=[
+            'status' => 200,
+            'message' => 'Customer_info',
+            'data' => $customer,
+            // 'data' => $bookings,
+        ];
+        
+        return $response;
+    
 
+}
+public function customer_bookings_info(Request $request , $id) {
+
+        $bookings = Booking::where('customer_id',$id)->with('service','sub_service' , 'information','vendor')->get();
+        $response=[
+            'status' => 200,
+            'message' => 'Customer Booking info ',
+            'data' => $bookings,
+        ];
+        
+        return $response;
+    
+
+}
 }

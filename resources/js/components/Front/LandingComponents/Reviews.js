@@ -26,7 +26,8 @@ class Reviews extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            reviews : []
+            reviews : [],
+            loading:true,
         };
     }
 
@@ -34,15 +35,26 @@ class Reviews extends Component {
         Axios.get('/api/get-all-reviews').then(res=>{
             console.log(res)
            this.setState({
-               reviews : res.data
+               reviews : res.data,
+               loading:false
            })
         })
+       
     }
      
     render() {
         return (
             <div>
-            <div className="dots"></div>
+                 {
+                    this.state.loading == true ?
+                    <div id="displayspinner" style={{ display: 'block', marginLeft: '48%', marginTop: '20%',marginBottom: '20%' }}>
+                    <div className="spinner-border  ml-2 text-dark spinner_format"  role="status">
+                        <span className="sr-only">Loading...</span>
+                    </div>
+                    </div>
+                        :
+                        this.state.loading == false ? <>
+             <div className="dots"></div>
                 <div className="container">
                 <div className="section-heading-rev text-center mb-40 wow fadeInUp" data-wow-delay="100ms">
                 <h2><span>LIVE REVIEWS</span></h2>
@@ -94,6 +106,9 @@ class Reviews extends Component {
                   
                 </Carousel>;
                 </div>
+                 </>
+  : null  } 
+
                 </div>
             
         );

@@ -8,6 +8,7 @@ import PaymentCards from './PaymentCards';
 
 class Profile extends Component {
     
+    
     render() {
         return (
             <div>

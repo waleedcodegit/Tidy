@@ -12,10 +12,11 @@ class EditProfile extends Component {
             email:'',
             address:'',
             phone:'',
+            status:'',
             phonenumber:'',
             loading:false,
             id:this.props.user.data.id,
-            profile_image:''
+            image:''
         };
     }
      
@@ -26,7 +27,8 @@ class EditProfile extends Component {
             email:this.props.user.data.email,
             address:this.props.user.data.address,
             phone:this.props.user.data.phone,
-            profile_image:this.props.user.data.image
+            image:this.props.user.data.image,
+            status:this.props.user.data.status
             
         })
     }
@@ -92,7 +94,7 @@ class EditProfile extends Component {
             if (res.data.status == 200) {
                 toast.success('Profile Image Uploaded. Please update profile.');
                 this.setState({
-                    profile_image:res.data.url,
+                    image:res.data.url,
                     loading:false
                 })
             } else {

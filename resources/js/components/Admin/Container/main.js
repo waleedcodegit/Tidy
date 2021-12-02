@@ -34,6 +34,7 @@ import SubCategoryList from '../SubCategory/index';
 import CustomerList from '../Customers/list';
 import CreateCustomer from '../Customers/create';
 import EditCustomer from '../Customers/edit';
+import CustomerBookingDetails from '../Customers/CustomersBookings';
 
 // Vendor
 import VendorsList from '../Vendors/list';
@@ -158,6 +159,7 @@ class Main extends Component {
                         <Route path="/admin/customer-list" component={CustomerList}></Route>
                         <Route path="/admin/create-customer" component={CreateCustomer}></Route>
                         <Route path="/admin/edit-customer/:id" component={EditCustomer}></Route>
+                        <Route path="/admin/customer-all-bookings-details/:id" component={CustomerBookingDetails}></Route>
 
                         <Route path="/admin/vendor-list" component={VendorsList}></Route>
                         <Route path="/admin/vendor-info/:id" component={VendorInfo}></Route>

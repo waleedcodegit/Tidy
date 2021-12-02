@@ -43,6 +43,7 @@ Route::view('/admin/list-subcategory', 'Admin');
 Route::view('/admin/customer-list', 'Admin');
 Route::view('/admin/create-customer', 'Admin');
 Route::view('/admin/edit-customer/{id}', 'Admin');
+Route::view('/admin/customer-all-bookings-details/{id}', 'Admin');
 
 Route::view('/admin/vendor-list', 'Admin');
 Route::view('/admin/vendor-info/{id}', 'Admin');

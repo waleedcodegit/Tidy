@@ -74,7 +74,7 @@ class Bookingdetails extends Component {
                                         <th>Parking Available</th>
                                         <th>At Home</th>
                                         <th>Status</th>
-                                        <th colspan= "2">Actions</th>
+                                        {/* <th colspan= "2">Actions</th> */}
                                         </tr>
                                     </thead>
                                     <tbody>

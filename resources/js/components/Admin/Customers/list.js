@@ -60,6 +60,7 @@ class CustomerList extends React.Component {
                                             <th>Email</th>
                                             <th>Address</th>
                                             <th>Phone</th>
+                                            <th>Customer Details</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -74,7 +75,8 @@ class CustomerList extends React.Component {
                                                         <td>{data.email}</td>
                                                         <td>{data.address}</td>
                                                         <td>{data.phone}</td>
-                                                        <td> <Link to ={`/admin/edit-customer/${data.id}`}><button className="btn btn-outline-success"> <i  className="fa fa-pencil"> </i></button></Link></td>
+                                                        <td> <Link to ={`/admin/customer-all-bookings-details/${data.id}`}> <button  className="btn btn-outline-success"> <i  className="fa fa-eye"> </i></button></Link></td>
+                                                        {/* <td> <Link to ={`/admin/edit-customer/${data.id}`}><button className="btn btn-outline-success"> <i  className="fa fa-pencil"> </i></button></Link></td> */}
                                                         <td> <button onClick={this.deleteCustomer.bind(this, data.id)} className="btn btn-outline-primary"> <i  className="fa fa-trash"> </i></button> </td>
                                                         
                                                     </tr>

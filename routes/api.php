@@ -137,6 +137,8 @@ Route::post('/create-admin','Admin\AdminController@create_admin');
 Route::post('/login-admin','Admin\AdminController@login_admin');
 Route::post('/check-auth-admin','Admin\AdminController@admin_check_auth');
 Route::post('/get_gift_cards','Admin\AdminController@get_gift_cards');
+Route::post('/customer-info/{id}','Admin\AdminController@customer_info');
+Route::post('/customer-bookings-info/{id}','Admin\AdminController@customer_bookings_info');
 
 //ManageAcounts Controller
 Route::post('/payments_list','Admin\ManageAcountsController@payments_list');

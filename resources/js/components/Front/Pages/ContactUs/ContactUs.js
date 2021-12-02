@@ -4,6 +4,7 @@ import DatePicker from "react-datepicker";
 import Swal from 'sweetalert2';
 
 import "react-datepicker/dist/react-datepicker.css";
+import toast from 'react-hot-toast';
 
 
 class ContactUs extends Component {
@@ -14,10 +15,20 @@ class ContactUs extends Component {
             sender_phone:'',
             message:'',
             sender_email:'',
-            loading:false
+            loading:true
         };
     }
-  
+    componentDidMount(){
+        Axios.get('/api/edit-content').then(res=>{
+            console.log(res)
+           this.setState({
+               modern_lives : res.data.data.modern_lives,
+               loading:false
+            
+           })
+        })
+       
+    }
     Sender_name(e){
         this.setState({
             sender_name:e.target.value
@@ -45,28 +56,32 @@ class ContactUs extends Component {
     change_step(step){
         this.setState({
             step:step,
-            error_string:''
+            error_string:'',
+           
         })
     }
+    
     SendEmail(e){
         e.preventDefault();
         Axios.post('/api/send-contectus-email',this.state).then(res=>{
 
             if(res.data.status == 200){
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Email send',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
+                toast.success('Email send');
+                // Swal.fire({
+                //     icon: 'success',
+                //     title: 'Email send',
+                //     showConfirmButton: false,
+                //     timer: 1500
+                // })
                 window.location.reload(false);
             } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: "please fill all fields",
-                    showConfirmButton: false,
-                    timer: 1500
-                })
+                toast.error('please fill all fields')
+                // Swal.fire({
+                //     icon: 'error',
+                //     title: "please fill all fields",
+                //     showConfirmButton: false,
+                //     timer: 1500
+                // })
             }
     
                
@@ -75,6 +90,14 @@ class ContactUs extends Component {
     render() {
         return (
             <div>
+                 {
+                    this.state.loading  ?
+                    <div id="displayspinner" style={{ display: 'block', marginLeft: '48%', marginTop: '20%',marginBottom: '20%' }}>
+                    <div className="spinner-border  ml-2 text-dark spinner_format"  role="status">
+                        <span className="sr-only">Loading...</span>
+                    </div>
+                    </div>
+                        : 
           <div className="container mt-5 mb-5" style={{margin:'0px'}}>
              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26502.753900513148!2d151.19248234657928!3d-33.867904911997805!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12ae401e8b983f%3A0x5017d681632ccc0!2sSydney%20NSW%202000%2C%20Australia!5e0!3m2!1sen!2s!4v1636974961063!5m2!1sen!2s" width={1670} height={650} style={{border: 0}} allowFullScreen loading="lazy" />
                   
@@ -150,6 +173,7 @@ class ContactUs extends Component {
           </div>
            </div> 
            </div>
+    }
            </div>
 
         );

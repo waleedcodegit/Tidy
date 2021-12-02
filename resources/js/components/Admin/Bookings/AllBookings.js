@@ -72,7 +72,7 @@ class AllBookings extends React.Component {
                                                     <tr key={index}>
                                                         <td>{index+1}</td>
                                                         <td>{data.customer.first_name +' '+ data.customer.last_name}</td>
-                                                        <td>${data.customer.email}</td>
+                                                        <td>{data.customer.email}</td>
                                                         <td>{data.customer.phone}</td>
                                                         <td>{data.customer.address}</td>
                                                         <td>{data.booking_totals}</td>

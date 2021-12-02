@@ -623,6 +623,7 @@ class SignUp extends Component {
         //   }, 2000);
     }
     submit_request() {
+        this.setState({ loading : true});
         Axios.post('/api/submit_vendor_request', this.state).then(res => {
             if (res.data.status == 200) {
                 this.setState({
@@ -637,6 +638,9 @@ class SignUp extends Component {
                 })
             }
         })
+         setTimeout(() => {
+                 this.setState({ loading : false});
+                   }, 2000);
     }
     agree_check() {
         this.setState({
@@ -1358,7 +1362,7 @@ class SignUp extends Component {
                                             </div>
                                             <div className="text-right ml-auto">
                                                 <button disabled={!this.state.agree_check} onClick={this.submit_request.bind(this)} className="btn btn-success   " type="submit">
-                                                    {
+                                                    {/* {
                                                         this.state.btn_loading ?
                                                             <div id="displayspinner" style={{ display: 'block', }}>
                                                                 <div className="spinner-border  ml-2 text-light spinner_format" role="status">
@@ -1366,7 +1370,10 @@ class SignUp extends Component {
                                                                 </div>
                                                             </div>
                                                             : <>Submit</>
-                                                    }
+                                                    } */}
+                                                       { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                                            { loading && <span > Loading</span>}
+                                                           { !loading && <span > Submit</span>}
                                                 </button>
                                             </div>
 
