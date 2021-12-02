@@ -1360,6 +1360,7 @@ class SignUp extends Component {
                                                     }
                                                 </button>
                                             </div>
+                                            
                                             <div className="text-right ml-auto">
                                                 <button disabled={!this.state.agree_check} onClick={this.submit_request.bind(this)} className="btn btn-success   " type="submit">
                                                     {/* {

@@ -7,6 +7,7 @@ import AddOns from './AddOns';
 import CustomerLocation from './CustomerLocation';
 import GetPrice from './GetPrice';
 import SelectServices from './SelectServices';
+import toast from 'react-hot-toast';
  
 class BookingForm extends Component {
   constructor(props) {

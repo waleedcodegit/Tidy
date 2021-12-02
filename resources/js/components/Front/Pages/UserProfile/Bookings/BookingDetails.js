@@ -254,9 +254,9 @@ class BookingDetails extends Component {
                                                         <div className="qote-price">
                                                             <span style={{margin:"0px",fontSize:"35px" , color:"#28a745"}}>${data.quote} </span>
                                                             <a onClick={this.accept_vendor_quote.bind(this,data.id)} disabled={loading} className="btn bk-btn btn-success"> 
-                                                            { loading && <i className= 'fa fa-refresh fa-spain'></i>}
-                                                      { loading && <span > Loading...</span>}
-                                                       { !loading && <span>Accept</span>}
+                                                                { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                                                { loading && <span > Loading...</span>}
+                                                                { !loading && <span>Accept</span>}
                                                             </a>
                                                         </div>
                                                         </div>
@@ -272,7 +272,7 @@ class BookingDetails extends Component {
                                     :null
                                     // <div className="detl-section">
                                     //     <div className="text-center">
-                                    //     <p style={{color:'#000000a3' , fontSize:'20px'}}>No Quotes from Vendor</p>
+                                    //     <p style={{color:'#000000a3' , fontSize:'20px'}}>No Quotes from Vendor yet</p>
                                     //     </div>
                                     // </div>
                                     }

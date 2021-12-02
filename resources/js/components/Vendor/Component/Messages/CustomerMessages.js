@@ -22,16 +22,14 @@ class CustomerMessages extends Component {
             messages:[],
             no_messages:true,
             chat:{first_name:'',last_name:''},
-            
-           
-
         }
+        console.log(props);
      
     }
     get_new_msgs(){
         let senderdata={
             access_token:window.localStorage.getItem('key1'),
-            vednor_id:this.props.vendor.data.id
+            vednor_id:this.props.vendor.data.vendor_id
         }
         Axios.post('/api/get_vendor_customer_chats',senderdata).then(res=>{
         this.setState({
@@ -60,7 +58,7 @@ class CustomerMessages extends Component {
     }
     componentWillMount(){
       setInterval(() => {
-        Axios.post('/api/get_vendor_customer_chats',{vendor_id:this.props.vendor.data.id}).then(res=>{
+        Axios.post('/api/get_vendor_customer_chats',{vendor_id:this.props.vendor.data.vendor_id}).then(res=>{
             this.setState({
                 chats:res.data,
                 chat:this.state.active_chat == 0 ? res.data[0] : this.state.chat,

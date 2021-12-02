@@ -206,8 +206,8 @@ class SelectServices extends Component {
                         <div className="row">
                         <div className="col-md-12">
                         
-                        <select onChange={this.select_sub_category.bind(this)} value={this.state.sub_service_id} name="gender" className="input--style-1 form-control col-md-12">
-                                <option disabled="disabled" default="selected">Please Select</option>  
+                        <select onChange={this.select_sub_category.bind(this)} value={this.state.sub_service_id} className="input--style-1 form-control col-md-12">
+                                <option  default="selected">Please Select</option>  
                                 {
                                   this.state.sub_categories.map((data,index)=>{
                                     return(
@@ -248,7 +248,6 @@ class SelectServices extends Component {
                       </span>
                     </div>
                     <div className="col-md-6">
-                      <div className="input-group col-md-12">
                         {/* <div className="input--stydle-1" > */}
                           <select  value={this.state.time || ""} onChange={this.time.bind(this)} name="gender"   className="col-md-12 input--style-1">
                             {/* <option disabled="disabled" selected="selected">Time to</option> */}
@@ -271,7 +270,6 @@ class SelectServices extends Component {
                           </select>
                           
                         {/* </div> */}
-                      </div>
                       <span className="d-flex mt-4">
                       <input  onChange={this.time_flexible.bind(this)}  type="checkbox" className="col-sm-1 "></input>I am flexible with the time +/- 2 hours 
                       </span>

@@ -247,7 +247,7 @@ class GiftCard extends Component {
                             <div className="col-md-6">
                             <label className="lbl-style"> *From<span>(Sender Email)</span></label>
                             <div className="input-group">
-                                <input value={this.state.sender_email} onChange={this.sender_email.bind(this)} className="form-control auth_input_box" type="text" placeholder name="name" />
+                                <input value={this.state.sender_email} onChange={this.sender_email.bind(this)} className="form-control auth_input_box" type="text"  />
                             </div>
                             </div>
                             <div className="col-md-12">
@@ -256,15 +256,16 @@ class GiftCard extends Component {
                             <div className="input-group">
                             <DatePicker id="example-datepicker"
                                 dateFormat={"dd/MM/yyyy"}
-                                selected={this.state.delivery_date} 
-                               
+                                selected={this.state.delivery_date}
+                                style={{width:'100px'}}
                                 placeholderText="dd/mm/yyyy"
                                 minDate={new Date()}
                                 //  showDisabledMonthNavigation
                                 onChange={(date)=>{this.date(date)}}
-                                className="form-control auth_input_box" />
+                                className="form-control auth_input_box"
+                                 />
                                 {/* <input className="input--style-1 js-datepicker" type="text" placeholder="2021-10-10" name="birthday" />
-                                <i className="zmdi zmdi-calendar-note input-icon js-btn-calendar" /> */}
+                                <i className="zmdi zmdi-calendar-note input-icon js-btn-calendar" style={{width:'249px'}} /> */}
                             </div>
                             </div>
                         </div>

@@ -175,7 +175,9 @@ class CommonController extends Controller
 
     public function get_vendor_customer_messages(Request $request){
         $vendor_chat = CustomerVendorChats::where('customer_id',$request->customer_id)->where('booking_id',$request->booking_id)->first();
+        
         if($vendor_chat){
+            $vendor_chat->ass_vendor = Booking::where('id', $request->booking_id)->where('vendor_status' , 1)->first();
             $vendor_messages = CustomerVendorMessage::where('chat_id',$vendor_chat->id)->get();
             $response = ['status' => 200 , 'messages' => $vendor_messages , 'chat' => $vendor_chat];
             return $response;
@@ -230,7 +232,7 @@ class CommonController extends Controller
         $customer_chat =  CustomerVendorChats::where('id',$customer_chat->id)->first();
         $customer_chat->last_active = date("Y-m-d h:i:sa");
         $customer_chat->last_msg_id = $customer_message->id;
-        $customer_chat->save();+
+        $customer_chat->save();
         $response = ['status' => 200 , 'message' => 'Message Sent'];
         return $response;
     }

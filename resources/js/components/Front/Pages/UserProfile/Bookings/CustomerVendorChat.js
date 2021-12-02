@@ -11,11 +11,18 @@ class CustomerVendorChat extends Component {
             no_messages:[],
             newmessage:'',
             chat:{id:0},
+            assignedVendor:'',
             loading:false,
         };
     }
      componentDidMount(){
+        Axios.post('/api/get_booking_by_id',{id:this.props.booking_id}).then(res=>{
+            this.setState({
+                assignedVendor: res.data.data,
+            })
+        });
        setInterval(()=>{
+        
         Axios.post('/api/get_vendor_customer_messages',{customer_id:this.props.user.data.id,booking_id:this.props.booking_id}).then(res=>{
             if(res.data.status == 200){
                 if(this.state.messages.length > 0){
@@ -60,7 +67,7 @@ class CustomerVendorChat extends Component {
             message: this.state.newmessage,
             sender:'c',
             customer_id:this.props.user.data.id,
-            vendor_id:7,
+            vendor_id:this.state.assignedVendor.vendor_id,
             booking_id:this.props.booking_id
         }
         array.push(newmsg);
@@ -96,6 +103,7 @@ class CustomerVendorChat extends Component {
     render() {
         const {loading} = this.state;
         return (
+            
             <div >
             <div className="row">
                 <div className="col-sm-12 padding-15">
@@ -133,24 +141,26 @@ class CustomerVendorChat extends Component {
                                             })
                                         }
                                     </div>
-                                {/* <div className="type_msg">
-                                    <div className="input_msg_write">
-                                        <form>
-                                            <input value={this.state.newmessage || ""} onChange={this.handle_new_message.bind(this)} type="text" className="write_msg" placeholder="Type a message" />
-                                            <button onClick={this.send_message.bind(this)} className="msg_send_btn" type="submit"><i className="fa fa-paper-plane-o" aria-hidden="true"></i></button>
-                                        </form>
-                                    </div>
-                                </div> */}
                             </div>
                             :
                             <>
-                            <img style={{width:'180px',marginTop:'100px',marginBottom:'100px'}} src="/images/nomessages.png"></img>
-                            <br></br>
-                            <h3>
-                            No Messages Existed. <br></br> Please send a message to start a chat with vendor on this booking</h3>
+                            {
+                                this.state.assignedVendor.vendor_status == 1 ?
+                                <div>
+                                    <img style={{width:'180px',marginTop:'100px',marginBottom:'100px'}} src="/images/nomessages.png"></img>
+                                    <br></br>
+                                    <h3>
+                                    No Messages Existed. <br></br> Please send a message to start a chat with vendor on this booking</h3>
+                                </div>
+                                :null
+                                
+                            }
+                            
                             </>
                             }
-                            <div className="comment-respond ">
+                            {
+                                this.state.assignedVendor.vendor_status == 1 ?
+                                <div className="comment-respond ">
                                         <form >
                                             <div className="row pt-5">
                                                 <div className="col-md-10">
@@ -158,16 +168,20 @@ class CustomerVendorChat extends Component {
                                                         <input value={this.state.newmessage || ""} className="form-control input_box" onChange={this.handle_new_message.bind(this)} placeholder="Type Message Here" type="text" />
                                                     </div>
                                                 </div>
-                                                <div   className="col-md-2">
+                                                <div className="col-md-2">
                                                     <button  onClick={this.send_message.bind(this)} disabled={loading} href="#" className="bk-btn2">
-                                                    { loading && <i className= 'fa fa-refresh fa-spain'></i>}
-                                                   { loading && <span >Sending</span>}
-                                                   { !loading && <span >Send</span>}
-                                                         </button>
+                                                        { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                                        { loading && <span >Sending</span>}
+                                                        { !loading && <span >Send</span>}
+                                                    </button>
                                                 </div>
                                             </div>
                                         </form>
                                     </div>
+                                    :
+                                    <h3>Vendor Assigning process is not completed yet (You can chat with vendor,once the process is completed)</h3>
+                            }
+                            
                         </div>
                     </div></div>
                     </div>

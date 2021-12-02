@@ -1,6 +1,7 @@
 import Axios from 'axios';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import toast from 'react-hot-toast';
 
 class CustomerCardIntegration extends Component {
     constructor(props) {
