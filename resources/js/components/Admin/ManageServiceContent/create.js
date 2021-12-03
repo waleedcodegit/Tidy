@@ -44,12 +44,12 @@ class Create extends Component {
 
     description(event) {
         this.setState({
-            description: event
+            description: event.target.value
         })
     }
     included_text(event) {
         this.setState({
-            included_text: event
+            included_text: event.target.value
         })
     }
     image_uploader(event) {

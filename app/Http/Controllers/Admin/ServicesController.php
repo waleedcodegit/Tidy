@@ -15,6 +15,7 @@ class ServicesController extends Controller
      */
     public function create_services_content(Request $request)
     {
+        // return $request;
         $validator = Validator::make($request->all(), [
             'image' => 'required',
             'service' => 'required',
@@ -33,6 +34,7 @@ class ServicesController extends Controller
         $ServiceContent->description = $request->description;
         $ServiceContent->included_text = $request->included_text;
         $ServiceContent->whychoose = $request->whychoose;
+        // return $ServiceContent;
         $ServiceContent->save();
         $response = ['status' => 200 , 'msg' => 'Success'];
             return $response;

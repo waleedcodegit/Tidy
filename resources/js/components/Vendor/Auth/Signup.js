@@ -623,7 +623,7 @@ class SignUp extends Component {
         //   }, 2000);
     }
     submit_request() {
-        this.setState({ loading : true});
+        // this.setState({ loading : true});
         Axios.post('/api/submit_vendor_request', this.state).then(res => {
             if (res.data.status == 200) {
                 this.setState({
@@ -638,9 +638,9 @@ class SignUp extends Component {
                 })
             }
         })
-         setTimeout(() => {
-                 this.setState({ loading : false});
-                   }, 2000);
+        //  setTimeout(() => {
+        //          this.setState({ loading : false});
+        //            }, 2000);
     }
     agree_check() {
         this.setState({
@@ -1372,10 +1372,10 @@ class SignUp extends Component {
                                                             </div>
                                                             : <>Submit</>
                                                     } */}
-                                                       { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                                       {/* { loading && <i className= 'fa fa-refresh fa-spain'></i>}
                                                             { loading && <span > Loading</span>}
-                                                           { !loading && <span > Submit</span>}
-                                                </button>
+                                                           { !loading && <span > Submit</span>} */}
+                                               Submit </button>
                                             </div>
 
                                         </div>
