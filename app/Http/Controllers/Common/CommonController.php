@@ -177,7 +177,6 @@ class CommonController extends Controller
         $vendor_chat = CustomerVendorChats::where('customer_id',$request->customer_id)->where('booking_id',$request->booking_id)->first();
         
         if($vendor_chat){
-            $vendor_chat->ass_vendor = Booking::where('id', $request->booking_id)->where('vendor_status' , 1)->first();
             $vendor_messages = CustomerVendorMessage::where('chat_id',$vendor_chat->id)->get();
             $response = ['status' => 200 , 'messages' => $vendor_messages , 'chat' => $vendor_chat];
             return $response;

@@ -143,76 +143,63 @@ class AdminMessages extends Component {
     }
     render() {
         return (
-            <div>
-                 
-            {/* {
-                this.state.loading ?
-               
-                    <div id="displayspinner text-center mt-5 " className="text-center" style={{ display: 'block', }}>
-                        <div className="spinner-border  ml-2 text-dark spinner_format" role="status">
-                            <span className="sr-only">Loading...</span>
-                        </div>
-                    </div>
-                    : */}
-            <section className="section">
-            <div className="section-body">
-              <div className="row">
-                <div className="col-12">
-                  <div className="card">
-                    <div className="card-header">
-                      <h4>Chat with Admin</h4>
-                    </div>
-                    <div className="card-body"></div>
-                <div className="container">
-                 <audio ref={(input) => {this.audioRef = input}} src="/audio/text_sound.mp3" />
-                   
-                    <div className="messaging">
-                        <div className="inbox_msg">
-                        {
-                               !this.state.no_messages?
-                                    <div className="mesgs col-md-12">
+            <div id="page-content">
+            <div className="tab-pane fade" id="message" role="tabpanel" aria-labelledby="message-tab">
+                <div className="row">
+                    <div className="col-sm-12 padding-15">
+                        <div className="blog-item profile-shadow">
+                            <div className="edit-content">
+                                <div className="col-md-12 auth_div">
+                                    <div className="login_div">
+                                        <h1 className="login_page_heading">Chat With Admin</h1>
+                                        <audio ref={(input) => { this.audioRef = input }} src="/audio/text_sound.mp3" />
 
-                                   
-                                    <hr></hr>
+                                        <div className="messaging">
+                                            <div className="inbox_msg">
+                                                {
+                                                    !this.state.no_messages ?
+                                                        <div className="mesgs col-md-12">
 
-                                    <div id="messages_div"  className="msg_history">
-                                        {
-                                            this.state.messages.map((msg,index)=>{
-                                                return(
-                                                    <div key={index} className={msg.sender == this.props.vendor.data.vendor_id ? "outgoing_msg" : 'incoming_msg '}>
-                                                        <div className={msg.sender == this.props.vendor.data.vendor_id ? "hide_img" : 'incoming_msg_img'}> 
-                                                        {/* <img src={img_base+msg.profile_image} alt="sunil" /> */}
-                                                         </div>
-                                                        <div className={msg.sender == this.props.vendor.data.vendor_id ? "sent_msg" : ' received_msg'}>
-                                                            <div className={msg.sender == this.props.vendor.data.vendor_id ? "" : 'received_withd_msg'}>
-                                                                <p>{msg.message}</p>
-                                                                <span className="time_date">{msg.time}    |  {msg.date}</span></div>
+
+                                                            <hr></hr>
+
+                                                            <div id="messages_div" className="msg_history">
+                                                                {
+                                                                    this.state.messages.map((msg, index) => {
+                                                                        return (
+                                                                            <div key={index} className={msg.sender == this.props.vendor.data.vendor_id ? "outgoing_msg" : 'incoming_msg '}>
+                                                                                <div className={msg.sender == this.props.vendor.data.vendor_id ? "hide_img" : 'incoming_msg_img'}>
+                                                                                    {/* <img src={img_base+msg.profile_image} alt="sunil" /> */}
+                                                                                </div>
+                                                                                <div className={msg.sender == this.props.vendor.data.vendor_id ? "sent_msg" : ' received_msg'}>
+                                                                                    <div className={msg.sender == this.props.vendor.data.vendor_id ? "" : 'received_withd_msg'}>
+                                                                                        <p>{msg.message}</p>
+                                                                                        <span className="time_date">{msg.time}    |  {msg.date}</span></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        )
+                                                                    })
+                                                                }
+                                                            </div>
+                                                            <div className="type_msg">
+                                                                <div className="input_msg_write">
+                                                                    <form>
+                                                                        <input value={this.state.newmessage || ""} onChange={this.handle_new_message.bind(this)} type="text" className="write_msg" placeholder="Type a message" />
+                                                                        <button onClick={this.send_message.bind(this)} className="msg_send_btn" type="submit"><i className="fa fa-paper-plane-o" ></i></button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                )
-                                            })
-                                        }
-                                    </div>
-                                <div className="type_msg">
-                                    <div className="input_msg_write">
-                                        <form>
-                                            <input value={this.state.newmessage || ""} onChange={this.handle_new_message.bind(this)} type="text" className="write_msg" placeholder="Type a message" />
-                                            <button onClick={this.send_message.bind(this)} className="msg_send_btn" type="submit"><i className="fa fa-paper-plane-o" aria-hidden="true"></i></button>
-                                        </form>
-                                    </div>
+                                                        : null
+                                                }
+                                            </div>
+                                        </div></div>
                                 </div>
                             </div>
-                            :null
-                            }
                         </div>
-                    </div></div>
                     </div>
-                    </div>
-                    </div>
-                    </div>
-                    </section>
-    {/* } */}
-
+                </div>
+            </div>
             </div>
         );
     }
