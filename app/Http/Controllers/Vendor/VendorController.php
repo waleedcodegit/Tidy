@@ -582,7 +582,7 @@ class VendorController extends Controller
             'australian_business_number' => 'required|min:11|max:11',
             'type_of_business' => 'required',
             'business_name' => 'required',
-            'strip_account' => 'required',
+            // 'strip_account' => 'required',
             // 'trading' => 'required',
         ]);
 
@@ -620,6 +620,7 @@ class VendorController extends Controller
                    'type_of_business' => $request->type_of_business,
                    'business_name' => $request->business_name,
                    'trading' => $request->trading,
+                   'image' => $request->image,
                    'insurance_certificate_type' => $request->insurance_certificate_type,
                 //    'bio' = $request->bio,
                    

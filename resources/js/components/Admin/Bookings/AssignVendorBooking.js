@@ -37,13 +37,9 @@ class AssignVendorBooking extends React.Component {
             vendor_id: id
         }
         Axios.post('/api/asign-vender-tocustomer',data).then(res=>{
+            this.props.history.push('/admin/pending-bookings');
             toast.success('Successfully Vendor Assign',{position: "bottom-center"});
-            // Swal.fire({
-            //     icon: 'success',
-            //     title: 'Successfully Vendor Assign',
-            //     showConfirmButton: false,
-            //     timer: 1500
-            // })
+         
             this.componentDidMount();
         })
         

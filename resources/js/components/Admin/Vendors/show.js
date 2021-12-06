@@ -15,6 +15,7 @@ class ShowVendor extends Component {
             business_name: '',
             dob: '',
             email: '',
+            image:'',
             first_name: '',
             last_name: '',
             insurance_certificate: '',
@@ -52,6 +53,7 @@ class ShowVendor extends Component {
                     australian_business_number: res.data.data.australian_business_number,
                     business_name: res.data.data.business_name,
                     dob: res.data.data.dob,
+                    image: res.data.data.image,
                     email: res.data.data.email,
                     first_name: res.data.data.first_name,
                     last_name: res.data.data.last_name,
@@ -103,7 +105,7 @@ class ShowVendor extends Component {
             this.componentDidMount();
 
             }else{
-                toast.error('Service Already Exists',{position: "bottom-center"});
+                toast.error(res.data.msg,{position: "bottom-center"});
             }
         })
     }
@@ -121,19 +123,10 @@ class ShowVendor extends Component {
             if(res.data.status == 200){
                 toast.success('Vendor Approved Successfully',{position: "bottom-center"});
                 this.props.history.push('/admin/vendor-list');
-            //     Swal.fire({
-            //         icon: 'success',
-            //         title: 'Vendor Approved Successfully',
-            //         showConfirmButton: false,
-            //         timer: 1500
-            //     })
-            // } else {
-            //     Swal.fire({
-            //         icon: 'error',
-            //         title: res.data.msg,
-            //         showConfirmButton: false,
-            //         timer: 1500
-            //     })
+            
+            } else {
+                toast.error( res.data.msg,{position: "bottom-center"});
+         
             }
         })
     }
@@ -158,7 +151,8 @@ class ShowVendor extends Component {
             //         showConfirmButton: false,
             //         timer: 1500
             //     })
-            // }else{
+            }else{
+                toast.error(res.data.msg,{position: "bottom-center"});
             //     Swal.fire({
             //         icon: 'error',
             //         title: res.data.msg,
@@ -179,7 +173,7 @@ class ShowVendor extends Component {
                             <div className="fixed-md-250 pull-sm-left fixed-right-border">
                             <div className="text-center">
                                 <div className="pad-ver">
-                                    <img src={img_baseurl+"1.png"} className="img-lg img-circle" alt="Profile Picture" />
+                                    <img src={img_baseurl+this.state.image} className="img-lg img-circle" alt="Profile Picture" />
                                 </div>
                                 <h4 className="text-lg text-overflow mar-no">{this.state.first_name} {this.state.last_name}</h4>
                                 <p className="text-sm text-muted">{this.state.business_name}</p>

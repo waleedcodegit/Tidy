@@ -338,6 +338,42 @@ class Profile extends Component {
         })
 
     }
+    upload_Profile_img(event) {
+        const formData = new FormData();
+        formData.append('file', event.target.files[0]);
+        formData.append('token', window.localStorage.getItem('al'));
+        let Configs = {
+            headers: {
+                token: window.localStorage.getItem('al'),
+                'content-type': false,
+                'mime-type': "multipart/form-data",
+            },
+            onUploadProgress: progressEvent => {
+                this.setState({
+                    btn2_prg: Math.round((progressEvent.loaded * 100) / progressEvent.total)
+                })
+            }
+        }
+        this.setState({
+            // loading: true,
+        })
+        Axios.post('/api/image_upload', formData, Configs).then(res => {
+
+            if (res.data.status == 200) {
+                toast.success('Profile Image Uploaded.');
+                this.setState({
+                    image:res.data.url,
+                    loading:false
+                })
+            } else {
+                toast.error(res.data.msg);
+                this.setState({
+                    // loading:false
+                })
+            }
+        })
+
+    }
     delete_vendor_address(id){
         Axios.post('/api/delete_vendor_address',{id:id}).then(res=>{
             toast.success('Address deleted successfully.');
@@ -536,13 +572,21 @@ class Profile extends Component {
                                                             <input  onChange={this.StripAccount.bind(this)} value={this.state.strip_account || ""} type="text" className="form-control" />
                                                         </div>
                                                     </div>
-                                                   
+                                                    {/* <div className="form-group input_div "><label className="input_label">Upload Profile Image</label>
+                                                <input onChange={this.upload_Profile_img.bind(this)} type="file" className="form-control auth_input_box" /></div> */}
                                                     <div className="row">
                                                         <div className="form-group col-12">
                                                             <label>Bio</label>
                                                             <textarea  onChange={this.bio.bind(this)} value={this.state.bio || ""} className="form-control summernote-simple" defaultValue={"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur voluptatum alias molestias minus quod dignissimos."} />
                                                         </div>
                                                     </div>
+                                                    <div className="row">
+                                                        <div className="form-group col-12">
+                                                            <label>Image</label>
+                                                            <input onChange={this.upload_Profile_img.bind(this)} type="file" className="form-control auth_input_box" />
+                                                        </div>
+                                                    </div>
+                                                    
                                                     
                                                 </div>
                                                 {
