@@ -257,7 +257,6 @@ class GiftCard extends Component {
                             <DatePicker id="example-datepicker"
                                 dateFormat={"dd/MM/yyyy"}
                                 selected={this.state.delivery_date}
-                                style={{width:'100px'}}
                                 placeholderText="dd/mm/yyyy"
                                 minDate={new Date()}
                                 //  showDisabledMonthNavigation

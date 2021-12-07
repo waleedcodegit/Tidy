@@ -227,8 +227,8 @@ class SelectServices extends Component {
                     <p>When would you like us to come?</p>
                     <div className="row">
                    
-                    <div className="col-md-4">
-                      <div className="input-group">
+                    <div className="col-md-6">
+                      <div>
                       {/* value={this.state.date || ""} */}
                         {/* <input value=""   id="date_" onChange={this.date.bind(this)}
                          className="input--style-1 datepicker" min="1990-01-01" max="2035-12-31" placeholder="dd-mm-yyyy" name="date" /> */}
@@ -243,8 +243,8 @@ class SelectServices extends Component {
                           onChange={(date)=>{this.date(date)}} />
 
                       </div>
-                      <span className="d-flex">
-                      <input onChange={this.date_flexible.bind(this)} type="checkbox" className="col-sm-1 "></input>I am flexible with the date +/- 1 day 
+                      <span className="d-flex" style={{marginTop:"10px"}}>
+                      <input onChange={this.date_flexible.bind(this)} type="checkbox" className="col-sm-1" style={{marginTop:"5px"}}></input>I am flexible with the date +/- 1 day 
                       </span>
                     </div>
                     <div className="col-md-6">
@@ -270,8 +270,8 @@ class SelectServices extends Component {
                           </select>
                           
                         {/* </div> */}
-                      <span className="d-flex mt-4">
-                      <input  onChange={this.time_flexible.bind(this)}  type="checkbox" className="col-sm-1 "></input>I am flexible with the time +/- 2 hours 
+                      <span className="d-flex" style={{marginTop:"10px"}}>
+                      <input  onChange={this.time_flexible.bind(this)}  type="checkbox" className="col-sm-1" style={{marginTop:"5px"}}></input>I am flexible with the time +/- 2 hours 
                       </span>
                     </div>
                     {/* <div className="col-md-3">

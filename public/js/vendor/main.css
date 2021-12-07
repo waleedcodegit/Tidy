@@ -280,7 +280,7 @@ input[type="date" i] {
    #FORM
    ========================================================================== */
 input {
-  outline: none;
+  /* outline: auto; */
   margin: 0;
   border: none;
   -webkit-box-shadow: none;
@@ -318,6 +318,7 @@ input {
   color: #666;
 	border-radius: 7px !important;
   border: 1px solid #1d2124 !important;
+  width:100%;
 }
 
 .input--style-1::-webkit-input-placeholder {

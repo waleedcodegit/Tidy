@@ -140,7 +140,7 @@ class AdminMessages extends Component {
                                    
                                     <hr></hr>
 
-                                    <div id="messages_div"  className="msg_history">
+                                    <div id="messages_div"  className="msg_history" >
                                         {
                                             this.state.messages.map((msg,index)=>{
                                                 return(
@@ -158,11 +158,11 @@ class AdminMessages extends Component {
                                             })
                                         }
                                     </div>
-                                <div className="type_msg">
+                                <div className="type_msg" style={{outline:"auto"}}>
                                     <div className="input_msg_write">
                                         <form>
                                             <input value={this.state.newmessage || ""} onChange={this.handle_new_message.bind(this)} type="text" className="write_msg" placeholder="Type a message" />
-                                            <button onClick={this.send_message.bind(this)} className="msg_send_btn" type="submit"><i className="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                                            <button onClick={this.send_message.bind(this)} className="msg_send_btn" type="submit"><i className="fa fa-paper-plane" aria-hidden="true"></i></button>
                                         </form>
                                     </div>
                                 </div>

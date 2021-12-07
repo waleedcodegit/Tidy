@@ -15,8 +15,8 @@ class AddInformation extends Component {
         this.state = {
             type_of_service: 1,
             questions: [],
-            bathrooms: 1,
-            bedrooms: 1,
+            bathrooms: 0,
+            bedrooms: 0,
             category:{},
             setting:{},
             answers:[],
@@ -26,7 +26,7 @@ class AddInformation extends Component {
             not_at_home:'',
             is_parking_available:'No',
             will_at_home:'No',
-            resident_type:'House',
+            resident_type:'',
             levels:1,
             error_string:'',
             extras:[],
@@ -100,6 +100,10 @@ class AddInformation extends Component {
         setTimeout(() => {
             this.setState({ loading : false});
           }, 2000);
+    }
+
+    goBack(val){
+        this.props.change_step(val);
     }
    
 
@@ -271,36 +275,37 @@ class AddInformation extends Component {
 
                                         <div className="col-md-6">
                                             <select onChange={this.resident_type.bind(this)} value={this.state.resident_type} className="form-control">
+                                                <option defaultValue="selected"> Select Resident Type </option>
                                                 <option value="House">House</option>
                                                 <option value="Apartment">Apartment</option>
                                             </select>
-                                            <label className="muted">(Choose an apartment or house)</label>
+                                            {/* <label className="muted">(Choose an apartment or house)</label> */}
                                         </div>
                                         <div className="col-md-6">
                                             <div className="main">
                                                 <button onClick={this.minus_levels.bind(this)} className="down_count btn btn-info btn_plus_minus" title="Down"><i className="icon-minus" /></button>
-                                                <input onChange={this.levels.bind(this)} className="counter" type="text" placeholder="value..." value={this.state.levels} />
+                                                <input onChange={this.levels.bind(this)} className="counter" type="text" placeholder="value..." value={this.state.levels + "  Levels"} />
                                                 <button onClick={this.add_levels.bind(this)} className="up_count btn btn-info btn_plus_minus" title="Up"><i className="icon-plus" /></button>
                                             </div>
-                                            <label className="muted">(No. of Levels)</label>
+                                            {/* <label className="muted">(No. of Levels)</label> */}
                                         </div>
                                     </div>
                                     <div class="row mt-3">
                                         <div className="col-md-6">
                                             <div className="main">
                                                 <button onClick={this.minus_bedroom.bind(this)} className="down_count btn btn-info btn_plus_minus" title="Down"><i className="icon-minus" /></button>
-                                                <input className="counter" type="text" placeholder="value..." value={this.state.bedrooms} />
+                                                <input className="counter" type="text" placeholder="value..." value={this.state.bedrooms + "  Bedrooms"} />
                                                 <button onClick={this.add_bedroom.bind(this)} className="up_count btn btn-info btn_plus_minus" title="Up"><i className="icon-plus" /></button>
                                             </div>
-                                            <label className="muted">(Bedrooms)</label>
+                                            {/* <label className="muted">(Bedrooms)</label> */}
                                         </div>
                                         <div className="col-md-6">
                                             <div className="main">
                                                 <button onClick={this.minus_bathroom.bind(this)} className="down_count btn btn-info btn_plus_minus" title="Down"><i className="icon-minus" /></button>
-                                                <input className="counter" type="text" placeholder="value..." value={this.state.bathrooms} />
+                                                <input className="counter" type="text" placeholder="value..." value={this.state.bathrooms + "  Bathrooms"} />
                                                 <button onClick={this.add_bathroom.bind(this)} className="up_count btn btn-info btn_plus_minus" title="Up"><i className="icon-plus" /></button>
                                             </div>
-                                            <label className="muted">(Bathrooms)</label>
+                                            {/* <label className="muted">(Bathrooms)</label> */}
                                         </div>
                                     </div>
                                 </div>
@@ -347,12 +352,12 @@ class AddInformation extends Component {
                                         <>
                                         <div className="col-md-12">
                                         <p>Please enter where </p>
-                                        <div className="input-group">
+                                        <div>
                                             <input onChange={this.where_parking.bind(this)}  className="input--style-1"  type="text" placeholder="text here" name="name" />
                                         </div>
                                     </div>
                                     <div className="col-md-12">
-                                    <p>Is parking free ?</p>
+                                    <h3>Is parking free ?</h3>
                                     <div className="d-flex">
                                     <input onChange={this.is_free_parking.bind(this)} checked={this.state.is_free_parking == 'Yes'} type="radio" className="radio_btn" id="yes_1" name="parking_available1"></input>
                                     <label for="yes_1">Yes</label>
@@ -371,7 +376,7 @@ class AddInformation extends Component {
                                 <div >
                                     <h3>Will you be at home (YES/NO)?</h3>
                                     <br></br>
-                                    <div className="d-flex">
+                                    <div className="d-flex" style={{marginTop:"-20px"}}>
                                     <input onChange={this.will_at_home.bind(this)} checked={this.state.will_at_home == 'Yes'} type="radio" className="radio_btn" id="yes_2" name="parking_available2"></input>
                                     <label for="yes_2">Yes</label>
                                     <input onChange={this.will_at_home.bind(this)} checked={this.state.will_at_home == 'No'} type="radio" className="radio_btn" id="no_2" name="parking_available2"></input>
@@ -384,7 +389,7 @@ class AddInformation extends Component {
                                         null
                                     :  <div className="col-md-12">
                                         <p> Please Enter how the vendor can enter the premises</p>
-                                        <div className="input-group">
+                                        <div>
                                             <input onChange={this.prem_vendor_enterance.bind(this)} className="input--style-1" type="text" placeholder="text here" name="name" />
                                         </div>
                                     </div>
@@ -477,7 +482,7 @@ class AddInformation extends Component {
                                 {/* <div className="divider-line" /> */}
                                 <div className="row">
                                     <div className="col-md-3">
-                                        <button onClick={this.Submit.bind(this, 1)}  className="p-t-20 btn btn-info btn--radius btn--green" type="submit" id="#collapseTwo">
+                                        <button onClick={this.goBack.bind(this, 1)}  className="p-t-20 btn btn-info btn--radius btn--green" type="submit" id="#collapseTwo">
                                        
                                           Back  </button>
                                     </div>
