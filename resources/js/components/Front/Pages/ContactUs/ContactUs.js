@@ -99,13 +99,13 @@ class ContactUs extends Component {
                     </div>
                         : 
           <div className="container mt-5 mb-5" style={{margin:'0px'}}>
-             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26502.753900513148!2d151.19248234657928!3d-33.867904911997805!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12ae401e8b983f%3A0x5017d681632ccc0!2sSydney%20NSW%202000%2C%20Australia!5e0!3m2!1sen!2s!4v1636974961063!5m2!1sen!2s" width={1670} height={650} style={{border: 0}} allowFullScreen loading="lazy" />
+             {/* <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26502.753900513148!2d151.19248234657928!3d-33.867904911997805!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12ae401e8b983f%3A0x5017d681632ccc0!2sSydney%20NSW%202000%2C%20Australia!5e0!3m2!1sen!2s!4v1636974961063!5m2!1sen!2s" width={1670} height={650} style={{border: 0}} allowFullScreen loading="lazy" /> */}
                   
 
            
                   <div  className="row">
                   </div>
-                    <div style={{marginLeft:'570px'}} className="card card-1">
+                    <div style={{marginLeft:'420px' , marginRight:"230px"}} className="card card-1">
                 <div className="card-heading ">
                 </div>
                 <div className="card-body-gift">
@@ -114,8 +114,8 @@ class ContactUs extends Component {
                   
                        <div className="col-md-12">
                   <div className="gift-card-right ">
-                        <h2 className="title">
-                        Contact us </h2>
+                        <h1 className="title" style={{textAlign:"center"}}>
+                        Contact us </h1>
                         <div className="divider-line" />
                         <form method="POST" className="services-page">
                         <div className="row">
@@ -136,7 +136,7 @@ class ContactUs extends Component {
                             <div className="col-md-6">
                             <label className="lbl-style">Phone<span></span></label>
                             <div className="input-group">
-                                <input value={this.state.sender_phone} onChange={this.Sender_phone.bind(this)}  className="form-control auth_input_box" type="text" placeholder name="name" />
+                                <input value={this.state.sender_phone} onChange={this.Sender_phone.bind(this)}  className="form-control auth_input_box" type="number" placeholder name="name" />
                             </div>
                             </div>
                          

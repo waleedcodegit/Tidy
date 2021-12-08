@@ -344,46 +344,46 @@ class SelectServices extends Component {
                     <>
                     <div className="row">
                     <div className="d-flex col-md-2" style={{width:"100%"}}>
-                      <input onChange={this.custom_day.bind(this,0)} type="checkbox" className="col-sm-6 mt-1 "style={{width:"80%"}}></input>
+                      <input onChange={this.custom_day.bind(this,0)} type="checkbox" className="col-sm-6 mt-1 "style={{width:"75%"}}></input>
                       Monday
                       </div>
                       <div className="d-flex col-md-2"style={{width:"100%"}}>
-                      <input onChange={this.custom_day.bind(this,1)} type="checkbox" className="col-sm-6 mt-1"style={{width:"80%"}}></input>
+                      <input onChange={this.custom_day.bind(this,1)} type="checkbox" className="col-sm-6 mt-1"style={{width:"75%"}}></input>
                       Tuesday
                       </div>
                       <div className="d-flex col-md-2"style={{width:"100%"}}>
-                      <input onChange={this.custom_day.bind(this,2)} type="checkbox" className="col-sm-6 mt-1"style={{width:"80%"}}></input>
+                      <input onChange={this.custom_day.bind(this,2)} type="checkbox" className="col-sm-6 mt-1"style={{width:"75%"}}></input>
                       Wednesday
                       </div>
                       <span className="d-flex col-md-2"style={{width:"100%"}}>
-                      <input onChange={this.custom_day.bind(this,3)} type="checkbox" className="col-sm-6 mt-1"style={{width:"80%"}}></input>
+                      <input onChange={this.custom_day.bind(this,3)} type="checkbox" className="col-sm-6 mt-1"style={{width:"75%"}}></input>
                       Thursday
                       </span>
                       <span className="d-flex col-md-2"style={{width:"100%"}}>
-                      <input onChange={this.custom_day.bind(this,4)} type="checkbox" className="col-sm-6 mt-1"style={{width:"80%"}}></input>
+                      <input onChange={this.custom_day.bind(this,4)} type="checkbox" className="col-sm-6 mt-1"style={{width:"75%"}}></input>
                       Friday
                       </span>
                       <span className="d-flex col-md-2"style={{width:"100%"}}>
-                      <input onChange={this.custom_day.bind(this,5)} type="checkbox" className="col-sm-6 mt-1"style={{width:"80%"}}></input>
+                      <input onChange={this.custom_day.bind(this,5)} type="checkbox" className="col-sm-6 mt-1"style={{width:"75%"}}></input>
                       Saturday
                       </span>
                       <span className="d-flex col-md-2"style={{width:"100%"}}>
-                      <input onChange={this.custom_day.bind(this,6)} type="checkbox" className="col-sm-6 mt-1"style={{width:"80%"}}></input>
+                      <input onChange={this.custom_day.bind(this,6)} type="checkbox" className="col-sm-6 mt-1"style={{width:"75%"}}></input>
                       Sunday
                       </span>
                     </div>
                     <br></br>
                     <div className="row">
                     <div className="d-flex col-md-2"style={{width:"100%"}}>
-                      <input style={{width:"80%"}} onChange={this.custom_recurring.bind(this,1)} type="radio" checked={this.state.custom_recurring == 1} className="col-sm-6 mt-1 "></input>
+                      <input style={{width:"75%"}} onChange={this.custom_recurring.bind(this,1)} type="radio" checked={this.state.custom_recurring == 1} className="col-sm-6 mt-1 "></input>
                       Weekly
                       </div>
                       <div className="d-flex col-md-2"style={{width:"100%"}}>
-                      <input style={{width:"80%"}} onChange={this.custom_recurring.bind(this,2)} type="radio" checked={this.state.custom_recurring == 2} className="col-sm-6 mt-1"></input>
+                      <input style={{width:"75%"}} onChange={this.custom_recurring.bind(this,2)} type="radio" checked={this.state.custom_recurring == 2} className="col-sm-6 mt-1"></input>
                       Fornightly
                       </div>
                       <div className="d-flex col-md-2"style={{width:"100%"}}>
-                      <input style={{width:"80%"}} onChange={this.custom_recurring.bind(this,3)} type="radio" checked={this.state.custom_recurring == 3} className="col-sm-6 mt-1"></input>
+                      <input style={{width:"75%"}} onChange={this.custom_recurring.bind(this,3)} type="radio" checked={this.state.custom_recurring == 3} className="col-sm-6 mt-1"></input>
                       Monthly
                       </div>
                      
