@@ -80,6 +80,9 @@ class Login extends Component {
                                             aria-describedby="emailHelp" 
                                         />
                                     </div>
+                                    <div className="text-right">
+                                        <span ><a href="/forgot-password">Forgot Password ?</a></span>
+                                    </div>
                                     <div>
                                         {
                                             this.state.form_error ?
@@ -98,7 +101,7 @@ class Login extends Component {
                                     </form>
                                     <div>
                                         <hr></hr>
-                                        <p className="auth_divider_text">Are You New to TidyHome ?   <span> <a  onClick={()=>{this.props.CHANGE_AUTH_TYPE('signup')}} style={{color:'green'}}><strong>SignUp</strong></a></span></p>
+                                        <p className="auth_divider_text">Are You New to TidyHome ?   <button className="btn submit_button btn-info"> <a  onClick={()=>{this.props.CHANGE_AUTH_TYPE('signup')}} >Sign Up</a></button></p>
 
                                     
                                     </div>

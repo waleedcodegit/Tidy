@@ -145,7 +145,7 @@ class Login extends Component {
                                 {
                                     this.state.auth_type == 1 ?
                                     <>
-                                    <p className="auth_divider_text">Are You New to TidyHome ? <span> <a href="/signup">Sign Up</a></span></p>
+                                    <p className="auth_divider_text">Are You New to TidyHome ? <button className="btn btn-info"> <a href="/signup" style={{color:"#060606"}}>Sign Up</a></button></p>
                                     </>
                                     :
                                     <>
