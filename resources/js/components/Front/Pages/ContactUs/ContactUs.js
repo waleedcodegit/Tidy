@@ -15,7 +15,8 @@ class ContactUs extends Component {
             sender_phone:'',
             message:'',
             sender_email:'',
-            loading:true
+            loading:true,
+            btn_loading:false,
         };
     }
     componentDidMount(){
@@ -62,32 +63,22 @@ class ContactUs extends Component {
     }
     
     SendEmail(e){
+        this.setState({ btn_loading : true});
         e.preventDefault();
         Axios.post('/api/send-contectus-email',this.state).then(res=>{
 
             if(res.data.status == 200){
                 toast.success('Email send');
-                // Swal.fire({
-                //     icon: 'success',
-                //     title: 'Email send',
-                //     showConfirmButton: false,
-                //     timer: 1500
-                // })
+                    this.setState({ btn_loading : false});
                 window.location.reload(false);
             } else {
-                toast.error('please fill all fields')
-                // Swal.fire({
-                //     icon: 'error',
-                //     title: "please fill all fields",
-                //     showConfirmButton: false,
-                //     timer: 1500
-                // })
-            }
-    
-               
+                toast.error(res.data.message)
+                    this.setState({ btn_loading : false});
+            }    
         })
     }
     render() {
+        const {btn_loading} = this.state;
         return (
             <div>
                  {
@@ -130,7 +121,7 @@ class ContactUs extends Component {
                         <div className="col-md-6">
                             <label className="lbl-style">Email<span></span></label>
                             <div className="input-group">
-                                <input value={this.state.sender_email} onChange={this.Sender_email.bind(this)}  className="form-control auth_input_box" type="text" placeholder name="name" />
+                                <input value={this.state.sender_email} onChange={this.Sender_email.bind(this)}  className="form-control auth_input_box" type="email" placeholder name="email" />
                             </div>
                             </div>
                             <div className="col-md-6">
@@ -160,7 +151,11 @@ class ContactUs extends Component {
                             <div className="col-md-12" />
                             <div className="col-md-6">
                             <button style={{display: 'block', width: '212%', border: 'none', backgroundColor:' #04AA6D',color:' white',padding: '14px 28px', fontSize: '16px',cursor: 'pointer',textAlign: 'center'}}
-                             onClick={this.SendEmail.bind(this)}  className="p-t-20 btn btn--radius btn-success" type="submit" id="#collapseTwo">Send Message</button>
+                             onClick={this.SendEmail.bind(this)} disabled={ btn_loading} className="p-t-20 btn btn--radius btn-success" type="submit" id="#collapseTwo">
+                                  { btn_loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                                            { btn_loading && <span > Loading...</span>}
+                                                           { !btn_loading && <span >  Send Message</span>}
+                                </button>
                             </div>
                         </div>
                         </form>

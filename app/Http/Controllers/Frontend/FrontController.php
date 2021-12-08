@@ -1308,7 +1308,7 @@ class FrontController extends Controller
     public function send_contectus_email(Request $request) {
         $validator = Validator::make($request->all(), [
             'sender_name' => 'required',
-            'sender_email' => 'required',
+            'sender_email' => 'required|email',
             'sender_phone' => 'required',
             'message' => 'required',
         ]);
