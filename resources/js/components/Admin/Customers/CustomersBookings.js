@@ -342,7 +342,12 @@ class CustomersBookings extends Component {
                                                                 <td>{index + 1}</td>
                                                                 <td>{data.booking_type == 1 ? "One Time" : "Recurring"}</td>
                                                                 <td>{data.service.name}</td>
-                                                                <td>{data.vendor.first_name+' '+data.vendor.last_name}</td>
+                                                                <td>
+                                                                    {
+                                                                        data.vendor == null ?  'Vendor not Assign yet' : data.vendor.first_name  +' '+   data.vendor.last_name
+                                                                    }
+                                                                    {/* {data.vendor.first_name+' '+data.vendor.last_name} */}
+                                                                    </td>
                                                                 <td>${data.booking_totals}</td>
                                                                 <td><Link to ={`/admin/customer-bookings-details/${data.id}`}>
                                                                     <button className="btn btn-outline-success"> <i  className="fa fa-eye"> </i></button></Link>

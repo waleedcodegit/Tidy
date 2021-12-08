@@ -54,6 +54,7 @@ class SignUp extends Component {
             agree_check: false,
             addresses:[],
             radius:0,
+            btnn_loading: false,
             places:'',
             lat:0,
             long:0,
@@ -481,7 +482,7 @@ class SignUp extends Component {
 
     }
     validate_services() {
-        this.setState({ btn_loading : true});
+        this.setState({ btnn_loading : true});
         
       
         let payload = {
@@ -511,7 +512,7 @@ class SignUp extends Component {
            
         }
         setTimeout(() => {
-            this.setState({ btn_loading : false});
+            this.setState({ btnn_loading : false});
           }, 2000);
 
     }
@@ -625,7 +626,7 @@ class SignUp extends Component {
     submit_request() {
         this.setState({ btn_loading : true});
         Axios.post('/api/submit_vendor_request', this.state).then(res => {
-            if (res.data.status != 200) {
+            if (res.data.status == 200) {
                 this.setState({
                     step: 6,
                     error_string: ''
@@ -728,6 +729,7 @@ class SignUp extends Component {
     render() {
         const {btn_loading} = this.state;
         const {loading} = this.state;
+        const {btnn_loading} = this.state;
         return (
                 <div className="card p-3 animate_auth_modal  px-0 pt-4 pb-0 mt-3 mb-3">
                     <h2 className="text-center" style={{ fontSize: '48px' }}><strong>Vendor Account SignUp</strong></h2>
@@ -951,13 +953,13 @@ class SignUp extends Component {
                                                             </button>
                                                         </div>
                                                         <div className="text-right ml-auto">
-                                                        <button onClick={this.validate_services.bind(this)}  disabled={loading} 
+                                                        <button onClick={this.validate_services.bind(this)}  disabled={btnn_loading} 
                      
                                                        className="btn btn-success" type="submit" id="#collapseTwo">
 
-                                                     { loading && <i className= 'fa fa-refresh fa-spain'></i>}
-                                                    { loading && <span > loading</span>}
-                                                     { !loading && <span > Next</span>}
+                                                     { btnn_loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                                    { btnn_loading && <span > loading</span>}
+                                                     { !btnn_loading && <span > Next</span>}
 
                                                              </button>
                                                             {/* <button onClick={this.validate_services.bind(this)} className="btn btn-success   " type="submit">
