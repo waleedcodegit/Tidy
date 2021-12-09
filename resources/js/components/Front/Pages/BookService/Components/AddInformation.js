@@ -89,7 +89,7 @@ class AddInformation extends Component {
         }
         this.props.ADD_INFORMATION(this.state);
         //this.props.change_step(val);
-        if (this.state.loc_address !='') {
+        if (this.state.loc_address != '') {
             this.props.changeLocation(this.state);
             this.props.change_step(4);
             // toast.success('Success');
@@ -112,23 +112,21 @@ class AddInformation extends Component {
 
 
 
-    places(place) {
+    // places(place) {
 
-        let lat = place.geometry.location.lat();
-        let long = place.geometry.location.lng();
-        this.setState({
-            places: place,
-            lat: lat,
-            long: long,
-            loc_address: place.formatted_address
-        })
-        // console.log(this.state.loc_address);
-
-    }
+    //     let lat = place.geometry.location.lat();
+    //     let long = place.geometry.location.lng();
+    //     this.setState({
+    //         places: place,
+    //         lat: lat,
+    //         long: long,
+    //         loc_address: place.formatted_address
+    //     })
+    // }
     componentDidMount() {
         console.log(this.props)
         Axios.post('/api/get_information_content', { id: this.props.select_service_state.service_id }).then(res => {
-         
+            // Axios.post('/api/get_information_content', { id:  1}).then(res => {
             this.setState({
                 loading: false,
                 category: res.data.category,
@@ -289,7 +287,7 @@ class AddInformation extends Component {
                                         <div className="col-md-6">
                                             <div className="main">
                                                 <button onClick={this.minus_levels.bind(this)} className="down_count btn btn-info btn_plus_minus" title="Down"><i className="icon-minus" /></button>
-                                                <input onChange={this.levels.bind(this)} className="counter" type="text" placeholder="value..." value={this.state.levels + "  Levels"} />
+                                                <input onChange={this.levels.bind(this)} className="counter" type="text" placeholder="value..." value={this.state.levels == 1 ? this.state.levels+" level" : this.state.levels+" levels" } />
                                                 <button onClick={this.add_levels.bind(this)} className="up_count btn btn-info btn_plus_minus" title="Up"><i className="icon-plus" /></button>
                                             </div>
                                             {/* <label className="muted">(No. of Levels)</label> */}
@@ -299,7 +297,7 @@ class AddInformation extends Component {
                                         <div className="col-md-6">
                                             <div className="main">
                                                 <button onClick={this.minus_bedroom.bind(this)} className="down_count btn btn-info btn_plus_minus" title="Down"><i className="icon-minus" /></button>
-                                                <input className="counter" type="text" placeholder="value..." value={this.state.bedrooms + "  Bedrooms"} />
+                                                <input className="counter" type="text" placeholder="value..." value={this.state.bedrooms==0 || this.state.bedrooms==1 ? this.state.bedrooms+" Bedroom" : this.state.bedrooms+" Bedrooms"} />
                                                 <button onClick={this.add_bedroom.bind(this)} className="up_count btn btn-info btn_plus_minus" title="Up"><i className="icon-plus" /></button>
                                             </div>
                                             {/* <label className="muted">(Bedrooms)</label> */}
@@ -307,7 +305,7 @@ class AddInformation extends Component {
                                         <div className="col-md-6">
                                             <div className="main">
                                                 <button onClick={this.minus_bathroom.bind(this)} className="down_count btn btn-info btn_plus_minus" title="Down"><i className="icon-minus" /></button>
-                                                <input className="counter" type="text" placeholder="value..." value={this.state.bathrooms + "  Bathrooms"} />
+                                                <input className="counter" type="text" placeholder="value..." value={this.state.bathrooms==0 || this.state.bathrooms==1 ? this.state.bathrooms+" Bathroom" : this.state.bathrooms+" Bathrooms"} />
                                                 <button onClick={this.add_bathroom.bind(this)} className="up_count btn btn-info btn_plus_minus" title="Up"><i className="icon-plus" /></button>
                                             </div>
                                             {/* <label className="muted">(Bathrooms)</label> */}
@@ -458,9 +456,10 @@ class AddInformation extends Component {
                                             types: 'sublocality',
                                             componentRestrictions: { country: "au" },
                                         }}
-                                        onPlaceSelected={(place) => {
+                                        onSubmit={(place) => {
                                             this.places(place);
                                         }}
+                                        setLocation
                                         style={{ width: '100%' }}
                                         className="form-control input_box"
                                     />
