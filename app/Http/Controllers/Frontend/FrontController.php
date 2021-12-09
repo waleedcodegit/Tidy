@@ -1325,6 +1325,7 @@ class FrontController extends Controller
             'phone' => $request->sender_phone,
             'message' => $request->message,
         ];
+        // info@tidyhome.com.au
         Mail::to("info@tidyhome.com.au")->send(new ContactusEmail($details));
         $response = [
             'status' => 200,

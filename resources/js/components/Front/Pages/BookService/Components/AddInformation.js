@@ -89,7 +89,7 @@ class AddInformation extends Component {
         }
         this.props.ADD_INFORMATION(this.state);
         //this.props.change_step(val);
-        if (this.state.loc_address != '') {
+        if (this.state.loc_address !='') {
             this.props.changeLocation(this.state);
             this.props.change_step(4);
             // toast.success('Success');
@@ -122,13 +122,13 @@ class AddInformation extends Component {
             long: long,
             loc_address: place.formatted_address
         })
-        console.log(this.state.loc_address);
+        // console.log(this.state.loc_address);
 
     }
     componentDidMount() {
         console.log(this.props)
         Axios.post('/api/get_information_content', { id: this.props.select_service_state.service_id }).then(res => {
-            // Axios.post('/api/get_information_content', { id:  1}).then(res => {
+         
             this.setState({
                 loading: false,
                 category: res.data.category,
