@@ -112,17 +112,17 @@ class AddInformation extends Component {
 
 
 
-    // places(place) {
+    places(place) {
 
-    //     let lat = place.geometry.location.lat();
-    //     let long = place.geometry.location.lng();
-    //     this.setState({
-    //         places: place,
-    //         lat: lat,
-    //         long: long,
-    //         loc_address: place.formatted_address
-    //     })
-    // }
+        let lat = place.geometry.location.lat();
+        let long = place.geometry.location.lng();
+        this.setState({
+            places: place,
+            lat: lat,
+            long: long,
+            loc_address: place.formatted_address
+        })
+    }
     componentDidMount() {
         console.log(this.props)
         Axios.post('/api/get_information_content', { id: this.props.select_service_state.service_id }).then(res => {
