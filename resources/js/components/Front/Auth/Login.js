@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import { img_baseurl } from '../../Configs/Api';
 import Axios from 'axios';
-import { connect } from 'react-redux';
+import { connect, Provider } from 'react-redux';
 import toast from 'react-hot-toast';
+import { GoogleLogin } from 'react-google-login';
+import { bind } from 'lodash';
+import { authentication } from '../../firebase';
+import { signInWithPopup , GoogleAuthProvider } from 'firebase/auth';
+
+
 class Login extends Component {
     constructor(props) {
         super(props);
@@ -58,6 +64,28 @@ class Login extends Component {
             this.setState({ loading : false});
           }, 2000);
     }
+     
+    // onGoogleAuthSuccess(e){
+    //     console.log(e);
+    // }
+
+    // onGoogleAuthFailure(e){
+    //     console.log(e);
+    // }
+
+    googleSignIn(){
+        const Provider = new GoogleAuthProvider();
+        signInWithPopup(authentication, Provider)
+        .then((re)=>{
+            console.log(re);
+        })
+        .catch((error)=>{
+            console.log(error);
+        })
+    }
+
+
+
     render() { 
         const {loading} = this.state;
         return (
@@ -139,10 +167,13 @@ class Login extends Component {
                                             </button>
                                         {/* Login</button> */}
                                 </div>
+                                
                             </form>
                             <div>
                                 <hr></hr>
-                                {
+                                <button className="btn submit_button btn-info" style={{marginBottom:"5px"}} onClick={this.googleSignIn.bind()}><img src="https://img.icons8.com/offices/30/000000/google-logo.png"/><span> Sign In with Google</span></button>
+                                <p className="auth_divider_text">Are You New to TidyHome ? <button className="btn btn-info"> <a href="/signup" style={{color:"#060606"}}>Sign Up</a></button></p>
+                                {/* {
                                     this.state.auth_type == 1 ?
                                     <>
                                     <p className="auth_divider_text">Are You New to TidyHome ? <button className="btn btn-info"> <a href="/signup" style={{color:"#060606"}}>Sign Up</a></button></p>
@@ -151,9 +182,9 @@ class Login extends Component {
                                     <>
                                     <p className="auth_divider_text">Are You New to TidyHome ? <span> <a href={"vendor-signup"}>Sign Up as a Vendor</a></span></p>
                                     </>
-                                }
-                              
+                                } */}
                             </div>
+                            
                         </div>
                     </div>
                 </div>

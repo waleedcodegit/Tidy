@@ -456,10 +456,9 @@ class AddInformation extends Component {
                                             types: 'sublocality',
                                             componentRestrictions: { country: "au" },
                                         }}
-                                        onSubmit={(place) => {
+                                        onPlaceSelected={(place) => {
                                             this.places(place);
                                         }}
-                                        setLocation
                                         style={{ width: '100%' }}
                                         className="form-control input_box"
                                     />
