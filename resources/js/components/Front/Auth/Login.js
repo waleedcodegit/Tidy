@@ -65,13 +65,13 @@ class Login extends Component {
           }, 2000);
     }
      
-    // onGoogleAuthSuccess(e){
-    //     console.log(e);
-    // }
+    onGoogleAuthSuccess(e){
+        console.log(e);
+    }
 
-    // onGoogleAuthFailure(e){
-    //     console.log(e);
-    // }
+    onGoogleAuthFailure(e){
+        console.log(e);
+    }
 
     googleSignIn(){
         const Provider = new GoogleAuthProvider();
@@ -173,6 +173,13 @@ class Login extends Component {
                                 <hr></hr>
                                 <button className="btn submit_button btn-info" style={{marginBottom:"5px"}} onClick={this.googleSignIn.bind()}><img src="https://img.icons8.com/offices/30/000000/google-logo.png"/><span> Sign In with Google</span></button>
                                 <p className="auth_divider_text">Are You New to TidyHome ? <button className="btn btn-info"> <a href="/signup" style={{color:"#060606"}}>Sign Up</a></button></p>
+                                <GoogleLogin
+                                    clientId="453086581998-g7ispilvs9fr3civrhvfbaseamiudf9p.apps.googleusercontent.com"
+                                    buttonText="Login"
+                                    onSuccess={this.onGoogleAuthSuccess.bind()}
+                                    onFailure={this.onGoogleAuthFailure.bind()}
+                                    cookiePolicy={'single_host_origin'}
+                                />
                                 {/* {
                                     this.state.auth_type == 1 ?
                                     <>
