@@ -67,6 +67,19 @@ class Login extends Component {
      
     onGoogleAuthSuccess(e){
         console.log(e);
+
+        Axios.post('/api/social_login',e).then(res=>{
+            console.log(res);
+            if(res.data.status == 200){
+                toast.success('Logged in Success');
+                window.localStorage.setItem('cus_token',res.data.customer.token);
+                // this.props.changeUser({is_login:true,data:res.data.customer});
+                window.open('/profile','_self');
+                // toast.success('Logged in Success');
+            }
+          
+        })
+
     }
 
     onGoogleAuthFailure(e){
@@ -171,15 +184,17 @@ class Login extends Component {
                             </form>
                             <div>
                                 <hr></hr>
-                                <button className="btn submit_button btn-info" style={{marginBottom:"5px"}} onClick={this.googleSignIn.bind()}><img src="https://img.icons8.com/offices/30/000000/google-logo.png"/><span> Sign In with Google</span></button>
-                                <p className="auth_divider_text">Are You New to TidyHome ? <button className="btn btn-info"> <a href="/signup" style={{color:"#060606"}}>Sign Up</a></button></p>
                                 <GoogleLogin
                                     clientId="453086581998-g7ispilvs9fr3civrhvfbaseamiudf9p.apps.googleusercontent.com"
                                     buttonText="Login"
                                     onSuccess={this.onGoogleAuthSuccess.bind()}
                                     onFailure={this.onGoogleAuthFailure.bind()}
                                     cookiePolicy={'single_host_origin'}
+                                    className="btn submit_button btn-info mb-3"
                                 />
+                                {/* <button className="btn submit_button btn-info" style={{marginBottom:"5px"}} onClick={this.googleSignIn.bind()}><img src="https://img.icons8.com/offices/30/000000/google-logo.png"/><span> Sign In with Google</span></button> */}
+                                <p className="auth_divider_text">Are You New to TidyHome ? <button className="btn btn-info"> <a href="/signup" style={{color:"#060606"}}>Sign Up</a></button></p>
+                             
                                 {/* {
                                     this.state.auth_type == 1 ?
                                     <>

@@ -75,6 +75,65 @@ class AuthController extends Controller
         }
     }
 
+    public function social_login(Request $request)
+   
+    {
+        // return $request->profileObj['familyName'];
+        $customer = Customer::where('email', $request->profileObj['email'])->where('status', 1)->first();
+        if($customer){
+            $meta_check = CustomerAuthMeta::where('customer_id',$customer->id)
+            ->where('ip',$request->ip())
+            ->first();
+                    if($meta_check){
+                    $token = $meta_check->token;
+                    } else {
+                    $meta = new CustomerAuthMeta();
+                    $meta->customer_id = $customer->id;
+                    $meta->ip = $request->ip();
+                    $meta->token = Hash::make(time());
+                    $new_time = date('H:i', strtotime('+15 minutes'));
+                    $meta->token_valid_till = $new_time;
+                    $meta->save();
+                    $token = $meta->token;
+                    }
+                    $customer->token = $token;
+                    return response()->json([
+                    'status' => 200,     
+                    'message' => "Successfull login",
+                    'customer' => $customer, 
+                    ]);
+        }else{
+            // $url = 'http://example.com/image.png';
+            // $img = public_path('images') . '\\test.png';
+            // file_put_contents($img, file_get_contents($url));
+
+            $new_customer = new Customer();
+            $new_customer->first_name = $request->profileObj['givenName'];
+            $new_customer->last_name  = $request->profileObj['familyName'];
+            $new_customer->email = $request->profileObj['email'];
+            $new_customer->password = Hash::make($request->profileObj['familyName']);
+            
+            $new_customer->status = 1;
+            $new_customer->save();
+    
+            $meta = new CustomerAuthMeta();
+            $meta->customer_id = $new_customer->id;
+            $meta->ip = $request->ip();
+            $meta->token = Hash::make(time());
+            $new_time = date('H:i', strtotime('+15 minutes'));
+            $meta->token_valid_till = $new_time;
+            $meta->save();
+            $new_customer->token = $meta->token;
+            
+            return response()->json([
+                'status' => 200,
+                'message' => "Customer Created Successfully",
+                'data' => $new_customer   
+            ]);  
+        }
+      
+    }
+
     /**
      * Show the form for creating a new resource.
      *

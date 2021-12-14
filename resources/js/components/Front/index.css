@@ -200,7 +200,9 @@ html {
 .shadow_card{
   box-shadow: rgb(0 0 0 / 16%) 0px 1px 4px;
 }
-
+.submit_button div{
+  margin-left: 36%;
+}
 ul.nav li.dropdown:hover > ul.dropdown-menu {
   display: block;    
 }

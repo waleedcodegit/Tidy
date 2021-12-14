@@ -19,7 +19,7 @@ class HowCleaningWorks extends Component {
                 loading:false
             })
         })
-        
+        axios.post('/api/get_app_status')
 
     }
 
@@ -31,6 +31,7 @@ class HowCleaningWorks extends Component {
                     <div id="displayspinner" style={{ display: 'block', marginLeft: '48%', marginTop: '20%',marginBottom: '20%' }}>
                     <div className="spinner-border  ml-2 text-dark spinner_format"  role="status">
                         <span className="sr-only">Loading...</span>
+                        
                     </div>
                     </div>
                         : 

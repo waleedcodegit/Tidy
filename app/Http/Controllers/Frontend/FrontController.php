@@ -1087,7 +1087,7 @@ class FrontController extends Controller
                 $image = date('His') . $filename;
                 $destination_path = public_path() . '/images/';
                 $file->move($destination_path, $image);
-                $url = $image;
+                $url = $image; 
                 $response = ['status' => 200 , 'msg' =>'File Uploaded.','url' => $url];
                 return $response;
             }

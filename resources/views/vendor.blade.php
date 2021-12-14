@@ -28,7 +28,6 @@
 
        
        
-        <script src="https://js.stripe.com/v3/"></script>
         
         <script type="text/javascript" src="{{asset('js/app.js')}}"></script>
        

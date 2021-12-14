@@ -34,6 +34,7 @@ class Footer extends Component {
                 </div>
                     : 
             <section class="about-section padding" >
+            
                 <div class="footer_" dangerouslySetInnerHTML={{__html:this.state.footer_content}}>
                 </div>
             </section>

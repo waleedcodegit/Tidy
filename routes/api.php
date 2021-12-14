@@ -44,6 +44,8 @@ Route::post('delete-subcategory','Admin\SubCategoryController@delete_SubCategory
 Route::post('delete-manageservice','Admin\ServicesController@delete_ManageService');
 
 Route::post('/update_customer','Customer\AuthController@update_customer');
+Route::post('/social_login','Customer\AuthController@social_login');
+
 
 // Customer Route
 Route::get('/customer-list','Customer\AuthController@index');
