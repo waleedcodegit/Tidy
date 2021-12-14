@@ -9,8 +9,21 @@ import toast from 'react-hot-toast';
 
 class SelectServices extends Component {
     constructor(props) {
+      var today = new Date(),
+
+    dateToday = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
+
+     
+      var today = new Date(),
+      time = today.getHours()
+      + ':' + today.getMinutes();
+      // currentDate = today.getFullYear() 
+      // + '-' + (today.getMonth() + 1)
+      //  + '-' + today.getDate();
         super(props);
         this.state = {
+          currentTime: time,
+          currentDate: dateToday,
             service_type:1,
             categories:[],
             sub_categories:[],
@@ -18,6 +31,23 @@ class SelectServices extends Component {
             sub_service_id:0,
             recurring:1,
             date:'',
+            todaydate:[
+              '07:00',
+              '08:00',
+              '09:00',
+              '10:00',
+              '11:00',
+              '12:00',
+              '13:00',
+              '14:00',
+              '15:00',
+              '16:00',
+              '17:00',
+              '18:00',
+              '19:00',
+              '20:00'
+              ],
+            todayTime:[],
             time:'7:00am',
             error_string:'',
             date_flexible:0,
@@ -147,10 +177,30 @@ class SelectServices extends Component {
           this.setState({ loading : false});
         }, 2000);
     }
+    
     date(e){
+  //     let data = {
+  //       date: e.target.value
+  //   }
+  //   Axios.post('/api/date_checker',data).then(res=>{  
+  //     this.setState({
+  //         currentDateTime:res.data.vendor
+  //     })
+  // })
+
       this.setState({
         date:e
       })
+      let data = {
+              date: e
+          }
+          Axios.post('/api/date_checker',data).then(res=>{  
+            console.log(res);
+                this.setState({
+                  todayTime:res.data.todayTime,
+                  // todaydate:res.data.todaydate
+                })
+            })
     }
     time(e){
       this.setState({
@@ -182,7 +232,7 @@ class SelectServices extends Component {
                   Book your cleaning service</h2>
                 <div className="divider-line" />
                 <form className="services-page">
-                  <h3>Select Service</h3>
+                  <h3>Select Service{this.state.currentDateTime}</h3>
                   <div className="row">
                  <div className="col-md-12">
                   
@@ -240,20 +290,69 @@ class SelectServices extends Component {
                          placeholderText="dd/mm/yyyy"
                          minDate={new Date()}
                         //  showDisabledMonthNavigation
-                          onChange={(date)=>{this.date(date)}} />
+                          onChange={(date)=>{this.date(date)}}
+                          checked={this.state.date == null} />
 
                       </div>
                       <span className="d-flex" style={{marginTop:"10px"}}>
-                      <input onChange={this.date_flexible.bind(this)} type="checkbox" className="col-sm-1" style={{marginTop:"5px"}}></input>I am flexible with the date +/- 1 day 
+                      <input onChange={this.date_flexible.bind(this)} type="checkbox" className="col-sm-1" style={{marginTop:"5px"}}></input> {
+                          
+                          }I am flexible with the date +/- 1 day 
                       </span>
                     </div>
-                    <div className="col-md-6">
+                    {
+                            this.state.date != null  ?
+                            <div className="col-md-6">
+                     
                         {/* <div className="input--stydle-1" > */}
                           <select  value={this.state.time || ""} onChange={this.time.bind(this)} name="gender"   className="col-md-12 input--style-1">
                             {/* <option disabled="disabled" selected="selected">Time to</option> */}
                             {/* <option>Select Time</option> */}
-                            <option value={'7:00am'}>7:00am</option>
-                            <option>8:00am</option>
+                           {
+                             this.state.todayTime != '' ? 
+                                this.state.todayTime.map((data,index)=>{
+                                return(
+                                  // this.state.currentTime < data ?
+                                  <option>{ 
+                                    data   
+                                    }</option>
+                                   
+                                   
+                                )
+                            })
+                            :
+                             this.state.todaydate.map((data,index)=>{
+                                return(
+                                  this.state.currentTime < data ?
+                                  <option>{ 
+                                    data   
+                                    }</option>
+                                    : null
+                                    )
+                                  })
+                                
+                           }
+                          
+                         
+                            
+                            {/* {
+                                        
+                                        
+                                                this.state.todayTime.map((data,index)=>{
+                                                    return(
+                                                      // this.state.currentMint < 
+                                                      this.state.currentTime < data ?
+                                                      <option>{ 
+                                                        data + '' + this.state.currentTime  
+                                                        }</option>
+                                                       :
+                                                       null
+
+                                                    )
+                                                })
+                                            } */}
+                            {/* <option value={'7:00am'}>{this.state.currentTime < '7' ? "7:00am" : "" }</option>
+                            <option>{this.state.currentTime < '8' ? "8:00am" : "" }</option>
                             <option>9:00am</option>
                             <option>10:00am</option>
                             <option>11:00am</option>
@@ -265,7 +364,7 @@ class SelectServices extends Component {
                             <option>05:00pm</option>
                             <option>06:00pm</option>
                             <option>07:00pm</option>
-                            <option>08:00pm</option>
+                            <option>08:00pm</option> */}
                             {/* <option>09:00pm</option> */}
                           </select>
                           
@@ -274,6 +373,8 @@ class SelectServices extends Component {
                       <input  onChange={this.time_flexible.bind(this)}  type="checkbox" className="col-sm-1" style={{marginTop:"5px"}}></input>I am flexible with the time +/- 2 hours 
                       </span>
                     </div>
+                   : null }
+                    
                     {/* <div className="col-md-3">
                       <div className="inpust-group">
                         <div className="input--stydle-1">

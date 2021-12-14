@@ -6,7 +6,7 @@ use App\Booking;
 use App\BookingInformation;
 use App\BookingService;
 use Illuminate\Support\Str;
-
+use Carbon\Carbon;
 use App\Category;
 use App\Customer;
 use App\CustomerCard;
@@ -833,6 +833,7 @@ class FrontController extends Controller
     public function update_customer_card(Request $request){
 
         $validator = Validator::make($request->all(), [
+            'card_holder_name' => 'required',
             'credit_card_number' => 'required',
             'cvc' => 'required',
             'expiry_month' => 'required',
@@ -1333,4 +1334,60 @@ class FrontController extends Controller
         ];
         return $response;
     }
-}
+    public function date_checker(Request $request){
+        $today = Carbon::yesterday()->setTimezone('Australia/Sydney');
+        $current = Carbon::now()->setTimezone('Australia/Sydney');
+        // return $current;
+        if($request->date > $today)
+        {
+            $todayTime =[
+            '07:00',
+            '08:00',
+            '09:00',
+            '10:00',
+            '11:00',
+            '12:00',
+            '13:00',
+            '14:00',
+            '15:00',
+            '16:00',
+            '17:00',
+            '18:00',
+            '19:00',
+            '20:00'
+            ];
+            $response = [
+                'todayTime' => $todayTime,
+                'msg' => 'Date NOT equal'
+            ];
+            return $response;
+        }
+        elseif($request->date != $today)
+            {
+                $todayTime =[ 
+                // '07:00',
+                // '08:00',
+                // '09:00',
+                // '10:00',
+                // '11:00',
+                // '12:00',
+                // '13:00',
+                // '14:00',
+                // '15:00',
+                // '16:00',
+                // '17:00',
+                // '18:00',
+                // '19:00',
+                // '20:00'
+                ];
+                $response = [
+                    'todayTime' => $todayTime,
+                    'msg' => 'Date equal'
+                ];
+                return $response;
+            }
+    
+        }
+    }
+
+

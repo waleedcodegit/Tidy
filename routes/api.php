@@ -238,6 +238,7 @@ Route::post('/delete-faq', 'Admin\FaqController@delete_faq');
 Route::post('/get_faqs_by_type', 'Admin\FaqController@get_faqs_by_type');
 
 // Front Controller Routes
+Route::post('/date_checker','Frontend\FrontController@date_checker');
 Route::post('/get_information_content','Frontend\FrontController@get_information_content');
 Route::post('/validate_select_service','Frontend\FrontController@validate_select_service');
 Route::post('/get_service_totals','Frontend\FrontController@get_service_totals');
