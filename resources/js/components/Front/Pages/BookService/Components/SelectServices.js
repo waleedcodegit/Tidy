@@ -15,7 +15,7 @@ class SelectServices extends Component {
 
      
       var today = new Date(),
-      time = (today.getHours() + 6)
+      time = (today.getHours())
       + ':' + today.getMinutes();
       // currentDate = today.getFullYear() 
       // + '-' + (today.getMonth() + 1)
