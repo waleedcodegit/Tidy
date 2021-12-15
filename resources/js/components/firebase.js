@@ -3,7 +3,7 @@ import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
     apiKey: "AIzaSyBQgSJy9Df_XJE3ZXj64kUtheFfi2yHGwA",
-    authDomain: "localhost",
+    authDomain: "tidy-home-319707.firebaseapp.com",
     projectId: "tidy-home-319707",
     storageBucket: "tidy-home-319707.appspot.com",
     messagingSenderId: "453086581998",

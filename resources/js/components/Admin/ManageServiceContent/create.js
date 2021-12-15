@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import toast from 'react-hot-toast';
+import { img_baseurl } from '../../Configs/Api';
 
 class Create extends Component {
     constructor(props) {

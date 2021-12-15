@@ -1080,23 +1080,7 @@ class FrontController extends Controller
             'data' => $checklists,
         ]);
     }
-    public function image_upload(Request $request){
-        try{
-            if ($request->hasFile('file')) {
-                $file = $request->file;
-                $filename = $file->getClientOriginalName();
-                $image = date('His') . $filename;
-                $destination_path = public_path() . '/images/';
-                $file->move($destination_path, $image);
-                $url = $image; 
-                $response = ['status' => 200 , 'msg' =>'File Uploaded.','url' => $url];
-                return $response;
-            }
-        }catch(Exception $e){
-            $response = ['status' => 401 , 'msg' => 'File Uploaded.','error' => $e];
-            return $response;
-        }
-    }
+    
 
     public function get_booking_by_id(Request $request){
         $bookings = Booking::where('id',$request->id)->with('service','sub_service','booking_services','vendor')->first();
@@ -1192,6 +1176,24 @@ class FrontController extends Controller
             'message' => "Complaint Submitted Successfully",
             'data' => $complain,
         ]);
+    }
+
+    public function image_upload(Request $request){
+        try{
+            if ($request->hasFile('file')) {
+                $file = $request->file;
+                $filename = $file->getClientOriginalName();
+                $image = date('His') . $filename;
+                $destination_path = public_path() . '/images/';
+                $file->move($destination_path, $image);
+                $url = $image; 
+                $response = ['status' => 200 , 'msg' =>'File Uploaded.','url' => $url];
+                return $response;
+            }
+        }catch(Exception $e){
+            $response = ['status' => 401 , 'msg' => 'File Uploaded.','error' => $e];
+            return $response;
+        }
     }
     
     public function upload_service_images(Request $request){
