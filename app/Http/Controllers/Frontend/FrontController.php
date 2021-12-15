@@ -1337,8 +1337,8 @@ class FrontController extends Controller
         return $response;
     }
     public function date_checker(Request $request){
-        $today = Carbon::yesterday()->setTimezone('Australia/Sydney');
-        $current = Carbon::now()->setTimezone('Australia/Sydney');
+        $today = Carbon::today();
+        $current = Carbon::now();
         // return $current;
         if($request->date > $today)
         {
@@ -1358,7 +1358,8 @@ class FrontController extends Controller
             '19:00',
             '20:00'
             ];
-            $response = [
+             $response = [
+                'status' => 200,
                 'todayTime' => $todayTime,
                 'msg' => 'Date NOT equal'
             ];
@@ -1383,6 +1384,7 @@ class FrontController extends Controller
                 // '20:00'
                 ];
                 $response = [
+                    
                     'todayTime' => $todayTime,
                     'msg' => 'Date equal'
                 ];

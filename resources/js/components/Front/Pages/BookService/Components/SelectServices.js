@@ -15,7 +15,7 @@ class SelectServices extends Component {
 
      
       var today = new Date(),
-      time = today.getHours()
+      time = (today.getHours() + 6)
       + ':' + today.getMinutes();
       // currentDate = today.getFullYear() 
       // + '-' + (today.getMonth() + 1)
@@ -179,18 +179,10 @@ class SelectServices extends Component {
     }
     
     date(e){
-  //     let data = {
-  //       date: e.target.value
-  //   }
-  //   Axios.post('/api/date_checker',data).then(res=>{  
-  //     this.setState({
-  //         currentDateTime:res.data.vendor
-  //     })
-  // })
-
       this.setState({
         date:e
       })
+     
       let data = {
               date: e
           }
@@ -198,10 +190,19 @@ class SelectServices extends Component {
             console.log(res);
                 this.setState({
                   todayTime:res.data.todayTime,
-                  // todaydate:res.data.todaydate
                 })
+                if(res.data.status != 200)
+                if(this.state.currentTime > "20:00")
+                {
+                 toast.error('Please Select Upcomming date. we Can not book any booking in Current date after 8PM',{position: "bottom-center"});
+                }
+                else{
+                  null
+                }
             })
     }
+  
+  
     time(e){
       this.setState({
         time:e.target.value
@@ -312,7 +313,6 @@ class SelectServices extends Component {
                              this.state.todayTime != '' ? 
                                 this.state.todayTime.map((data,index)=>{
                                 return(
-                                  // this.state.currentTime < data ?
                                   <option>{ 
                                     data   
                                     }</option>
@@ -321,15 +321,21 @@ class SelectServices extends Component {
                                 )
                             })
                             :
+                            this.state.currentTime < "20:00" ?
                              this.state.todaydate.map((data,index)=>{
                                 return(
-                                  this.state.currentTime < data ?
+
+                                  this.state.currentTime < data  ?
                                   <option>{ 
-                                    data   
+                                     data  
                                     }</option>
                                     : null
+                                    
+                                    
                                     )
                                   })
+                                  :
+                                  <option selected >Please Select Any Coming Date </option>
                                 
                            }
                           
