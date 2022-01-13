@@ -33,6 +33,11 @@ class Login extends Component {
             password:e.target.value
         })
     }
+
+    goBack(val) {
+        this.props.change_step(val);
+    }
+
     login(e){
         this.setState({ loading : true});
         e.preventDefault();
@@ -102,8 +107,7 @@ class Login extends Component {
                                     <div>
                                         <hr></hr>
                                         <p className="auth_divider_text">Are You New to TidyHome ?   <button className="btn submit_button btn-info"> <a  onClick={()=>{this.props.CHANGE_AUTH_TYPE('signup')}} >Sign Up</a></button></p>
-
-                                    
+                                        <button className="btn submit_button btn-info"> <a  onClick={this.goBack.bind(this,2)} >Go Back</a></button>
                                     </div>
                                 </div>
                             </div>
@@ -118,7 +122,9 @@ class Login extends Component {
 const mapDispatchToProps = (disptach) => {
     return{
         changeUser:(user)=>{disptach({type:'CHANGE_USER', payload:user})},
-        CHANGE_AUTH_TYPE:(type)=>{disptach({type:'CHANGE_AUTH_TYPE',payload:type})}
+        CHANGE_AUTH_TYPE:(type)=>{disptach({type:'CHANGE_AUTH_TYPE',payload:type})},
+        change_step: (step) => {disptach({ type: 'CHANGE_BOOKING_STEP', payload: step })
+        }
     }
 }
  

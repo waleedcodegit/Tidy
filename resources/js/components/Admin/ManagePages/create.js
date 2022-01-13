@@ -79,7 +79,10 @@ class Create extends Component {
                                 <div className="col-sm-12">
                                     <div className="form-group">
                                         <label htmlFor="price">Page Content:</label>
-                                        <ReactQuill  onChange={this.content.bind(this)}/>
+                                        <ReactQuill  
+                                        onChange={this.content.bind(this)}
+                                        readOnly={true}
+                                        />
                                     </div>
                                 </div>   
                             </div>

@@ -112,11 +112,11 @@ class CustomerSignUp extends Component {
                             <form>
                             <div class="form-group input_div ">
                                 <label className="input_label">First Name</label>
-                                <input onChange={this.first_name.bind(this)} type="email" class="form-control auth_input_box" autoFocus  />
+                                <input onChange={this.first_name.bind(this)} type="name" class="form-control auth_input_box" autoFocus  />
                             </div>
                             <div class="form-group input_div ">
                                 <label className="input_label">Last Name</label>
-                                <input onChange={this.last_name.bind(this)} type="email" class="form-control auth_input_box"   />
+                                <input onChange={this.last_name.bind(this)} type="name" class="form-control auth_input_box"   />
                             </div>
                             <div class="form-group input_div ">
                                 <label className="input_label">Email</label>
@@ -128,7 +128,7 @@ class CustomerSignUp extends Component {
                             </div>
                             <div class="form-group input_div ">
                                 <label className="input_label">Address</label>
-                                <input onChange={this.address.bind(this)} type="email" class="form-control auth_input_box"   />
+                                <input onChange={this.address.bind(this)} class="form-control auth_input_box"   />
                             </div>
                             <div class="form-group input_div ">
                                 <label className="input_label">Phone Number</label>

@@ -19,7 +19,7 @@ class Index extends Component{
         super(props);
         this.state = {
             paths:['/book-service','/signup','/login','/vendor-signup','/vendor-login','/gift-card','/profile','/service/:slug'
-            ,'/message-admin','/forgot-password','/reset-password','/vendor-forget-password','/vendor-reset-password','/booking-details/:id',
+            ,'/message-admin','/forgot-password','/reset-password/:id','/vendor-forget-password','/vendor-reset-password/:id','/booking-details/:id',
             '/bookings-feed','/employee-login','/Empprofile','/:slug','/Empbookings','/service-details/:id'
 
         ]

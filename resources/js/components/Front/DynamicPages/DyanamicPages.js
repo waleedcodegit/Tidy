@@ -36,7 +36,7 @@ class DynamicPages extends Component {
                 </div>
                     : 
             <section class="about-section padding" >
-                <div class="Content_" dangerouslySetInnerHTML={{__html:this.state.page_content}}>
+                <div class="Content_" dangerouslySetInnerHTML={{__html:JSON.parse(this.state.page_content)}}>
                 </div>
             </section>
     }

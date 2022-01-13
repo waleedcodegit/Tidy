@@ -48,7 +48,7 @@ class Navbar2 extends Component {
                         
                     <Nav.Link href="/"><span className="text-center"><img src="https://img.icons8.com/ios/24/000000/home--v2.png"/></span>
                     <br></br><p className="nav_link">Home</p></Nav.Link>
-                    <Nav.Link href="#home">
+                    <Nav.Link href="/how-it-works">
                         <span><img src="https://img.icons8.com/ios/24/000000/how-quest.png"/></span>
                         <br></br>
                         <p className="nav_link">How it Works</p>

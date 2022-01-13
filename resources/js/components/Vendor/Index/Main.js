@@ -20,6 +20,7 @@ import AddWithdraw from '../Component/ManageAccounts/Addwithdraw';
 import MyPayments from '../Component/ManageAccounts/Mypaments';
 import BookingDetails from '../Component/ManageBookings/BookingDetails';
 import VendorServiceDetails from '../Component/ManageBookings/VendorServiceDetails';
+import VendorResetPassword from '../Auth/VendorResetPassword';
 
 
 class Main extends Component {
@@ -46,6 +47,7 @@ class Main extends Component {
                 <Route path='/vendor/my_payments' component={MyPayments}></Route>
                 <Route path='/vendor/booking-details/:id' component={BookingDetails}></Route>
                 <Route path='/vendor/vendor-service-details/:id' component={VendorServiceDetails}></Route>
+                <Route path='/vendor-reset-password/:id' component={VendorResetPassword}></Route>
                 
             </div>
         );
