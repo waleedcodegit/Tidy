@@ -66,7 +66,6 @@ class PagesController extends Controller
         
         $content = Page::where('slug',$request->slug)->first();
         if($content){
-            // $content= json_decode($content->content);
             return $content;
         }
     }

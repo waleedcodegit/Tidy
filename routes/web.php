@@ -169,8 +169,9 @@ Route::view('/service-details/{id}' , 'Front');
 
 Route::view('/profile', 'Front');
 Route::view('/booking-details/{id}', 'Front');
-
 Route::view('/{path?}', 'Front');
+Route::view('/page/{path?}', 'Front');
+
 Route::get('{reactRoutes}', function () {
     return view('Front');
 });

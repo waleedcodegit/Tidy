@@ -81,7 +81,6 @@ class Create extends Component {
                                         <label htmlFor="price">Page Content:</label>
                                         <ReactQuill  
                                         onChange={this.content.bind(this)}
-                                        readOnly={true}
                                         />
                                     </div>
                                 </div>   

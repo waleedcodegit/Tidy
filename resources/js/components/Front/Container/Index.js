@@ -51,7 +51,8 @@ class Index extends Component {
                 
                 {/* <Route path="/" component={TopHeader}></Route> */}
                 <Navbar  {...this.props}></Navbar>
-                <Route exact path="/:slug" component={DynamicPages}></Route>
+                {/* <Route exact path="/:slug" component={DynamicPages}></Route> */}
+                <Route exact path="/page/:slug" component={DynamicPages}></Route>
                 <Route exact path="/" component={Landing}></Route>
                 <Route exact path="/login" component={Login}></Route>
                 <Route exact path="/signup" component={Signup}></Route>
