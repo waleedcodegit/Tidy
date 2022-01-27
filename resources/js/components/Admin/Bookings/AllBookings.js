@@ -79,7 +79,7 @@ class AllBookings extends React.Component {
                                                         <td>{data.date}</td>
                                                         {/* <td>{data.vendor.ratings}</td> */}
                                                        
-                                             <td>
+                                                        <td>
                                                               <Link to ={`/admin/customer-bookings-details/${data.id}`}> 
                                                             <button className="btn btn-success" disabled={loading}> 
                                                             { loading && <i className= 'fa fa-refresh fa-spain'></i>}
@@ -87,7 +87,7 @@ class AllBookings extends React.Component {
                                                             { !loading && <span >Details</span>}
                                                             </button>
                                                              </Link> 
-                                                            </td>
+                                                        </td>
                                                         {/* <td> */}
                                                              {/* <button 
                                                          onClick={this.deleteCustomer.bind(this, data.id)} 

@@ -10,7 +10,7 @@ class App extends Component{
     super(props);
     this.state = {
       paths:['/services/:name?','/login','/signup','/vendor-signup','/vendor-login'
-      ,'/gift-card','/profile','/service/:slug','/message-admin'
+      ,'/gift-card','/profile','/service/:slug','/message-admin','/contact-us'
     ]
     };
   }
