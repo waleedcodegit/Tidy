@@ -99,6 +99,13 @@ class CommonController extends Controller
             $customer_chat->customer_id = $request->customer_id;
             $customer_chat->last_active = date("Y-m-d h:i:sa");
             $customer_chat->save();
+            $customer_message = new CustomerMessage();
+            $customer_message->sender = $request->sender;
+            $customer_message->chat_id = $customer_chat->id;
+            $customer_message->message = $request->message;
+            $customer_message->time = date("h:i:sa");
+            $customer_message->date = date("d-m-Y");
+            $customer_message->save();
         }else{
             $customer_message = new CustomerMessage();
             $customer_message->sender = $request->sender;

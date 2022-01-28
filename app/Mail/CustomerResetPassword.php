@@ -31,6 +31,6 @@ class CustomerResetPassword extends Mailable
      */
     public function build()
     {
-        return $this->subject("Reset Password Link")->view('emails.CustomerResetPassword')->from("familymatchemail@gmail.com","Booking App");
+        return $this->subject("Reset Password Link")->view('emails.CustomerResetPassword')->from("familymatchemail@gmail.com","TidyHome");
     }
 }

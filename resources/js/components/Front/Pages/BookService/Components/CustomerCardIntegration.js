@@ -42,6 +42,9 @@ class CustomerCardIntegration extends Component {
             card_holder_name: e.target.value
         })
     }
+    goBack(val) {
+        this.props.change_step(val);
+    }
     validate_card() {
         this.setState({ loading : true});
         Axios.post('/api/update_customer_card', this.state).then(res => {
@@ -107,14 +110,21 @@ class CustomerCardIntegration extends Component {
                 <p className="text-center text-danger">{this.state.error_string}</p>
                 :null
             }
-            <div className="col-sm-12  text-right p-3">
-               <button onClick={this.validate_card.bind(this)}disabled={loading} className="btn btn-success ">
-               { loading && <i className= 'fa fa-refresh fa-spain'></i>}
-                                            { loading && <span > Loading...</span>}
-                                            { !loading && <span >Save</span>}
-                                                    </button>
-                   {/* </button> */}
-            </div>
+                <div className='row'>
+                    <div className="col-sm-3">
+                        <button onClick={this.goBack.bind(this, 1)} className="p-t-20 btn btn-info btn--radius btn--green" type="submit" id="#collapseTwo">
+
+                            Back  </button>
+                    </div>
+                    <div className='col-sm-6'/>
+                    <div className="col-sm-3 text-right">
+                    <button onClick={this.validate_card.bind(this)}disabled={loading} className="btn btn-success ">
+                    { loading && <i className= 'fa fa-refresh fa-spain'></i>}
+                                                    { loading && <span > Loading...</span>}
+                                                    { !loading && <span >Save</span>}
+                                                            </button>
+                    </div>
+                </div>
             </div>
         );
     }
@@ -128,6 +138,7 @@ const mapDispatchToProps = (disptach) => {
     return{
         CHANGE_AUTH_TYPE:(type)=>{disptach({type:'CHANGE_AUTH_TYPE',payload:type})},
         changeUser:(user)=>{disptach({type:'CHANGE_USER', payload:user})},
+        change_step: (step) => {disptach({ type: 'CHANGE_BOOKING_STEP', payload: step })}
     }
 }
  

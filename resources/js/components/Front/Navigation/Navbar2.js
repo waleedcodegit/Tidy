@@ -73,7 +73,7 @@ class Navbar2 extends Component {
                       
                     </NavDropdown>
                     </Nav.Link>
-                    <Nav.Link href="/about-us">
+                    <Nav.Link href="page/about-us">
                         <span><img src="https://img.icons8.com/ios/24/000000/about.png"/></span>
                         <br></br>
                         <p className="nav_link"> About Us</p>

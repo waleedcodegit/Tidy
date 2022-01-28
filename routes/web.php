@@ -158,7 +158,7 @@ Route::view('/vendor-employee/service-details/{id}' , 'vendor');
 
 
 // Front Client Routes
-Route::view('/contact-us' , 'Front');
+//Route::view('/contact-us' , 'Front');
 Route::view('/services/{name?}', 'Front');
 Route::view('/signup', 'Front');
 Route::view('/forgot-password' , 'Front');
