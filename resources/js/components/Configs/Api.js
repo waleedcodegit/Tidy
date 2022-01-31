@@ -1,5 +1,5 @@
 module.exports={
-    img_baseurl:'/images/',
+    img_baseurl:'/public/images/',
     img_insurance:'/files/',
 
     // Stripe Public Key
